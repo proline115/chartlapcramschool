@@ -1,0 +1,399 @@
+html{
+
+    background-color:#7E8E70;
+
+    background-image:
+        url("images/background.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+}
+
+body{
+
+    margin:0;
+
+    overflow:hidden;
+
+    background:transparent;
+
+}
+
+#openingCover{
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:
+        url("images/background.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    opacity:1;
+
+    z-index:4000;
+
+    pointer-events:none;
+
+    transition:
+        opacity 1.5s ease;
+
+}
+
+
+
+#openingCover.hide{
+
+    opacity:0;
+
+}
+
+.container{
+
+    width:100vw;
+
+    min-height:100vh;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+img{
+    position:absolute;
+
+    height:auto;
+
+    object-fit:contain;
+}
+
+/* 左 */
+
+.left{
+
+    width:450px;
+
+    left:-40px;
+
+    top:18%;
+
+    transform:
+        translate(-600px,500px)
+        rotate(32deg);
+
+}
+
+/* 右 */
+
+.right{
+
+    width:450px;
+
+    right:-30px;
+
+    top:18%;
+
+    transform:
+        translate(600px,500px)
+        rotate(-32deg);
+
+}
+
+/* 下 */
+
+.bottom{
+
+    width:700px;
+
+    left:50%;
+
+    top:60%;
+
+    opacity:0;
+
+    transform:
+        translate(-50%,120px);
+
+}
+
+.left.show{
+
+    animation:
+        leftPop
+        0.65s
+        cubic-bezier(.25,.9,.45,1)
+        forwards;
+
+}
+
+.right.show{
+
+    animation:
+        rightPop
+        0.65s
+        cubic-bezier(.25,.9,.45,1)
+        forwards;
+
+}
+
+
+/* 左 */
+
+@keyframes leftPop{
+
+    0%{
+        transform:
+            translate(-600px,500px)
+            rotate(32deg);
+    }
+
+    88%{
+        transform:
+            translate(10px,-8px)
+            rotate(17deg);
+    }
+
+    100%{
+        transform:
+            translate(0,0)
+            rotate(18deg);
+    }
+
+}
+
+
+/* 右 */
+
+@keyframes rightPop{
+
+    0%{
+        transform:
+            translate(600px,500px)
+            rotate(-32deg);
+    }
+
+    88%{
+        transform:
+            translate(-10px,-8px)
+            rotate(-17deg);
+    }
+
+    100%{
+        transform:
+            translate(0,0)
+            rotate(-18deg);
+    }
+
+}
+
+.bottom.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+
+    transition:
+        transform 1.5s ease,
+        opacity 1.5s ease;
+
+}
+
+/* Tap */
+
+#tapStart{
+
+    position:fixed;
+
+    left:50%;
+
+    top:60%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:max-content;
+
+    font-size:40px;
+
+    font-family:sans-serif;
+
+    font-weight:700;
+
+    color:#9EEBFF;
+
+    text-shadow:
+        0 0 10px rgba(0,40,70,0.9),
+        0 0 24px rgba(0,70,120,0.7),
+        0 0 40px rgba(0,120,180,0.45);
+
+    letter-spacing:2px;
+
+    opacity:0;
+
+    transition:
+        opacity 1.5s;
+
+    user-select:none;
+
+    z-index:1000;
+
+}
+
+#tapStart.show{
+
+    opacity:1;
+
+}
+
+#tapStart.hide{
+
+    opacity:0;
+
+}
+
+/* 開始後消える */
+
+.fade.hide{
+
+    opacity:0 !important;
+
+    transition:
+        opacity 1.5s ease;
+
+}
+
+#banner{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:120px;
+
+    background:#1B4C9A;
+
+    display:none;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    box-sizing:border-box;
+
+    z-index:3000;
+
+    isolation:isolate;
+
+}
+
+
+/* 左右グループ */
+
+.banner-left,
+.banner-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+
+.logo{
+
+    width:90px;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-right:24px;
+
+    margin-left:-24px;
+
+}
+
+
+.logo img{
+
+    width:78px;
+
+    height:78px;
+
+    object-fit:contain;
+
+}
+
+/* 各項目 */
+
+.nav-item{
+
+    width:88px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    flex-shrink:0;
+
+}
+
+
+
+/* アイコン */
+
+.nav-item img{
+
+    width:66px;
+
+    height:66px;
+
+    object-fit:contain;
+
+    margin-top:-32px;
+
+}
+
+
+
+.nav-item span{
+
+    color:white;
+
+    font-size:14px;
+
+    line-height:1;
+
+    transform:translateY(35px);
+
+}
