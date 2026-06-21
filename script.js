@@ -289,3 +289,32 @@ function rotateLogo(event) {
         });
     }
 }
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        } else {
+            entry.target.classList.remove("show");
+        }
+    });
+}, {
+    root: document.querySelector("#content"),
+    /* 上下の遊びを元の設定に戻します */
+    rootMargin: "-40px 0px", 
+    threshold: 0 
+});
+
+/* ボックスの監視を開始する関数 */
+function initBoxObserver() {
+    document.querySelectorAll(".menu-box").forEach((box) => {
+        observer.observe(box);
+    });
+}
+
+/* サイトに入ったタイミングで監視を開始 */
+const originalEnterMain = enterMain;
+enterMain = function() {
+    if (typeof originalEnterMain === "function") originalEnterMain();
+    initBoxObserver();
+};
