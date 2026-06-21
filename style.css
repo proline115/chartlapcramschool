@@ -42,12 +42,12 @@ body{
 
     opacity:1;
 
-    z-index:4000;
+    z-index:1500;
 
     pointer-events:none;
 
-    transition:
-        opacity 1.5s ease;
+    transition:opacity 1.5s ease;
+
 
 }
 
@@ -93,6 +93,8 @@ img{
         translate(-600px,500px)
         rotate(32deg);
 
+    z-index:2000;
+
 }
 
 /* 右 */
@@ -108,6 +110,8 @@ img{
     transform:
         translate(600px,500px)
         rotate(-32deg);
+
+    z-index:2000;
 
 }
 
@@ -125,6 +129,8 @@ img{
 
     transform:
         translate(-50%,120px);
+
+    z-index:2000;
 
 }
 
@@ -211,6 +217,55 @@ img{
 
 }
 
+.opening-logo{
+    position: fixed;
+    left: 50%;
+    top: 25%;
+    width: 250px;
+    height: 250px;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    opacity: 0;
+    z-index: 2000;
+}
+
+.opening-logo.show{
+    animation: logoPop 0.8s cubic-bezier(.25,.9,.45,1) 0.5s forwards;
+}
+
+.opening-logo.hide{
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes logoPop{
+    0%{
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    88%{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes fadeOut{
+    0%{
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateZ(0deg);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translate(-50%, -50%) rotateZ(360deg);
+    }
+}
+
 /* Tap */
 
 #tapStart{
@@ -248,7 +303,7 @@ img{
 
     user-select:none;
 
-    z-index:1000;
+    z-index:2000;
 
 }
 
@@ -299,7 +354,7 @@ img{
 
     box-sizing:border-box;
 
-    z-index:3000;
+    z-index:1000;
 
     isolation:isolate;
 
@@ -341,13 +396,16 @@ img{
 
 
 .logo img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+    cursor: pointer;
+    z-index:99999;
+}
 
-    width:78px;
-
-    height:78px;
-
-    object-fit:contain;
-
+.logo img:active{
+    transform: rotateZ(360deg);
 }
 
 /* 各項目 */
@@ -396,4 +454,84 @@ img{
 
     transform:translateY(35px);
 
+}
+
+#content{
+    position: fixed;
+    top: 120px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.page{
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    pointer-events: auto;
+}
+
+.page.active{
+    display: block;
+}
+
+.container::before{
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 1400;
+    cursor: pointer;
+}
+
+/* 破裂アニメーション（すでに巨大な状態から、さらにダメ押しで膨らんで霧散） */
+@keyframes logoBurst {
+    0% {
+        transform: rotateZ(0deg) scale(20.0); /* 99回目の巨大サイズを引き継ぐ */
+        filter: blur(0px) brightness(1);
+        opacity: 1;
+    }
+    40% {
+        transform: rotateZ(360deg) scale(25.0); /* 完全に画面を覆い尽くす25倍 */
+        filter: blur(15px) brightness(3); 
+        opacity: 0.95;
+    }
+    100% {
+        transform: rotateZ(900deg) scale(0); /* 激しく回転しながら中心へ消滅 */
+        filter: blur(50px) brightness(5);
+        opacity: 0;
+    }
+}
+
+/* 戻ってくる時のアニメーション（逆回転しながらフェードイン） */
+@keyframes logoRespawn {
+    0% {
+        opacity: 0;
+        transform: rotateZ(-360deg) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateZ(0deg) scale(1);
+    }
+}
+
+.logo img.burst {
+    position: fixed; 
+    left: 50vw;
+    top: 50vh;
+    margin: 0;
+    transform-origin: center center;
+    z-index: 99999; 
+    animation: logoBurst 1.0s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+    pointer-events: none;
+}
+
+.logo img.respawn {
+    animation: logoRespawn 0.6s ease-out forwards;
 }
