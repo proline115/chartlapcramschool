@@ -1,7 +1,4 @@
 html{
-
-    background-color:#7E8E70;
-
     background-image:
         url("images/background.jpg");
 
@@ -342,7 +339,7 @@ img{
 
     height:120px;
 
-    background:#1B4C9A;
+    background-color: rgba(27, 76, 154, 0.9);
 
     display:none;
 
@@ -465,6 +462,8 @@ img{
     overflow-y: auto;
     pointer-events: none;
     z-index: 100;
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow-y: auto;
 }
 
 .page{
@@ -534,4 +533,124 @@ img{
 
 .logo img.respawn {
     animation: logoRespawn 0.6s ease-out forwards;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+.hero-title {
+    font-size: 64px;
+    font-weight: 900;
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    color: #1B4C9A;
+    margin: 0 0 25px 0;
+    letter-spacing: 3px;
+    text-shadow: 
+        2px 2px 0px #ffffff, 
+        4px 4px 10px rgba(27, 76, 154, 0.2); 
+}
+
+.hero-catch {
+    font-size: 18px;
+    color: #444444;
+    margin: 0 0 40px 0;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.hero-welcome {
+    font-size: 16px;
+    color: #333333;
+    line-height: 1.8;
+}
+
+.hero-welcome p {
+    margin: 0;
+}
+
+/* ==========================================
+   6つのボックスエリア（グリッド全体）
+   ========================================== */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 横に3列均等に並べる */
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;                    /* ボックスが溢れないように器を大きく拡張 */
+    
+    /* 親要素のフレックスボックスの干渉を上書きし、塊ごと画面の真ん中に配置するために必要 */
+    margin: 50px auto !important; 
+    justify-content: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   個々のボックス（正方形）
+   ========================================== */
+.menu-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #1B4C9A;
+    border-radius: 8px;
+    padding: 25px;
+    box-sizing: border-box;
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+
+    /* ボックス自体は動かさず、透明度だけを変化させる（これで振動がゼロになります） */
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+/* 画面内に入った時のボックス自体の状態 */
+.menu-box.show {
+    opacity: 1 !important;
+}
+
+/* --- ボックスの中身（画像・文字）だけを少し動かしてフワッと感を出す --- */
+.menu-box > * {
+    transform: translateY(15px);
+    transition: transform 0.8s ease-out;
+}
+
+/* 画面内に入ったら中身が一斉に元の位置にスライドアップする */
+.menu-box.show > * {
+    transform: translateY(0) !important;
+}
+
+/* ==========================================
+   ボックス内の各要素（画像・文字）
+   ========================================== */
+/* 大きくてインパクトのある画像サイズ */
+.box-icon {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    position: static;
+}
+
+/* ボックス内の見出し */
+.menu-box h3 {
+    font-size: 20px;
+    color: #1B4C9A;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+}
+
+/* ボックス内の説明文 */
+.menu-box p {
+    font-size: 14px;
+    color: #333333;
+    margin: 0;
+    line-height: 1.5;
 }
