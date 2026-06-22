@@ -16,7 +16,13 @@
 
 <body>
 
-    
+<div class="transition-curtain-container">
+    <div class="curtain layer-1"></div>
+    <div class="curtain layer-2"></div>
+    <div class="curtain layer-3">
+        <div id="curtainText" class="curtain-text"></div>
+    </div>
+</div>
 
 <div class="container">
 
@@ -44,9 +50,13 @@ Tap to Start
 
     <div class="banner-left">
 
-        <div class="logo" onclick="navigateTo('home')">
-    <img src="images/logo.png" onclick="rotateLogo(event)">
-</div>
+        <div class="logo">
+            <div class="logo-wrapper">
+                <img src="images/logo.png" onclick="rotateLogo(event)" class="header-logo-img">
+        
+                <span class="logo-hidden-text">①29340</span>
+            </div>
+        </div>
 
         <div class="nav-item" onclick="navigateTo('home')">
 
@@ -157,7 +167,7 @@ Tap to Start
     <div class="menu-box">
         <h3>合言葉</h3>
         <img src="images/password.png" class="box-icon">
-        <p>合言葉を入れないと見れない問題達。その合言葉はこのサイトの何処かに…？SHA256解析しないでね。</p>
+        <p>合言葉を入れないと見れないもの達。その合言葉はこのサイトの何処かに…？プログラム解析しないでね。</p>
     </div>
     <div class="menu-box">
         <h3>答え</h3>
