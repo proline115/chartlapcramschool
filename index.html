@@ -1,21 +1,52 @@
 <!DOCTYPE html>
-<html lang="ja">
+<!--あーあ
+    見ないでって言ったのに
+    頑張って作ったんだけどなぁ
+    ネタバレは面白くないよ
+    自分でギミックを探すから面白いんじゃない-->
 
+<!--2番だけ見つかって他が気になっちゃった？
+    全部で何番まであるんだろうねぇ
+    この下まで読み進めていったら
+    番号達も答え番号も合言葉もわかっちゃうんよね-->
+
+<!--いや
+    隠すこともできんことはないんよ
+    でもそこは性善説で行きたいやん
+    見ないでって言ったんやから-->
+
+<!--見ちゃった人は可哀想かもね
+    せっかく楽しめるサイトを作ったのに
+    あなたはそれを楽しめなくなっちゃった-->
+
+<!--そろそろ引き返す用意はできたでしょう
+    htmlもjsも見ないで
+    この開発ツールをさっさ閉じなさい-->
+
+<!--何か隠し要素を期待しているならごめんね
+    ここを見ないとわからないかもしれないものは多々あるけど
+    それすらも知ってる人が知ってるでいい
+    頑張って考えて探すんだよ
+    ここを見ないと読めない文章は無いようにしているんだから-->
+
+<!--ここまで読んでなおまだ気になる？
+    じゃあそんなあなたにちょっとヒント
+    ホームを開く前に放置するといいかもしれない-->
+
+<!--これで何もなかったら君はただ変な三人を見つめてるヤバイやつだね
+    ｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗｗ-->
+
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
     <title>チャート周回予備校HP</title>
-
     <link rel="stylesheet" href="style.css">
-    <link
-    rel="preload"
-    href="images/background.jpg"
-    as="image">
+    <link rel="preload" href="images/background.jpg" as="image">
 </head>
 
 <body>
-
 <div class="transition-curtain-container">
     <div class="curtain layer-1"></div>
     <div class="curtain layer-2"></div>
@@ -25,161 +56,182 @@
 </div>
 
 <div class="container">
-
     <div id="openingCover"></div>
-
     <img src="images/left.png" class="fade left">
-
     <img src="images/right.png" class="fade right">
-
     <img src="images/bottom.png" class="fade bottom">
-
     <img src="images/logo.png" class="opening-logo">
-
-    <div
-id="tapStart"
-onclick="startSite()">
-
-Tap to Start
-
-</div>
-
+    <div id="tapStart" onclick="startSite()">Tap to Start</div>
 </div>
 
 <header id="banner">
-
     <div class="banner-left">
-
         <div class="logo">
             <div class="logo-wrapper">
                 <img src="images/logo.png" onclick="rotateLogo(event)" class="header-logo-img">
-        
-                <span class="logo-hidden-text">①29340</span>
+                <span class="logo-hidden-text">①98643</span>
             </div>
         </div>
-
         <div class="nav-item" onclick="navigateTo('home')">
-
             <img src="images/home.png">
-
             <span>ホーム</span>
-            
-
         </div>
-
-
         <div class="nav-item" onclick="navigateTo('mondai')">
-
             <img src="images/problem.png">
-
             <span>問題集</span>
-
         </div>
-
-
         <div class="nav-item" onclick="navigateTo('kasu')">
-
             <img src="images/kasu.png">
-
             <span>カス問題集</span>
-
         </div>
-
-
         <div class="nav-item" onclick="navigateTo('kokoroe')">
-
             <img src="images/kokoroe.png">
-
             <span>心得</span>
-
         </div>
-
-
         <div class="nav-item" onclick="navigateTo('history')">
-
             <img src="images/history.png">
-
             <span>歴史</span>
-
         </div>
-
     </div>
-
-
 
     <div class="banner-right">
-
         <div class="nav-item" onclick="navigateTo('password')">
-
             <img src="images/password.png">
-
             <span>合言葉</span>
-
         </div>
-
-
         <div class="nav-item" onclick="navigateTo('answer')">
-
             <img src="images/answer.png">
-
             <span>答え</span>
-
         </div>
-
     </div>
-
 </header>
+
+<div id="pdf-viewer-view" class="hidden">
+    <div class="viewer-actions">
+        <button class="btn-back" onclick="closePdf()">← 一覧に戻る</button>
+    </div>    
+    <div class="pdf-full-wrapper">
+        <iframe id="pdf-frame" src="" frameborder="0"></iframe>
+    </div>
+    <div class="action-container">
+        <button id="btn-solved" class="btn-solved" onclick="showSolvedPopup()">解き終わった！</button>
+    </div>
+</div>
 
 <main id="content">
 
 <div id="page-home" class="page active">
     <div class="hero-section">
         <h1 class="hero-title">チャート周回予備校</h1>
-        
         <p class="hero-catch">チャートの周りで回ること、それが受験生。</p>
-        
-            <div class="hero-welcome">
+        <div class="hero-welcome">
             <p>チャート周回予備校へようこそ！</p>
             <p>自作問題をまとめています。ぜひチャレンジしてみてください！</p>
         </div>
     </div>
     <div class="menu-grid">
-    <div class="menu-box">
-        <h3>問題集</h3>
-        <img src="images/problem.png" class="box-icon">
-        <p>このグループが制作した問題達。全校生徒で解いた問題もあったり無かったり。難問良問揃いです。ぜひやってみてください。</p>
+        <div class="menu-box">
+            <h3>問題集</h3>
+            <img src="images/problem.png" class="box-icon">
+            <p>このグループが制作した問題達。全校生徒で解いた問題もあったり無かったり。難問良問揃いです。ぜひやってみてください。</p>
+        </div>
+        <div class="menu-box">
+            <h3>カス問題集</h3>
+            <img src="images/kasu.png" class="box-icon">
+            <p>問題を作っていく中で生まれた没問題達。努力して生んだものにカスなんて無い！と言うそこのあなた。やってみて。カスだから。</p>
+        </div>
+        <div class="menu-box">
+            <h3>心得</h3>
+            <img src="images/kokoroe.png" class="box-icon">
+            <p>我々は信念を持って勉強をしている！その心得を書いています。中学受験生は参考にしてみてね♡</p>
+        </div>
+        <div class="menu-box">
+            <h3>歴史</h3>
+            <img src="images/history.png" class="box-icon">
+            <p>このサークルが結成され、今までに起こったこと達。授業をし、問題を作り、大会に出て。ここまでの経緯がまとめられています。</p>
+        </div>
+        <div class="menu-box">
+            <h3>合言葉</h3>
+            <img src="images/password.png" class="box-icon">
+            <p>合言葉を入れないと見れないもの達。その合言葉はこのサイトの何処かに…？プログラム解析しないでね。</p>
+        </div>
+        <div class="menu-box">
+            <h3>答え</h3>
+            <img src="images/answer.png" class="box-icon">
+            <p>問題を解いたらもらえるコードを入れると答えが見れます。間違えてたら連絡してね。カス問題集の答えが間違えてるかどうかは知らない。</p>
+        </div>
     </div>
-    <div class="menu-box">
-        <h3>カス問題集</h3>
-        <img src="images/kasu.png" class="box-icon">
-        <p>問題を作っていく中で生まれた没問題達。努力して生んだものにカスなんて無い！と言うそこのあなた。やってみて。カスだから。</p>
+</div>
+
+<div id="page-mondai" class="page">    
+    <div id="mondai-list-view">
+        <div class="page-header">
+            <div class="filter-container">
+                <select id="subject-filter" onchange="filterProblems()">
+                    <option value="すべて">すべての教科</option>
+                    <option value="国語">国語</option>
+                    <option value="数学">数学</option>
+                    <option value="英語">英語</option>
+                    <option value="地理">地理</option>
+                    <option value="公共">公共</option>
+                    <option value="歴史">歴史</option>
+                    <option value="理科">理科</option>
+                    <option value="情報">情報</option>
+                </select>
+            </div>
+        </div>
+        <div id="thumbnail-grid" class="thumbnail-grid"></div>
     </div>
-    <div class="menu-box">
-        <h3>心得</h3>
-        <img src="images/kokoroe.png" class="box-icon">
-        <p>我々は信念を持って勉強をしている！その心得を書いています。中学受験生は参考にしてみてね♡</p>
+    <div class="reset-container" style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+        <button class="btn-reset" onclick="openResetModal()">解答履歴を削除する</button>
     </div>
-    <div class="menu-box">
-        <h3>歴史</h3>
-        <img src="images/history.png" class="box-icon">
-        <p>このサークルが結成され、今までに起こったこと達。授業をし、問題を作り、大会に出て。ここまでの経緯がまとめられています。</p>
+
+    <div id="reset-confirm-modal" class="custom-modal-overlay hidden">
+        <div class="custom-modal-box">
+            <h3>確認</h3>
+            <p>問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？</p>
+            <div class="modal-actions">
+                <button class="btn-modal-delete" onclick="executeClearAllHistory()">はい</button>
+                <button class="btn-modal-cancel" onclick="closeResetModal()">いいえ</button>
+            </div>
+        </div>
     </div>
-    <div class="menu-box">
-        <h3>合言葉</h3>
-        <img src="images/password.png" class="box-icon">
-        <p>合言葉を入れないと見れないもの達。その合言葉はこのサイトの何処かに…？プログラム解析しないでね。</p>
-    </div>
-    <div class="menu-box">
-        <h3>答え</h3>
-        <img src="images/answer.png" class="box-icon">
-        <p>問題を解いたらもらえるコードを入れると答えが見れます。間違えてたら連絡してね。カス問題集の答えが間違えてるかどうかは知らない。</p>
+</div>
+
+<div id="page-kasu" class="page">
+    <div id="kasu-mondai-list-view">
+        <div class="page-header">
+            <div class="filter-container">
+                <select id="kasu-subject-filter" onchange="filterKasuProblems()">
+                    <option value="すべて">すべての教科</option>
+                    <option value="国語">国語</option>
+                    <option value="数学">数学</option>
+                    <option value="英語">英語</option>
+                    <option value="地理">地理</option>
+                    <option value="公共">公共</option>
+                    <option value="歴史">歴史</option>
+                    <option value="理科">理科</option>
+                    <option value="情報">情報</option>
+                </select>
+            </div>
+        </div>
+    <div id="kasu-thumbnail-grid" class="thumbnail-grid"></div>
+</div>
+<div class="reset-container" style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+    <button class="btn-reset" onclick="openKasuResetModal()">解答履歴を削除する</button>
+</div>
+
+<div id="kasu-reset-confirm-modal" class="custom-modal-overlay hidden">
+    <div class="custom-modal-box">
+        <h3>確認</h3>
+        <p>問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？</p>
+        <div class="modal-actions">
+            <button class="btn-modal-delete" onclick="executeClearAllHistory()">はい</button>
+            <button class="btn-modal-cancel" onclick="closeKasuResetModal()">いいえ</button>
+        </div>
     </div>
 </div>
 </div>
-
-<div id="page-mondai" class="page">問題集</div>
-
-<div id="page-kasu" class="page">カス問題集</div>
 
 <div id="page-kokoroe" class="page">心得</div>
 
@@ -188,8 +240,17 @@ Tap to Start
 <div id="page-password" class="page">合言葉</div>
 
 <div id="page-answer" class="page">答え</div>
-
 </main>
+
+<div id="solved-popup" class="popup-overlay" style="display: none !important;">
+    <div class="popup-content">
+        <h3>お疲れ様でした！</h3>
+        <p class="popup-label">答え番号</p>
+        <div id="popup-answer-number" class="answer-number">#000</div>
+        <p class="popup-subtext">答えページに入力してください。</p>
+        <button class="btn-popup-close" onclick="closePdfAndPopup()">閉じて一覧に戻る</button>
+    </div>
+</div>
 
 <script src="script.js"></script>
 
