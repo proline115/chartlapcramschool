@@ -1,216 +1,110 @@
 html{
-    background-image:
-        url("images/background.jpg");
-
+    background-image:url("images/background.jpg");
     background-size:cover;
-
     background-position:center;
-
     background-repeat:no-repeat;
-
     background-attachment:fixed;
-
 }
 
 body{
-
     margin:0;
-
     overflow:hidden;
-
     background:transparent;
-
 }
 
 #openingCover{
-
     position:fixed;
-
     inset:0;
-
-    background-image:
-        url("images/background.jpg");
-
+    background-image:url("images/background.jpg");
     background-size:cover;
-
     background-position:center;
-
     background-repeat:no-repeat;
-
     opacity:1;
-
     z-index:1500;
-
     pointer-events:none;
-
     transition:opacity 1.5s ease;
-
-
 }
 
-
-
 #openingCover.hide{
-
     opacity:0;
-
 }
 
 .container{
-
     width:100vw;
-
     min-height:100vh;
-
     position:relative;
-
     overflow:hidden;
-
 }
 
 img{
     position:absolute;
-
     height:auto;
-
     object-fit:contain;
 }
 
-/* 左 */
-
 .left{
-
     width:450px;
-
     left:-40px;
-
     top:18%;
-
-    transform:
-        translate(-600px,500px)
-        rotate(32deg);
-
+    transform:translate(-600px,500px) rotate(32deg);
     z-index:2000;
-
 }
-
-/* 右 */
 
 .right{
-
     width:450px;
-
     right:-30px;
-
     top:18%;
-
-    transform:
-        translate(600px,500px)
-        rotate(-32deg);
-
+    transform:translate(600px,500px) rotate(-32deg);
     z-index:2000;
-
 }
 
-/* 下 */
-
 .bottom{
-
     width:700px;
-
     left:50%;
-
     top:60%;
-
     opacity:0;
-
-    transform:
-        translate(-50%,120px);
-
+    transform:translate(-50%,120px);
     z-index:2000;
-
 }
 
 .left.show{
-
-    animation:
-        leftPop
-        0.65s
-        cubic-bezier(.25,.9,.45,1)
-        forwards;
+    animation:leftPop 0.65s cubic-bezier(.25,.9,.45,1) forwards;
 
 }
 
 .right.show{
-
-    animation:
-        rightPop
-        0.65s
-        cubic-bezier(.25,.9,.45,1)
-        forwards;
+    animation:rightPop 0.65s cubic-bezier(.25,.9,.45,1) forwards;
 
 }
-
-
-/* 左 */
 
 @keyframes leftPop{
-
     0%{
-        transform:
-            translate(-600px,500px)
-            rotate(32deg);
+        transform:translate(-600px,500px) rotate(32deg);
     }
-
     88%{
-        transform:
-            translate(10px,-8px)
-            rotate(17deg);
+        transform:translate(10px,-8px) rotate(17deg);
     }
-
     100%{
-        transform:
-            translate(0,0)
-            rotate(18deg);
+        transform:translate(0,0) rotate(18deg);
     }
-
 }
 
-
-/* 右 */
-
 @keyframes rightPop{
-
     0%{
-        transform:
-            translate(600px,500px)
-            rotate(-32deg);
+        transform:translate(600px,500px) rotate(-32deg);
     }
-
     88%{
-        transform:
-            translate(-10px,-8px)
-            rotate(-17deg);
+        transform:translate(-10px,-8px) rotate(-17deg);
     }
-
     100%{
-        transform:
-            translate(0,0)
-            rotate(-18deg);
+        transform:translate(0,0) rotate(-18deg);
     }
-
 }
 
 .bottom.show{
-
     opacity:1;
-
-    transform:
-        translate(-50%,0);
-
-    transition:
-        transform 1.5s ease,
-        opacity 1.5s ease;
+    transform:translate(-50%,0);
+    transition:transform 1.5s ease,opacity 1.5s ease;
 
 }
 
@@ -239,12 +133,10 @@ img{
         opacity: 0;
         transform: translate(-50%, -50%) scale(0);
     }
-
     88%{
         opacity: 1;
         transform: translate(-50%, -50%) scale(1.1);
     }
-
     100%{
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
@@ -256,141 +148,78 @@ img{
         opacity: 1;
         transform: translate(-50%, -50%) rotateZ(0deg);
     }
-
     100%{
         opacity: 0;
         transform: translate(-50%, -50%) rotateZ(360deg);
     }
 }
 
-/* Tap */
-
 #tapStart{
-
     position:fixed;
-
     left:50%;
-
     top:60%;
-
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
     width:max-content;
-
     font-size:40px;
-
     font-family:sans-serif;
-
     font-weight:700;
-
     color:#9EEBFF;
-
     text-shadow:
         0 0 10px rgba(0,40,70,0.9),
         0 0 24px rgba(0,70,120,0.7),
         0 0 40px rgba(0,120,180,0.45);
-
     letter-spacing:2px;
-
     opacity:0;
-
-    transition:
-        opacity 1.5s;
-
+    transition:opacity 1.5s;
     user-select:none;
-
     z-index:2000;
-
 }
 
 #tapStart.show{
-
     opacity:1;
-
 }
 
 #tapStart.hide{
-
     opacity:0;
-
 }
 
-/* 開始後消える */
-
 .fade.hide{
-
     opacity:0 !important;
-
-    transition:
-        opacity 1.5s ease;
-
+    transition:opacity 1.5s ease;
 }
 
 #banner{
-
     position:fixed;
-
     top:0;
-
     left:0;
-
     width:100%;
-
     height:120px;
-
     background-color: rgba(27, 76, 154, 0.9);
-
     display:none;
-
     justify-content:space-between;
-
     align-items:center;
-
     padding:0 40px;
-
     box-sizing:border-box;
-
     z-index:1000;
-
     isolation:isolate;
-
 }
-
-
-/* 左右グループ */
 
 .banner-left,
 .banner-right{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
 }
-
-
 
 .logo{
-
     width:90px;
-
     height:100%;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     margin-right:24px;
-
     margin-left:-24px;
-
 }
-
 
 .logo img{
     width: 100px;
@@ -405,52 +234,27 @@ img{
     transform: rotateZ(360deg);
 }
 
-/* 各項目 */
-
 .nav-item{
-
     width:88px;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:flex-start;
-
     flex-shrink:0;
-
 }
-
-
-
-/* アイコン */
 
 .nav-item img{
-
     width:66px;
-
     height:66px;
-
     object-fit:contain;
-
     margin-top:-32px;
-
 }
 
-
-
 .nav-item span{
-
     color:white;
-
     font-size:14px;
-
     line-height:1;
-
     transform:translateY(35px);
-
 }
 
 #content{
@@ -489,26 +293,24 @@ img{
     cursor: pointer;
 }
 
-/* 破裂アニメーション（すでに巨大な状態から、さらにダメ押しで膨らんで霧散） */
 @keyframes logoBurst {
     0% {
-        transform: rotateZ(0deg) scale(20.0); /* 99回目の巨大サイズを引き継ぐ */
+        transform: rotateZ(0deg) scale(20.0);
         filter: blur(0px) brightness(1);
         opacity: 1;
     }
     40% {
-        transform: rotateZ(360deg) scale(25.0); /* 完全に画面を覆い尽くす25倍 */
+        transform: rotateZ(360deg) scale(25.0);
         filter: blur(15px) brightness(3); 
         opacity: 0.95;
     }
     100% {
-        transform: rotateZ(900deg) scale(0); /* 激しく回転しながら中心へ消滅 */
+        transform: rotateZ(900deg) scale(0);
         filter: blur(50px) brightness(5);
         opacity: 0;
     }
 }
 
-/* 戻ってくる時のアニメーション（逆回転しながらフェードイン） */
 @keyframes logoRespawn {
     0% {
         opacity: 0;
@@ -571,26 +373,35 @@ img{
     margin: 0;
 }
 
-/* ==========================================
-   6つのボックスエリア（グリッド全体）
-   ========================================== */
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 横に3列均等に並べる */
+    align-items: stretch !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 25px;
-    width: 100%;
-    max-width: 1200px;                    /* ボックスが溢れないように器を大きく拡張 */
-    
-    /* 親要素のフレックスボックスの干渉を上書きし、塊ごと画面の真ん中に配置するために必要 */
+    width: 100% !important;
+    max-width: 1200px;
+    box-sizing: border-box;
     margin: 50px auto !important; 
     justify-content: center;
     padding: 0 20px;
-    box-sizing: border-box;
 }
 
-/* ==========================================
-   個々のボックス（正方形）
-   ========================================== */
+@media (max-width: 900px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px;
+        width: 100% !important; /* 💡 念のためここでも100%を維持 */
+    }
+}
+
+@media (max-width: 600px) {
+    .menu-grid {
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 16px;
+        width: 100% !important;
+    }
+}
+
 .menu-box {
     background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #1B4C9A;
@@ -599,47 +410,39 @@ img{
     box-sizing: border-box;
     width: 100%;
     aspect-ratio: 1 / 1; 
-    
     display: flex;
     flex-direction: column;
+    padding: 20px 15px !important;
+    min-width: 0 !important;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-
-    /* ボックス自体は動かさず、透明度だけを変化させる（これで振動がゼロになります） */
     opacity: 0;
     transition: opacity 0.8s ease-out;
 }
 
-/* 画面内に入った時のボックス自体の状態 */
 .menu-box.show {
     opacity: 1 !important;
 }
 
-/* --- ボックスの中身（画像・文字）だけを少し動かしてフワッと感を出す --- */
 .menu-box > * {
     transform: translateY(15px);
     transition: transform 0.8s ease-out;
 }
 
-/* 画面内に入ったら中身が一斉に元の位置にスライドアップする */
 .menu-box.show > * {
     transform: translateY(0) !important;
 }
 
-/* ==========================================
-   ボックス内の各要素（画像・文字）
-   ========================================== */
-/* 大きくてインパクトのある画像サイズ */
 .box-icon {
-    width: 150px;
-    height: 150px;
     object-fit: contain;
-    margin-bottom: 15px;
+    margin-bottom: 10px !important;
     position: static;
+    width: 50% !important;
+    max-width: 150px !important; 
+    height: auto !important;
 }
 
-/* ボックス内の見出し */
 .menu-box h3 {
     font-size: 20px;
     color: #1B4C9A;
@@ -647,15 +450,15 @@ img{
     font-weight: 700;
 }
 
-/* ボックス内の説明文 */
 .menu-box p {
     font-size: 14px;
     color: #333333;
     margin: 0;
     line-height: 1.5;
+    width: 100%;
+    word-break: break-all;
 }
 
-/* カーテン全体を包むコンテナ（画面全体を覆う） */
 .transition-curtain-container {
     position: fixed !important;
     top: 0 !important;
@@ -666,104 +469,546 @@ img{
     pointer-events: none;
 }
 
-/* アニメーション中、画面全体のクリックを完全禁止するバリア */
 .transition-curtain-container.is-locking {
     pointer-events: auto !important;
 }
 
-/* 3本共通の長方形の基本設定 */
 .curtain {
     position: absolute;
     top: 0;
-    left: -100%;          /* 最初は画面の左外側に隠しておく */
+    left: -100%;
     width: 100%;
     height: 100%;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* 滑らかな加減速 */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* A案：洗練されたブルーグラデーションの色分け */
-.curtain.layer-1 { background-color: #4A86E8; } /* 1本目：ライトブルー */
-.curtain.layer-2 { background-color: #2A64B5; } /* 2本目：ミディアムブルー */
-.curtain.layer-3 { background-color: #1B4C9A; } /* 3本目：メインの紺色（完全目隠し） */
+.curtain.layer-1 { background-color: #4A86E8; }
+.curtain.layer-2 { background-color: #2A64B5; }
+.curtain.layer-3 { background-color: #1B4C9A; }
 
-/* ==========================================================================
-   【行き】クリック時：左外から画面を覆い尽くす（右へスライド）
-   ========================================================================== */
 .transition-curtain-container.is-leaving .curtain {
     transform: translateX(100%);
 }
-/* 長方形の時間差（ディレイ）を長めに設定 */
+
 .transition-curtain-container.is-leaving .curtain.layer-2 { transition-delay: 0.25s; }
 .transition-curtain-container.is-leaving .curtain.layer-3 { transition-delay: 0.5s; }
 
-/* ==========================================================================
-   【帰り】ページ表示時：画面を覆った状態から、左側へ戻るようにハケる
-   ========================================================================== */
 .transition-curtain-container.is-entering .curtain {
-    transform: translateX(100%); /* 開始時は画面を覆っている状態 */
+    transform: translateX(100%);
 }
 .transition-curtain-container.is-entering.is-active .curtain {
-    transform: translateX(0);    /* 左側（元の位置）へ戻って消える */
+    transform: translateX(0);
 }
-/* ハケるときも同様に長めの時間差をつける */
+
 .transition-curtain-container.is-entering.is-active .curtain.layer-2 { transition-delay: 0.25s; }
 .transition-curtain-container.is-entering.is-active .curtain.layer-3 { transition-delay: 0.5s; }
 
-/* ==========================================================================
-   カーテン内のテキスト演出（完全同期版）
-   ========================================================================== */
-
-/* 3本目の長方形（.layer-3）そのものを文字の基準位置にする */
 .curtain.layer-3 {
     display: flex;
-    align-items: center;     /* 上下中央揃え */
-    justify-content: center; /* 左右中央揃え */
+    align-items: center;
+    justify-content: center;
 }
 
-/* 文章のスタイル設定 */
 .curtain-text {
-    font-size: 4rem;         /* 3.5remから6rem（約1.7倍）へさらに超巨大化 */
-    font-weight: 900;        /* 文字の太さも最大限に太くして力強く */
-    color: #ffffff;          /* 文字の色（白） */
-    white-space: nowrap;     /* 勝手に改行されるのを防ぐ */
-    letter-spacing: 2px;     /* 文字同士の間隔を少し広げて見やすく */
-    
-    /* フェードインや独自の動き（ディレイなど）をすべて排除 */
+    font-size: 4rem;
+    font-weight: 900;
+    color: #ffffff;
+    white-space: nowrap;
+    letter-spacing: 2px;
     transition: none !important; 
     opacity: 1 !important;
 }
 
-/* ロゴと文字をぴったり重ねるための親要素 */
 .logo-wrapper {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;  /* 現在の.logoのサイズに合わせる */
-    height: 100%; /* 現在の.logoのサイズに合わせる */
+    width: 100%;
+    height: 100%;
 }
 
-/* ヘッダーのロゴ画像（手前に配置） */
 .header-logo-img {
     position: relative;
-    z-index: 2; /* ★隠し文字より大きい数値にして手前に出す */
+    z-index: 2;
     display: block;
 }
 
-/* ロゴの裏に隠れるテキスト（下の階層） */
 .logo-hidden-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 完全に中央配置 */
-    z-index: 1; /* ★ロゴ（z-index: 2）より小さい数値なので裏側に隠れる */
-    
-    /* 文字のデザイン調整（お好みでサイズや色を変えてください） */
+    transform: translate(-50%, -50%);
+    z-index: 1;
     font-size: 14px;
     font-weight: bold;
     color: #ffffff;
     white-space: nowrap;
-    
-    /* クリックやホバーの判定をすり抜けさせてロゴの邪魔をしない設定 */
     pointer-events: none; 
 }
+
+#page-mondai {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#subject-filter,
+#kasu-subject-filter {
+    background: #d3e5ff !important;
+    color: hsl(219, 43%, 22%) !important;
+    font-weight: bold !important;
+    border: 2px solid rgba(135, 206, 250, 0.5) !important;
+    padding: 10px 25px !important;
+    font-size: 1rem !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important; 
+    outline: none !important;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+#subject-filter:hover,
+#kasu-subject-filter:hover {
+    background: #ff9900 !important;
+    border-color: #ffaa33 !important;
+    color: #111111 !important;
+}
+
+#subject-filter option,
+#kasu-subject-filter option {
+    background: #1a2a40 !important;
+    color: #ffffff !important;
+    padding: 10px !important;
+}
+
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 4px !important; 
+    padding: 10px 0;
+    width: 100%;
+}
+
+@media (max-width: 1200px) { .thumbnail-grid { grid-template-columns: repeat(5, 1fr); } }
+@media (max-width: 900px) {  .thumbnail-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 600px) {  .thumbnail-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.mondai-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100% !important; 
+    max-width: none !important;
+    margin: 0 !important; 
+    border-radius: 12px !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px !important; 
+    box-sizing: border-box;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.4s ease, scale 0.4s ease;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9) !important; 
+    border: 6px solid transparent !important; 
+}
+
+.mondai-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    background: #ffffff !important; 
+}
+
+.mondai-item.subject-英語 { border-color: #e94057 !important; } /* 鮮やかなルビーレッド */
+.mondai-item.subject-数学 { border-color: #07299c !important; }
+.mondai-item.subject-地理 { border-color: #b56d00 !important; } /* 深みのあるロイヤルブルー */
+.mondai-item.subject-公共 { border-color: #10b981 !important; } /* クリーンなエメラルドグリーン */
+.mondai-item.subject-歴史 { border-color: #ff9900 !important; } /* サイトの補色でもある快活なオレンジ */
+.mondai-item.subject-理科 { border-color: #8b5cf6 !important; } /* 鮮明なアメジストパープル */
+.mondai-item.subject-情報 { border-color: #ae0ba8 !important; }
+.mondai-item.subject-国語 { border-color: #cace00 !important; }
+
+
+.mondai-title {
+    color: #222222 !important; 
+    font-size: 1.3rem !important; 
+    font-weight: 800 !important; 
+    line-height: 1.3 !important; 
+    margin: 0;
+    word-break: break-all;
+    text-shadow: none !important; 
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+.mondai-item.fade-out {
+    opacity: 0 !important;
+    scale: 0.8 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    width: 0 !important; 
+    height: 0 !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    overflow: hidden !important;
+    border: 0 solid transparent !important; 
+}
+
+#pdf-viewer-view {
+    width: 100vw !important;
+    height: 100vh !important; 
+    background: #333333;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    position: relative !important;
+    overflow: hidden;
+    z-index:9999;
+}
+
+.pdf-full-wrapper {
+    width: 100% !important;
+    height: 100% !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    background: #333333;
+}
+
+#pdf-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.action-container {
+    position: absolute !important;
+    bottom: 0 !important; 
+    left: 0 !important;
+    width: 100% !important;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.action-container {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start !important; 
+    align-items: center;
+    z-index: 100;
+}
+
+.action-container {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 80px;
+    display: flex;
+    justify-content: flex-end !important; 
+    align-items: center;
+    z-index: 100;
+}
+
+.btn-solved {
+    background: #ffcc00;
+    color: #111111;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    margin-right: 20px !important; 
+}
+
+.btn-solved:hover {
+    background: #ffe066;
+    transform: scale(1.05);
+}
+
+.popup-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    display: none;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 9999999 !important;
+}
+
+.popup-content {
+    background: #222222 !important;
+    border: 3px solid #ffcc00 !important;
+    padding: 40px !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+    width: 90% !important;
+    max-width: 400px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
+    position: relative !important;
+}
+
+.popup-content h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.popup-label {
+    color: #aaaaaa;
+    font-size: 1rem;
+    margin-bottom: 0px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.answer-number {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #ffcc00;
+    margin: 10px 0;
+    text-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.popup-subtext {
+    color: #dddddd;
+    font-size: 0.9rem;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.btn-popup-close {
+    background: #ffffff;
+    color: #111111;
+    border: none;
+    padding: 15px 0;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-popup-close:hover {
+    background: #dddddd;
+}
+
+body.no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
+
+.viewer-actions {
+    position: absolute !important;
+    top: 55px !important;
+    left: 15px !important;
+    z-index: 100 !important;
+}
+
+.btn-back {
+    background: rgba(0, 0, 0, 0.75) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    padding: 10px 18px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    backdrop-filter: blur(4px) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+    transition: background 0.2s !important;
+}
+
+.btn-back:hover {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.mondai-item.subject-英語.is-completed {
+    background-color: rgb(231, 156, 166) !important;
+}
+
+.mondai-item.subject-数学.is-completed {
+    background-color: rgb(131, 160, 210) !important;
+}
+
+.mondai-item.subject-地理.is-completed {
+    background-color: rgb(210, 180, 131) !important;
+}
+
+.mondai-item.subject-公共.is-completed {
+    background-color: rgb(159, 223, 201) !important;
+}
+
+.mondai-item.subject-歴史.is-completed {
+    background-color: rgb(255, 211, 146) !important;
+}
+
+.mondai-item.subject-理科.is-completed {
+    background-color: rgb(186, 161, 244) !important;
+}
+
+.mondai-item.subject-情報.is-completed {
+    background-color: rgb(247, 173, 251) !important;
+}
+
+.mondai-item.subject-国語.is-completed {
+    background-color: rgb(253, 255, 161) !important;
+}
+
+.btn-reset {
+    background-color: #ffffff;
+    color: #e94057;
+    border: 2px solid #e94057;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-reset:hover {
+    background-color: #e94057;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(233, 64, 87, 0.2);
+}
+
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.custom-modal-box {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.custom-modal-box h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.custom-modal-box p {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-modal-cancel {
+    background-color: #eeeeee;
+    color: #333333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex: 1;
+}
+.btn-modal-cancel:hover {
+    background-color: #dddddd;
+}
+
+.btn-modal-delete {
+    background-color: #e94057;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex: 1;
+}
+.btn-modal-delete:hover {
+    background-color: #d13248;
+}
+
+.btn-reset {
+    background-color: #ffffff;
+    color: #e94057;
+    border: 2px solid #e94057;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-reset:hover {
+    background-color: #e94057;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   絞り込み時の表示アニメーション
+   ========================================================================== */
+
+/* 既に表示されているもの・新しく表示されるものが「ふわっ」と現れる */
+.mondai-item.fade-in {
+    animation: fadeInUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* 上に浮き上がりながら不透明度が上がるアニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
