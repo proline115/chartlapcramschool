@@ -576,6 +576,7 @@ img{
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important; 
     outline: none !important;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
+    margin:0 !important;
 }
 
 #subject-filter:hover,
@@ -911,6 +912,13 @@ body.no-scroll {
     justify-content: center;
     z-index: 9999;
     transition: opacity 0.3s ease;
+    pointer-events: auto;
+}
+
+/* モーダルが非表示（hidden）のとき */
+.custom-modal-overlay.hidden {
+    display: none !important;
+    pointer-events: none; /* 非表示のときはクリックをスルーさせる */
 }
 
 .custom-modal-box {
@@ -1010,5 +1018,46 @@ body.no-scroll {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+/* ==========================================================================
+   絞り込み検索欄の上下位置を完全に同期させるCSS
+   ========================================================================== */
+
+/* 通常とカスのリストビューの基準点を統一 */
+#mondai-list-view, 
+#kasu-mondai-list-view {
+    position: relative;
+    /* 上の要素（タイトル等）と被らないように、あらかじめ上に同じ幅の余白を作ります */
+    padding-top: 70px !important; 
+}
+
+/* 検索欄を囲むヘッダー部分を絶対配置にして、高さを固定 */
+#mondai-list-view .page-header,
+#kasu-mondai-list-view .page-header {
+    position: absolute !important;
+    top: 0 !important;   /* 一覧のてっぺんからの位置 */
+    left: 0;
+    width: 100%;
+    margin: 0 !important;
+    padding: 10px 0 !important; /* 上下の内側余白を完全に統一 */
+}
+
+/* ==========================================================================
+   ページ全体の上の余白を完全に一致させる
+   ========================================================================== */
+
+#page-mondai, 
+#page-kasu {
+    /* 💡 ページ全体の上の隙間をどちらも「0」にして完全に揃えます */
+    margin-top: 0 !important;
+    padding-top: 20px !important; /* 👈 ここでお好みの上の隙間の広さに調整してください */
+}
+
+/* 一番上のヘッダー（検索欄の箱）の上の余白も完全に統一 */
+#mondai-list-view .page-header,
+#kasu-mondai-list-view .page-header {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
