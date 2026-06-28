@@ -82,6 +82,7 @@ const problemList = [
     ["pdf/The Tale of Genji2.pdf","The Tale of<br>Genji2","国語","7579"],
     ["pdf/オハイオの風2.pdf","オハイオの風2","英語","8610"],
     ["pdf/旭川の網代木.pdf","旭川の網代木<br>(日本史)","歴史","9283"],
+    ["pdf/永田町の番人（公共・政経そして少し香る地理）.pdf","永田町の番人<br>(公共・政経<br>そして少し<br>香る地理)","公共","7209"],
     ["pdf/英検対策オハイオの風.pdf","英検対策<br>オハイオの風","英語","0798"],
     ["pdf/加古川の網代木.pdf","加古川の網代木<br>(日本史)","歴史","4701"],
     ["pdf/奇問の崖.pdf","奇問の崖<br>(物理)","理科","5098"],
@@ -90,7 +91,7 @@ const problemList = [
     ["pdf/共テ世界史-2.pdf","共テ世界史-2","歴史","0784"],
     ["pdf/共テ世界史-3.pdf","共テ世界史-3","歴史","6098"],
     ["pdf/共テ世界史-4.pdf","共テ世界史-4","歴史","2374"],
-    ["pdf/共テ倫理キリスト教編 - .pdf","共テ倫理<br>キリスト教編","公共","1997"],
+    ["pdf/共テ倫理キリスト教編.pdf","共テ倫理<br>キリスト教編","公共","1997"],
     ["pdf/共通テスト作問 生物基礎 - 第1問A.pdf","生物基礎<br>第1問A","理科","3610"],
     ["pdf/共通テスト理科基礎演習のための演習1日目.pdf","化学基礎<br>1日目","理科","9720"],
     ["pdf/共通テスト理科基礎演習のための演習2日目.pdf","化学基礎<br>2日目","理科","3748"],
@@ -99,6 +100,7 @@ const problemList = [
     ["pdf/数学.pdf","数学","数学","7598"],
     ["pdf/単発数学.pdf","単発数学","数学","2078"],
     ["pdf/天川の網代木（日本史）.pdf","天川の網代木<br>(日本史)","歴史","6513"],
+    ["pdf/中学生でもできる情報.pdf","中学生でも<br>できる情報","情報","8274"],
     ["pdf/日本史.pdf","日本史","歴史","0874"],
     ["pdf/別府川の網代木（日本史）.pdf","別府川の網代木<br>(日本史)","歴史","5697"],
     ["pdf/無地の知.pdf","無知の知<br>(地学)","理科","8136"],
@@ -568,6 +570,367 @@ function closeKasuResetModal() {
 /**
  * 【超安全】通常・カスの両方の履歴を一発で全削除する処理
  */
+function executeClearAllHistory() {
+    // 1. 通常とカス、両方のローカルストレージデータを完全消去
+    localStorage.removeItem("completedMondaiList");
+    localStorage.removeItem("completedKasuList");
+
+    // 2. 通常問題集のカードから「.is-completed」クラスを一斉に剥ぎ取る
+    const normalCards = document.querySelectorAll("#thumbnail-grid .mondai-item.is-completed");
+    normalCards.forEach(card => card.classList.remove("is-completed"));
+
+    // 3. カス問題集のカードからも「.is-completed」クラスを一斉に剥ぎ取る
+    const kasuCards = document.querySelectorAll("#kasu-thumbnail-grid .mondai-item.is-completed");
+    kasuCards.forEach(card => card.classList.remove("is-completed"));
+
+    // 4. 開いている可能性のあるメッセージボックスを両方閉じる
+    closeResetModal();
+    closeKasuResetModal();
+}
+
+// ==========================================
+// 🌿 隠し要素：全会話ツリーデータ定義
+// ==========================================
+const secretDialogueTree = {
+  start: {
+    text: "こんなに頑張ったのに何故？",
+    buttons: [
+      { text: "飽きた", next: "bored_1" },
+      { text: "もう一度やりたい", next: "want_more_1" }
+    ]
+  },
+  // --- 🌿 飽きたルート ---
+  bored_1: {
+    text: "だからってこんなことしなくても…",
+    buttons: [
+      { text: "消す", next: "delete_insist_1" },
+      { text: "やっぱ消さない", next: "CLOSE" }
+    ]
+  },
+  delete_insist_1: {
+    text: "そんな君には消させてあげない！",
+    buttons: [
+      { text: "消す", next: "delete_insist_2" },
+      { text: "ごめん", next: "sorry_route" }
+    ]
+  },
+  delete_insist_2: {
+    text: "え…何が君をそこまで…",
+    buttons: [
+      { text: "消す", next: "give_up_delete" },
+      { text: "ごめん", next: "sorry_route" }
+    ]
+  },
+  give_up_delete: {
+    text: "わかったよ…",
+    buttons: [
+      { text: "消す", next: "DELETE_HISTORY" },
+      { text: "消す", next: "DELETE_HISTORY" }
+    ]
+  },
+  sorry_route: {
+    text: "わかったならいいんだよ。",
+    buttons: [
+      { text: "消させていただく", next: "DELETE_HISTORY" },
+      { text: "消さないでおく", next: "relieved" }
+    ]
+  },
+  relieved: {
+    text: "良かった良かった",
+    buttons: [
+      { text: "消す", next: "why_do_this" },
+      { text: "閉じる", next: "CLOSE" }
+    ]
+  },
+  why_do_this: {
+    text: "なんでそんなことするの…？",
+    buttons: [
+      { text: "自我を消す", next: "loop_back" },
+      { text: "お前を消す", next: "loop_back" }
+    ]
+  },
+  loop_back: {
+    text: "問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？",
+    buttons: [
+      { text: "はい", next: "DELETE_HISTORY" },
+      { text: "いいえ", next: "CLOSE" }
+    ]
+  },
+  // --- 🌸 もう一度やりたいルート ---
+  want_more_1: {
+    text: "あら…///",
+    buttons: [
+      { text: "やっぱやらない", next: "CLOSE" },
+      { text: "楽しかった", next: "reward_ask" }
+    ]
+  },
+  reward_ask: {
+    text: "制作者として感無量。そんなあなたにご褒美を。",
+    buttons: [
+      { text: "受け取る", next: "reward_code" },
+      { text: "受け取らない", next: "humble_route" }
+    ]
+  },
+  humble_route: {
+    text: "楽しみ方は人それぞれだよね。ここまで解いてくれてありがとね。",
+    buttons: [
+      { text: "どういたしまして", next: "DELETE_HISTORY" },
+      { text: "こちらこそ", next: "DELETE_HISTORY" }
+    ]
+  },
+  reward_code: {
+    text: "③74293",
+    buttons: [
+      { text: "ありがとう", next: "true_reward" },
+      { text: "ばーーーか！！", next: "CLOSE" }
+    ]
+  },
+  true_reward: {
+    text: "本当の数字は③38421。試すようなことをしてごめん。",
+    buttons: [
+      { text: "いいよ", next: "enjoy_again" },
+      { text: "大丈夫だよ", next: "enjoy_again" }
+    ]
+  },
+  enjoy_again: {
+    text: "もう一度楽しむ",
+    buttons: [
+      { text: "はい", next: "DELETE_HISTORY" },
+      { text: "楽しむ", next: "DELETE_HISTORY" }
+    ]
+  }
+};
+
+// ==========================================
+// ⚙️ 状態管理用変数
+// ==========================================
+let currentSecretStage = null; // 現在の隠しイベント進行状況 ('start', 'bored_1' など)
+let activeModalType = null;     // 現在どちらのモーダルが開いているか ('normal' または 'kasu')
+
+// ==========================================
+// 🔍 全問クリアチェック関数
+// ==========================================
+function checkAllQuestionsCleared() {
+    // HTML内のすべての問題カード（通常・カス両方）の総数を取得
+    // ※もしコンポーネントが動的に生成される場合、配列のデータ数と比較してもOKです
+    const totalProblems = document.querySelectorAll(".thumbnail-grid .mondai-item").length;
+    
+    // 現在LocalStorageに保存されているクリア済みの数を取得
+    const savedMondai = JSON.parse(localStorage.getItem("completedMondaiList") || "[]");
+    const savedKasu = JSON.parse(localStorage.getItem("completedKasuList") || "[]");
+    const totalCleared = savedMondai.length + savedKasu.length;
+
+    // 0件で一致してしまうのを防ぎつつ、総問題数とクリア済みの数が一致しているか判定
+    return totalProblems > 0 && totalCleared === totalProblems;
+}
+
+// ==========================================
+// 🔄 モーダルの表示リセット関数（テキストを元に戻す）
+// ==========================================
+function resetModalDOM() {
+    // 通常モーダルの復元
+    const normalModal = document.getElementById("reset-confirm-modal");
+    if (normalModal) {
+        normalModal.querySelector("p").textContent = "問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？";
+        const buttons = normalModal.querySelectorAll(".modal-actions button");
+        buttons[0].textContent = "はい";
+        buttons[1].textContent = "いいえ";
+    }
+    // カスモーダルの復元
+    const kasuModal = document.getElementById("kasu-reset-confirm-modal");
+    if (kasuModal) {
+        kasuModal.querySelector("p").textContent = "問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？";
+        const buttons = kasuModal.querySelectorAll(".modal-actions button");
+        buttons[0].textContent = "はい";
+        buttons[1].textContent = "いいえ";
+    }
+}
+
+// ==========================================
+// 🔓 既存関数のオーバーライドとフック
+// ==========================================
+
+function openResetModal() {
+    const modal = document.getElementById("reset-confirm-modal");
+    if (modal) {
+        resetModalDOM();
+        activeModalType = "normal";
+        
+        if (checkAllQuestionsCleared()) {
+            currentSecretStage = "start";
+        } else {
+            currentSecretStage = null;
+        }
+
+        modal.classList.remove("hidden");
+        document.body.classList.add("no-scroll");
+
+        // 💡 追加：モーダル背景をクリックした時のイベントが外（下のPDF）に漏れないようにする
+        modal.addEventListener('click', (e) => e.stopPropagation());
+    }
+}
+
+function openKasuResetModal() {
+    const modal = document.getElementById("kasu-reset-confirm-modal");
+    if (modal) {
+        resetModalDOM();
+        activeModalType = "kasu";
+
+        if (checkAllQuestionsCleared()) {
+            currentSecretStage = "start";
+        } else {
+            currentSecretStage = null;
+        }
+
+        modal.classList.remove("hidden");
+        document.body.classList.add("no-scroll");
+
+        // 💡 追加：モーダル背景をクリックした時のイベントが外（下のPDF）に漏れないようにする
+        modal.addEventListener('click', (e) => e.stopPropagation());
+    }
+}
+
+function closeResetModal() {
+    const modal = document.getElementById("reset-confirm-modal");
+    if (modal) {
+        modal.classList.add("hidden");
+        document.body.classList.remove("no-scroll");
+        currentSecretStage = null;
+        activeModalType = null;
+    }
+}
+
+
+function closeKasuResetModal() {
+    const modal = document.getElementById("kasu-reset-confirm-modal");
+    if (modal) {
+        modal.classList.add("hidden");
+        document.body.classList.remove("no-scroll");
+        currentSecretStage = null;
+        activeModalType = null;
+    }
+}
+
+// ==========================================
+// 🧠 隠し要素の選択肢・分岐制御ロジック
+// ==========================================
+
+/**
+ * モーダル内のボタンテキストとメッセージを動的に書き換える
+ */
+function renderSecretDialogue(stageKey) {
+    currentSecretStage = stageKey; // 👈 ここで現在のステージを確実に更新！
+    const data = secretDialogueTree[stageKey];
+    
+    const modalId = activeModalType === "kasu" ? "kasu-reset-confirm-modal" : "reset-confirm-modal";
+    const modal = document.getElementById(modalId);
+    
+    if (modal) {
+        modal.querySelector("p").textContent = data.text;
+        const buttons = modal.querySelectorAll(".modal-actions button");
+        buttons[0].textContent = data.buttons[0].text;
+        buttons[1].textContent = data.buttons[1].text;
+    }
+}
+
+/**
+ * 【統合版】モーダルのボタンがクリックされた時の全制御関数
+ * - 0なら左ボタン（はい側）、1なら右ボタン（いいえ側）
+ */
+function handleModalClick(buttonIndex) {
+    // ----------------------------------------------------
+    // 1. 通常時（全問クリアしていない、または最初の画面を出す前）
+    // ----------------------------------------------------
+    if (currentSecretStage === null) {
+        if (buttonIndex === 0) {
+            // 「はい」が押されたら普通に履歴削除
+            executeClearAllHistory();
+        } else {
+            // 「いいえ」が押されたら普通に閉じる
+            if (activeModalType === "kasu") {
+                closeKasuResetModal();
+            } else {
+                closeResetModal();
+            }
+        }
+        return;
+    }
+
+    // ----------------------------------------------------
+    // 2. 最初の画面（本当によろしいですか？）でボタンが押された時
+    // ----------------------------------------------------
+    if (currentSecretStage === "start") {
+        if (buttonIndex === 0) {
+            // 「はい」が押されたら、隠し要素の最初のセリフを表示
+            renderSecretDialogue("start");
+            // 💡 ここがポイント：画面を切り替えたので、ステージを次に進める準備をする
+            currentSecretStage = "start_waiting"; 
+        } else {
+            // 「いいえ」ならイベントを起こさずに閉じる
+            if (activeModalType === "kasu") {
+                closeKasuResetModal();
+            } else {
+                closeResetModal();
+            }
+        }
+        return;
+    }
+
+    // ----------------------------------------------------
+    // 3. 「こんなに頑張ったのに何故？」以降の会話が進行中の時
+    // ----------------------------------------------------
+    // 画面が切り替わった直後のダミーステージを本番の "start" に戻して判定する
+    if (currentSecretStage === "start_waiting") {
+        currentSecretStage = "start";
+    }
+
+    const currentData = secretDialogueTree[currentSecretStage];
+    if (!currentData || !currentData.buttons[buttonIndex]) return;
+
+    // 押されたボタン（0 or 1）に応じた次のステージ名を取得
+    const nextStage = currentData.buttons[buttonIndex].next;
+
+    if (nextStage === "CLOSE") {
+        if (activeModalType === "kasu") {
+            closeKasuResetModal();
+        } else {
+            closeResetModal();
+        }
+    } else if (nextStage === "DELETE_HISTORY") {
+        executeClearAllHistory();
+    } else {
+        // 次のメッセージへ
+        renderSecretDialogue(nextStage);
+    }
+}
+
+/**
+ * 【連動修正】隠し要素の選択肢に基づいてステージを「次」に進める関数
+ */
+function handleSecretChoice(buttonIndex) {
+    const currentData = secretDialogueTree[currentSecretStage];
+    if (!currentData || !currentData.buttons[buttonIndex]) return;
+
+    // 💡 ここでしっかりと「次のステージ名」を取得します
+    const nextStage = currentData.buttons[buttonIndex].next;
+
+    if (nextStage === "CLOSE") {
+        // 履歴を残したまま閉じる
+        closeResetModal();
+        closeKasuResetModal();
+    } else if (nextStage === "DELETE_HISTORY") {
+        // 履歴を完全削除する
+        executeClearAllHistory();
+    } else {
+        // 💡 次のステージ（例: "bored_1" や "want_more_1"）の文字を画面に反映し、
+        // 内部の currentSecretStage もその値に更新する
+        renderSecretDialogue(nextStage);
+    }
+}
+
+// ==========================================
+// 💥 【最終着地】コア削除処理（元のコードをそのまま維持）
+// ==========================================
 function executeClearAllHistory() {
     // 1. 通常とカス、両方のローカルストレージデータを完全消去
     localStorage.removeItem("completedMondaiList");
