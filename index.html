@@ -191,8 +191,8 @@
             <h3>確認</h3>
             <p>問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？</p>
             <div class="modal-actions">
-                <button class="btn-modal-delete" onclick="executeClearAllHistory()">はい</button>
-                <button class="btn-modal-cancel" onclick="closeResetModal()">いいえ</button>
+                <button class="btn-modal-delete" onclick="handleModalClick(0)">はい</button>
+                <button class="btn-modal-cancel" onclick="handleModalClick(1)">いいえ</button>
             </div>
         </div>
     </div>
@@ -219,15 +219,15 @@
 </div>
 <div class="reset-container" style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
     <button class="btn-reset" onclick="openKasuResetModal()">解答履歴を削除する</button>
-</div>
+    </div>
 
 <div id="kasu-reset-confirm-modal" class="custom-modal-overlay hidden">
     <div class="custom-modal-box">
         <h3>確認</h3>
         <p>問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？</p>
         <div class="modal-actions">
-            <button class="btn-modal-delete" onclick="executeClearAllHistory()">はい</button>
-            <button class="btn-modal-cancel" onclick="closeKasuResetModal()">いいえ</button>
+            <button class="btn-modal-delete" onclick="handleModalClick(0)">はい</button>
+            <button class="btn-modal-cancel" onclick="handleModalClick(1)">いいえ</button>
         </div>
     </div>
 </div>
