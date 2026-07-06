@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <!--あーあ
     見ないでって言ったのに
-    頑張って作ったんだけどなぁ
+    頑張って作ったんやけどなぁ
     ネタバレは面白くないよ
     自分でギミックを探すから面白いんじゃない-->
 
-<!--2番だけ見つかって他が気になっちゃった？
+<!--1番か2番かだけ見つかって他が気になっちゃった？
     全部で何番まであるんだろうねぇ
     この下まで読み進めていったら
     番号達も答え番号も合言葉もわかっちゃうんよね-->
@@ -90,7 +90,7 @@
         </div>
         <div class="nav-item" onclick="navigateTo('history')">
             <img src="images/history.png">
-            <span>歴史</span>
+            <span>実績</span>
         </div>
     </div>
 
@@ -123,7 +123,7 @@
 <div id="page-home" class="page active">
     <div class="hero-section">
         <h1 class="hero-title">チャート周回予備校</h1>
-        <p class="hero-catch">チャートの周りで回ること、それが受験生。</p>
+        <p class="hero-catch" id="home-headline">チャートの周りで回ること、それが受験生。</p>
         <div class="hero-welcome">
             <p>チャート周回予備校へようこそ！</p>
             <p>自作問題をまとめています。ぜひチャレンジしてみてください！</p>
@@ -146,9 +146,9 @@
             <p>我々は信念を持って勉強をしている！その心得を書いています。中学受験生は参考にしてみてね♡</p>
         </div>
         <div class="menu-box">
-            <h3>歴史</h3>
+            <h3>実績</h3>
             <img src="images/history.png" class="box-icon">
-            <p>このサークルが結成され、今までに起こったこと達。授業をし、問題を作り、大会に出て。ここまでの経緯がまとめられています。</p>
+            <p>あなたがこのサイトで達成した実績。あなたはどこまで楽しみ、どこまで学べるのか。自分の限界を試してみよう。</p>
         </div>
         <div class="menu-box">
             <h3>合言葉</h3>
@@ -169,6 +169,7 @@
             <div class="filter-container">
                 <select id="subject-filter" onchange="filterProblems()">
                     <option value="すべて">すべての教科</option>
+                    <option value="未回答">未回答の問題</option>
                     <option value="国語">国語</option>
                     <option value="数学">数学</option>
                     <option value="英語">英語</option>
@@ -204,6 +205,7 @@
             <div class="filter-container">
                 <select id="kasu-subject-filter" onchange="filterKasuProblems()">
                     <option value="すべて">すべての教科</option>
+                    <option value="未回答">未回答の問題</option>
                     <option value="国語">国語</option>
                     <option value="数学">数学</option>
                     <option value="英語">英語</option>
@@ -233,9 +235,48 @@
 </div>
 </div>
 
-<div id="page-kokoroe" class="page">心得</div>
+<div id="page-kokoroe" class="page">
 
-<div id="page-history" class="page">歴史</div>
+<div class="belief-page-container">
+
+  <div class="belief-digital-screen">
+    
+    <div class="belief-favorite-tag">
+      <span class="belief-indicator-text">オキニイリ</span>
+      <div class="belief-star-box">
+        <img id="fav-star" src="belief/star_off.png" alt="星マーク">
+      </div>
+    </div>
+
+    <div class="belief-screen-left">
+        <h2 id="member-name">メンバー1</h2>
+      <div class="belief-member-photo-frame">
+        <img id="member-photo" src="belief/member1.png" alt="メンバー写真">
+      </div>
+    </div>
+
+    <div class="belief-screen-right">
+      <div id="profile-text-container" class="belief-profile-text-wrap">
+        
+        <p id="member-profile">ここにプロフィールや心得のテキストが入ります。文字が溢れた場合は、右側の枠からはみ出さずにバッサリと非表示になります。</p>
+      </div>
+    </div>
+
+    <div id="error-message" class="belief-error-toast">これ以上進めません</div>
+
+  </div>
+
+  <div class="belief-digital-controller">
+    <button type="button" id="btn-prev" class="belief-digi-btn belief-btn-round">◀</button>
+    <button type="button" id="btn-favorite" class="belief-digi-btn belief-btn-oval">★</button>
+    <button type="button" id="btn-next" class="belief-digi-btn belief-btn-round">▶</button>
+  </div>
+
+</div>
+    
+</div>
+
+<div id="page-history" class="page">実績</div>
 
 <div id="page-password" class="page">合言葉</div>
 
