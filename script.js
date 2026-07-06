@@ -19,6 +19,7 @@ const randomPhrases = [
     "野辺に咲く花となりしも<br>われはまた<br>袂濡らさむ君ぞゆかしき",
     "合言葉に<br>「Okayama」と入れると…？",
     "合言葉に<br>「Math」と入れると…？",
+    "合言葉「Question」で<br>直接メッセージが送れます",
     "いつまでも回るわけでは無いらしい",
     "ティンバル果が<br>結局何かわかってない",
     "ジャムシェドプルの<br>タタ財閥を創始したのは<br>ジャムシェトジー・タタ",
@@ -32,7 +33,15 @@ const randomPhrases = [
     "大凶......<br>そういう日だってある<br>リフレッシュしよう！",
     "思慮分別とかいう<br>「sensible」「おとなし」<br>専用のワード",
     "紙とペンがあれば<br>娯楽は完結する",
-    "明日こそは警報でてほしい"
+    "明日こそは警報でてほしい",
+    "本当に月が綺麗なとき<br>なんて言えば良いんや",
+    "左って何も無かったっけ…<br>無かったか…",
+    "鶯が<br>パイレーツ・オ◯・カリビアンの<br>音程で鳴いてた",
+    "聖徳太子色々やりすぎて<br>集団名とかじゃないと<br>信じられない",
+    "ｳｪｲﾊﾟ₍ᐢ.ˬ.ᐢ₎ｱｰﾈﾑﾗﾝﾄﾞ",
+    "[カス知識]<br>おむつの炎は黄色",
+    "作者の気持ちを<br>答えさせる問題<br>実際見たこと無い",
+    "長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら短歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。"
 ];
 
 const sequentialPhrases = [
@@ -79,7 +88,6 @@ const problemList = [
     ["pdf/9-共テ.pdf", "9-共テ<br>(地理)", "地理", "6103"],
     ["pdf/the field of「Subjunctive」.pdf","the field of<br>「Subjunctive」","英語","6578"],
     ["pdf/The Tale of Genji.pdf","The Tale of<br>Genji","国語","9842"],
-    ["pdf/The Tale of Genji2.pdf","The Tale of<br>Genji2","国語","7579"],
     ["pdf/オハイオの風2.pdf","オハイオの風2","英語","8610"],
     ["pdf/旭川の網代木.pdf","旭川の網代木<br>(日本史)","歴史","9283"],
     ["pdf/永田町の番人（公共・政経そして少し香る地理）.pdf","永田町の番人<br>(公共・政経<br>そして少し<br>香る地理)","公共","7209"],
@@ -125,6 +133,39 @@ const kasuProblemList = [
     ["kasupdf/カス歴史2.pdf","カス歴史2","歴史","0577"],
     ["kasupdf/ザグロスの頂.pdf","ザグロスの頂<br>(地理)","地理","2695"],
     ["kasupdf/やさしい理系生物.pdf","やさしい理系生物","理科","2987"]
+];
+
+const membersData = [
+  { id: 1, name: "岡山の吉右衛門", 
+    profile: "『オハイオの風』・『永田町の番人』制作<br>英検準一級講座主宰（合格者2名）<br><br>心得：百合は日本の文化です。<br><br>挨拶：来年の現国の教科書に百合が載るってよ",
+    beliefProfile: "百合は日本の文化です。"},
+  { id: 2, name: "メンバー２", 
+    profile: "ここはデモンストレーション<br><br>心得：好きなこと書いてもらっていい。お気に入りに設定された人はここに書いてあることがホームに載る。けど別にホームに乗せるやつとここに書いてあるやつ変えてもいい。<br><br>挨拶：あったほうがいいと思ったけど無くてもいいかと思った<br><br>他：ほんと好きなこと書いてもらっていい。なんか身分が特定されるような何々が無ければ。あとオプションは自由。色変えたいとかあったら全然。超えたらスクロール出来んから。それも含めて演出。" ,
+    beliefProfile: "わかった？"},
+  { id: 3, name: "プロリン115", 
+    profile: "倫理・サイト運営担当<br><br>受験勉強を生贄にサイトを制作している。<br>英検講座より参加したが、申し込み方法がわからず無事不戦敗。<br><br><span style='color:white;'>心得：質に全</span>振りすれば勉強時間0でもいける<br><br><span style='color:white;'>'挨拶：サイト運</span>営をしております！少しでも楽しんでいただけ<span style='color:white;'>れば何よ</span>りです。実績全解除目指しましょう。",
+    beliefProfile: "新たな扉が開かれた！"},
+  { id: 4, name: "メンバー4", 
+    profile: "ここに4人目のプロフィールのテキストが入ります。",
+    beliefProfile:"百合コーン🦄"},
+  { id: 5, name: "メンバー5", 
+    profile: "ここに5人目のプロフィールのテキストが入ります。",
+    beliefProfile: "p-ビスホスフィノ木"},
+  { id: 6, name: "メンバー6", 
+    profile: "ここに6人目のプロフィールのテキストが入ります。",
+    beliefProfile: "岡山は日本の植民地"},
+  { id: 7, name: "メンバー7", 
+    profile: "ここに7人目のプロフィールのテキストが入ります。",
+    beliefProfile: "ベリリウムは貴ガスやぁ"},
+  { id: 8, name: "メンバー8", 
+    profile: "ここに8人目のプロフィールのテキストが入ります。",
+    beliefProfile: "「に加えて」は三文字やろ！"},
+  { id: 9, name: "メンバー9", 
+    profile: "ここに9人目のプロフィールのテキストが入ります。",
+    beliefProfile: "3人以上は百合ではない"},
+  { id: 10, name: "メンバー10", 
+    profile: "ここに10人目のプロフィールのテキストが入ります。",
+    beliefProfile:"お前の親父巨人軍？"}
 ];
 
 const container = document.querySelector(".container");
@@ -240,6 +281,7 @@ function executePageSwitch(fullPageId) {
     if(targetPage){
         targetPage.classList.add("active");
     }
+    initMemberPage();
 }
 
 function triggerCurtainTransition(fullPageId, callback) {
@@ -370,19 +412,13 @@ enterMain = function() {
 
 let currentAnswerNumber = "";
 let currentOpenedPdfUrl = "";
-// 💡 【バグ防止】今開いているのが通常（'normal'）かカス（'kasu'）かを記録する
 let currentMondaiType = "normal"; 
 
-// ページ読み込み時に「通常」と「カス」の両方を自動生成
 document.addEventListener("DOMContentLoaded", () => {
-    // 1つの関数（生成マシーン）に、データ、箱のID、保存先の名前を渡して2回動かす
     initAnyGrid(problemList, "thumbnail-grid", "completedMondaiList");
     initAnyGrid(kasuProblemList, "kasu-thumbnail-grid", "completedKasuList");
 });
 
-/**
- * 【超安全・共通化】どんな問題集のカードでもバグなく自動生成するマシーン
- */
 function initAnyGrid(listData, gridId, storageKey) {
     const grid = document.getElementById(gridId);
     if (!grid) return;
@@ -403,7 +439,6 @@ function initAnyGrid(listData, gridId, storageKey) {
             item.classList.add("is-completed");
         }
         
-        // 💡 クリック時、どちらのタイプ（通常かカスか）も一緒に記憶させてPDFを開く
         const type = (gridId === "kasu-thumbnail-grid") ? "kasu" : "normal";
         item.onclick = () => openPdf(pdfUrl, answerNum, type);
 
@@ -416,38 +451,41 @@ function initAnyGrid(listData, gridId, storageKey) {
     });
 }
 
-/**
- * 通常問題の絞り込み
- */
 function filterProblems() {
     executeFilter("subject-filter", "#thumbnail-grid .mondai-item");
 }
 
-/**
- * 【新設】カス問題の絞り込み
- */
 function filterKasuProblems() {
     executeFilter("kasu-subject-filter", "#kasu-thumbnail-grid .mondai-item");
 }
 
-/**
- * 【バグ・エラー完全防止版】絞り込みロジック
- */
 function executeFilter(filterSelectId, itemSelector) {
-    // 💡 安全装置：指定されたセレクトボックスが画面内にあるかチェック
     const filterElement = document.getElementById(filterSelectId);
-    if (!filterElement) return; // 画面になければ、エラーを出さずに処理を終了する（これでバグが防げます）
+    if (!filterElement) return;
 
     const filterValue = filterElement.value;
     const items = document.querySelectorAll(itemSelector);
 
     items.forEach(item => {
         const itemSubject = item.getAttribute("data-subject");
+        
+        const isCompleted = item.classList.contains("is-completed");
+
         item.classList.remove("fade-in");
 
-        if (filterValue === "すべて" || itemSubject === filterValue) {
+        let shouldShow = false;
+
+        if (filterValue === "すべて") {
+            shouldShow = true;
+        } else if (filterValue === "未回答") {
+            shouldShow = !isCompleted;
+        } else {
+            shouldShow = (itemSubject === filterValue);
+        }
+
+        if (shouldShow) {
             item.classList.remove("fade-out");
-            void item.offsetWidth; 
+            void item.offsetWidth;
             item.classList.add("fade-in");
         } else {
             item.classList.add("fade-out");
@@ -455,9 +493,6 @@ function executeFilter(filterSelectId, itemSelector) {
     });
 }
 
-/**
- * PDF画面を開く
- */
 function openPdf(pdfUrl, answerNum, type) {
     const viewerView = document.getElementById("pdf-viewer-view");
     const pdfFrame = document.getElementById("pdf-frame");
@@ -465,7 +500,7 @@ function openPdf(pdfUrl, answerNum, type) {
     if (viewerView && pdfFrame) {
         currentAnswerNumber = answerNum;
         currentOpenedPdfUrl = pdfUrl;
-        currentMondaiType = type; // 💡 通常かカスかを記憶
+        currentMondaiType = type;
 
         pdfFrame.src = pdfUrl;
         viewerView.classList.remove("hidden");
@@ -475,9 +510,6 @@ function openPdf(pdfUrl, answerNum, type) {
     }
 }
 
-/**
- * 通常の「戻る」処理
- */
 function closePdf() {
     const viewerView = document.getElementById("pdf-viewer-view");
     const pdfFrame = document.getElementById("pdf-frame");
@@ -489,9 +521,7 @@ function closePdf() {
     }
 }
 
-/**
- * 「解き終わった！」ボタンを押してポップアップを表示（通常・カス連動版）
- */
+
 function showSolvedPopup() {
     const popup = document.getElementById("solved-popup");
     const popupText = document.getElementById("popup-answer-number");
@@ -501,7 +531,6 @@ function showSolvedPopup() {
         popup.style.setProperty("display", "flex", "important"); 
 
         if (currentOpenedPdfUrl) {
-            // 💡 今開いているタイプに合わせて、探すカードの場所と保存先を自動で切り替える
             const selector = currentMondaiType === "kasu" ? "#kasu-thumbnail-grid" : "#thumbnail-grid";
             const storageKey = currentMondaiType === "kasu" ? "completedKasuList" : "completedMondaiList";
 
@@ -520,9 +549,6 @@ function showSolvedPopup() {
     }
 }
 
-/**
- * ポップアップを閉じ、PDFビューアーも同時に閉じる
- */
 function closePdfAndPopup() {
     const popup = document.getElementById("solved-popup");
     if (popup) {
@@ -531,9 +557,6 @@ function closePdfAndPopup() {
     closePdf(); 
 }
 
-/**
- * 【通常ボタン用】メッセージボックスを開閉する
- */
 function openResetModal() {
     const modal = document.getElementById("reset-confirm-modal");
     if (modal) {
@@ -549,9 +572,6 @@ function closeResetModal() {
     }
 }
 
-/**
- * 【カスボタン用】メッセージボックスを開閉する
- */
 function openKasuResetModal() {
     const modal = document.getElementById("kasu-reset-confirm-modal");
     if (modal) {
@@ -567,30 +587,17 @@ function closeKasuResetModal() {
     }
 }
 
-/**
- * 【超安全】通常・カスの両方の履歴を一発で全削除する処理
- */
 function executeClearAllHistory() {
-    // 1. 通常とカス、両方のローカルストレージデータを完全消去
     localStorage.removeItem("completedMondaiList");
     localStorage.removeItem("completedKasuList");
-
-    // 2. 通常問題集のカードから「.is-completed」クラスを一斉に剥ぎ取る
     const normalCards = document.querySelectorAll("#thumbnail-grid .mondai-item.is-completed");
     normalCards.forEach(card => card.classList.remove("is-completed"));
-
-    // 3. カス問題集のカードからも「.is-completed」クラスを一斉に剥ぎ取る
     const kasuCards = document.querySelectorAll("#kasu-thumbnail-grid .mondai-item.is-completed");
     kasuCards.forEach(card => card.classList.remove("is-completed"));
-
-    // 4. 開いている可能性のあるメッセージボックスを両方閉じる
     closeResetModal();
     closeKasuResetModal();
 }
 
-// ==========================================
-// 🌿 隠し要素：全会話ツリーデータ定義
-// ==========================================
 const secretDialogueTree = {
   start: {
     text: "こんなに頑張ったのに何故？",
@@ -599,7 +606,6 @@ const secretDialogueTree = {
       { text: "もう一度やりたい", next: "want_more_1" }
     ]
   },
-  // --- 🌿 飽きたルート ---
   bored_1: {
     text: "だからってこんなことしなくても…",
     buttons: [
@@ -656,7 +662,6 @@ const secretDialogueTree = {
       { text: "いいえ", next: "CLOSE" }
     ]
   },
-  // --- 🌸 もう一度やりたいルート ---
   want_more_1: {
     text: "あら…///",
     buttons: [
@@ -701,34 +706,18 @@ const secretDialogueTree = {
   }
 };
 
-// ==========================================
-// ⚙️ 状態管理用変数
-// ==========================================
-let currentSecretStage = null; // 現在の隠しイベント進行状況 ('start', 'bored_1' など)
-let activeModalType = null;     // 現在どちらのモーダルが開いているか ('normal' または 'kasu')
+let currentSecretStage = null;
+let activeModalType = null;
 
-// ==========================================
-// 🔍 全問クリアチェック関数
-// ==========================================
 function checkAllQuestionsCleared() {
-    // HTML内のすべての問題カード（通常・カス両方）の総数を取得
-    // ※もしコンポーネントが動的に生成される場合、配列のデータ数と比較してもOKです
     const totalProblems = document.querySelectorAll(".thumbnail-grid .mondai-item").length;
-    
-    // 現在LocalStorageに保存されているクリア済みの数を取得
     const savedMondai = JSON.parse(localStorage.getItem("completedMondaiList") || "[]");
     const savedKasu = JSON.parse(localStorage.getItem("completedKasuList") || "[]");
     const totalCleared = savedMondai.length + savedKasu.length;
-
-    // 0件で一致してしまうのを防ぎつつ、総問題数とクリア済みの数が一致しているか判定
     return totalProblems > 0 && totalCleared === totalProblems;
 }
 
-// ==========================================
-// 🔄 モーダルの表示リセット関数（テキストを元に戻す）
-// ==========================================
 function resetModalDOM() {
-    // 通常モーダルの復元
     const normalModal = document.getElementById("reset-confirm-modal");
     if (normalModal) {
         normalModal.querySelector("p").textContent = "問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？";
@@ -736,7 +725,6 @@ function resetModalDOM() {
         buttons[0].textContent = "はい";
         buttons[1].textContent = "いいえ";
     }
-    // カスモーダルの復元
     const kasuModal = document.getElementById("kasu-reset-confirm-modal");
     if (kasuModal) {
         kasuModal.querySelector("p").textContent = "問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？";
@@ -745,10 +733,6 @@ function resetModalDOM() {
         buttons[1].textContent = "いいえ";
     }
 }
-
-// ==========================================
-// 🔓 既存関数のオーバーライドとフック
-// ==========================================
 
 function openResetModal() {
     const modal = document.getElementById("reset-confirm-modal");
@@ -764,8 +748,6 @@ function openResetModal() {
 
         modal.classList.remove("hidden");
         document.body.classList.add("no-scroll");
-
-        // 💡 追加：モーダル背景をクリックした時のイベントが外（下のPDF）に漏れないようにする
         modal.addEventListener('click', (e) => e.stopPropagation());
     }
 }
@@ -784,8 +766,6 @@ function openKasuResetModal() {
 
         modal.classList.remove("hidden");
         document.body.classList.add("no-scroll");
-
-        // 💡 追加：モーダル背景をクリックした時のイベントが外（下のPDF）に漏れないようにする
         modal.addEventListener('click', (e) => e.stopPropagation());
     }
 }
@@ -811,15 +791,8 @@ function closeKasuResetModal() {
     }
 }
 
-// ==========================================
-// 🧠 隠し要素の選択肢・分岐制御ロジック
-// ==========================================
-
-/**
- * モーダル内のボタンテキストとメッセージを動的に書き換える
- */
 function renderSecretDialogue(stageKey) {
-    currentSecretStage = stageKey; // 👈 ここで現在のステージを確実に更新！
+    currentSecretStage = stageKey;
     const data = secretDialogueTree[stageKey];
     
     const modalId = activeModalType === "kasu" ? "kasu-reset-confirm-modal" : "reset-confirm-modal";
@@ -833,20 +806,11 @@ function renderSecretDialogue(stageKey) {
     }
 }
 
-/**
- * 【統合版】モーダルのボタンがクリックされた時の全制御関数
- * - 0なら左ボタン（はい側）、1なら右ボタン（いいえ側）
- */
 function handleModalClick(buttonIndex) {
-    // ----------------------------------------------------
-    // 1. 通常時（全問クリアしていない、または最初の画面を出す前）
-    // ----------------------------------------------------
     if (currentSecretStage === null) {
         if (buttonIndex === 0) {
-            // 「はい」が押されたら普通に履歴削除
             executeClearAllHistory();
         } else {
-            // 「いいえ」が押されたら普通に閉じる
             if (activeModalType === "kasu") {
                 closeKasuResetModal();
             } else {
@@ -856,17 +820,11 @@ function handleModalClick(buttonIndex) {
         return;
     }
 
-    // ----------------------------------------------------
-    // 2. 最初の画面（本当によろしいですか？）でボタンが押された時
-    // ----------------------------------------------------
     if (currentSecretStage === "start") {
         if (buttonIndex === 0) {
-            // 「はい」が押されたら、隠し要素の最初のセリフを表示
             renderSecretDialogue("start");
-            // 💡 ここがポイント：画面を切り替えたので、ステージを次に進める準備をする
             currentSecretStage = "start_waiting"; 
         } else {
-            // 「いいえ」ならイベントを起こさずに閉じる
             if (activeModalType === "kasu") {
                 closeKasuResetModal();
             } else {
@@ -876,18 +834,12 @@ function handleModalClick(buttonIndex) {
         return;
     }
 
-    // ----------------------------------------------------
-    // 3. 「こんなに頑張ったのに何故？」以降の会話が進行中の時
-    // ----------------------------------------------------
-    // 画面が切り替わった直後のダミーステージを本番の "start" に戻して判定する
     if (currentSecretStage === "start_waiting") {
         currentSecretStage = "start";
     }
 
     const currentData = secretDialogueTree[currentSecretStage];
     if (!currentData || !currentData.buttons[buttonIndex]) return;
-
-    // 押されたボタン（0 or 1）に応じた次のステージ名を取得
     const nextStage = currentData.buttons[buttonIndex].next;
 
     if (nextStage === "CLOSE") {
@@ -899,52 +851,244 @@ function handleModalClick(buttonIndex) {
     } else if (nextStage === "DELETE_HISTORY") {
         executeClearAllHistory();
     } else {
-        // 次のメッセージへ
         renderSecretDialogue(nextStage);
     }
 }
 
-/**
- * 【連動修正】隠し要素の選択肢に基づいてステージを「次」に進める関数
- */
 function handleSecretChoice(buttonIndex) {
     const currentData = secretDialogueTree[currentSecretStage];
     if (!currentData || !currentData.buttons[buttonIndex]) return;
-
-    // 💡 ここでしっかりと「次のステージ名」を取得します
     const nextStage = currentData.buttons[buttonIndex].next;
 
     if (nextStage === "CLOSE") {
-        // 履歴を残したまま閉じる
         closeResetModal();
         closeKasuResetModal();
     } else if (nextStage === "DELETE_HISTORY") {
-        // 履歴を完全削除する
         executeClearAllHistory();
     } else {
-        // 💡 次のステージ（例: "bored_1" や "want_more_1"）の文字を画面に反映し、
-        // 内部の currentSecretStage もその値に更新する
         renderSecretDialogue(nextStage);
     }
 }
 
-// ==========================================
-// 💥 【最終着地】コア削除処理（元のコードをそのまま維持）
-// ==========================================
 function executeClearAllHistory() {
-    // 1. 通常とカス、両方のローカルストレージデータを完全消去
     localStorage.removeItem("completedMondaiList");
     localStorage.removeItem("completedKasuList");
-
-    // 2. 通常問題集のカードから「.is-completed」クラスを一斉に剥ぎ取る
     const normalCards = document.querySelectorAll("#thumbnail-grid .mondai-item.is-completed");
     normalCards.forEach(card => card.classList.remove("is-completed"));
-
-    // 3. カス問題集のカードからも「.is-completed」クラスを一斉に剥ぎ取る
     const kasuCards = document.querySelectorAll("#kasu-thumbnail-grid .mondai-item.is-completed");
     kasuCards.forEach(card => card.classList.remove("is-completed"));
-
-    // 4. 開いている可能性のあるメッセージボックスを両方閉じる
     closeResetModal();
     closeKasuResetModal();
 }
+
+let favoriteMemberId = localStorage.getItem("belief_favorite_member_id");
+
+if (favoriteMemberId !== null && typeof membersData !== "undefined") {
+  const favId = parseInt(favoriteMemberId, 10);
+  const favIndex = membersData.findIndex(member => member.id === favId);
+  
+  if (favIndex !== -1) {
+    const favMember = membersData[favIndex];
+    membersData.splice(favIndex, 1);
+    membersData.unshift(favMember);
+  }
+}
+
+let currentIndex = 0;
+
+function sortMembersByFavorite() {
+  // 最新の保存データを取得
+  favoriteMemberId = localStorage.getItem("belief_favorite_member_id");
+  
+  if (typeof membersData !== "undefined") {
+    // 1. まずはIDの順番（1, 2, 3...）に完全に並び替えて、元の状態（メンバー1が先頭）に戻す
+    membersData.sort((a, b) => a.id - b.id);
+    
+    // 2. お気に入り登録されている人がいる場合だけ、その人を先頭に引っ越しさせる
+    if (favoriteMemberId !== null) {
+      const favId = parseInt(favoriteMemberId, 10);
+      const favIndex = membersData.findIndex(member => member.id === favId);
+      
+      if (favIndex !== -1) {
+        const favMember = membersData[favIndex];
+        membersData.splice(favIndex, 1); // 一旦配列から抜く
+        membersData.unshift(favMember);  // 配列の先頭（0番目）に追加
+      }
+    }
+  }
+}
+
+// ★追加：ページ遷移してきた時や、ロード時に「画面を完全に初期化する」共通の関数
+function initMemberPage() {
+  // 1. お気に入りデータをもとに配列を並び替える
+  sortMembersByFavorite();
+  
+  // 2. インデックスを強制的に「最初の人（0番目）」にリセットする
+  currentIndex = 0;
+  
+  // 3. スライド画面とホームの文章を最新状態に更新する
+  updateScreen(currentIndex);
+  updateHomeHeadline();
+}
+
+const memberPhoto = document.getElementById("member-photo");
+const favStar = document.getElementById("fav-star");
+const memberName = document.getElementById("member-name");
+const memberProfile = document.getElementById("member-profile");
+const profileWrap = document.getElementById("profile-text-container");
+const errorToast = document.getElementById("error-message");
+
+const btnPrev = document.getElementById("btn-prev");
+const btnNext = document.getElementById("btn-next");
+const btnFavorite = document.getElementById("btn-favorite");
+
+const homeHeadline = document.getElementById("home-headline"); 
+const defaultHeadline = "チャートの周りで回ること、それが受験生。";
+
+function updateHomeHeadline() {
+  if (favoriteMemberId !== null && typeof membersData !== "undefined") {
+    const favId = parseInt(favoriteMemberId, 10);
+    const favMember = membersData.find(member => member.id === favId);
+    if (favMember && favMember.beliefProfile) {
+      homeHeadline.innerHTML = favMember.beliefProfile;
+      return;
+    }
+  }
+  homeHeadline.textContent = defaultHeadline;
+}
+function updateScreen(index, direction = "") {
+  profileWrap.className = "belief-profile-text-wrap";
+  memberPhoto.className = "";
+  memberName.className = ""; 
+  
+  void profileWrap.offsetWidth; 
+  void memberPhoto.offsetWidth; 
+  void memberName.offsetWidth; 
+
+  function refreshStarIcon() {
+    if (favoriteMemberId !== null && membersData[index].id === parseInt(favoriteMemberId, 10)) {
+        favStar.src = "belief/star_on.png";
+    } else {
+        favStar.src = "belief/star_off.png";
+    }
+  }
+
+  if (!direction) {
+    memberPhoto.src = `belief/member${membersData[index].id}.png`;
+    memberName.textContent = membersData[index].name;
+    memberProfile.innerHTML = membersData[index].profile;
+    refreshStarIcon();
+    return;
+  }
+
+  if (direction === "next") {
+    profileWrap.classList.add("slide-out-left");
+    memberPhoto.classList.add("slide-out-left");
+    memberName.classList.add("slide-out-left"); 
+  } else if (direction === "prev") {
+    profileWrap.classList.add("slide-out-right");
+    memberPhoto.classList.add("slide-out-right");
+    memberName.classList.add("slide-out-right"); 
+  }
+
+  setTimeout(() => {
+    memberPhoto.src = `belief/member${membersData[index].id}.png`;
+    memberName.textContent = membersData[index].name;
+    memberProfile.innerHTML = membersData[index].profile;
+    refreshStarIcon();
+    profileWrap.className = "belief-profile-text-wrap";
+    memberPhoto.className = "";
+    memberName.className = ""; 
+    if (direction === "next") {
+      profileWrap.classList.add("slide-in-right");
+      memberPhoto.classList.add("slide-in-right");
+      memberName.classList.add("slide-in-right");  
+    } else if (direction === "prev") {
+      profileWrap.classList.add("slide-in-left");
+      memberPhoto.classList.add("slide-in-left");
+      memberName.classList.add("slide-in-left"); 
+    }
+  }, 300);
+}
+
+let errorTimeout;
+function showLimitError() {
+  clearTimeout(errorTimeout);
+  errorToast.style.transition = "none";
+  errorToast.style.opacity = "1";
+  errorToast.classList.add("show");
+
+  errorTimeout = setTimeout(() => {
+    errorToast.style.transition = "opacity 1.5s ease"; 
+    errorToast.style.opacity = "0"; 
+    
+    setTimeout(() => {
+      errorToast.classList.remove("show");
+    }, 15);
+  }, 1); 
+}
+
+btnNext.addEventListener("click", () => {
+  if (currentIndex < membersData.length - 1) {
+    currentIndex++;
+    updateScreen(currentIndex, "next");
+  } else {
+    showLimitError();
+  }
+});
+
+btnPrev.addEventListener("click", () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updateScreen(currentIndex, "prev");
+  } else {
+    showLimitError();
+  }
+});
+
+btnFavorite.addEventListener("click", () => {
+  const currentMemberId = membersData[currentIndex].id;
+  if (favoriteMemberId !== null && parseInt(favoriteMemberId, 10) === currentMemberId) {
+    favoriteMemberId = null;
+    localStorage.removeItem("belief_favorite_member_id");
+    favStar.src = "belief/star_off.png";
+  } else {
+    favoriteMemberId = currentMemberId.toString();
+    localStorage.setItem("belief_favorite_member_id", favoriteMemberId);
+    favStar.src = "belief/star_on.png";
+  }
+  updateHomeHeadline();
+});
+
+updateScreen(currentIndex);
+updateHomeHeadline();
+
+initMemberPage();
+
+// ==========================================
+// キーボード操作のイベントリスナー
+// ==========================================
+window.addEventListener("keydown", (event) => {
+  // 入力フォームなどにフォーカスがある場合は、キーボード操作を無効化する（誤動作防止）
+  if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
+    return;
+  }
+
+  switch (event.key) {
+    case "ArrowRight": // 右矢印キーが押されたとき
+      event.preventDefault(); // ブラウザのデフォルトのスクロールなどを防ぐ
+      btnNext.click(); // 右ボタンのクリックイベントを強制実行
+      break;
+
+    case "ArrowLeft": // 左矢印キーが押されたとき
+      event.preventDefault();
+      btnPrev.click(); // 左ボタンのクリックイベントを強制実行
+      break;
+
+    case " ": // スペースキーが押されたとき（半角スペース）
+    case "Spacebar": // 古いブラウザ用の対策
+      event.preventDefault(); // スペースキーによる画面スクロールを防ぐ
+      btnFavorite.click(); // 真ん中の星ボタンのクリックイベントを強制実行
+      break;
+  }
+});
