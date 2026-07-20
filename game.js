@@ -1076,7 +1076,6 @@ window.initGame = function(canvas) {
 
             // --- 当たり判定（敵弾/敵本体 vs 自機） ---
             enemyBullets.forEach((eb) => {
-                if (eb.parent && eb.parent.y > canvas.height) return;
 
                 const dist = Math.hypot(eb.x - player.x, eb.y - player.y);
                 if (dist < (player.width / 2 + 3)) {
