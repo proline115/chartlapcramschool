@@ -839,7 +839,7 @@ body.no-scroll {
 }
 
 .btn-back {
-    background: rgba(0, 0, 0, 0.75) !important;
+    background: rgba(0, 89, 255, 0.75) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
     padding: 10px 18px !important;
@@ -1212,15 +1212,20 @@ body.no-scroll {
 }
 
 .belief-digital-controller {
-  display: block !important;
   text-align: center !important;
   margin-top: 35px !important;
   clear: both !important;
   white-space: nowrap !important; 
+  display: flex;            /* 1. 子要素（ボタン）を横並びにする */
+  justify-content: center;   /* 2. 【重要】横方向に対して「完全に中央揃え」にする */
+  align-items: center;       /* 3. 縦方向に対しても中央揃えにする */
+  gap: 20px;                 /* 4. ボタンとボタンの間の隙間（お好みで調整してください） */
+  width: 100%;               /* 画面いっぱいに横幅を広げる（これで中央が確定します） */
+  margin: 0 auto;
 }
 .belief-digi-btn {
   background-color: #2b3a2a !important;
-  color: #8bd88b !important;
+  color: #8bd88b;
   border: 4px solid #1a2419 !important;
   cursor: pointer !important;
   display: inline-flex !important;
@@ -1248,10 +1253,7 @@ body.no-scroll {
   font-size: 48px !important; 
   line-height: 1 !important;  
 }
-.belief-digi-btn:active {
-  box-shadow: 0 0px 0 #131b12 !important;
-  top: 8px !important; 
-}
+
 
 #member-name {
   position: absolute !important;
@@ -1276,4 +1278,29 @@ body.no-scroll {
 #member-name, 
 #member-profile {
   font-family: 'DotGothic16', sans-serif !important;
+}
+
+/* カルーセルボタンが無効（端に到達）のときの見た目 */
+.disabled {
+    color: #88d48868 !important;
+}
+
+.btn-prev, 
+.btn-next, 
+.btn-favorite {
+    /* 長押しによるコンテキストメニューの起動を抑止 */
+    -webkit-touch-callout: none !important;
+    
+    /* タッチ時のテキストや要素の選択（青い選択範囲）を禁止 */
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    
+    /* タッチをスクロールやズームに変換させず、生データとしてJSに送る */
+    touch-action: none !important;
+}
+
+/* ① クリア済みの場合に星ボタンを金色にするスタイル */
+.is-gold{
+    /* 画像を美しい金色（イエローゴールド）に変化させ、シャドウをかけるフィルター */
+    color:rgba(255, 215, 0, 0.8)!important;
 }
