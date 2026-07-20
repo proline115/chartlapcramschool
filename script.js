@@ -41,7 +41,11 @@ const randomPhrases = [
     "ｳｪｲﾊﾟ₍ᐢ.ˬ.ᐢ₎ｱｰﾈﾑﾗﾝﾄﾞ",
     "[カス知識]<br>おむつの炎は黄色",
     "作者の気持ちを<br>答えさせる問題<br>実際見たこと無い",
-    "長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら短歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。"
+    "長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら短歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。",
+    "老人のイカれ昭和エピソード好き",
+    "山へ芝刈りにって<br>結局何してたんやろ",
+    "範囲多すぎると<br>逆に何もしたくなくなる症候群",
+    "背景の写真は<br>どこから撮ったでしょう"
 ];
 
 const sequentialPhrases = [
@@ -137,17 +141,17 @@ const kasuProblemList = [
 
 const membersData = [
   { id: 1, name: "岡山の吉右衛門", 
-    profile: "『オハイオの風』・『永田町の番人』制作<br>英検準一級講座主宰（合格者2名）<br><br>心得：百合は日本の文化です。<br><br>挨拶：来年の現国の教科書に百合が載るってよ",
+    profile: "『オハイオの風』・『永田町の番人』制作<br>英検準一級講座主宰（合格者2名）<br><br>心得：百合は日本の文化です。<br><br>挨拶：ご機嫌よう、岡山県民の諸君。大都会岡山の出身である諸君は当然、百合についてある程度の知見をお持ちだと拝察する。いや、岡山県民であろうとなかろうと、全国民は百合を愛で、百合を観察し、百合に敬意を持っていなければならない。なのでここに、人類最後の防衛策として『<span style='font-weight:bold;color:yellow;'>国民百合文化研究所</span>』の設立を要求する！",
     beliefProfile: "百合は日本の文化です。"},
   { id: 2, name: "白狐ふゆ", 
     profile: "生物・倫理選択。<br>「しろぎつね」のつもりでつけた名前だったが初手で「びゃっこ」と読まれてしまったため、今は「びゃっこふゆ」で統一している。<br><br>心得：ラブコメは一対一対応。不得意教科ほど楽しくあれ。<br><br>挨拶：はじめましての人ははじめまして。もし「こいつ見たことあるな？」って人がいれば、相当レアなので誇っていいと思います。ちょっとした娯楽を皆様に提供することができれば幸いです。" ,
     beliefProfile: "「Novel」"},
   { id: 3, name: "プロリン115", 
-    profile: "倫理・サイト運営担当<br><br>受験勉強を生贄にサイトを制作している。<br>英検講座より参加したが、申し込み方法がわからず無事不戦敗。<br><br><span style='color:white;'>心得：質に全</span>振りすれば勉強時間0でもいける<br><br><span style='color:white;'>挨拶：サイト運</span>営をしております！少しでも楽しんでいただけ<span style='color:white;'>れば何よ</span>りです。実績全解除目指しましょう。",
+    profile: "倫理・サイト運営担当<br><br>受験勉強を生贄にサイトを制作している。<br>英検講座より参加したが、申し込み方法がわからず無事不戦敗。<br><br><span style='color:white;'>心得：質に全</span>振りすれば勉強時間0でもいける<br><br><span style='color:white;'>挨拶：サイト運</span>営をしております！少しでも楽しんでいただけれ<span style='color:white;'>ば何より</span>です。実績全解除目指しましょう。",
     beliefProfile: "新たな扉が開かれた！"},
-  { id: 4, name: "メンバー4", 
-    profile: "ここに4人目のプロフィールのテキストが入ります。",
-    beliefProfile:"百合コーン🦄"},
+  { id: 4, name: "アポロ12号", 
+    profile: "文化祭2日目提唱者<br>超ネクタイ開発者<br>ゴリキュア黄色枠<br>罰掃除を冗談で乗り切った者<br>「はい歌ろ」開発者<br>絆の奇跡：女性パート担当<br>カントリーロード：ソプラノ担当<br>旗手5年連続担当<br>善きサマリア人の例え<br><span style='font-weight:bold;color:yellow;'>先公に仇なす者</span>",
+    beliefProfile:"神は死んだ"},
   { id: 5, name: "メンバー5", 
     profile: "ここに5人目のプロフィールのテキストが入ります。",
     beliefProfile: "p-ビスホスフィノ木"},
@@ -881,7 +885,9 @@ function executeClearAllHistory() {
     closeKasuResetModal();
 }
 
+
 let favoriteMemberId = localStorage.getItem("belief_favorite_member_id");
+let hasCleared = localStorage.getItem("belief_game_cleared");
 
 if (favoriteMemberId !== null && typeof membersData !== "undefined") {
   const favId = parseInt(favoriteMemberId, 10);
@@ -899,6 +905,11 @@ let currentIndex = 0;
 function sortMembersByFavorite() {
   // 最新の保存データを取得
   favoriteMemberId = localStorage.getItem("belief_favorite_member_id");
+  let gameBtnFav  = document.getElementById("btn-favorite");
+  // ① クリア状況の取得
+  if (hasCleared) {
+    gameBtnFav.classList.add("is-gold");
+  }
   
   if (typeof membersData !== "undefined") {
     // 1. まずはIDの順番（1, 2, 3...）に完全に並び替えて、元の状態（メンバー1が先頭）に戻す
@@ -965,6 +976,41 @@ function updateScreen(index, direction = "") {
   void memberPhoto.offsetWidth; 
   void memberName.offsetWidth; 
 
+  // --- 【追加】ボタンの明暗（有効・無効）を制御する関数 ---
+  function updateButtonStates(currentIndex) {
+    if (!btnPrev || !btnNext) return; // ボタン要素が存在しない場合はスキップ
+    const gamePage = document.getElementById("game-page-screen");
+    if (gamePage && gamePage.style.display === "block") {
+        return; 
+    }
+    // 現在のメンバーデータ
+    const currentMember = membersData[currentIndex];
+
+    // 1. 左ボタン（◀）の制御
+    if (currentIndex === 0) {
+      // 先頭（インデックス0）にいるとき
+      if (currentMember && currentMember.id === 3) {
+        // 例外：メンバー3が先頭なら、奥にゲームがある合図として明るいまま（クリック可能）にする
+        btnPrev.classList.remove("disabled");
+      } else {
+        // それ以外なら、通常通り端なので暗く（クリック不可）にする
+        btnPrev.classList.add("disabled");
+      }
+    } else {
+      // 先頭以外なら常に明るい（クリック可能）
+      btnPrev.classList.remove("disabled");
+    }
+
+    // 2. 右ボタン（▶）の制御
+    if (currentIndex === membersData.length - 1) {
+      // 末尾（最後のメンバー）にいるなら暗く（クリック不可）にする
+      btnNext.classList.add("disabled");
+    } else {
+      // それ以外なら常に明るい（クリック可能）
+      btnNext.classList.remove("disabled");
+    }
+  }
+
   function refreshStarIcon() {
     if (favoriteMemberId !== null && membersData[index].id === parseInt(favoriteMemberId, 10)) {
         favStar.src = "belief/star_on.png";
@@ -973,11 +1019,13 @@ function updateScreen(index, direction = "") {
     }
   }
 
+  // アニメーションなし（初期表示など）の場合
   if (!direction) {
     memberPhoto.src = `belief/member${membersData[index].id}.png`;
     memberName.textContent = membersData[index].name;
     memberProfile.innerHTML = membersData[index].profile;
     refreshStarIcon();
+    updateButtonStates(index); // 【追加】ボタンの状態を更新
     return;
   }
 
@@ -996,6 +1044,8 @@ function updateScreen(index, direction = "") {
     memberName.textContent = membersData[index].name;
     memberProfile.innerHTML = membersData[index].profile;
     refreshStarIcon();
+    updateButtonStates(index); // 【追加】文字が切り替わったタイミングでボタンの状態を更新
+    
     profileWrap.className = "belief-profile-text-wrap";
     memberPhoto.className = "";
     memberName.className = ""; 
@@ -1028,67 +1078,228 @@ function showLimitError() {
   }, 1); 
 }
 
-btnNext.addEventListener("click", () => {
-  if (currentIndex < membersData.length - 1) {
-    currentIndex++;
-    updateScreen(currentIndex, "next");
-  } else {
-    showLimitError();
-  }
-});
+// ==========================================
+// 【修正版】コントローラー＆ゲーム連動処理
+// ==========================================
 
-btnPrev.addEventListener("click", () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updateScreen(currentIndex, "prev");
-  } else {
-    showLimitError();
-  }
-});
+// 初期状態として、ゲーム画面がまだ開かれていないことを明示
+if (typeof window.currentGameScene === "undefined") {
+  window.currentGameScene = "NOT_OPEN"; 
+}
 
-btnFavorite.addEventListener("click", () => {
-  const currentMemberId = membersData[currentIndex].id;
-  if (favoriteMemberId !== null && parseInt(favoriteMemberId, 10) === currentMemberId) {
-    favoriteMemberId = null;
-    localStorage.removeItem("belief_favorite_member_id");
-    favStar.src = "belief/star_off.png";
-  } else {
-    favoriteMemberId = currentMemberId.toString();
-    localStorage.setItem("belief_favorite_member_id", favoriteMemberId);
-    favStar.src = "belief/star_on.png";
-  }
-  updateHomeHeadline();
-});
+function setupControllerButton(btnElement, arrowKey, actionType, normalCallback) {
+  if (!btnElement) return;
 
+  // 擬似的にキーボードのキーを押し下げる/離す関数
+  const dispatchKeyEvent = (type, keyName) => {
+    const event = new KeyboardEvent(type, {
+      key: keyName,
+      code: keyName,
+      bubbles: true,
+      cancelable: true
+    });
+    window.dispatchEvent(event);
+  };
+
+  const handleEvent = (e) => {
+    const gamePage = document.getElementById("game-page-screen");
+    const isGameVisible = gamePage && gamePage.style.display === "block";
+
+    // ─── A. ゲーム画面が開いている時の処理 ───
+    if (isGameVisible) {
+      if (window.currentGameScene === "PLAYING") {
+        // スマホやノートPCの標準挙動（ズーム、長押しメニューなど）を完全に殺す
+        if (e.cancelable) e.preventDefault();
+        e.stopPropagation();
+
+        // 1. ボタンが押された時（touchstart）
+        if (e.type === "touchstart") {
+          dispatchKeyEvent("keydown", arrowKey); // キーボードのキーを「押しっぱなし」にする
+        }
+        // 2. ボタンから指が離れた時（touchend / touchcancel）
+        else if (e.type === "touchend" || e.type === "touchcancel") {
+          dispatchKeyEvent("keyup", arrowKey); // キーボードのキーを「離す」
+        }
+        return; 
+      }
+
+      // ★【修正】ゲームのメニュー画面（SELECT/OVER/CLEAR）では、指を離した時の重複発火をスキップ
+      if (e.type === "touchend" || e.type === "touchcancel") return;
+
+      // ゲーム画面（SELECT/OVER/CLEAR画面）の時の挙動
+      if (actionType === "next") {
+        if (e.type === "touchstart" && e.cancelable) e.preventDefault();
+        gamePage.style.display = "none";
+        window.currentGameScene = "NOT_OPEN"; 
+        return;
+      } 
+      else if (actionType === "prev") {
+        if (e.type === "touchstart" && e.cancelable) e.preventDefault();
+        if (typeof showLimitError === "function") showLimitError();
+        return;
+      }
+      else if (actionType === "star") {
+        if (e.cancelable) e.preventDefault();
+        
+        // 選択画面では連打を防ぐため、touchstart（またはクリック）の瞬間だけイベントを発火させる
+        if (e.type === "touchstart" || e.type === "click") {
+          dispatchKeyEvent("keydown", arrowKey);
+          // 押しっぱなしにならないよう、直後に離したイベントも送る
+          setTimeout(() => dispatchKeyEvent("keyup", arrowKey), 20);
+        }
+        return;
+      }
+    }
+
+    // ─── B. ゲーム画面が開かれていない通常時の処理 ───
+    // ★【修正】通常画面（カルーセル移動や星ボタン）でも、指を離した時の重複発火をスキップ
+    if (e.type === "touchend" || e.type === "touchcancel") return;
+
+    if (e.type === "touchstart") {
+      if (e.cancelable) e.preventDefault();
+    }
+    normalCallback();
+  };
+
+  // 通常クリック（タップ）時のイベント
+  btnElement.addEventListener("click", handleEvent);
+
+  // タッチ開始と終了を、この関数だけで完全に制御する
+  btnElement.addEventListener("touchstart", handleEvent, { passive: false });
+  btnElement.addEventListener("touchend", handleEvent, { passive: false });
+  btnElement.addEventListener("touchcancel", handleEvent, { passive: false });
+}
+
+// ─── 右ボタン（▶）の設定 ───
+if (btnNext) {
+  setupControllerButton(btnNext, "ArrowRight", "next", () => {
+    if (currentIndex < membersData.length - 1) {
+      currentIndex++;
+      updateScreen(currentIndex, "next");
+    } else {
+      if (typeof showLimitError === "function") showLimitError();
+    }
+  }, { passive: true });
+}
+
+// ─── 左ボタン（◀）の設定 ───
+if (btnPrev) {
+  setupControllerButton(btnPrev, "ArrowLeft", "prev", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateScreen(currentIndex, "prev");
+    } else {
+      const currentMember = (typeof membersData !== "undefined") ? membersData[0] : null;
+      
+      if (currentMember && currentMember.id === 3) {
+        let gamePageContainer = document.getElementById("game-page-screen");
+        const originScreen = document.querySelector(".belief-digital-screen");
+        
+        if (originScreen) {
+          if (!gamePageContainer) {
+            gamePageContainer = document.createElement("div");
+            gamePageContainer.id = "game-page-screen";
+            
+            gamePageContainer.style.position = "absolute";
+            gamePageContainer.style.top = "0";
+            gamePageContainer.style.left = "0";
+            gamePageContainer.style.width = "100%";
+            gamePageContainer.style.height = "100%";
+            gamePageContainer.style.backgroundColor = "#000000"; 
+            gamePageContainer.style.zIndex = "10";             
+            
+            const canvas = document.createElement("canvas");
+            canvas.id = "charShooCanvas";
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.style.display = "block";
+            gamePageContainer.appendChild(canvas);
+            
+            originScreen.style.position = "relative"; 
+            originScreen.appendChild(gamePageContainer);
+          }
+          
+          gamePageContainer.style.display = "block";
+          window.currentGameScene = "SELECT"; 
+
+          if (typeof window.initGame === "function") {
+            const canvasElement = document.getElementById("charShooCanvas");
+            window.initGame(canvasElement);
+          }
+        }
+      } else {
+        if (typeof showLimitError === "function") showLimitError();
+      }
+    }
+  }, { passive: true });
+}
+
+// ─── お気に入り・星ボタン（★）の設定 ───
+if (btnFavorite) {
+  setupControllerButton(btnFavorite, " ", "star", () => {
+    const currentMemberId = membersData[currentIndex].id;
+
+    if (favoriteMemberId !== null && parseInt(favoriteMemberId, 10) === currentMemberId) {
+      favoriteMemberId = null;
+      localStorage.removeItem("belief_favorite_member_id");
+      if (favStar) favStar.src = "belief/star_off.png";
+    } else {
+      favoriteMemberId = currentMemberId.toString();
+      localStorage.setItem("belief_favorite_member_id", favoriteMemberId);
+      if (favStar) favStar.src = "belief/star_on.png";
+    }
+    updateHomeHeadline();
+  }, { passive: true });
+}
+
+// 画面初期化の実行
 updateScreen(currentIndex);
 updateHomeHeadline();
 
-initMemberPage();
+if (typeof initMemberPage === "function") {
+  initMemberPage();
+}
 
 // ==========================================
 // キーボード操作のイベントリスナー
 // ==========================================
 window.addEventListener("keydown", (event) => {
-  // 入力フォームなどにフォーカスがある場合は、キーボード操作を無効化する（誤動作防止）
   if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
     return;
   }
 
+  const gamePage = document.getElementById("game-page-screen");
+  const isGameVisible = gamePage && gamePage.style.display === "block";
+
+  if (isGameVisible && window.currentGameScene === "PLAYING") {
+    return; 
+  }
+
   switch (event.key) {
-    case "ArrowRight": // 右矢印キーが押されたとき
-      event.preventDefault(); // ブラウザのデフォルトのスクロールなどを防ぐ
-      btnNext.click(); // 右ボタンのクリックイベントを強制実行
+    case "ArrowRight": 
+      event.preventDefault(); 
+      if (btnNext) btnNext.click(); 
       break;
 
-    case "ArrowLeft": // 左矢印キーが押されたとき
+    case "ArrowLeft": 
       event.preventDefault();
-      btnPrev.click(); // 左ボタンのクリックイベントを強制実行
+      if (btnPrev) btnPrev.click(); 
       break;
 
-    case " ": // スペースキーが押されたとき（半角スペース）
-    case "Spacebar": // 古いブラウザ用の対策
-      event.preventDefault(); // スペースキーによる画面スクロールを防ぐ
-      btnFavorite.click(); // 真ん中の星ボタンのクリックイベントを強制実行
+    case " ": 
+    case "Spacebar": 
+      event.preventDefault(); 
+      if (btnFavorite) btnFavorite.click(); 
       break;
+  }
+});
+
+// --- Chrome等でのスマホ長押しメニュー（コンテキストメニュー）を完全に無効化する ---
+[btnPrev, btnNext, btnFavorite].forEach(btn => {
+  if (btn) {
+    // 指を長押ししたときにメニューが出る動作をキャンセル
+    btn.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
   }
 });
