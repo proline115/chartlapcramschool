@@ -147,7 +147,7 @@ const membersData = [
     profile: "生物・倫理選択。<br>「しろぎつね」のつもりでつけた名前だったが初手で「びゃっこ」と読まれてしまったため、今は「びゃっこふゆ」で統一している。<br><br>心得：ラブコメは一対一対応。不得意教科ほど楽しくあれ。<br><br>挨拶：はじめましての人ははじめまして。もし「こいつ見たことあるな？」って人がいれば、相当レアなので誇っていいと思います。ちょっとした娯楽を皆様に提供することができれば幸いです。" ,
     beliefProfile: "「Novel」"},
   { id: 3, name: "プロリン115", 
-    profile: "倫理・サイト運営担当<br><br>受験勉強を生贄にサイトを制作している。<br>英検講座より参加したが、申し込み方法がわからず無事不戦敗。<br><br><span style='color:white;'>心得：質に全</span>振りすれば勉強時間0でもいける<br><br><span style='color:white;'>挨拶：サイト運</span>営をしております！少しでも楽しんでいただけれ<span style='color:white;'>ば何より</span>です。実績全解除目指しましょう。",
+    profile: "倫理・サイト運営担当<br><br>受験勉強を生贄にサイトを制作している。<br>英検講座より参加したが、申し込み方法がわからず無事不戦敗。（その後合格しました。講師に感謝。）<br><br><span style='color:white;'>心得：質に全</span>振りすれば勉強時間0でもいける<br><br><span style='color:white;'>挨拶：サイト運</span>営をしております！少しでも楽しんでいただけれ<span style='color:white;'>ば何より</span>です。実績全解除目指しましょう。",
     beliefProfile: "新たな扉が開かれた！"},
   { id: 4, name: "アポロ12号", 
     profile: "文化祭2日目提唱者<br>超ネクタイ開発者<br>ゴリキュア黄色枠<br>罰掃除を冗談で乗り切った者<br>「はい歌ろ」開発者<br>絆の奇跡：女性パート担当<br>カントリーロード：ソプラノ担当<br>旗手5年連続担当<br>善きサマリア人の例え<br><span style='font-weight:bold;color:yellow;'>先公に仇なす者</span>",
@@ -170,6 +170,30 @@ const membersData = [
   { id: 10, name: "メンバー10", 
     profile: "ここに10人目のプロフィールのテキストが入ります。",
     beliefProfile:"お前の親父巨人軍？"}
+];
+
+const CUSTOM_ERROR_MESSAGES = [
+  ["会長", "お前ら、最高だぜ〜！🐢"],
+  ["うんち", "💩"],
+  ["うんこ", "💩"],
+  ["poo","💩"],
+  ["poop","💩"],
+  ["ウンチ","💩"],
+  ["ウンコ","💩"],
+  ["💩","💩"],
+  ["","なんか書いて"],
+  ["岡山の吉右衛門","圧倒的有能"],
+  ["白狐ふゆ","こいつがいなけりゃゲームも小説も無い。"],
+  ["プロリン115","僕だよ! 115は分子量!"],
+  ["アポロ12号","なんかこの人にはついていきたくなるよね。"],
+  ["合言葉","素直め"],
+  ["百合コーン","🦄（正解）"],
+  ["ユニコーン","惜しい！"],
+  ["ニンヒドリン","可愛いよね"],
+  ["00000","...ローラー？"],
+  ["00001","...諦めな？"],
+  ["00002","...10万通りあるよ？"],
+  ["00003","...まぁ頑張れ"]
 ];
 
 const container = document.querySelector(".container");
@@ -1302,4 +1326,192 @@ window.addEventListener("keydown", (event) => {
       e.preventDefault();
     });
   }
+});
+
+// ==========================================
+// 合言葉ポップアップ ＆ 画面遷移制御
+// ==========================================
+
+const PASSWORD_MAP = {
+  "Okayama": "page-okayama",
+  "Math": "page-math",
+  "Question": "page-question",
+  "Tanka": "page-tanka",
+  "Load": "page-load",
+  "Novel": "page-novel"
+};
+
+const passwordOverlay = document.getElementById("password-modal-overlay");
+const passwordInput = document.getElementById("password-input");
+const passwordMessage = document.getElementById("password-message");
+const passwordSubmitBtn = document.getElementById("password-submit-btn");
+const passwordCloseBtn = document.getElementById("password-close-btn");
+
+let isPasswordModalOpen = false;
+
+// 1. 合言葉ポップアップを開く
+function openPasswordModal() {
+  if (!passwordOverlay) return;
+  isPasswordModalOpen = true;
+  document.body.classList.add("modal-open"); // 背景全体のクリックを物理遮断
+
+  passwordInput.value = "";
+  passwordMessage.textContent = "合言葉を入力してください";
+  passwordMessage.classList.remove("error");
+  passwordOverlay.classList.remove("hidden");
+
+  setTimeout(() => {
+    passwordInput.focus();
+  }, 50);
+}
+
+// 2. 合言葉ポップアップを閉じる
+function closePasswordModal() {
+  if (!passwordOverlay) return;
+  isPasswordModalOpen = false;
+  document.body.classList.remove("modal-open"); // 背景遮断を解除
+
+  passwordOverlay.classList.add("hidden");
+  passwordInput.blur();
+}
+
+// 3. 合言葉の判定処理
+function checkPassword() {
+  const inputVal = passwordInput.value.trim();
+
+  // ① 正解の場合
+  if (PASSWORD_MAP[inputVal]) {
+    const targetPageId = PASSWORD_MAP[inputVal];
+
+    setCurtainText();
+    triggerCurtainTransition(targetPageId, () => {
+      closePasswordModal();
+      executePageSwitch(targetPageId);
+    });
+
+  } else {
+    // 不正解の場合の処理
+    
+    // 1. 特定の単語に含まれているか判定
+    const customMatch = CUSTOM_ERROR_MESSAGES.find(item => item[0] === inputVal);
+
+    if (customMatch) {
+      // 特定の単語にマッチした場合のメッセージ
+      passwordMessage.textContent = customMatch[1];
+
+    } else if (/^\d{5}$/.test(inputVal)) {
+      // 2. 「特定の単語」以外で、半角数字5桁が入力された場合のエラーメッセージ
+      passwordMessage.textContent = "ここではありません。"; 
+
+    } else {
+      // 3. 上記のいずれにも該当しない場合（従来のメッセージ）
+      passwordMessage.textContent = "そのページは存在しません。";
+    }
+
+    // エラー装飾＆フォーカス維持
+    passwordMessage.classList.add("error");
+    passwordInput.focus();
+  }
+}
+
+// 4. イベントリスナー登録
+if (passwordSubmitBtn) {
+  passwordSubmitBtn.addEventListener("click", checkPassword);
+}
+if (passwordCloseBtn) {
+  passwordCloseBtn.addEventListener("click", closePasswordModal);
+}
+if (passwordInput) {
+  passwordInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      checkPassword();
+    }
+  });
+
+  // 他の領域をタップしてフォーカスが外れそうになったら自動で復帰
+  passwordInput.addEventListener("blur", () => {
+    if (isPasswordModalOpen) {
+      setTimeout(() => {
+        if (isPasswordModalOpen) passwordInput.focus();
+      }, 10);
+    }
+  });
+}
+
+// モーダル枠外（背景）をタップした場合のフォーカス復帰
+if (passwordOverlay) {
+  passwordOverlay.addEventListener("click", (e) => {
+    if (e.target === passwordOverlay) {
+      passwordInput.focus();
+    }
+  });
+}
+
+// ==========================================
+// Math専用PDF表示機能（問題集UI模倣・別処理）
+// ==========================================
+
+// Math専用の資料データリスト [PDFパス, 表示タイトル]
+const mathDataList = [
+  ["secret/数学.pdf", "問題"],
+  ["secret/数学答え.pdf","答え"]
+];
+
+// 初期化：正方形カードの生成
+function initMathGrid() {
+  const grid = document.getElementById("math-grid");
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  mathDataList.forEach((item) => {
+    const [pdfUrl, title] = item;
+
+    // カード要素の作成（.mondai-item 風）
+    const card = document.createElement("div");
+    card.className = "math-item";
+
+    const titleEl = document.createElement("div");
+    titleEl.className = "math-title";
+    titleEl.innerHTML = title;
+
+    card.appendChild(titleEl);
+
+    // クリックイベント（Math専用モーダルを開く）
+    card.onclick = () => openMathPdfModal(pdfUrl, title);
+
+    grid.appendChild(card);
+  });
+}
+
+// PDFビューアの開閉処理
+function openMathPdfModal(pdfUrl, title) {
+  const modal = document.getElementById("math-pdf-modal");
+  const titleEl = document.getElementById("math-pdf-title");
+  const iframe = document.getElementById("math-pdf-iframe");
+
+  if (modal && iframe) {
+    if (titleEl) titleEl.innerHTML = title;
+    iframe.src = pdfUrl;
+
+    modal.classList.remove("hidden");
+    // 背景のスクロールを一時的に固定
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeMathModal() {
+  const modal = document.getElementById("math-pdf-modal");
+  const iframe = document.getElementById("math-pdf-iframe");
+
+  if (modal) {
+    modal.classList.add("hidden");
+    if (iframe) iframe.src = ""; // リセット
+    document.body.style.overflow = ""; // 背景スクロール解除
+  }
+}
+
+// DOM読み込み完了時にMath一覧を初期化
+document.addEventListener("DOMContentLoaded", () => {
+  initMathGrid();
 });
