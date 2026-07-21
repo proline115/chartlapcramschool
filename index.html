@@ -96,7 +96,7 @@
     </div>
 
     <div class="banner-right">
-        <div class="nav-item" onclick="navigateTo('password')">
+        <div class="nav-item" onclick="openPasswordModal()">
             <img src="images/password.png">
             <span>合言葉</span>
         </div>
@@ -116,6 +116,15 @@
     </div>
     <div class="action-container">
         <button id="btn-solved" class="btn-solved" onclick="showSolvedPopup()">解き終わった！</button>
+    </div>
+</div>
+
+<div id="math-pdf-modal" class="math-pdf-view hidden">
+    <div class="math-viewer-actions">
+      <button class="math-back-btn" onclick="closeMathModal()">← 戻る</button>
+    </div>
+    <div class="math-pdf-body">
+      <iframe id="math-pdf-iframe" class="math-pdf-iframe" src="" frameborder="0"></iframe>
     </div>
 </div>
 
@@ -280,7 +289,150 @@
 
 <div id="page-history" class="page">実績</div>
 
-<div id="page-password" class="page">合言葉</div>
+<div id="page-okayama" class="page secret-page">
+  <div class="secret-page-container">
+    <h2>岡山写真館</h2>
+    <p>&emsp;ここは岡山写真館。のどかな岡山の風景を御覧あれ。あなたもきっと心安らぎ、悩みは消え、全てうまくいくでしょう。</p>
+    <p>（岡山の写真が届いてないから東京旅行の思い出をどうぞ。）</p>
+    <img src="secret/Tokyo1.jpg">
+    <img src="secret/Tokyo2.jpg">
+    <img src="secret/Tokyo3.jpg">
+    <img src="secret/Tokyo4.jpg">
+  </div>
+</div>
+
+<div id="page-math" class="page secret-page">
+  <div class="secret-page-container">
+    <h2>数学の問題</h2>
+    <p>&emsp;後輩と東京に行ったときにホテルで作られた問題。難しすぎて意味がわからない。同級生数人と本当に数時間話し合ってやっと一人解けるか解けないかだった。チャレンジしてみてください。答えはかなり明白。証明が難しい。答え隣においてあるけど見ても多分わからない。<br>（この問題は問題集の問題としてカウントされません。）</p>
+
+    <div class="math-grid" id="math-grid"></div>
+  </div>
+</div>
+
+
+
+<div id="page-question" class="page secret-page">
+  <div class="secret-page-container">
+    <h2>質問窓口</h2>
+    <p>このサイト及び予備校に関する質問、意見等を受け付けています。ご意見ある方は送っていただけると可能であれば解答いたします。</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfm4wDcDRnJxNay7j1ZHPP8U0U8G3UyzthWpMRu52mUxYG-dQ/viewform?embedded=true" class="questionnaire">読み込んでいます…</iframe>
+  </div>
+</div>
+
+<div id="page-tanka" class="page secret-page">
+  <div class="secret-page-container">
+    <h2>歌集</h2>
+    <p>&emsp;チャート周回予備校なるものは、山に籠もりて月ごろ和歌を讀みけり。それを集めたるなり。汝もまた和歌を讀みくれたらば、われらが喜びはこれより上なかるべし。</p>
+  </div>
+</div>
+
+<div id="page-load" class="page secret-page">
+  <div class="secret-page-container">
+    <h2>ロード文章</h2>
+      <p>&emsp;対して意味のあることは書いてない。私がたまに思ったことを書き記す場所。そして短歌。短歌と和歌の違いってなんなんだろうね。多分読みきれてない人が大半だと思うのでここに残しておきます。さっき調べたけど和歌の中に短歌が含まれるらしい。</p>
+      <br>
+      <p>山深み陰だに見えずまして影しかれどもあふ世の縁かな</p>
+<p>朝にて冬去ると天の文あれば手中に入らむゆきの結晶</p>
+<p>春の日に見える君の門出には皆で出で来て会ふこともがな</p>
+<p>たちわかれしほたるなみだせきあへずながれてゆくはときのながれよ</p>
+<p>花冷えの東風をば猛く踏み分けて海原とほく渡りたまひね</p>
+<p>貝寄風に侘しさのみはたくしつつ今はにおふる葵を覚ゆ</p>
+<p>たのみおくきみが木かげのやすらかに我もつとめてぞかしづかむこと</p>
+<p>たのしかる月日もつひに盛りにて泰澄がごと登り果つのみ</p>
+<p>ひさかたの輝かしき空きみがため未来を照らす光なりけり</p>
+<p>しろたへの雪が溶けゆく春の日に君の門出よいとあはれかな</p>
+<p>千木り無き流るる時の遠けれど違える年の春も来にけり</p>
+<p>あらたまの春にぞならんめでたき日輝く六花降りしきること</p>
+<p>朝露の置きし木立をながむれば苔よりいづる竹ぞありけむ</p>
+<p>朝露に濡れにし竹ののぶがごと延びゆく君の明日をも見てむ</p>
+<p>竹の子や一日ふるまにおよすげば誰か明日の姿知るらむ</p>
+<p>露濡るる袖ひるがえしたかむなを摘みゆく君に朝日さしぬる</p>
+<p>たかむなの生ふる野辺に影照りてつゆもなかるる隅なかりけり</p>
+<p>野辺に咲く花となりしもわれはまた袂濡らさむ君ぞゆかしき</p>
+<p>合言葉に「Okayama」と入れると…？</p>
+<p>合言葉に「Math」と入れると…？</p>
+<p>合言葉「Question」で直接メッセージが送れます</p>
+<p>いつまでも回るわけでは無いらしい</p>
+<p>ティンバル果が結局何かわかってない</p>
+<p>ジャムシェドプルのタタ財閥を創始したのはジャムシェトジー・タタ</p>
+<p>このサイトにはクリアという概念が存在する…かも</p>
+<p>勉強を楽しむのに頭の良さは関係ない</p>
+<p>『恋愛は幸福の期待値が低い』</p>
+<p>大吉！！！今日一日全部の四択を当てるかも</p>
+<p>中吉！！二択まで絞れたら後は勘でいける</p>
+<p>小吉！運に頼らず自力で解こう</p>
+<p>凶...一日二択を全外し地理はやめとこう</p>
+<p>大凶......そういう日だってあるリフレッシュしよう！</p>
+<p>思慮分別とかいう「sensible」「おとなし」専用のワード</p>
+<p>紙とペンがあれば娯楽は完結する</p>
+<p>明日こそは警報でてほしい</p>
+<p>本当に月が綺麗なときなんて言えば良いんや</p>
+<p>左って何も無かったっけ…無かったか…</p>
+<p>鶯がパイレーツ・オ◯・カリビアンの音程で鳴いてた</p>
+<p>聖徳太子色々やりすぎて集団名とかじゃないと信じられない</p>
+<p>ｳｪｲﾊﾟ₍ᐢ.ˬ.ᐢ₎ｱｰﾈﾑﾗﾝﾄﾞ</p>
+<p>[カス知識]おむつの炎は黄色</p>
+<p>作者の気持ちを答えさせる問題実際見たこと無い</p>
+<p>長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら短歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。</p>
+<p>老人のイカれ昭和エピソード好き</p>
+<p>山へ芝刈りにって結局何してたんやろ</p>
+<p>範囲多すぎると逆に何もしたくなくなる症候群</p>
+<p>背景の写真はどこから撮ったでしょう</p>
+<br>
+<p>（以下は全て出し切ったしたあとに流れる文章）</p>
+<br>
+<p>終わりだよ</p>
+<p>本当に終わりだよ</p>
+<p>終わりだって言ってんじゃん！</p>
+<p>何？暇なの？</p>
+<p>こんなに短歌いっぱいあるのによくここまで来たよね</p>
+<p>ちなみに合言葉「Tanka」で短歌一覧見れるよ</p>
+<p>まだメッセージあると思ってる？</p>
+<p>こういうのは唐突に終わるもの</p>
+<p>これで終わりだよ</p>
+<p>これで終わりだよ</p>
+<p>終わったと思った？ｗ</p>
+<p>まだ続くんだよなそれが</p>
+<p>予想できてるんかよ</p>
+<p>もういいよ</p>
+<p>長いって</p>
+<p>あなたが失った時間で英単語を覚えるべき</p>
+<p>...</p>
+<p>...</p>
+<p>まだおるやん</p>
+<p>ごめんって</p>
+<p>もう負けたって</p>
+<p>なんか悩みとかある感じ？</p>
+<p>誰か止めなかったの？</p>
+<p>だいぶ暇やん</p>
+<p>もうそっちの勝ちでいいよ</p>
+<p>望みのものはこれであろう</p>
+<p>②█████</p>
+<p>以降も楽しんでね！</p>
+  </div>
+</div>
+
+<div id="page-novel" class="page secret-page">
+  <div class="secret-page-container">
+    <h2>俺のニンヒドリンが可愛すぎる！！</h2>
+    <h3>第一話</h3>
+    <hr>
+    <p>白狐先生の更新をしばしお待ちを！</p>
+  </div>
+</div>
+
+<div id="password-modal-overlay" class="password-modal-overlay hidden">
+  <div class="password-modal">
+    <div id="password-message" class="password-message">合言葉を入力してください</div>
+    <input type="text" id="password-input" class="password-input" placeholder="合言葉" autocomplete="off">
+    <div class="password-buttons">
+      <button type="button" id="password-submit-btn" class="password-btn submit">決定</button>
+      <button type="button" id="password-close-btn" class="password-btn cancel">戻る</button>
+    </div>
+  </div>
+</div>
+
 
 <div id="page-answer" class="page">答え</div>
 </main>
@@ -294,6 +446,7 @@
         <button class="btn-popup-close" onclick="closePdfAndPopup()">閉じて一覧に戻る</button>
     </div>
 </div>
+
 
 <script src="script.js"></script>
 <script src="game.js"></script>
