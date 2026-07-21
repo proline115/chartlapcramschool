@@ -702,30 +702,6 @@ img{
 
 .action-container {
     position: absolute !important;
-    bottom: 0 !important; 
-    left: 0 !important;
-    width: 100% !important;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-}
-
-.action-container {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 80px;
-    display: flex;
-    justify-content: flex-start !important; 
-    align-items: center;
-    z-index: 100;
-}
-
-.action-container {
-    position: absolute !important;
     bottom: 0 !important;
     left: 0 !important;
     width: 100% !important;
@@ -1303,4 +1279,284 @@ body.no-scroll {
 .is-gold{
     /* 画像を美しい金色（イエローゴールド）に変化させ、シャドウをかけるフィルター */
     color:rgba(255, 215, 0, 0.8)!important;
+}
+
+/* ==========================================
+   合言葉ポップアップ表示中の背景完全に無効化
+   ========================================== */
+body.modal-open .container,
+body.modal-open .bottom-nav,
+body.modal-open .nav-item,
+body.modal-open button,
+body.modal-open [onclick] {
+  pointer-events: none !important; /* 背景のonclick要素をすべて押し不能にする */
+}
+
+/* ポップアップ自体とその内部のみクリック可能にする */
+#password-modal-overlay,
+#password-modal-overlay * {
+  pointer-events: auto !important;
+}
+
+.password-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+.password-modal-overlay.hidden {
+  display: none !important;
+}
+
+.password-modal {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 320px;
+  text-align: center;
+}
+
+.password-message {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: #333333;
+  min-height: 1.4em;
+}
+
+.password-message.error {
+  color: #e53935;
+  font-weight: bold;
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.password-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.password-btn {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.password-btn.submit {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.password-btn.cancel {
+  background-color: #e0e0e0;
+  color: #333333;
+}
+
+/* ==========================================
+   合言葉対応ページ（要素領域と表示範囲の完全一致版）
+   ========================================== */
+
+/* 通常状態（非表示） */
+.secret-page {
+  display: none !important;
+}
+
+/* アクティブ状態（表示時）：外枠は画面幅全体で配置のみを担当 */
+.secret-page.active {
+  display: block !important;
+  position: absolute;
+  top: 0px;               /* バナーの直下に配置 */
+  left: 0;
+  width: 100%;             /* 100vwによる横スクロール・余計な広がりを防止 */
+  box-sizing: border-box;
+  background-color: transparent !important;
+  z-index: 100;
+  padding-bottom: 120px;
+  overflow: visible !important;
+}
+
+/* 中央の白いコンテナ：見た目の「白い箱」と領域（青エリア）をぴったり一致させる */
+.secret-page-container {
+  display: block;
+  background-color: #ffffff; /* 完全な白 */
+  width: 70%;               /* 実際の白い表示幅 */
+  max-width: 800px;
+  margin-top: 0;
+  margin-bottom:0;
+  margin:0 auto;           /* 左右中央寄せ */
+  padding: 24px;
+  box-sizing: border-box;   /* paddingを含めたサイズ計算にする */
+  height: auto;             /* 中身に合わせて伸びる */
+  overflow: visible !important;
+}
+
+/* コンテナ内の画像を重ねず、1枚ずつ上から順番に並べる設定 */
+.secret-page-container img {
+  position: static !important;  /* 他の画像と重なる指定（absolute等）を強制解除 */
+  display: block !important;    /* 1行に1枚ずつ配置 */
+  width: 100% !important;        /* コンテナの幅ピッタリに合わせる */
+  max-width: 100% !important;    /* 枠からはみ出るのを防ぐ */
+  height: auto !important;       /* 縦横比を崩さない */
+  margin: 16px auto !important;  /* 画像同士の上下に16pxの余白を作る */
+  clear: both !important;        /* 回り込み（float）を解除 */
+  box-sizing: border-box !important;
+}
+
+/* ==========================================
+   Math専用ページ（グリッド小型化 & PDF最前面化）
+   ========================================== */
+
+.math-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px !important; 
+    padding: 10px 0;
+    width: 100%;
+}
+
+
+.math-item {
+   position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%; 
+    max-width: none !important;
+    margin: 0 !important; 
+    border-radius: 12px !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px !important; 
+    box-sizing: border-box;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9) !important; 
+    border: 6px solid transparent !important; 
+   border-color: #07299c !important;
+}
+
+
+.math-item:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+   background: #ffffff !important;
+}
+
+
+.math-title {
+   color: #222222 !important;
+   font-size: 1.3rem !important;
+   font-weight: 800 !important;
+   line-height: 1.3 !important;
+   margin: 0;
+   word-break: break-all;
+   text-shadow: none !important;
+}
+
+
+/* ==========================================
+   Math専用PDFビューア（絶対的な最前面配置）
+   ========================================== */
+
+/* 画面内のすべての要素よりも上に表示されるように z-index を極大化 */
+#math-pdf-modal.math-pdf-view {
+    width: 100vw !important;
+    height: 100vh !important; 
+    background: #333333;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    position: absolute !important;
+    overflow: hidden;
+    z-index:9999;
+}
+
+#math-pdf-modal.math-pdf-view.hidden {
+  display: none !important;
+}
+
+
+/* iframe表示領域 */
+.math-pdf-body {
+  width: 100% !important;
+    height: 100% !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    background: #333333;
+}
+
+.math-pdf-iframe {
+  width: 100%;
+   height: 100%;
+   border: none;
+   position:absolute;
+}
+
+.math-back-btn{
+    background: rgba(0, 89, 255, 0.75) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    padding: 10px 18px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    backdrop-filter: blur(4px) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+    transition: background 0.2s !important;
+}
+
+.math-back-btn:hover {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.math-viewer-actions{
+    position: absolute !important;
+    top: 55px !important;
+    left: 15px !important;
+    z-index: 100 !important;
+}
+
+/* ==========================================
+   Questionページ（Googleフォーム埋め込み調整）
+   ========================================== */
+
+/* フォームを包むiframeのスタイル */
+iframe.questionnaire {
+  width: 100% !important;        /* 横幅は親要素いっぱいに広げる */
+  min-height: 800px !important;  /* フォーム全体が入るように高さを十分確保 (必要に応じて調整) */
+  height: 80vh !important;       /* 画面全体の80%程度の高さにする */
+  border: none !important;        /* 枠線を消す */
+  display: block !important;
+  margin: 0 auto !important;     /* 中央寄せ */
+  box-sizing: border-box !important;
+}
+
+/* モバイル表示時の高さ調整 */
+@media (max-width: 600px) {
+  iframe.questionnaire {
+    min-height: 1000px !important; /* スマホだと項目が縦長になるため、さらに高さを確保 */
+    height: 85vh !important;
+  }
 }
