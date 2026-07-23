@@ -1416,7 +1416,16 @@ function checkPassword() {
     passwordMessage.classList.add("error");
     passwordInput.focus();
   }
+  // 入力内容が変更（編集・一文字でも消去/追加）されたらメッセージをデフォルトに戻す
+  passwordInput.addEventListener('input', () => {
+  // メッセージをデフォルトに戻す
+  passwordMessage.textContent = "合言葉を入力してください";
+  
+  // もしエラー用の赤文字スタイルなどを適用している場合は外す
+  passwordMessage.classList.remove("error");
+});
 }
+
 
 // 4. イベントリスナー登録
 if (passwordSubmitBtn) {
