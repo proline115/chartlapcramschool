@@ -1393,7 +1393,7 @@ body.modal-open [onclick] {
   background-color: transparent !important;
   z-index: 100;
   padding-bottom: 120px;
-  overflow: visible !important;
+  overflow: auto !important;
 }
 
 /* 中央の白いコンテナ：見た目の「白い箱」と領域（青エリア）をぴったり一致させる */
@@ -1408,7 +1408,7 @@ body.modal-open [onclick] {
   padding: 24px;
   box-sizing: border-box;   /* paddingを含めたサイズ計算にする */
   height: auto;             /* 中身に合わせて伸びる */
-  overflow: visible !important;
+  overflow: auto !important;
 }
 
 /* コンテナ内の画像を重ねず、1枚ずつ上から順番に並べる設定 */
@@ -1545,8 +1545,8 @@ body.modal-open [onclick] {
 /* フォームを包むiframeのスタイル */
 iframe.questionnaire {
   width: 100% !important;        /* 横幅は親要素いっぱいに広げる */
-  min-height: 800px !important;  /* フォーム全体が入るように高さを十分確保 (必要に応じて調整) */
-  height: 80vh !important;       /* 画面全体の80%程度の高さにする */
+  min-height: 1200px !important;  /* フォーム全体が入るように高さを十分確保 (必要に応じて調整) */
+  height: auto !important;       /* 画面全体の80%程度の高さにする */
   border: none !important;        /* 枠線を消す */
   display: block !important;
   margin: 0 auto !important;     /* 中央寄せ */
@@ -1559,4 +1559,166 @@ iframe.questionnaire {
     min-height: 1000px !important; /* スマホだと項目が縦長になるため、さらに高さを確保 */
     height: 85vh !important;
   }
+}
+
+#page-tanka{
+    font-family: "游明朝", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "MS PMincho", serif;
+}
+
+/* 色紙＆解説ブロックの全体ラップ */
+.tanka-item {
+  margin-bottom: 60px; /* 各ブロック間の余白 */
+  width: 100%;
+}
+
+/* 色紙風ボックス（縦書き） */
+.shikishi-box {
+    flex-direction: column; /* 要素を縦並びにする */
+  align-items: center;    /* 左右方向の中央寄せ */
+  background-color: #fcfaf2; /* 生成り・和紙風の柔らかな白 */
+  border: 1px solid #dcd3be;   /* 金潜紙風・和風の淡い縁取り */
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* ほんのり浮き上がる影 */
+  padding: 40px 30px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* 縦書き設定 */
+  writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  text-orientation: upright;
+
+  /* 縦書き時の高さ調整 */
+  min-height: 260px;
+  display: flex;
+  justify-content: center; /* 縦書き時の中央寄せ */
+  align-items: flex-start;
+}
+
+/* 短歌のテキストスタイル */
+.shikishi-text {
+  font-size: 1.25rem;
+  line-height: 2.2;
+  letter-spacing: 0.15em;
+  color: #2b2b2b;
+}
+
+/* 横書き解説エリア */
+.tanka-explanation {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 16px 20px;
+  border-left: 3px solid #8c7853; /* ワンポイントの和風アクセント線 */
+  border-radius: 0 4px 4px 0;
+  box-sizing: border-box;
+}
+
+/* ポップアップ自体とその内部のみクリック可能にする */
+#answer-modal-overlay,
+#answer-modal-overlay * {
+  pointer-events: auto !important;
+}
+
+.answer-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+.answer-modal-overlay.hidden {
+  display: none !important;
+}
+
+.answer-modal {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 320px;
+  text-align: center;
+}
+
+.answer-message {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: #333333;
+  min-height: 1.4em;
+}
+
+.answer-message.error {
+  color: #e53935;
+  font-weight: bold;
+}
+
+.answer-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.answer-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.answer-btn {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.answer-btn.submit {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.answer-btn.cancel {
+  background-color: #e0e0e0;
+  color: #333333;
+}
+
+/* 5桁の数字表示エリア */
+.secret-number-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+/* 数字の下にある横線 */
+.digit-box {
+    width: 45px;
+    height: 55px;
+    border-bottom: 4px solid #333; /* 下線の太さと色 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 表示される数字のフォント・デザイン */
+.digit-val {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #000000; /* お好みのカラーに変更可能 */
+    line-height: 1;
 }
