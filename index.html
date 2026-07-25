@@ -100,7 +100,7 @@
             <img src="images/password.png">
             <span>合言葉</span>
         </div>
-        <div class="nav-item" onclick="navigateTo('answer')">
+        <div class="nav-item" onclick="openAnswerModal()">
             <img src="images/answer.png">
             <span>答え</span>
         </div>
@@ -269,7 +269,7 @@
     <div class="belief-screen-right">
       <div id="profile-text-container" class="belief-profile-text-wrap">
         
-        <p id="member-profile">ここにプロフィールや心得のテキストが入ります。文字が溢れた場合は、右側の枠からはみ出さずにバッサリと非表示になります。</p>
+        <p id="member-profile"></p>
       </div>
     </div>
 
@@ -292,20 +292,27 @@
 <div id="page-okayama" class="page secret-page">
   <div class="secret-page-container">
     <h2>岡山写真館</h2>
+    <hr>
     <p>&emsp;ここは岡山写真館。のどかな岡山の風景を御覧あれ。あなたもきっと心安らぎ、悩みは消え、全てうまくいくでしょう。</p>
     <p>（岡山の写真が届いてないから東京旅行の思い出をどうぞ。）</p>
     <img src="secret/Tokyo1.jpg">
     <img src="secret/Tokyo2.jpg">
     <img src="secret/Tokyo3.jpg">
     <img src="secret/Tokyo4.jpg">
+    <p>（岡山の写真は届きませんでしたが京都旅行の写真が届きました。）</p>
+    <img src="secret/Kyoto1.png">
+    <img src="secret/Kyoto2.png">
+    <img src="secret/Kyoto3.png">
+    <img src="secret/Kyoto4.png">
+    <img src="secret/Kyoto5.png">
   </div>
 </div>
 
 <div id="page-math" class="page secret-page">
   <div class="secret-page-container">
     <h2>数学の問題</h2>
+    <hr>
     <p>&emsp;後輩と東京に行ったときにホテルで作られた問題。難しすぎて意味がわからない。同級生数人と本当に数時間話し合ってやっと一人解けるか解けないかだった。チャレンジしてみてください。答えはかなり明白。証明が難しい。答え隣においてあるけど見ても多分わからない。<br>（この問題は問題集の問題としてカウントされません。）</p>
-
     <div class="math-grid" id="math-grid"></div>
   </div>
 </div>
@@ -315,6 +322,7 @@
 <div id="page-question" class="page secret-page">
   <div class="secret-page-container">
     <h2>質問窓口</h2>
+    <hr>
     <p>このサイト及び予備校に関する質問、意見等を受け付けています。ご意見ある方は送っていただけると、可能であれば解答いたします。</p>
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfm4wDcDRnJxNay7j1ZHPP8U0U8G3UyzthWpMRu52mUxYG-dQ/viewform?embedded=true" class="questionnaire">読み込んでいます…</iframe>
   </div>
@@ -323,14 +331,186 @@
 <div id="page-tanka" class="page secret-page">
   <div class="secret-page-container">
     <h2>歌集</h2>
-    <p>&emsp;チャート周回予備校なるものは、山に籠もりて月ごろ和歌を讀みけり。それを集めたるなり。汝もまた和歌を讀みくれたらば、われらが喜びはこれより上なかるべし。<br>（他のロード文章も読みたい方は「Load」で読めます。）</p>
+    <hr>
+    <p>&emsp;チャート周回予備校なるものは、山に籠もりて月ごろ和歌を詠みけり。それを集めたるなり。汝もまた和歌を詠みたれば、われらが喜びはこれより上なかるべし。<br>（他のロード文章も読みたい方は「Load」で読めます。）</p>
+
+    <div class="tanka-list" style="margin-top: 40px;">
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">春の日に<br>見える君の<br>門出には<br>皆で出で来て<br>会ふこともがな</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：とある春の日に出会えたあなたの門出のときには、皆で揃ってあいたいものだなぁ。<br>
+          &emsp;10番目のものまでは部活から卒業していく先輩へ向けた和歌となっている。もちろんこれもそれの一つ。「見える君の」の部分で出会った頃の過去に思いを想起させ、すぐに「門出には」と未来に思いを馳せている。思い出を振り返り、これからに向けて進んでいく、別れの歌にふさわしい句となっている。これは別れの歌であると同時に未来への新たな出会いも含意しているのだろう。そしてどんなに周りの人々が変わったとしても、変わらない先輩後輩の繋がりを願う、そんな歌である。
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">たちわかれ<br>しほたるなみだ<br>せきあへず<br>ながれてゆくは<br>ときのながれよ</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：別れに際して流れる涙はとまらずに、流れて行くのは時の流れであることだよ<br>
+          &emsp;止まらない涙と、止められない別れ。その対比が美しい。「たちわかれ」は古今和歌集、在原行平の「立ち別れいなばの山の峰に生ふるまつとし聞かば今帰りこむ」を受けている。たとえ別れてもあなたが待っているなら私はすぐにでも帰ろう、という意である。お気づきではあると思うが、在原の句は去る人が詠んだ句、この句は待つ人が詠んだ句。つまり在原の歌への答歌とも受け取れる。すぐに帰るとは言われたものの、待つ側の涙は止まることがないほど、別れは辛いものである。それでも先輩の門出を祝い、引き止めない健気さがこの句に現れている。
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">花冷えの<br>東風をば猛く<br>踏み分けて<br>海原とほく<br>渡りたまひね</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：花を散らすような風すら踏み分けながら、勇気を持って先の見えない大海のようなこの世界を進んでいってほしいものだよ<br>
+          &emsp;これから訪れるであろう困難に立ち向かうそんな先輩の姿を願う句である。だがこの困難とはただの困難ではない。「踏み分ける」この動詞が指すのは、道なき道を切り開いていく、という意味である。まだ誰も経験したことのないような冒険に訪れるのはもちろん、誰も経験したことのないような困難である。それに対処するには並々ならぬ判断力と行動力が必要であろう。ところで、何を踏み分けているのであろうか。草であろうか。石であろうか。いや、風である。風とは本来耐えるものである。また頭など悠々越して自分を空気で包むものである。それを踏むのだ。想像してみてほしい。この句から感じ取れるのはまさに巨人のような先輩の背中であり、どんな困難にも立ち向かえてしまうと思えるような頼りがいのある背中である。そんな先輩には門出はふさわしい。新たな世界への旅立ちでも、我々は安心して帰りを待つことができる。
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">貝寄風に<br>侘しさのみは<br>たくしつつ<br>今はにおふる<br>葵を覚ゆ</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：これでお別れだという悲しさは言わず、今はついあなたと出会えたことを思い返してしまうことであるよ<br>
+          &emsp;こちらも風が題材になっているが、こちらは悲しみを隠してくれるような風である。貝寄風に際して我々は運ばれてくる貝にめでたさを感じるが、故郷を離れ風に乗った貝の悲しみはあまり考えない。「貝寄風」という言葉は運ばれていく貝を比喩として、旅立っていく人々を象徴している。その人々に寂しさを託す、つまり同じ感情を共有するだけであって、言葉などその間には必要ない。それが可能なのは先輩後輩の絆あってこそである。「におふ」とは自然が色づいていくという意味である。「葵」は花の「葵」と「会う日」の掛詞である。その絆を持ってして、出会った日を振り返ればその日は葵のように色づいて見えるようになる。思い出が色づくことは嬉しさと同時に、現在との対比も相まって寂しさも立ち現れてくる。そんな別れにも心と心は繋がり続けているのだろう。
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">たのみおく<br>きみが木かげの<br>やすらかに<br>我もつとめてぞ<br>かしづかむこと</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">たのしかる<br>月日もつひに<br>盛りにて<br>泰澄がごと<br>登り果つのみ</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">ひさかたの<br>輝かしき空<br>きみがため<br>未来を照らす<br>光なりけり</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">しろたへの<br>雪が溶けゆく<br>春の日に<br>君の門出よ<br>いとあはれかな</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">千木り無き<br>流るる時の<br>遠けれど<br>違える年の<br>春も来にけり</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">あらたまの<br>春にぞならん<br>めでたき日<br>輝く六花<br>降りしきること</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">竹の子や<br>一日ふるまに<br>およすげば<br>誰か明日の<br>姿知るらむ</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">和歌</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">和歌</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">和歌</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">和歌</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">和歌</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">和歌</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+      <div class="tanka-item">
+        <div class="shikishi-box">
+          <p class="shikishi-text">和歌</p>
+        </div>
+        <div class="tanka-explanation">
+          訳：
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
 <div id="page-load" class="page secret-page">
   <div class="secret-page-container">
     <h2>ロード文章</h2>
-      <p>&emsp;対して意味のあることは書いてない。私がたまに思ったことを書き記す場所。そして短歌。短歌と和歌の違いってなんなんだろうね。多分読みきれてない人が大半だと思うのでここに残しておきます。さっき調べたけど和歌の中に短歌が含まれるらしい。</p>
+    <hr>
+      <p>&emsp;対して意味のあることは書いてない。私がたまに思ったことを書き記す場所。そして和歌。和歌と短歌の違いってなんなんだろうね。多分読みきれてない人が大半だと思うのでここに残しておきます。さっき調べたけど和歌の中に短歌が含まれるらしい。</p>
       <br>
       <p>山深み陰だに見えずまして影しかれどもあふ世の縁かな</p>
 <p>朝にて冬去ると天の文あれば手中に入らむゆきの結晶</p>
@@ -374,7 +554,7 @@
 <p>ｳｪｲﾊﾟ₍ᐢ.ˬ.ᐢ₎ｱｰﾈﾑﾗﾝﾄﾞ</p>
 <p>[カス知識]おむつの炎は黄色</p>
 <p>作者の気持ちを答えさせる問題実際見たこと無い</p>
-<p>長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら短歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。</p>
+<p>長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら和歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。</p>
 <p>老人のイカれ昭和エピソード好き</p>
 <p>山へ芝刈りにって結局何してたんやろ</p>
 <p>範囲多すぎると逆に何もしたくなくなる症候群</p>
@@ -386,8 +566,8 @@
 <p>本当に終わりだよ</p>
 <p>終わりだって言ってんじゃん！</p>
 <p>何？暇なの？</p>
-<p>こんなに短歌いっぱいあるのによくここまで来たよね</p>
-<p>ちなみに合言葉「Tanka」で短歌一覧見れるよ</p>
+<p>こんなに和歌いっぱいあるのによくここまで来たよね</p>
+<p>ちなみに合言葉「Waka」で和歌一覧見れるよ</p>
 <p>まだメッセージあると思ってる？</p>
 <p>こういうのは唐突に終わるもの</p>
 <p>これで終わりだよ</p>
@@ -422,6 +602,76 @@
   </div>
 </div>
 
+<div id="page-secret1" class="page secret-page">
+    <div class="secret-page-container">
+        <h2>隠しページ①</h2>
+        <hr>
+        <div class="secret-number-display">
+            <div class="digit-box"><span class="digit-val" data-index="0"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="1"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="2"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="3"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="4"></span></div>
+        </div>
+    </div>
+</div>
+
+<div id="page-secret2" class="page secret-page">
+    <div class="secret-page-container">
+        <h2>隠しページ②</h2>
+        <hr>
+        <div class="secret-number-display">
+            <div class="digit-box"><span class="digit-val" data-index="0"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="1"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="2"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="3"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="4"></span></div>
+        </div>
+    </div>
+</div>
+
+<div id="page-secret3" class="page secret-page">
+    <div class="secret-page-container">
+        <h2>隠しページ③</h2>
+        <hr>
+        <div class="secret-number-display">
+            <div class="digit-box"><span class="digit-val" data-index="0"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="1"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="2"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="3"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="4"></span></div>
+        </div>
+    </div>
+</div>
+
+<div id="page-secret4" class="page secret-page">
+    <div class="secret-page-container">
+        <h2>隠しページ④</h2>
+        <hr>
+        <div class="secret-number-display">
+            <div class="digit-box"><span class="digit-val" data-index="0"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="1"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="2"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="3"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="4"></span></div>
+        </div>
+    </div>
+</div>
+
+<div id="page-secret5" class="page secret-page">
+    <div class="secret-page-container">
+        <h2>隠しページ⑤</h2>
+        <hr>
+        <div class="secret-number-display">
+            <div class="digit-box"><span class="digit-val" data-index="0"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="1"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="2"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="3"></span></div>
+            <div class="digit-box"><span class="digit-val" data-index="4"></span></div>
+        </div>
+    </div>
+</div>
+
 <div id="password-modal-overlay" class="password-modal-overlay hidden">
   <div class="password-modal">
     <div id="password-message" class="password-message">合言葉を入力してください</div>
@@ -433,8 +683,17 @@
   </div>
 </div>
 
+<div id="answer-modal-overlay" class="answer-modal-overlay hidden">
+  <div class="answer-modal">
+    <div id="answer-message" class="answer-message">数字を入力してください</div>
+    <input type="text" id="answer-input" class="answer-input" placeholder="数字" autocomplete="off">
+    <div class="answer-buttons">
+      <button type="button" id="answer-submit-btn" class="answer-btn submit">決定</button>
+      <button type="button" id="answer-close-btn" class="answer-btn cancel">戻る</button>
+    </div>
+  </div>
+</div>
 
-<div id="page-answer" class="page">答え</div>
 </main>
 
 <div id="solved-popup" class="popup-overlay" style="display: none !important;">
