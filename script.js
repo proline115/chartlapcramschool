@@ -41,7 +41,7 @@ const randomPhrases = [
     "ｳｪｲﾊﾟ₍ᐢ.ˬ.ᐢ₎ｱｰﾈﾑﾗﾝﾄﾞ",
     "[カス知識]<br>おむつの炎は黄色",
     "作者の気持ちを<br>答えさせる問題<br>実際見たこと無い",
-    "長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら短歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。",
+    "長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら和歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。",
     "老人のイカれ昭和エピソード好き",
     "山へ芝刈りにって<br>結局何してたんやろ",
     "範囲多すぎると<br>逆に何もしたくなくなる症候群",
@@ -53,8 +53,8 @@ const sequentialPhrases = [
     "本当に終わりだよ",
     "終わりだって言ってんじゃん！",
     "何？暇なの？",
-    "こんなに短歌いっぱいあるのに<br>よくここまで来たよね",
-    "ちなみに合言葉「Tanka」で<br>短歌一覧見れるよ",
+    "こんなに和歌いっぱいあるのに<br>よくここまで来たよね",
+    "ちなみに合言葉「Waka」で<br>和歌一覧見れるよ",
     "まだメッセージ<br>あると思ってる？",
     "こういうのは唐突に終わるもの",
     "これで終わりだよ",
@@ -80,63 +80,63 @@ const sequentialPhrases = [
 ];
 
 const problemList = [
-    ["pdf/『オハイオの風』.pdf", "『オハイオの風』", "英語", "7230"],
-    ["pdf/1-共テ.pdf", "1-共テ<br>(地理)", "地理", "7109"],
-    ["pdf/2-共テ.pdf", "2-共テ<br>(地理)", "地理", "7653"],
-    ["pdf/3-共テ.pdf", "3-共テ<br>(地理)", "地理", "4075"],
-    ["pdf/4-共テ.pdf", "4-共テ<br>(地理)", "地理", "6734"],
-    ["pdf/5-共テ.pdf", "5-共テ<br>(地理)", "地理", "2071"],
-    ["pdf/6-共テ.pdf", "6-共テ<br>(地理)", "地理", "9851"],
-    ["pdf/7-共テ.pdf", "7-共テ<br>(地理)", "地理", "2706"],
-    ["pdf/8-共テ.pdf", "8-共テ<br>(地理)", "地理", "3287"],
-    ["pdf/9-共テ.pdf", "9-共テ<br>(地理)", "地理", "6103"],
-    ["pdf/the field of「Subjunctive」.pdf","the field of<br>「Subjunctive」","英語","6578"],
-    ["pdf/The Tale of Genji.pdf","The Tale of<br>Genji","国語","9842"],
-    ["pdf/オハイオの風2.pdf","オハイオの風2","英語","8610"],
-    ["pdf/旭川の網代木.pdf","旭川の網代木<br>(日本史)","歴史","9283"],
-    ["pdf/永田町の番人（公共・政経そして少し香る地理）.pdf","永田町の番人<br>(公共・政経<br>そして少し<br>香る地理)","公共","7209"],
-    ["pdf/英検対策オハイオの風.pdf","英検対策<br>オハイオの風","英語","0798"],
-    ["pdf/加古川の網代木.pdf","加古川の網代木<br>(日本史)","歴史","4701"],
-    ["pdf/奇問の崖.pdf","奇問の崖<br>(物理)","理科","5098"],
-    ["pdf/共テ2-情報.pdf","共テ2-情報","情報","4986"],
-    ["pdf/共テ世界史-1.pdf","共テ世界史-1","歴史","0916"],
-    ["pdf/共テ世界史-2.pdf","共テ世界史-2","歴史","0784"],
-    ["pdf/共テ世界史-3.pdf","共テ世界史-3","歴史","6098"],
-    ["pdf/共テ世界史-4.pdf","共テ世界史-4","歴史","2374"],
-    ["pdf/共テ倫理キリスト教編.pdf","共テ倫理<br>キリスト教編","公共","1997"],
-    ["pdf/共通テスト作問 生物基礎 - 第1問A.pdf","生物基礎<br>第1問A","理科","3610"],
-    ["pdf/共通テスト理科基礎演習のための演習1日目.pdf","化学基礎<br>1日目","理科","9720"],
-    ["pdf/共通テスト理科基礎演習のための演習2日目.pdf","化学基礎<br>2日目","理科","3748"],
-    ["pdf/共通テスト理科基礎演習のための演習3日目.pdf","化学基礎<br>3日目","理科","9640"],
-    ["pdf/小学生でもできる情報.pdf","小学生でも<br>できる情報","情報","3658"],
-    ["pdf/数学.pdf","数学","数学","7598"],
-    ["pdf/単発数学.pdf","単発数学","数学","2078"],
-    ["pdf/天川の網代木（日本史）.pdf","天川の網代木<br>(日本史)","歴史","6513"],
-    ["pdf/中学生でもできる情報.pdf","中学生でも<br>できる情報","情報","8274"],
-    ["pdf/日本史.pdf","日本史","歴史","0874"],
-    ["pdf/別府川の網代木（日本史）.pdf","別府川の網代木<br>(日本史)","歴史","5697"],
-    ["pdf/無地の知.pdf","無知の知<br>(地学)","理科","8136"],
-    ["pdf/倫理テスト.pdf","倫理テスト","公共","0792"],
-    ["pdf/倫理大問1.pdf","倫理大問1","公共","2783"],
-    ["pdf/倫理大問2.pdf","倫理大問2","公共","4895"],
-    ["pdf/倫理大問3.pdf","倫理大問3","公共","6048"],
-    ["pdf/倫理大問4.pdf","倫理大問4","公共","9740"],
-    ["pdf/倫理大問5.pdf","倫理大問5","公共","9658"],
-    ["pdf/倫理大問6.pdf","倫理大問6","公共","7681"],
-    ["pdf/倫理大問7.pdf","倫理大問7","公共","2871"]
+    ["pdf/『オハイオの風』.pdf", "『オハイオの風』", "英語", "7230","answer/仮PDF.pdf"],
+    ["pdf/1-共テ.pdf", "1-共テ<br>(地理)", "地理", "7109","answer/仮PDF.pdf"],
+    ["pdf/2-共テ.pdf", "2-共テ<br>(地理)", "地理", "7653","answer/仮PDF.pdf"],
+    ["pdf/3-共テ.pdf", "3-共テ<br>(地理)", "地理", "4075","answer/仮PDF.pdf"],
+    ["pdf/4-共テ.pdf", "4-共テ<br>(地理)", "地理", "6734","answer/仮PDF.pdf"],
+    ["pdf/5-共テ.pdf", "5-共テ<br>(地理)", "地理", "2071","answer/仮PDF.pdf"],
+    ["pdf/6-共テ.pdf", "6-共テ<br>(地理)", "地理", "9851","answer/仮PDF.pdf"],
+    ["pdf/7-共テ.pdf", "7-共テ<br>(地理)", "地理", "2706","answer/仮PDF.pdf"],
+    ["pdf/8-共テ.pdf", "8-共テ<br>(地理)", "地理", "3287","answer/仮PDF.pdf"],
+    ["pdf/9-共テ.pdf", "9-共テ<br>(地理)", "地理", "6103","answer/仮PDF.pdf"],
+    ["pdf/the field of「Subjunctive」.pdf","the field of<br>「Subjunctive」","英語","6578","answer/仮PDF.pdf"],
+    ["pdf/The Tale of Genji.pdf","The Tale of<br>Genji","国語","9842","answer/仮PDF.pdf"],
+    ["pdf/オハイオの風2.pdf","オハイオの風2","英語","8610","answer/仮PDF.pdf"],
+    ["pdf/旭川の網代木.pdf","旭川の網代木<br>(日本史)","歴史","9283","answer/仮PDF.pdf"],
+    ["pdf/永田町の番人（公共・政経そして少し香る地理）.pdf","永田町の番人<br>(公共・政経<br>そして少し<br>香る地理)","公共","7209","answer/仮PDF.pdf"],
+    ["pdf/英検対策オハイオの風.pdf","英検対策<br>オハイオの風","英語","0798","answer/仮PDF.pdf"],
+    ["pdf/加古川の網代木.pdf","加古川の網代木<br>(日本史)","歴史","4701","answer/仮PDF.pdf"],
+    ["pdf/奇問の崖.pdf","奇問の崖<br>(物理)","理科","5098","answer/仮PDF.pdf"],
+    ["pdf/共テ2-情報.pdf","共テ2-情報","情報","4986","answer/仮PDF.pdf"],
+    ["pdf/共テ世界史-1.pdf","共テ世界史-1","歴史","0916","answer/仮PDF.pdf"],
+    ["pdf/共テ世界史-2.pdf","共テ世界史-2","歴史","0784","answer/仮PDF.pdf"],
+    ["pdf/共テ世界史-3.pdf","共テ世界史-3","歴史","6098","answer/仮PDF.pdf"],
+    ["pdf/共テ世界史-4.pdf","共テ世界史-4","歴史","2374","answer/仮PDF.pdf"],
+    ["pdf/共テ倫理キリスト教編.pdf","共テ倫理<br>キリスト教編","公共","1997","answer/仮PDF.pdf"],
+    ["pdf/共通テスト作問 生物基礎 - 第1問A.pdf","生物基礎<br>第1問A","理科","3610","answer/仮PDF.pdf"],
+    ["pdf/共通テスト理科基礎演習のための演習1日目.pdf","化学基礎<br>1日目","理科","9720","answer/仮PDF.pdf"],
+    ["pdf/共通テスト理科基礎演習のための演習2日目.pdf","化学基礎<br>2日目","理科","3748","answer/仮PDF.pdf"],
+    ["pdf/共通テスト理科基礎演習のための演習3日目.pdf","化学基礎<br>3日目","理科","9640","answer/仮PDF.pdf"],
+    ["pdf/小学生でもできる情報.pdf","小学生でも<br>できる情報","情報","3658","answer/仮PDF.pdf"],
+    ["pdf/数学.pdf","数学","数学","7598","answer/仮PDF.pdf"],
+    ["pdf/単発数学.pdf","単発数学","数学","2078","answer/仮PDF.pdf"],
+    ["pdf/天川の網代木（日本史）.pdf","天川の網代木<br>(日本史)","歴史","6513","answer/仮PDF.pdf"],
+    ["pdf/中学生でもできる情報.pdf","中学生でも<br>できる情報","情報","8274","answer/仮PDF.pdf"],
+    ["pdf/日本史.pdf","日本史","歴史","0874","answer/仮PDF.pdf"],
+    ["pdf/別府川の網代木（日本史）.pdf","別府川の網代木<br>(日本史)","歴史","5697","answer/仮PDF.pdf"],
+    ["pdf/無地の知.pdf","無知の知<br>(地学)","理科","8136","answer/仮PDF.pdf"],
+    ["pdf/倫理テスト.pdf","倫理テスト","公共","0792","answer/仮PDF.pdf"],
+    ["pdf/倫理大問1.pdf","倫理大問1","公共","2783","answer/仮PDF.pdf"],
+    ["pdf/倫理大問2.pdf","倫理大問2","公共","4895","answer/仮PDF.pdf"],
+    ["pdf/倫理大問3.pdf","倫理大問3","公共","6048","answer/仮PDF.pdf"],
+    ["pdf/倫理大問4.pdf","倫理大問4","公共","9740","answer/仮PDF.pdf"],
+    ["pdf/倫理大問5.pdf","倫理大問5","公共","9658","answer/仮PDF.pdf"],
+    ["pdf/倫理大問6.pdf","倫理大問6","公共","7681","answer/仮PDF.pdf"],
+    ["pdf/倫理大問7.pdf","倫理大問7","公共","2871","answer/仮PDF.pdf"]
 ];
 
 const kasuProblemList = [
-    ["kasupdf/カス英語.pdf", "カス英語", "英語", "5278"],
-    ["kasupdf/カス英語2.pdf", "カス英語2", "英語", "5601"],
-    ["kasupdf/カス世界史NOVA①.pdf","カス世界史<br>NOVA①","歴史","9436"],
-    ["kasupdf/カス世界史NOVA② .pdf","カス世界史<br>NOVA②","歴史","8704"],
-    ["kasupdf/カス政経.pdf","カス政経","公共","8769"],
-    ["kasupdf/カス倫理.pdf","カス倫理","公共","2693"],
-    ["kasupdf/カス歴史.pdf","カス歴史","歴史","1273"],
-    ["kasupdf/カス歴史2.pdf","カス歴史2","歴史","0577"],
-    ["kasupdf/ザグロスの頂.pdf","ザグロスの頂<br>(地理)","地理","2695"],
-    ["kasupdf/やさしい理系生物.pdf","やさしい理系生物","理科","2987"]
+    ["kasupdf/カス英語.pdf", "カス英語", "英語", "5278","answer/仮PDF.pdf"],
+    ["kasupdf/カス英語2.pdf", "カス英語2", "英語", "5601","answer/仮PDF.pdf"],
+    ["kasupdf/カス世界史NOVA①.pdf","カス世界史<br>NOVA①","歴史","9436","answer/仮PDF.pdf"],
+    ["kasupdf/カス世界史NOVA② .pdf","カス世界史<br>NOVA②","歴史","8704","answer/仮PDF.pdf"],
+    ["kasupdf/カス政経.pdf","カス政経","公共","8769","answer/仮PDF.pdf"],
+    ["kasupdf/カス倫理.pdf","カス倫理","公共","2693","answer/仮PDF.pdf"],
+    ["kasupdf/カス歴史.pdf","カス歴史","歴史","1273","answer/仮PDF.pdf"],
+    ["kasupdf/カス歴史2.pdf","カス歴史2","歴史","0577","answer/仮PDF.pdf"],
+    ["kasupdf/ザグロスの頂.pdf","ザグロスの頂<br>(地理)","地理","2695","answer/仮PDF.pdf"],
+    ["kasupdf/やさしい理系生物.pdf","やさしい理系生物","理科","2987","answer/仮PDF.pdf"]
 ];
 
 const membersData = [
@@ -173,16 +173,25 @@ const membersData = [
 ];
 
 const CUSTOM_ERROR_MESSAGES = [
-  ["会長", "お前ら、最高だぜ〜！🐢"],
   ["う","う…？"],
   ["うん","うん…？"],
+  ["ウ","ウ…？"],
+  ["ウン","ウン…？"],
   ["うんち", "💩"],
   ["うんこ", "💩"],
+  ["うんぴ","💩"],
   ["poo","💩"],
   ["poop","💩"],
+  ["Poo","💩"],
+  ["Poop","💩"],
   ["ウンチ","💩"],
   ["ウンコ","💩"],
+  ["ウンピ","💩"],
+  ["unti","💩"],
+  ["unko","💩"],
+  ["unco","💩"],
   ["💩","💩"],
+  ["会長", "お前ら、最高だぜ〜！🐢"],
   ["","なんか書いて"],
   ["岡山の吉右衛門","圧倒的有能"],
   ["白狐ふゆ","こいつがいなけりゃゲームも小説も無い。"],
@@ -190,10 +199,11 @@ const CUSTOM_ERROR_MESSAGES = [
   ["アポロ12号","なんかこの人にはついていきたくなるよね。"],
   ["合言葉","素直め"],
   ["百合コーン","🦄（正解）"],
+  ["ユリコーン","🦄（正解）"],
   ["ユニコーン","惜しい！"],
   ["ニンヒドリン","アミノ基を検出する試薬。アミノ基が存在する溶液には赤紫色の呈色を示す。プロリンなどのイミノ基を持つ物質に対しては黄色を呈色し、この色をプロリン黄という。"],
   ["ビウレット","ペプチド結合を検出する試薬。ペプチド結合が化合物一分子内に三つ以上存在する場合、ペプチド結合を行っている原子と錯体を形成し、赤紫色を呈色する。"],
-  ["プロリン","アミノ酸の一種だが、アミノ基を有していない。一年前ぐらいからこの名前を使っているため小説と被ったのは本当にたまたま。自分を重ねたわけじゃない。原案は確かに私だがプロリンである必要があった。読んでくれ。"],
+  ["プロリン","アミノ酸の一種だが、アミノ基を有していない。一年前ぐらいからこの名前を使っているため小説と被ったのは本当にたまたま。自分を重ねたわけじゃない。原案は確かに私だがプロリンである必要があった。頼む。読んでくれ。"],
   ["00000","...ローラー？"],
   ["00001","...諦めな？"],
   ["00002","...10万通りあるよ？"],
@@ -278,6 +288,7 @@ function navigateTo(pageId){
     } else {
         executePageSwitch(fullPageId);
     }
+
 }
 
 function setCurtainText() {
@@ -314,6 +325,12 @@ function executePageSwitch(fullPageId) {
         targetPage.classList.add("active");
     }
     initMemberPage();
+    targetPage.scrollTo(0, 0);
+    if (fullPageId === 'page-secret1') onVisitSecretPage(1);
+    if (fullPageId === 'page-secret2') onVisitSecretPage(2);
+    if (fullPageId === 'page-secret3') onVisitSecretPage(3);
+    if (fullPageId === 'page-secret4') onVisitSecretPage(4);
+    if (fullPageId === 'page-secret5') onVisitSecretPage(5);
 }
 
 function triggerCurtainTransition(fullPageId, callback) {
@@ -1340,7 +1357,7 @@ const PASSWORD_MAP = {
   "Okayama": "page-okayama",
   "Math": "page-math",
   "Question": "page-question",
-  "Tanka": "page-tanka",
+  "Waka": "page-tanka",
   "Load": "page-load",
   "Novel": "page-novel"
 };
@@ -1527,4 +1544,195 @@ function closeMathModal() {
 // DOM読み込み完了時にMath一覧を初期化
 document.addEventListener("DOMContentLoaded", () => {
   initMathGrid();
+});
+
+// ==========================================
+// 答えポップアップ ＆ 処理制御
+// ==========================================
+
+// 隠しコード（5桁）と遷移先ページの対応マップ
+const answerSecretCodeMap = {
+  "98643": "page-secret1",
+  "29308": "page-secret2",
+  "38421": "page-secret3",
+  "01125": "page-secret4",
+  "2nf9s": "page-secret5"
+};
+
+// ==========================================
+// 答えモーダル制御
+// ==========================================
+
+const answerOverlay = document.getElementById("answer-modal-overlay");
+const answerInput = document.getElementById("answer-input");
+const answerMessage = document.getElementById("answer-message");
+const answerSubmitBtn = document.getElementById("answer-submit-btn");
+const answerCloseBtn = document.getElementById("answer-close-btn");
+
+let isAnswerModalOpen = false;
+
+// 答えモーダルを開く
+function openAnswerModal() {
+  if (!answerOverlay) return;
+  isAnswerModalOpen = true;
+  document.body.classList.add("modal-open");
+
+  answerInput.value = "";
+  answerMessage.textContent = "数字を入力してください";
+  answerMessage.classList.remove("error");
+  answerOverlay.classList.remove("hidden");
+
+  setTimeout(() => {
+    answerInput.focus();
+  }, 50);
+}
+
+// 答えモーダルを閉じる
+function closeAnswerModal() {
+  if (!answerOverlay) return;
+  isAnswerModalOpen = false;
+  document.body.classList.remove("modal-open");
+
+  answerOverlay.classList.add("hidden");
+  answerInput.blur();
+}
+
+// 答えの判定処理
+function checkAnswerCode() {
+  const inputVal = answerInput.value.trim();
+  // 2. 通常の問題コードの判定 (problemList & kasuProblemList)
+  let foundProblem = problemList.find(item => item[3] === inputVal);
+  if (!foundProblem && typeof kasuProblemList !== "undefined") {
+    foundProblem = kasuProblemList.find(item => item[3] === inputVal);
+  }
+  // 1. 隠しコード（5桁）の判定
+  if (answerSecretCodeMap[inputVal]) {
+    const targetPageId = answerSecretCodeMap[inputVal];
+    answerMessage.textContent="ありがとう";
+    answerMessage.classList.add("error");
+    setCurtainText();
+    triggerCurtainTransition(targetPageId, () => {
+     closeAnswerModal();
+     executePageSwitch(targetPageId);
+   });
+
+  }else if (foundProblem && foundProblem[4]) {
+    const ansPdfUrl = foundProblem[4];
+    const ansTitle = (foundProblem[1] || "解答") + "（解答）";
+
+    closeAnswerModal();
+    openMathPdfModal(ansPdfUrl, ansTitle);
+  } else {
+    if (answerMessage) {
+      answerMessage.textContent = "コードが違います";
+      answerMessage.classList.add("error");
+    }
+    answerInput.focus();
+  }
+  answerInput.addEventListener('input',()=>{
+    answerMessage.textContent="数字を入力してください";
+    answerMessage.classList.remove("error");
+  });
+}
+
+// イベントリスナーの登録（合言葉と全く同じ構成）
+if (answerSubmitBtn) {
+  answerSubmitBtn.addEventListener("click", checkAnswerCode);
+}
+
+if (answerCloseBtn) {
+  answerCloseBtn.addEventListener("click", closeAnswerModal);
+}
+
+if (answerInput) {
+  answerInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      checkAnswerCode();
+    }
+  });
+
+  // ボタン操作を妨げないよう、フォーカス復帰に少し猶予を持たせる（合言葉と同等）
+  answerInput.addEventListener("blur", () => {
+    if (isAnswerModalOpen) {
+      setTimeout(() => {
+        if (isAnswerModalOpen) answerInput.focus();
+      }, 10);
+    }
+  });
+}
+
+if (answerOverlay) {
+  answerOverlay.addEventListener("click", (e) => {
+    if (e.target === answerOverlay) {
+      answerInput.focus();
+    }
+  });
+}
+
+// ==========================================
+// 隠し番号ページ 制御ロジック（ローカルストレージ対応版）
+// ==========================================
+
+const SECRET_CODE = ['2', '5', '3', '2', '7'];
+const STORAGE_KEY = 'discoveredSecretsData';
+
+// 1. ローカルストレージからデータを読み込む関数
+function loadDiscoveredSecrets() {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (savedData) {
+    try {
+      return JSON.parse(savedData);
+    } catch (e) {
+      console.error("データの読み込みに失敗しました", e);
+    }
+  }
+  // 保存データがない場合のデフォルト値
+  return { 1: false, 2: false, 3: false, 4: false, 5: false };
+}
+
+// 2. 発見状態の保持変数（ローカルストレージから復元）
+const discoveredSecrets = loadDiscoveredSecrets();
+
+/**
+ * 隠しページに到達したときに呼び出す関数
+ * @param {number} pageNum - 訪問した隠しページの番号 (1〜5)
+ */
+function onVisitSecretPage(pageNum) {
+  if (discoveredSecrets.hasOwnProperty(pageNum)) {
+    // フラグを更新
+    discoveredSecrets[pageNum] = true;
+    
+    // 3. ローカルストレージに最新状態を保存
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(discoveredSecrets));
+  }
+
+  // 画面表示を更新
+  updateAllSecretDisplays();
+}
+
+/**
+ * すべての隠しページ内にある横線・数字の表示を更新する
+ */
+function updateAllSecretDisplays() {
+  const displayContainers = document.querySelectorAll('.secret-number-display');
+
+  displayContainers.forEach(container => {
+    SECRET_CODE.forEach((digit, index) => {
+      const targetSpan = container.querySelector(`.digit-val[data-index="${index}"]`);
+      const pageNum = index + 1;
+
+      if (targetSpan) {
+        if (discoveredSecrets[pageNum]) {
+          targetSpan.textContent = digit;
+        } else {
+          targetSpan.textContent = '';
+        }
+      }
+    });
+  });
+}
+
+// 4. ページ読み込み完了時（初回ロード時）に保存データを元に表示を初期化
+document.addEventListener("DOMContentLoaded", () => {
+  updateAllSecretDisplays();
 });
