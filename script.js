@@ -110,7 +110,6 @@ const problemList = [
     ["pdf/共通テスト理科基礎演習のための演習3日目.pdf","化学基礎<br>3日目","理科","9640","answer/仮PDF.pdf"],
     ["pdf/小学生でもできる情報.pdf","小学生でも<br>できる情報","情報","3658","answer/仮PDF.pdf"],
     ["pdf/数学.pdf","数学","数学","7598","answer/仮PDF.pdf"],
-    ["pdf/単発数学.pdf","単発数学","数学","2078","answer/仮PDF.pdf"],
     ["pdf/天川の網代木（日本史）.pdf","天川の網代木<br>(日本史)","歴史","6513","answer/仮PDF.pdf"],
     ["pdf/中学生でもできる情報.pdf","中学生でも<br>できる情報","情報","8274","answer/仮PDF.pdf"],
     ["pdf/日本史.pdf","日本史","歴史","0874","answer/仮PDF.pdf"],
