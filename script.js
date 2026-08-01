@@ -45,11 +45,14 @@ const randomPhrases = [
     "老人のイカれ昭和エピソード好き",
     "山へ芝刈りにって<br>結局何してたんやろ",
     "範囲多すぎると<br>逆に何もしたくなくなる症候群",
-    "背景の写真は<br>どこから撮ったでしょう"
+    "背景の写真は<br>どこから撮ったでしょう",
+    "私の愛した「Cookie」",
+    "教養は高く<br>品性は低く",
+    "ミリカンすごくね？"
 ];
 
 const sequentialPhrases = [
-    "終わりだよ",
+    "これで終わりだよ",
     "本当に終わりだよ",
     "終わりだって言ってんじゃん！",
     "何？暇なの？",
@@ -109,8 +112,9 @@ const problemList = [
     ["pdf/共通テスト理科基礎演習のための演習2日目.pdf","化学基礎<br>2日目","理科","3748","answer/仮PDF.pdf"],
     ["pdf/共通テスト理科基礎演習のための演習3日目.pdf","化学基礎<br>3日目","理科","9640","answer/仮PDF.pdf"],
     ["pdf/小学生でもできる情報.pdf","小学生でも<br>できる情報","情報","3658","answer/仮PDF.pdf"],
-    ["pdf/数学.pdf","数学","数学","7598","answer/仮PDF.pdf"],
+    ["pdf/単発数学.pdf","単発数学","数学","7598","answer/仮PDF.pdf"],
     ["pdf/天川の網代木（日本史）.pdf","天川の網代木<br>(日本史)","歴史","6513","answer/仮PDF.pdf"],
+    ["pdf/二発数学.pdf","二発数学","数学","0659","answer/仮PDF.pdf"],
     ["pdf/中学生でもできる情報.pdf","中学生でも<br>できる情報","情報","8274","answer/仮PDF.pdf"],
     ["pdf/日本史.pdf","日本史","歴史","0874","answer/仮PDF.pdf"],
     ["pdf/別府川の網代木（日本史）.pdf","別府川の網代木<br>(日本史)","歴史","5697","answer/仮PDF.pdf"],
@@ -151,12 +155,12 @@ const membersData = [
   { id: 4, name: "アポロ12号", 
     profile: "文化祭2日目提唱者<br>超ネクタイ開発者<br>ゴリキュア黄色枠<br>罰掃除を冗談で乗り切った者<br>「はい歌ろ」開発者<br>絆の奇跡：女性パート担当<br>カントリーロード：ソプラノ担当<br>旗手5年連続担当<br>善きサマリア人の例え<br><span style='font-weight:bold;color:yellow;'>先公に仇なす者</span>",
     beliefProfile:"神は死んだ"},
-  { id: 5, name: "メンバー5", 
-    profile: "ここに5人目のプロフィールのテキストが入ります。",
-    beliefProfile: "p-ビスホスフィノ木"},
-  { id: 6, name: "メンバー6", 
-    profile: "ここに6人目のプロフィールのテキストが入ります。",
-    beliefProfile: "岡山は日本の植民地"},
+  { id: 5, name: "さすらいのブッダ", 
+    profile: "播磨に悟りを教えに来た。<br><br>岡山の吉右衛門からの遊びの誘いを、「お金をかけて疲れに行くなんてw」と最悪の冷笑で断った話はあまりにも有名。<br><br>心得：来世は美少女になりたい<br><br>挨拶：なますて〜。極楽は西の方にあるよ〜。探してみてね！",
+    beliefProfile: "来世は美少女になりたい"},
+  { id: 6, name: "妹嶌　紫", 
+    profile: "物理が好きな生物選択。<br><br>とりあえず、受験生は『やさしい理系数学』をすればよい。『やさしい理系数学』はやさしくない。『やさしい理系数学』をするときとYoutube shortを見てるときが一番生きていることを感じられる。『やさしい理系数学』に憧れて『やさしい理系生物』を作成。生物の資料集は『新課程　視覚でとらえるフォトサイエンス生物図録』一択。問題集は『生物重要問題集』と『生物上級問題精講』を勧める。きゃんべるんるん。あ、名前の読み方はどこかにあるはず。きゃんべるんるん。きゃんべるんるん。きゃんべるんるん。きゃんべるんるん。きゃんべるんるん",
+    beliefProfile: "彼女欲しい"},
   { id: 7, name: "メンバー7", 
     profile: "ここに7人目のプロフィールのテキストが入ります。",
     beliefProfile: "ベリリウムは貴ガスやぁ"},
@@ -189,6 +193,7 @@ const CUSTOM_ERROR_MESSAGES = [
   ["unti","💩"],
   ["unko","💩"],
   ["unco","💩"],
+  ["unpi","💩"],
   ["💩","💩"],
   ["会長", "お前ら、最高だぜ〜！🐢"],
   ["","なんか書いて"],
@@ -202,11 +207,12 @@ const CUSTOM_ERROR_MESSAGES = [
   ["ユニコーン","惜しい！"],
   ["ニンヒドリン","アミノ基を検出する試薬。アミノ基が存在する溶液には赤紫色の呈色を示す。プロリンなどのイミノ基を持つ物質に対しては黄色を呈色し、この色をプロリン黄という。"],
   ["ビウレット","ペプチド結合を検出する試薬。ペプチド結合が化合物一分子内に三つ以上存在する場合、ペプチド結合を行っている原子と錯体を形成し、赤紫色を呈色する。"],
-  ["プロリン","アミノ酸の一種だが、アミノ基を有していない。一年前ぐらいからこの名前を使っているため小説と被ったのは本当にたまたま。自分を重ねたわけじゃない。原案は確かに私だがプロリンである必要があった。頼む。読んでくれ。"],
+  ["イミノ基","=NHや-NH-のこと。イミド基ともいう。ニンヒドリンと反応し、黄色を呈色する。"],
   ["00000","...ローラー？"],
   ["00001","...諦めな？"],
   ["00002","...10万通りあるよ？"],
-  ["00003","...まぁ頑張れ"]
+  ["00003","...まぁ頑張れ"],
+  ["Cookie","そのページは存在しません。<br>ですが何かが進んだかもしれません。<br>当たり前にあった何かが。"]
 ];
 
 const container = document.querySelector(".container");
@@ -259,6 +265,7 @@ function startSite(){
     tap.classList.add("hide");
 
     setTimeout(enterMain, 1500);
+    updateAchievementProgress("achievement_1");
 }
 
 function enterMain(){
@@ -299,6 +306,9 @@ function setCurtainText() {
     if (availableRandomPhrases.length > 0) {
         const randomIndex = Math.floor(Math.random() * availableRandomPhrases.length);
         selectedText = availableRandomPhrases[randomIndex];
+        if (selectedText.includes("大吉")) {
+            updateAchievementProgress("achievement_8");
+        }
         availableRandomPhrases.splice(randomIndex, 1);
     }
     else if (sequentialPhrases.length > 0) {
@@ -330,6 +340,7 @@ function executePageSwitch(fullPageId) {
     if (fullPageId === 'page-secret3') onVisitSecretPage(3);
     if (fullPageId === 'page-secret4') onVisitSecretPage(4);
     if (fullPageId === 'page-secret5') onVisitSecretPage(5);
+    checkSecretPageDiscovery(fullPageId);
 }
 
 function triggerCurtainTransition(fullPageId, callback) {
@@ -374,27 +385,30 @@ function rotateLogo(event) {
 
     const logoImg = document.querySelector('.logo img');
     if (!logoImg) return;
-
-    clickCount++;
+    updateLogoAchievements();
+    clickCount+=clickPower;
     currentRotation += 360;
 
     let currentDuration = Math.max(1.4, 1.5 - (clickCount * 0.001)); 
 
     let currentScale = 1;
+    if(isBurstEnabled){
     if (clickCount > scaleStartClick) {
         const scaleProgress = (clickCount - scaleStartClick) / (maxClicks - scaleStartClick);
         currentScale = 1 + (scaleProgress * 19.0); 
     }
+  }
 
-    if (clickCount < maxClicks) {
+    if (clickCount < maxClicks||!isBurstEnabled) {
         logoImg.style.transition = `transform ${currentDuration}s ease-out`;
         logoImg.style.transform = `rotateZ(${currentRotation}deg) scale(${currentScale})`;
     } 
     else {
+      if(isBurstEnabled){
         isBurst = true;
         logoImg.style.transition = 'none'; 
         logoImg.classList.add('burst'); 
-
+        updateLogoExplodeAchievements();
         logoImg.addEventListener('animationend', function handler() {
             logoImg.removeEventListener('animationend', handler);
             logoImg.classList.remove('burst');
@@ -414,12 +428,13 @@ function rotateLogo(event) {
             }, 500);
         });
     }
+  }
 
     if (clickCount < maxClicks && !logoImg.dataset.hasListener) {
         logoImg.dataset.hasListener = "true";
         logoImg.addEventListener('transitionend', () => {
             if (isBurst) return;
-            if (clickCount > scaleStartClick) {
+            if (clickCount > scaleStartClick&&isBurstEnabled) {
                 logoImg.style.transition = `transform 2.5s cubic-bezier(0.25, 1, 0.5, 1)`;
                 logoImg.style.transform = `rotateZ(0deg) scale(1)`;
             } else {
@@ -603,6 +618,7 @@ function closePdfAndPopup() {
         popup.style.setProperty("display", "none", "important"); 
     }
     closePdf(); 
+    updateSubjectOnlyAchievements()
 }
 
 function openResetModal() {
@@ -635,16 +651,7 @@ function closeKasuResetModal() {
     }
 }
 
-function executeClearAllHistory() {
-    localStorage.removeItem("completedMondaiList");
-    localStorage.removeItem("completedKasuList");
-    const normalCards = document.querySelectorAll("#thumbnail-grid .mondai-item.is-completed");
-    normalCards.forEach(card => card.classList.remove("is-completed"));
-    const kasuCards = document.querySelectorAll("#kasu-thumbnail-grid .mondai-item.is-completed");
-    kasuCards.forEach(card => card.classList.remove("is-completed"));
-    closeResetModal();
-    closeKasuResetModal();
-}
+
 
 const secretDialogueTree = {
   start: {
@@ -888,6 +895,18 @@ function handleModalClick(buttonIndex) {
 
     const currentData = secretDialogueTree[currentSecretStage];
     if (!currentData || !currentData.buttons[buttonIndex]) return;
+    // ===【追加】選択されたボタンテキストに応じた判定（実績⑳〜㉓）===
+    const selectedButtonText = currentData.buttons[buttonIndex].text;
+
+    if (selectedButtonText === "自我を消す" || selectedButtonText === "お前を消す") {
+        // ⑳ 解答履歴さんの自我を消す
+        updateAchievementProgress("achievement_20");
+    } else if (selectedButtonText === "ごめん" || selectedButtonText === "ごめんなさい") {
+        // ㉑（1回）、㉒（10回）、㉓（100回）謝る
+        updateAchievementProgress("achievement_21", 1);
+        updateAchievementProgress("achievement_22", 1);
+        updateAchievementProgress("achievement_23", 1);
+    }
     const nextStage = currentData.buttons[buttonIndex].next;
 
     if (nextStage === "CLOSE") {
@@ -919,6 +938,23 @@ function handleSecretChoice(buttonIndex) {
 }
 
 function executeClearAllHistory() {
+  const allProblemsCount = problemList.length + kasuProblemList.length;
+    const savedMondai = JSON.parse(localStorage.getItem("completedMondaiList") || "[]");
+    const savedKasu = JSON.parse(localStorage.getItem("completedKasuList") || "[]");
+    const solvedCount = savedMondai.length + savedKasu.length;
+
+    if (solvedCount === 0) {
+        // ⑰ 解答履歴空削除
+        updateAchievementProgress("achievement_17");
+    } else {
+        // ⑱ 解答履歴削除
+        updateAchievementProgress("achievement_18");
+
+        // ⑲ 全回答後解答履歴削除
+        if (solvedCount === allProblemsCount) {
+            updateAchievementProgress("achievement_19");
+        }
+    }
     localStorage.removeItem("completedMondaiList");
     localStorage.removeItem("completedKasuList");
     const normalCards = document.querySelectorAll("#thumbnail-grid .mondai-item.is-completed");
@@ -927,6 +963,7 @@ function executeClearAllHistory() {
     kasuCards.forEach(card => card.classList.remove("is-completed"));
     closeResetModal();
     closeKasuResetModal();
+    updateSubjectOnlyAchievements();
 }
 
 
@@ -1291,6 +1328,7 @@ if (btnFavorite) {
       favoriteMemberId = currentMemberId.toString();
       localStorage.setItem("belief_favorite_member_id", favoriteMemberId);
       if (favStar) favStar.src = "belief/star_on.png";
+      checkMemberPinAchievements(currentMemberId);
     }
     updateHomeHeadline();
   }, { passive: true });
@@ -1417,7 +1455,13 @@ function checkPassword() {
 
     if (customMatch) {
       // 特定の単語にマッチした場合のメッセージ
-      passwordMessage.textContent = customMatch[1];
+      passwordMessage.innerHTML = customMatch[1];
+      if(inputVal==="Cookie"){
+        achievementsData[1].description=`中心軸をずらしてるのがポイント<div class="achievement-shop-container"><div class="achievement-shop-left"><img src="images/cursor.png" alt="cursor" class="achievement-cursor-img"></div><button id="buyCursorBtn" onclick="buyCursor()" class="achievement-buy-btn">購入<br>10回転</button></div>`;
+        achievementsData[4].description=`遠心力って強すぎるとこうなるんだよ<br><br><button id="upgrade-click-btn" class="upgrade-btn" onclick="buyClickUpgrade()">アップグレード<br>100回転<br現在✕1</button>`;
+        renderAchievements();
+        localStorage.setItem("cookie","start");
+      }
 
     } else if (/^\d{5}$/.test(inputVal)) {
       // 2. 「特定の単語」以外で、半角数字5桁が入力された場合のエラーメッセージ
@@ -1510,7 +1554,9 @@ function initMathGrid() {
     card.onclick = () => openMathPdfModal(pdfUrl, title);
 
     grid.appendChild(card);
+    
   });
+  
 }
 
 // PDFビューアの開閉処理
@@ -1605,7 +1651,10 @@ function checkAnswerCode() {
     foundProblem = kasuProblemList.find(item => item[3] === inputVal);
   }
   // 1. 隠しコード（5桁）の判定
-  if (answerSecretCodeMap[inputVal]) {
+  if(inputVal==="2nf9s"){
+    answerMessage.textContent="そういうのやっちゃだめでしょ。何が目的かは知らんけど少なくとも楽しむことを忘れちゃいけない。";
+    answerMessage.classList.add("error");
+  }else if (answerSecretCodeMap[inputVal]) {
     const targetPageId = answerSecretCodeMap[inputVal];
     answerMessage.textContent="ありがとう";
     answerMessage.classList.add("error");
@@ -1703,6 +1752,9 @@ function onVisitSecretPage(pageNum) {
     
     // 3. ローカルストレージに最新状態を保存
     localStorage.setItem(STORAGE_KEY, JSON.stringify(discoveredSecrets));
+    if(pageNum!==5){
+      updateAchievementProgress(`achievement_${pageNum+40}`)
+    }
   }
 
   // 画面表示を更新
@@ -1735,3 +1787,1220 @@ function updateAllSecretDisplays() {
 document.addEventListener("DOMContentLoaded", () => {
   updateAllSecretDisplays();
 });
+
+// 全45個の実績マスターデータ（画像パス対応版）
+const achievementsData = [
+  {
+    id: "achievement_1",
+    image: "achieve/achieve1.png", // ★画像リンク
+    title: "ようこそ！",
+    conditionText: "このページに辿り着こう<br>あれ？なんで見えてるの？",
+    currentVal: 0,
+    targetVal: 0,
+    description: "ぜひ楽しみ尽くしてね！",
+    unlocked: false
+  },
+  {
+    id: "achievement_2",
+    image: "achieve/achieve2.png",
+    title: "ぐる",
+    conditionText: "回る",
+    currentVal: 0,
+    targetVal: 1,
+    description: "中心軸をずらしてるのがポイント",
+    unlocked: false
+  },
+  {
+    id: "achievement_3",
+    image: "achieve/achieve3.png",
+    title: "ぐるぐる",
+    conditionText: "さらに、回る",
+    currentVal: 0,
+    targetVal: 10,
+    description: "回転を止めないで",
+    unlocked: false
+  },
+  {
+    id: "achievement_4",
+    image: "achieve/achieve4.png",
+    title: "ぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐるぐる",
+    conditionText: "永劫回帰する",
+    currentVal: 0,
+    targetVal: 1000000,
+    description: "これこそ私がしたかったこと",
+    unlocked: false
+  },
+  {
+    id: "achievement_5",
+    image: "achieve/achieve5.png",
+    title: "ドッカーン！",
+    conditionText: "爆破する",
+    currentVal: 0,
+    targetVal: 1,
+    description: "遠心力って強すぎるとこうなるんだよ",
+    unlocked: false
+  },
+  {
+    id: "achievement_6",
+    image: "achieve/achieve6.png",
+    title: "ニトログリセリン",
+    conditionText: "10回爆破する",
+    currentVal: 0,
+    targetVal: 10,
+    description: "そろそろサイトが壊れそう！",
+    unlocked: false
+  },
+  {
+    id: "achievement_7",
+    image: "achieve/achieve7.png",
+    title: "トリニトロトルエン",
+    conditionText: "100回爆破する",
+    currentVal: 0,
+    targetVal: 100,
+    description: `さぁ、次は1000回<br><br><button id="toggle-burst-btn" class="toggle-btn active" onclick="toggleBurstSetting()">爆発演出: ON</button>`,
+    unlocked: false
+  },
+  {
+    id: "achievement_8",
+    image: "achieve/achieve8.png",
+    title: "大吉！！",
+    conditionText: "大吉を引く",
+    currentVal: 0,
+    targetVal: 0,
+    description: "待ち人はいつくんねん",
+    unlocked: false
+  },
+  {
+    id: "achievement_9",
+    image: "achieve/achieve9.png",
+    title: "国語マニア",
+    conditionText: "国語だけ解く",
+    currentVal: 0,
+    targetVal: 10,
+    description: "国語から解いたんか<br>ニッチだねぇ",
+    unlocked: false
+  },
+  {
+    id: "achievement_10",
+    image: "achieve/achieve10.png",
+    title: "数学マニア",
+    conditionText: "数学だけ解く",
+    currentVal: 0,
+    targetVal: 10,
+    description: "数学がこれで終わりだと思ったら大間違い<br>（・∀・）",
+    unlocked: false
+  },
+  {
+    id: "achievement_11",
+    image: "achieve/achieve11.png",
+    title: "英語マニア",
+    conditionText: "英語だけ解く",
+    currentVal: 0,
+    targetVal: 10,
+    description: "ほんとにやったの？！<br>流石にあなたはもうネイティブ",
+    unlocked: false
+  },
+  {
+    id: "achievement_12",
+    image: "achieve/achieve12.png",
+    title: "社会マニア",
+    conditionText: "社会だけ解く",
+    currentVal: 0,
+    targetVal: 10,
+    description: "よくやった<br>本当にありがとう<br>そんなあなたはぜひ倫理選択においで",
+    unlocked: false
+  },
+  {
+    id: "achievement_13",
+    image: "achieve/achieve13.png",
+    title: "理科マニア",
+    conditionText: "理科だけ解く",
+    currentVal: 0,
+    targetVal: 10,
+    description: "あれってほんまに理科っていう括りで良かったん…？",
+    unlocked: false
+  },
+  {
+    id: "achievement_14",
+    image: "achieve/achieve14.png",
+    title: "情報マニア",
+    conditionText: "情報だけ解く",
+    currentVal: 0,
+    targetVal: 10,
+    description: "好きこそものの上手なれ",
+    unlocked: false
+  },
+  {
+    id: "achievement_15",
+    image: "achieve/achieve15.png",
+    title: "上位1%ランカー",
+    conditionText: "10問解く",
+    currentVal: 0,
+    targetVal: 10,
+    description: "1問でも嬉しいのに10問も!?",
+    unlocked: false
+  },
+  {
+    id: "achievement_16",
+    image: "achieve/achieve16.png",
+    title: "神",
+    conditionText: "全て解く",
+    currentVal: 0,
+    targetVal: 50,
+    description: "あぁ…神よ…この地まで来たりし神よ…そなたにあらん限りの祝福を…",
+    unlocked: false
+  },
+  {
+    id: "achievement_17",
+    image: "achieve/achieve17.png",
+    title: "空打ち",
+    conditionText: "何もないを消す",
+    currentVal: 0,
+    targetVal: 0,
+    description: "何やってんのｗ",
+    unlocked: false
+  },
+  {
+    id: "achievement_18",
+    image: "achieve/achieve18.png",
+    title: "がんばったのに…",
+    conditionText: "解いたを消す",
+    currentVal: 0,
+    targetVal: 0,
+    description: "もう消さないでね！",
+    unlocked: false
+  },
+  {
+    id: "achievement_19",
+    image: "achieve/achieve19.png",
+    title: "色即是空",
+    conditionText: "何でもあるを消す",
+    currentVal: 0,
+    targetVal: 0,
+    description: "始めから何もなかったのかもしれない",
+    unlocked: false
+  },
+  {
+    id: "achievement_20",
+    image: "achieve/achieve20.png",
+    title: "問題、カス問題ともに解答履歴が消去されます。本当によろしいですか？",
+    conditionText: "消したくないを消す",
+    currentVal: 0,
+    targetVal: 0,
+    description: "取り返しがつく系のゲームで良かったね！",
+    unlocked: false
+  },
+  {
+    id: "achievement_21",
+    image: "achieve/achieve21.png",
+    title: "心からの謝罪",
+    conditionText: "謝る",
+    currentVal: 0,
+    targetVal: 1,
+    description: "人は間違いを受け入れた時、一段と美しくなるのです",
+    unlocked: false
+  },
+  {
+    id: "achievement_22",
+    image: "achieve/achieve22.png",
+    title: "上辺だけの謝罪",
+    conditionText: "いっぱい謝る",
+    currentVal: 0,
+    targetVal: 10,
+    description: "謝罪のこと流れ作業だと思ってる!?",
+    unlocked: false
+  },
+  {
+    id: "achievement_23",
+    image: "achieve/achieve23.png",
+    title: "狂気の時代",
+    conditionText: "謝り倒す",
+    currentVal: 0,
+    targetVal: 100,
+    description: "意外と社会人ってこんなもんなんかもしれない",
+    unlocked: false
+  },
+  {
+    id: "achievement_24",
+    image: "achieve/achieve24.png",
+    title: "あなたを百合の世界へといざないませう",
+    conditionText: "メンバー１をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "最近ヤンジャンの巻末グラビア見てたら好みの子がいたのでプロフィール見たんですけど、まさかの中3で横転。その子のインスタとXフォローしときました。",
+    unlocked: false
+  },
+  {
+    id: "achievement_25",
+    image: "achieve/achieve25.png",
+    title: "固定感謝！<br>歓迎you!",
+    conditionText: "メンバー２をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "楽しんでいただけたのなら、これに勝る喜びはありません！ちなみに僕は今最高に楽しいです。感想等々お待ちしております！",
+    unlocked: false
+  },
+  {
+    id: "achievement_26",
+    image: "achieve/achieve26.png",
+    title: "感謝感激雨あられ",
+    conditionText: "メンバー３をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "わざわざ固定してくれたってことは何か期待したのかな？ぜひ応えようじゃないか！",
+    unlocked: false
+  },
+  {
+    id: "achievement_27",
+    image: "achieve/achieve27.png",
+    title: "ありがとう④",
+    conditionText: "メンバー４をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "メンバー４を固定した",
+    unlocked: false
+  },
+  {
+    id: "achievement_28",
+    image: "achieve/achieve28.png",
+    title: "ブッディズム・ファースト",
+    conditionText: "メンバー５をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "人災や天災が蔓延る今日、目先の利益に踊らされるそんなあなたは「中道」を歩きましょう。何事も普通が一番。",
+    unlocked: false
+  },
+  {
+    id: "achievement_29",
+    image: "achieve/achieve29.png",
+    title: "固定してくれてありがとう！！",
+    conditionText: "メンバー６をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "数学科いきたい。名前は、せしましょうゆです。ラインラント進駐",
+    unlocked: false
+  },
+  {
+    id: "achievement_30",
+    image: "images/logo.png",
+    title: "ありがとう⑦",
+    conditionText: "メンバー７をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "メンバー７を固定した",
+    unlocked: false
+  },
+  {
+    id: "achievement_31",
+    image: "images/logo.png",
+    title: "ありがとう⑧",
+    conditionText: "メンバー８をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "メンバー８を固定した",
+    unlocked: false
+  },
+  {
+    id: "achievement_32",
+    image: "images/logo.png",
+    title: "ありがとう⑨",
+    conditionText: "メンバー９をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "メンバー９を固定した",
+    unlocked: false
+  },
+  {
+    id: "achievement_33",
+    image: "images/logo.png",
+    title: "ありがとう⑩",
+    conditionText: "メンバー１０をお気に入り登録する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "メンバー１０を固定した",
+    unlocked: false
+  },
+  {
+    id: "achievement_34",
+    image: "achieve/achieve34.png",
+    title: "アガペー",
+    conditionText: "全員固定する",
+    currentVal: 0,
+    targetVal: 10,
+    description: "この浮気者！",
+    unlocked: false
+  },
+  {
+    id: "achievement_35",
+    image: "achieve/achieve35.png",
+    title: "肯定の哲学",
+    conditionText: `実績が欲しい？<br><div class="ach35-btn-group"><button type="button" class="ach35-btn ach35-btn-want" onclick="handleAch35Want(event)">欲しい！</button><button type="button" class="ach35-btn ach35-btn-reject" onclick="handleAch35Reject(event)">いらない！</button></div>`,
+    currentVal: 0,
+    targetVal: 0,
+    description: "全然欲しいならあげるよ",
+    unlocked: false
+  },
+  {
+    id: "achievement_36",
+    image: "achieve/achieve36.png",
+    title: "まだまだこれから",
+    conditionText: "ゲームクリア",
+    currentVal: 0,
+    targetVal: 0,
+    description: "よく見つけたね！<br>…よくクリアしたね!?<br>[新武器が追加されました]",
+    unlocked: false
+  },
+  {
+    id: "achievement_37",
+    image: "achieve/achieve37.png",
+    title: "俺が止める！",
+    conditionText: "侵略数0達成",
+    currentVal: 0,
+    targetVal: 0,
+    description: "このゲーム体当たりが一番強いんだから<br>(その中でもこの画像出せた人はもっとすごいかも？)",
+    unlocked: false
+  },
+  {
+    id: "achievement_38",
+    image: "achieve/achieve38.png",
+    title: "5.00✕10^4",
+    conditionText: "ハイスコア50000達成",
+    currentVal: 0,
+    targetVal: 50000,
+    description: "よくここまでたどり着いた<br>さぁ最終段階へ進もう<br>[新武器が追加されました]",
+    unlocked: false
+  },
+  {
+    id: "achievement_39",
+    image: "achieve/achieve39.png",
+    title: "平和主義",
+    conditionText: "敵を一体も倒さずクリア",
+    currentVal: 0,
+    targetVal: 0,
+    description: "実質のオールクリア<br>制作者ですら多分まだここまでたどり着いていない<br>おめでとう、そしてありがとう<br>追記：クリアしました✌",
+    unlocked: false
+  },
+  {
+    id: "achievement_40",
+    image: "achieve/achieve40.png",
+    title: "かくれんぼ（鬼側）",
+    conditionText: "隠しページを全て発見する",
+    currentVal: 0,
+    targetVal: 6,
+    description: "制作者の魂胆バレバレじゃないの<br>小説が面白かったら感想送ってね",
+    unlocked: false
+  },
+  {
+    id: "achievement_41",
+    image: "images/logo.png",
+    title: "①",
+    conditionText: "①",
+    currentVal: 0,
+    targetVal: 0,
+    description: "このサイトのコンセプトがだいたいわかってきた？",
+    unlocked: false
+  },
+  {
+    id: "achievement_42",
+    image: "images/logo.png",
+    title: "②",
+    conditionText: "②",
+    currentVal: 0,
+    targetVal: 0,
+    description: "コンプリート欲旺盛な君は、このサイトをすぐにクリアできるでしょう",
+    unlocked: false
+  },
+  {
+    id: "achievement_43",
+    image: "images/logo.png",
+    title: "③",
+    conditionText: "③",
+    currentVal: 0,
+    targetVal: 0,
+    description: "人には優しくしようね！",
+    unlocked: false
+  },
+  {
+    id: "achievement_44",
+    image: "images/logo.png",
+    title: "④",
+    conditionText: "④",
+    currentVal: 0,
+    targetVal: 0,
+    description: "やはり最高難易度<br>格が違う<br>だがそれをクリアしたあなたは⑤もすぐに見つかる。",
+    unlocked: false
+  },
+  {
+    id: "achievement_45",
+    image: "images/logo.png",
+    title: "実績マニア",
+    conditionText: "実績を全て解除する",
+    currentVal: 0,
+    targetVal: 0,
+    description: "(^o^)",
+    unlocked: false
+  }
+];
+
+// ==========================================
+// 1. ローカルストレージ（保存・読み込み）
+// ==========================================
+
+function loadAchievementsData() {
+  const savedData = localStorage.getItem("achievements_save");
+  if (savedData) {
+    try {
+      const parsedData = JSON.parse(savedData);
+      achievementsData.forEach(item => {
+        if (parsedData[item.id]) {
+          item.unlocked = parsedData[item.id].unlocked;
+          item.currentVal = parsedData[item.id].currentVal;
+        }
+      });
+    } catch (e) {
+      console.error("実績データの読み込みに失敗しました", e);
+    }
+  }
+}
+
+function saveAchievementsData() {
+  const dataToSave = {};
+  achievementsData.forEach(item => {
+    dataToSave[item.id] = {
+      unlocked: item.unlocked,
+      currentVal: item.currentVal
+    };
+  });
+  localStorage.setItem("achievements_save", JSON.stringify(dataToSave));
+}
+
+
+// ==========================================
+// 2. 右下ポップアップ通知（テキストのみ）
+// ==========================================
+
+function showAchievementToast(item) {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+  toast.className = "achievement-toast";
+
+  toast.innerHTML = `
+    <div class="toast-content">
+      <span class="toast-label">実績解除！</span>
+      <span class="toast-title">${item.title}</span>
+    </div>
+  `;
+
+  container.appendChild(toast);
+
+  // 3秒後にアニメーションで消去
+  setTimeout(() => {
+    toast.classList.add("hide");
+    toast.addEventListener("animationend", () => {
+      toast.remove();
+    });
+  }, 3000);
+}
+
+
+// ==========================================
+// 3. 実績グリッド画面の描画 (renderAchievements)
+// ==========================================
+
+function renderAchievements() {
+  const grid = document.getElementById("achievement-grid");
+  if (!grid) return;
+  
+  grid.innerHTML = "";
+  let unlockedCount = 0;
+
+  achievementsData.forEach((item) => {
+    if (item.unlocked) unlockedCount++;
+
+    const box = document.createElement("div");
+    box.className = `achievement-box ${item.unlocked ? 'unlocked' : ''}`;
+
+    let overlayContent = "";
+    
+    if (item.unlocked) {
+      // 達成済み：実績名 と 説明
+      overlayContent = `
+        <div class="overlay-title">${item.title}</div>
+        <div class="overlay-text">${item.description}</div>
+      `;
+    } else {
+      // 未達成：条件文章 と 進捗
+      const progressText = item.targetVal > 0 ? `<div class="overlay-progress">${item.currentVal} / ${item.targetVal}</div>` : "";
+      overlayContent = `
+        <div class="overlay-text">${item.conditionText}</div>
+        ${progressText}
+      `;
+    }
+
+    box.innerHTML = `
+      <img src="${item.image}" alt="${item.title}" class="achievement-image">
+      <div class="achievement-overlay">
+        ${overlayContent}
+      </div>
+    `;
+
+    // ★【追加】未達成の㉟（achievement_35）の場合、マウスオーバー時に表示をリセット
+    if (item.id === "achievement_35" && !item.unlocked) {
+      box.addEventListener("mouseenter", () => {
+        const overlayText = box.querySelector(".overlay-text");
+        if (overlayText) {
+          // ボタンが含まれる初期の conditionText にリセット
+          overlayText.innerHTML = item.conditionText;
+        }
+      });
+    }
+
+    grid.appendChild(box);
+  });
+
+  // カウント更新
+  const countEl = document.getElementById("unlocked-count");
+  if (countEl) countEl.textContent = unlockedCount;
+  updateCursorButtonUI();
+  updateUpgradeButtonUI();
+}
+
+
+// ==========================================
+// 4. 実績達成判定・更新処理
+// ==========================================
+
+function unlockAchievement(item) {
+  if (item.unlocked) return;
+
+  item.unlocked = true;
+  saveAchievementsData();
+  showAchievementToast(item); // 初めて条件を満たした時のみ通知
+  renderAchievements();
+}
+
+// 引数に skipRender を追加（デフォルトは false）
+function updateAchievementProgress(id, value = 1, isAbsolute = false, skipRender = false) {
+  const item = achievementsData.find(a => a.id === id);
+  
+  // すでに達成済みなら何もしない
+  if (!item || item.unlocked) return;
+
+  if (isAbsolute) {
+    item.currentVal = value;
+  } else {
+    item.currentVal += value;
+  }
+
+  // 判定
+  if (item.targetVal === 0 || item.currentVal >= item.targetVal) {
+    unlockAchievement(item);
+  } else {
+    saveAchievementsData();
+    
+    // ★ skipRender が true でない場合のみ全体を再描画する
+    if (!skipRender) {
+      renderAchievements();
+    }
+  }
+
+  if (id !== "achievement_45") {
+    setupSecretCode5();
+    checkAllAchievementsCompleted();
+  }
+}
+
+
+// ==========================================
+// 5. 初期化と「Tap to Start」への紐付け
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. 保存データの復元と実績画面の初回描画
+  if (localStorage.getItem("secret_code_5")) {
+    setupSecretCode5();
+  }
+  if(localStorage.getItem("cookie")){
+    achievementsData[1].description=`中心軸をずらしてるのがポイント<div class="achievement-shop-container"><div class="achievement-shop-left"><img src="images/cursor.png" alt="cursor" class="achievement-cursor-img"></div><button id="buyCursorBtn" onclick="buyCursor()" class="achievement-buy-btn">購入<br>10回転</button></div>`;
+    achievementsData[4].description=`遠心力って強すぎるとこうなるんだよ<br><br><button id="upgrade-click-btn" class="upgrade-btn" onclick="buyClickUpgrade()">アップグレード<br>100回転<br>現在✕1</button>`;
+  }
+  loadAchievementsData();
+  renderAchievements();
+  updateSubjectOnlyAchievements();
+});
+
+/**
+ * ロゴ回転系の実績（②・③・④）を一括更新する関数
+ */
+function updateLogoAchievements() {
+    // 1回回転（実績②）
+    updateAchievementProgress("achievement_2", 1);
+    
+    // 10回回転（実績③）
+    updateAchievementProgress("achievement_3", 1);
+    
+    // 1,000,000回回転（実績④）
+    updateAchievementProgress("achievement_4", clickPower, false, true);
+    const item4 = achievementsData.find(a => a.id === "achievement_4");
+    const index4 = achievementsData.findIndex(a => a.id === "achievement_4");
+    if (index4 !== -1) {
+      const grid = document.getElementById("achievement-grid");
+      if (grid && grid.children[index4]) {
+        const progressEl = grid.children[index4].querySelector(".overlay-progress");
+        if (progressEl) {
+          progressEl.textContent = `${item4.currentVal} / ${item4.targetVal}`;
+        }
+      }
+    }
+}
+
+
+
+/**
+ * ロゴ爆破・破裂系の実績（⑤・⑥・⑦）を一括更新する関数
+ * ロゴが破裂する処理の内部で呼び出してください
+ */
+function updateLogoExplodeAchievements() {
+    // ロゴ爆破1回目（実績⑤）
+    updateAchievementProgress("achievement_5", 1);
+    
+    // ロゴ爆破10回目（実績⑥）
+    updateAchievementProgress("achievement_6", 1);
+    
+    // ロゴ爆破100回目（実績⑦）
+    updateAchievementProgress("achievement_7", 1);
+}
+
+/**
+ * 実績⑨〜⑭（単一教科のみ解いているか）および⑮⑯の進捗を動的に更新する関数
+ */
+function updateSubjectOnlyAchievements() {
+    // 1. problemList と kasuProblemList から全問題データを統合（将来の問題追加にも自動対応）
+    const allProblems = [...problemList, ...kasuProblemList];
+
+    // 2. ローカルストレージからクリア済みのPDF URLを取得
+    const savedMondai = JSON.parse(localStorage.getItem("completedMondaiList") || "[]");
+    const savedKasu = JSON.parse(localStorage.getItem("completedKasuList") || "[]");
+    const completedUrls = [...savedMondai, ...savedKasu];
+
+    // クリア済み問題の教科一覧を抽出
+    const solvedSubjects = completedUrls.map(url => {
+        const found = allProblems.find(item => item[0] === url);
+        return found ? found[2] : null; // [0]がPDF URL, [2]が教科名
+    }).filter(Boolean);
+
+    // 3. 各実績の対象教科定義
+    const subjectConfig = [
+        { id: "achievement_9",  subjects: ["国語"] },
+        { id: "achievement_10", subjects: ["数学"] },
+        { id: "achievement_11", subjects: ["英語"] },
+        { id: "achievement_12", subjects: ["公共", "歴史", "地理"] },
+        { id: "achievement_13", subjects: ["理科"] },
+        { id: "achievement_14", subjects: ["情報"] }
+    ];
+
+    // 4. 各教科実績の目標値（現在の全問題数）と進捗を動的に判定・更新
+    subjectConfig.forEach(config => {
+        // 現在データ内に存在する「対象教科」の全問題数を取得（問題追加に対応）
+        const totalCount = allProblems.filter(p => config.subjects.includes(p[2])).length;
+        
+        let targetSolvedCount = 0;
+        let otherSolvedCount = 0;
+
+        solvedSubjects.forEach(s => {
+            if (config.subjects.includes(s)) {
+                targetSolvedCount++;
+            } else {
+                otherSolvedCount++;
+            }
+        });
+
+        const achievement = achievementsData.find(a => a.id === config.id);
+        if (achievement) {
+            // 目標値を現在の問題数に自動セット
+            achievement.targetVal = totalCount;
+
+            // 他教科が混ざっていれば 0 にリセット、それ以外なら解いた件数を設定
+            if (otherSolvedCount > 0) {
+                updateAchievementProgress(config.id, 0, true);
+            } else {
+                updateAchievementProgress(config.id, targetSolvedCount, true);
+            }
+        }
+    });
+
+    // 5. ⑯「問題を全て解く」の目標値も全体の問題数に合わせて自動更新
+    const achievement16 = achievementsData.find(a => a.id === "achievement_16");
+    if (achievement16) {
+        achievement16.targetVal = allProblems.length;
+    }
+
+    // ⑮「10問」と ⑯「全問」の進捗を更新
+    updateAchievementProgress("achievement_15", completedUrls.length, true);
+    updateAchievementProgress("achievement_16", completedUrls.length, true);
+}
+
+/**
+ * 履歴削除実行時に呼び出す実績判定関数
+ */
+function checkHistoryDeleteAchievements() {
+    // 全問題数の取得（通常問題＋カス問題）
+    const totalProblemCount = problemList.length + kasuProblemList.length;
+
+    // 現在クリア済みの問題リストを取得
+    const savedMondai = JSON.parse(localStorage.getItem("completedMondaiList") || "[]");
+    const savedKasu = JSON.parse(localStorage.getItem("completedKasuList") || "[]");
+    const solvedCount = savedMondai.length + savedKasu.length;
+
+    if (solvedCount === 0) {
+        // ⑰ 解答履歴空削除
+        updateAchievementProgress("achievement_17");
+    } else {
+        // ⑱ 解答履歴削除（1問以上解いている）
+        updateAchievementProgress("achievement_18");
+
+        // ⑲ 全回答後解答履歴削除（全問解いている状態）
+        if (solvedCount >= totalProblemCount) {
+            updateAchievementProgress("achievement_19");
+        }
+    }
+}
+
+/**
+ * 解答履歴さんとのメッセージ選択肢選択時に呼び出す関数
+ * @param {string} choiceText - 選択したボタンのテキスト（例: "ごめん", "自我を消す", "お前を消す" など）
+ */
+function handleHistoryMessageChoice(choiceText) {
+    if (choiceText === "自我を消す" || choiceText === "お前を消す") {
+        // ⑳ 解答履歴さんの自我を消す
+        updateAchievementProgress("achievement_20");
+    } else if (choiceText === "ごめん") {
+        // ㉑（1回）、㉒（10回）、㉓（100回）謝るカウントを加算
+        updateAchievementProgress("achievement_21", 1);
+        updateAchievementProgress("achievement_22", 1);
+        updateAchievementProgress("achievement_23", 1);
+    }
+}
+
+/**
+ * メンバー固定（★お気に入りオン）時に呼び出す実績判定関数
+ * @param {number} memberId - 固定されたメンバーのID (1〜10)
+ */
+function checkMemberPinAchievements(memberId) {
+    if (!memberId || isNaN(memberId)) return;
+
+    // 1. 個別メンバー固定実績（㉔〜㉝）を解除
+    // ID 1 -> achievement_24, ID 10 -> achievement_33
+    const targetId = `achievement_${23 + memberId}`;
+    updateAchievementProgress(targetId);
+
+    // 2. ㉔〜㉝（achievement_24 〜 achievement_33）がすべて解除されているか確認
+    let allPinned = 0;
+    for (let i = 24; i <= 33; i++) {
+        const ach = achievementsData.find(a => a.id === `achievement_${i}`);
+        if (ach&&ach.unlocked) {
+            allPinned++;
+        }
+    }
+
+        updateAchievementProgress("achievement_34",allPinned,true);
+}
+
+/**
+ * ㉟「欲しい！」ボタン押下時
+ */
+function handleAch35Want(event) {
+  if (event) event.stopPropagation(); // イベント伝播防止
+
+  // 実績㉟を解除
+  updateAchievementProgress("achievement_35");
+}
+
+/**
+ * ㉟「いらない！」ボタン押下時
+ */
+function handleAch35Reject(event) {
+  if (event) event.stopPropagation(); // イベント伝播防止
+
+  // ボタンの親要素または overlay-text 全体を「ならあげない」に書き換える
+  const container = event.target.closest(".overlay-text") || event.target.parentElement;
+  if (container) {
+    container.innerHTML = "ならあげない";
+  }
+}
+
+// 隠しページのターゲットID一覧（6つ）
+const SECRET_PAGE_IDS = [
+  "page-okayama",
+  "page-math",
+  "page-question",
+  "page-tanka",
+  "page-load",
+  "page-novel"
+];
+
+/**
+ * 隠しページの訪問状態をチェック・カウント更新する関数
+ * @param {string} targetPageId - 遷移先のページID
+ */
+function checkSecretPageDiscovery(targetPageId) {
+  // 遷移先が隠しページ一覧に含まれていない場合は何もしない
+  if (!SECRET_PAGE_IDS.includes(targetPageId)) return;
+
+  // localStorage から訪問済みリストを取得（無ければ空配列）
+  let visitedSecrets = JSON.parse(localStorage.getItem("visited_secret_pages") || "[]");
+
+  // 初めて訪れた隠しページの場合のみ追加
+  if (!visitedSecrets.includes(targetPageId)) {
+    visitedSecrets.push(targetPageId);
+    localStorage.setItem("visited_secret_pages", JSON.stringify(visitedSecrets));
+  }
+
+  // ★ 発見したユニークなページ数（1〜6）を実績の進捗として送る
+  if (typeof updateAchievementProgress === "function") {
+    updateAchievementProgress("achievement_40", visitedSecrets.length,true);
+  }
+}
+
+/**
+ * 全実績（achievement_1 ～ achievement_44）が解除されているかチェックし、
+ * すべて解除されていれば achievement_45 を解除する関数
+ */
+function checkAllAchievementsCompleted() {
+  // すでに㊺が解除済みなら処理スキップ
+  const ach45 = achievementsData.find(a => a.id === "achievement_45");
+  if (ach45 && ach45.unlocked) return;
+
+  // 1〜44 までの実績を取得
+  const targetAchievements = achievementsData.filter(a => a.id !== "achievement_45");
+
+  // 全て unlocked === true か判定
+  const isAllUnlocked = targetAchievements.every(a => a.unlocked === true);
+
+  // 全て解除されていたら㊺を解除！
+  if (isAllUnlocked) {
+    updateAchievementProgress("achievement_45");
+  }
+}
+
+// ==========================================
+// 隠し数字⑤（全実績解除報酬）管理ロジック
+// ==========================================
+
+// 既存の ①～④ の数字一覧（被り防止用）
+const EXISTING_SECRET_CODES = ["98643", "29308", "38421", "01125"];
+
+/**
+ * ①〜④と被らないランダムな5桁の数字を1つ生成・固定して返す関数
+ */
+function getOrGenerateSecretCode5() {
+  // すでに保存済みの数字があればそれを返す
+  let savedCode = localStorage.getItem("secret_code_5");
+  if (savedCode) {
+    return savedCode;
+  }
+
+  // 既存の①〜④と被らない数字が生成されるまでループ
+  let newCode = "";
+  do {
+    // 00000 〜 99999 の5桁の数字（パディング付き）
+    newCode = Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+  } while (EXISTING_SECRET_CODES.includes(newCode));
+
+  // ローカルストレージに保存
+  localStorage.setItem("secret_code_5", newCode);
+  return newCode;
+}
+
+/**
+ * 隠し数字⑤の登録 ＆ ㊺の実績メッセージを上書き更新する関数
+ */
+function setupSecretCode5() {
+  const code5 = getOrGenerateSecretCode5();
+
+  // 1. answerSecretCodeMap 内の⑤の仮コードを生成された数字に上書き
+  if (typeof answerSecretCodeMap !== "undefined") {
+    // 仮コード（2nf9s等）を削除して、決定したコードで登録
+    delete answerSecretCodeMap["2nf9s"]; 
+    answerSecretCodeMap[code5] = "page-secret5";
+  }
+
+  // 2. achievementsData 内の ㊺ の説明文を置き換え
+  if (typeof achievementsData !== "undefined") {
+    const ach45 = achievementsData.find(a => a.id === "achievement_45");
+    if (ach45) {
+      ach45.description = `ここまで辿り着いたあなたへ。まずはありがとう。そしてどこを探してもなかったこれをあなたに。<br>⑤${code5}<br>さぁ、クリアしよう`;
+    }
+  }
+}
+
+function buyCursor() {
+  const cost = getCursorCost();
+  const item4 = achievementsData.find(a => a.id === "achievement_4");
+  if (item4 && item4.currentVal >= cost) {
+    updateAchievementProgress("achievement_4", -cost, false, true);
+
+    // DOM表示更新
+    const index4 = achievementsData.findIndex(a => a.id === "achievement_4");
+    if (index4 !== -1) {
+      const grid = document.getElementById("achievement-grid");
+      if (grid && grid.children[index4]) {
+        const progressEl = grid.children[index4].querySelector(".overlay-progress");
+        if (progressEl) {
+          progressEl.textContent = `${item4.currentVal} / ${item4.targetVal}`;
+        }
+      }
+    }
+
+    // ★ 購入成功時に周回カーソルを出現させる
+    spawnOrbitCursor();
+   updateCursorButtonUI() 
+  }
+}
+
+// ==========================================
+// 複数購入・周回カーソル一括管理システム（高密度版）
+// ==========================================
+
+const activeCursors = [];
+
+let globalTime = 0;
+let animationFrameId = null;
+let lastTimestamp = null;
+
+// ★ 設定の変更部分
+const MAX_PER_LAYER = 30;      // 1周あたりの最大カーソル数（12 → 24 に大幅増量）
+const BASE_RADIUS = 70;        // 1周目の半径(px)
+const RADIUS_STEP = 35;        // 周（レイヤー）ごとの加算半径(px)
+
+/**
+ * 新しいカーソルを購入して追加する関数
+ */
+function spawnOrbitCursor() {
+  const logoContainer = document.querySelector('.logo');
+  if (!logoContainer) return;
+
+  if (getComputedStyle(logoContainer).position === 'static') {
+    logoContainer.style.position = 'relative';
+  }
+
+  // 1. 新しいカーソルDOMの生成
+  const cursorImg = document.createElement('img');
+  cursorImg.className = 'orbit-cursor-item';
+  cursorImg.src = 'images/cursor.png';
+  
+  Object.assign(cursorImg.style, {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: '32px',
+    height: '32px',
+    pointerEvents: 'none',
+    zIndex: '100',
+    transition: 'none',
+    opacity: '0'
+  });
+
+  logoContainer.appendChild(cursorImg);
+
+  // 2. カーソルデータを配列に追加
+  const newCursor = {
+    element: cursorImg,
+    spawnTime: globalTime,
+    lastClickTime: -99999,
+  };
+  activeCursors.push(newCursor);
+
+  // 3. アニメーションループが動いていなければ開始
+  if (!animationFrameId) {
+    lastTimestamp = performance.now();
+    animationFrameId = requestAnimationFrame(updateCursorLoop);
+  }
+}
+
+// 設定定数
+const CURSOR_DELAY = 100;      // ★ 隣のカーソルとの時間間隔 (200ms = 0.2秒で固定)
+const CLICK_INTERVAL = 10000;  // ★ 各カーソルが次に叩くまでの周期 (10秒で固定)
+
+/**
+ * 毎フレーム全カーソルを計算・描画するメインループ (60fps)
+ */
+function updateCursorLoop(timestamp) {
+  const deltaTime = timestamp - lastTimestamp;
+  lastTimestamp = timestamp;
+  globalTime += deltaTime;
+
+  const totalCount = activeCursors.length;
+
+  activeCursors.forEach((cursor, index) => {
+    // --- ① レイヤー（周）とインデックスの計算 ---
+    const layer = Math.floor(index / MAX_PER_LAYER);
+    const countInThisLayer = Math.min(totalCount - layer * MAX_PER_LAYER, MAX_PER_LAYER);
+    const indexInLayer = index % MAX_PER_LAYER;
+
+    // 半径と角度の計算
+    const targetRadius = BASE_RADIUS + (layer * RADIUS_STEP);
+    const angleStep = 360 / (countInThisLayer === MAX_PER_LAYER ? MAX_PER_LAYER : countInThisLayer);
+    const baseAngle = indexInLayer * angleStep;
+
+    // 時間経過による全体の周回運動
+    const orbitSpeed = 0.04; 
+    const currentAngle = (baseAngle + globalTime * orbitSpeed) % 360;
+
+    // --- ② 各カーソル独立の10秒周期クリック判定 ---
+    // 各カーソル固有の発火タイミング（生成順 index × 固定オフセット CURSOR_DELAY）
+    const cursorOffset = index * CURSOR_DELAY;
+    
+    // このカーソル専用の周期時間 (0 ~ 9999ms)
+    const cursorCycleTime = (globalTime - cursorOffset) % CLICK_INTERVAL;
+    
+    let isKnocking = false;
+    
+    // 自身の10秒周期の先頭 120ms 間だけ叩く
+    // (globalTime >= cursorOffset は生成直後にマイナス周期で誤発火するのを防止)
+    if (globalTime >= cursorOffset && cursorCycleTime >= 0 && cursorCycleTime < 120) {
+      isKnocking = true;
+
+      // 10秒に1回だけ実行
+      if (globalTime - cursor.lastClickTime > 9000) {
+        cursor.lastClickTime = globalTime;
+        if (typeof rotateLogo === 'function') {
+          rotateLogo(null);
+        }
+      }
+    }
+
+    // --- ③ ヌッと登場する演出 (0.5秒) ---
+    const age = globalTime - cursor.spawnTime;
+    let spawnScale = 1;
+    let radius = targetRadius;
+
+    if (age < 500) {
+      const progress = age / 500;
+      spawnScale = progress;
+      radius = targetRadius * progress;
+      cursor.element.style.opacity = progress.toString();
+    } else {
+      cursor.element.style.opacity = '1';
+    }
+
+    // --- ④ ノック（たたき）演出 ---
+    if (isKnocking) {
+      radius -= 18; // 叩く時に内側へ引き込む
+    }
+
+    // --- ⑤ 位置・回転の適用 ---
+    const rad = (currentAngle * Math.PI) / 180;
+    const x = Math.cos(rad) * radius;
+    const y = Math.sin(rad) * radius;
+    const rotation = currentAngle - 90; // 指先を中心へ固定
+
+    cursor.element.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${spawnScale}) rotate(${rotation}deg)`;
+  });
+
+  animationFrameId = requestAnimationFrame(updateCursorLoop);
+}
+
+// --- 爆発演出 ON/OFF 設定管理 ---
+let isBurstEnabled = localStorage.getItem("isBurstEnabled") !== "false";
+
+/**
+ * ボタンの見た目（テキストとスタイル）を更新する
+ */
+function updateBurstToggleButton() {
+    const btn = document.getElementById("toggle-burst-btn");
+    if (!btn) return;
+
+    if (isBurstEnabled) {
+        btn.classList.add("active");
+        btn.textContent = "爆発演出: ON";
+    } else {
+        btn.classList.remove("active");
+        btn.textContent = "爆発演出: OFF";
+    }
+}
+
+/**
+ * ボタンが押されたときに切り替える
+ */
+function toggleBurstSetting() {
+    isBurstEnabled = !isBurstEnabled;
+    // ★ 修正: setItem で正しく保存
+    localStorage.setItem("isBurstEnabled", isBurstEnabled ? "true" : "false");
+    updateBurstToggleButton();
+}
+
+// ==========================================
+// 自動クリック強化（アップグレード）管理
+// ==========================================
+
+let upgradeLevel = 1;      // 現在のレベル
+let clickPower = 1;        // 1打あたりの倍率 (1, 2, 3...)
+let upgradeCost = 100;     // 必要回転数（コスト）
+
+/**
+ * ボタンのテキスト表示を3行構成で更新する
+ */
+function updateUpgradeButtonUI() {
+  const btn = document.getElementById("upgrade-click-btn");
+  if (!btn) return;
+
+  // innerHTML を使って3行（<br>区切り）で設定
+  btn.innerHTML = `アップグレード<br>${upgradeCost}回転<br>現在✕${clickPower}`;
+}
+
+/**
+ * アップグレード実行処理
+ */
+function buyClickUpgrade() {
+  // ※ここで現在の所持回転数/ポイントのチェックを入れる場合は記載します
+  // if (currentRotations < upgradeCost) return;
+  const item4 = achievementsData.find(a => a.id === "achievement_4");
+  if (item4 && item4.currentVal >= upgradeCost) {
+  upgradeLevel++;
+  clickPower=Math.ceil(clickPower*1.5);
+  updateAchievementProgress("achievement_4", -upgradeCost, false, true);
+  // コストの増加（例: 2倍ずつ増加。必要に応じて調整してください）
+  upgradeCost = Math.floor(upgradeCost * 2);
+
+  // UI更新と状態保存
+  updateUpgradeButtonUI();
+  localStorage.setItem("upgradeLevel", upgradeLevel.toString());
+  const item4 = achievementsData.find(a => a.id === "achievement_4");
+    const index4 = achievementsData.findIndex(a => a.id === "achievement_4");
+    if (index4 !== -1) {
+      const grid = document.getElementById("achievement-grid");
+      if (grid && grid.children[index4]) {
+        const progressEl = grid.children[index4].querySelector(".overlay-progress");
+        if (progressEl) {
+          progressEl.textContent = `${item4.currentVal} / ${item4.targetVal}`;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * 現在のカーソル所持数から購入コストを計算 (一の位切り捨て)
+ */
+function getCursorCost() {
+  const currentCount = Math.floor(activeCursors.length/10); // 現在のカーソル数
+  const rawCost = 10 * Math.pow(1.3, currentCount);
+  return Math.floor(rawCost / 10) * 10;
+}
+
+/**
+ * カーソル購入ボタンの表示（テキスト）を更新
+ */
+function updateCursorButtonUI() {
+  const btn = document.getElementById("buyCursorBtn");
+  if (!btn) return;
+
+  const currentCost = getCursorCost();
+  const currentCount = activeCursors.length;
+
+  // ボタン表示の更新（3行構成など必要に応じて調整してください）
+  btn.innerHTML = `購入<br>${currentCost}回転`;
+}
