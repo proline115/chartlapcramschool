@@ -1042,6 +1042,7 @@ window.initGame = function(canvas) {
                             if (score > highScore) {
                                 highScore = score;
                                 localStorage.setItem("belief_highscore_common", highScore.toString());
+                                updateAchievementProgress("achievement_38", highScore);
                             }
                         }
                         b.y = -999; 
@@ -1356,6 +1357,9 @@ window.initGame = function(canvas) {
             }
 
             if (window.currentGameScene === "GAMEOVER") {
+                if (passedEnemiesCount === 0) {
+                    updateAchievementProgress("achievement_37");
+                }
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.fillStyle = "#ff0000";
@@ -1380,6 +1384,13 @@ window.initGame = function(canvas) {
             }
 
             if (window.currentGameScene === "CLEAR") {
+                updateAchievementProgress("achievement_36");
+                if (passedEnemiesCount === 0) {
+                    updateAchievementProgress("achievement_37");
+                }
+                if (score === 0) {
+                    updateAchievementProgress("achievement_39");
+                }
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 
@@ -1495,6 +1506,7 @@ window.initGame = function(canvas) {
             if (currentPhase === "INFINITY"&&score > highScore) {
                 highScore = score;
                 localStorage.setItem("belief_highscore_common", highScore.toString());
+                updateAchievementProgress("achievement_38", highScore,true);
             }
         }
     });
