@@ -352,7 +352,7 @@ img{
 .hero-title {
     font-size: 64px;
     font-weight: 900;
-    font-family: 'Arial Black', 'Impact', sans-serif;
+    font-family: sans-serif;
     color: #1B4C9A;
     margin: 0 0 25px 0;
     letter-spacing: 3px;
@@ -1024,7 +1024,7 @@ body.no-scroll {
 
 .belief-page-container {
   display: block !important;
-  font-family: 'Courier New', Courier, monospace !important;
+  font-family: 'DotGothic16';
   padding: 30px !important;
   box-sizing: border-box !important;
 }
@@ -1246,14 +1246,6 @@ body.no-scroll {
   line-height: 30px !important;
   height: 33px !important;
   white-space: nowrap !important;
-}
-
-.belief-profile-text-wrap, 
-.belief-error-toast,
-.belief-indicator-text,
-#member-name, 
-#member-profile {
-  font-family: 'DotGothic16', sans-serif !important;
 }
 
 /* カルーセルボタンが無効（端に到達）のときの見た目 */
@@ -1721,4 +1713,360 @@ iframe.questionnaire {
     font-weight: bold;
     color: #000000; /* お好みのカラーに変更可能 */
     line-height: 1;
+}
+
+/*------------------以下実績ページ------------------*/
+
+/* 実績グリッド：1列あたりの数を減らし、1つのサイズを大きく・余白を広めに調整 */
+.achievement-grid {
+    display: grid;
+    /* 最小幅を160pxに設定することで1列の数を抑え、1つを大きくします */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 30px; /* 余白を広めに設定 */
+    padding: 30px 0;
+}
+
+/* 正方形の箱（ベース） */
+.achievement-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 正方形を維持 */
+    
+    /* ホバー前でもくっきり見える枠線と、極薄い背景 */
+    background-color: transparent; /* うっすら残す半透明背景 */
+    border: 2px solid #000000; /* くっきり見えるグレーの実線枠 */
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ホバー時の箱 */
+.achievement-box:hover {
+    transform: translateY(-4px);
+}
+
+/* --- 達成済みの場合 --- */
+.achievement-box.unlocked {
+    background-color: #ffffff;
+    border: 2px solid #ffd700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.achievement-box.unlocked:hover {
+    border-color: #ffd700; /* 達成済みホバー時はゴールド枠 */
+}
+
+/* --- 達成済みの場合 --- */
+/* 達成時の画像表示エリア */
+.achievement-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* 未達成時は非表示 */
+}
+
+/* 達成済みの箱は画像を表示し、枠線をつける */
+.achievement-box.unlocked {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.achievement-box.unlocked .achievement-image {
+    display: block;
+}
+
+/* --- ホバー時に白くなるオーバーレイ --- */
+.achievement-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* カーソルを合わせると真っ白に */
+    color: #111111;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px; /* 内部余白もゆったりめに */
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 10px;
+    
+    /* 初期状態は完全透明 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* カーソルを合わせた時に中身（白背景＋文字）を表示 */
+.achievement-box:hover .achievement-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 白背景内のテキスト装飾 */
+.overlay-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: #000;
+}
+
+.overlay-text {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #333;
+    word-break: break-all;
+}
+
+.overlay-progress {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+/*------------------以下通知-----------------*/
+
+/* 右下ポップアップのコンテナ位置 */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: none; /* クリックを阻害しない */
+}
+
+/* ポップアップ本体 */
+.achievement-toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 2px solid #ffd700; /* 金色の枠線 */
+    border-radius: 8px;
+    padding: 12px 16px;
+    min-width: 260px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    
+    /* 右からスライドインするアニメーション */
+    animation: toastSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* 消える時のアニメーションクラス */
+.achievement-toast.hide {
+    animation: toastFadeOut 0.4s ease forwards;
+}
+
+/* アイコン（画像）表示エリア */
+.toast-image {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #333;
+}
+
+/* テキストエリア */
+.toast-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.toast-label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #ffd700; /* ゴールド */
+    letter-spacing: 1px;
+}
+
+.toast-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+/* アニメーションキーフレーム */
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toastFadeOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+}
+
+/* ボタンの親グループ */
+.ach35-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* 共通ボタン基本スタイル */
+.ach35-btn {
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+/* 「欲しい！」ボタンのホバー・アクティブ表示 */
+.ach35-btn-want:hover {
+  background-color: #4caf50; /* ポジティブな緑色 */
+  color: #ffffff;
+  border-color: #4caf50;
+  transform: translateY(-1px);
+}
+
+.ach35-btn-want:active {
+  transform: translateY(0);
+}
+
+/* 「いらない！」ボタンのホバー・アクティブ表示 */
+.ach35-btn-reject:hover {
+  background-color: #f44336; /* ネガティブな赤色 */
+  color: #ffffff;
+  border-color: #f44336;
+  transform: translateY(-1px);
+}
+
+.ach35-btn-reject:active {
+  transform: translateY(0);
+}
+
+/* ショップ全体コンテナ（左寄せベース） */
+.achievement-shop-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+/* 左側エリア（画像） */
+.achievement-shop-left {
+  display: flex;
+  align-items: center;
+}
+
+/* 左側のカーソル画像 */
+.achievement-cursor-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-left: 20px;
+}
+
+/* 右側の正方形購入ボタン（金枠・背景と文字色のみ反転） */
+.achievement-buy-btn {
+  width: 56px;
+  height: 56px;
+  margin-left: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 11px;
+  font-weight: bold;
+  color: #444444;           /* 初期：黒文字 */
+  background-color: #ffffff;/* 初期：白背景 */
+  border: 2px solid #d4af37;/* 枠線：ゴールド */
+  border-radius: 6px;
+  box-shadow: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+/* ホバー時（カーソルを合わせたとき）：背景が灰色になり文字色は白へ */
+.achievement-buy-btn:hover {
+  color: #ffffff;          /* 文字色：白（そのまま） */
+  background-color: #444444;/* 背景色：落ち着いた灰色 */
+}
+
+/* ボタン押下時 */
+.achievement-buy-btn:active {
+  opacity: 0.8;
+}
+
+/* 設定トグルボタンの基本スタイル */
+.toggle-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+/* ON状態のスタイル */
+.toggle-btn.active {
+  background-color: #ff4757; /* 目立つアクセントカラー */
+  color: #fff;
+  border-color: #ff4757;
+  box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+}
+
+/* ホバー時の微調整 */
+.toggle-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.upgrade-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.4;       /* 行間を整える */
+  text-align: center;     /* 中央揃え */
+  background: linear-gradient(135deg, #4b6cb7, #182848); /* お好みのカラー */
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.upgrade-btn:active {
+  transform: translateY(0);
 }
