@@ -352,7 +352,7 @@ img{
 .hero-title {
     font-size: 64px;
     font-weight: 900;
-    font-family: sans-serif;
+    font-family:sans-serif;
     color: #1B4C9A;
     margin: 0 0 25px 0;
     letter-spacing: 3px;
@@ -627,13 +627,29 @@ img{
     transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.4s ease, scale 0.4s ease;
     text-align: center;
     background: rgba(255, 255, 255, 0.9) !important; 
-    border: 6px solid transparent !important; 
+    border: 6px solid transparent !important;
 }
 
 .mondai-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
     background: #ffffff !important; 
+}
+
+.mondai-item.fade-in{
+    animation: fadeInUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .mondai-item.subject-英語 { border-color: #e94057 !important; } /* 鮮やかなルビーレッド */
@@ -979,20 +995,7 @@ body.no-scroll {
     color: #ffffff;
 }
 
-.mondai-item.fade-in {
-    animation: fadeInUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(15px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
 
 #mondai-list-view, 
 #kasu-mondai-list-view {
@@ -1446,6 +1449,7 @@ body.modal-open [onclick] {
     background: rgba(255, 255, 255, 0.9) !important; 
     border: 6px solid transparent !important; 
    border-color: #07299c !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.4s ease, scale 0.4s ease;
 }
 
 
@@ -2069,4 +2073,481 @@ iframe.questionnaire {
 
 .upgrade-btn:active {
   transform: translateY(0);
+}
+
+/* ==========================================
+   隠しクリア・エンディング演出全体 CSS
+   ========================================== */
+
+/* ------------------------------------------
+   1. 暗転オーバーレイ & 隠し入力モーダル
+   ------------------------------------------ */
+/* 暗転用オーバーレイ */
+.blackout-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 2s ease;
+  z-index: 99998;
+}
+
+.blackout-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 隠し入力モーダル */
+.clear-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.clear-modal.hidden {
+  display: none !important;
+}
+
+.clear-modal-content {
+  background: #1e1e2f;
+  color: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  border: 1px solid #444;
+}
+
+.clear-modal-content input {
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-align: center;
+  padding: 8px;
+  margin: 16px 0;
+  width: 160px;
+  border-radius: 6px;
+  border: 1px solid #666;
+  background: #2a2a3d;
+  color: #fff;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.clear-btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.clear-btn.submit { background-color: #4caf50; color: white; }
+.clear-btn.cancel { background-color: #666; color: white; }
+
+.error-msg {
+  color: #ff5252;
+  font-size: 13px;
+  margin-top: 12px;
+  min-height: 18px;
+}
+
+
+/* ------------------------------------------
+   2. エンディング画面ベース & 画面分割
+   ------------------------------------------ */
+/* エンディング画面全体 */
+.ending-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  z-index: 100000;
+  display: flex;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.ending-container.active {
+  opacity: 1;
+}
+
+.ending-container.hidden {
+  display: none !important;
+}
+
+/* 左側コンテナ（枠の突き抜け防止設定） */
+.ending-left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 上詰め */
+  align-items: flex-start;     /* 左詰め */
+  padding: 40px;
+  box-sizing: border-box;
+  min-width: 0;                /* ★ Flex子要素のサイズみ出しを防止 */
+  min-height: 0;               /* ★ Flex子要素のサイズみ出しを防止 */
+}
+
+/* 右側エリア：親要素 */
+.ending-right {
+  width: 50%;
+  height: 100vh;         /* 高さを100vhに明示的に固定 */
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* 左上：思い出画像エリア（大きめサイズ設定） */
+.memory-image-wrapper {
+  height: 60%;            /* 左側エリアの横幅ほぼいっぱいに拡大 */
+  aspect-ratio: 4 / 3 !important;        /* 4:3 の比率を維持 */
+  
+  position: relative;
+  background-color: #000;
+  overflow: hidden !important; /* 枠外のはみだしをカット */
+  border-radius: 12px;         /* 大きくなった分、角丸も少し滑らかに */
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* 中身の画像（枠の中に絶対配置で100%固定） */
+.memory-image {
+  position: absolute;          /* ★ 枠（wrapper）に対してぴったり固定 */
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;           /* ★ 4:3の枠の中に隙間なくフィット */
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.memory-image.show {
+  opacity: 1;
+}
+
+
+/* 右側：スタッフロールエリア */
+.staff-roll-content {
+  position: absolute;
+  width: 100%;
+  top: 0;                /* 開始位置を上端(0)に設定 */
+  left: 0;
+  color: #ffffff;
+  font-family: sans-serif;
+  text-align: center;
+  padding-bottom: 0;
+  will-change: transform;
+}
+
+/* アニメーション起動クラス */
+.staff-roll-content.scrolling {
+  animation: staffRollScroll 89s linear forwards;
+}
+
+/* ★ 画面下から現れ、スタッフロールの「一番下」が画面上へ消え切るまで移動 */
+@keyframes staffRollScroll {
+  0% {
+    /* 100vh (画面の全高分だけ下に配置してスタート) */
+    transform: translateY(100vh);
+  }
+  100% {
+    /* -100% (自分自身の高さ分だけ上へ押し上げる) */
+    transform: translateY(-100%);
+  }
+}
+
+/* 枠（セクション）スタイル */
+.credit-section {
+  margin-bottom: 80px;
+}
+
+.section-title {
+  font-size: 24px;
+  letter-spacing: 4px;
+  color: #9eebff;
+  margin-bottom: 28px;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+  display: inline-block;
+  border-bottom: 1px solid rgba(158, 235, 255, 0.3);
+  padding-bottom: 6px;
+}
+
+/* 役職・名前（中央空白軸に整列） */
+.credit-row {
+  display: flex;
+  width: 100%;
+  font-size: 16px;
+  line-height: 2.4;
+}
+
+.credit-row .role {
+  flex: 1;
+  text-align: right;
+  padding-right: 20px;
+  color: #bbbbbb;
+}
+
+.credit-row .name {
+  flex: 1;
+  text-align: left;
+  padding-left: 20px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+
+/* ------------------------------------------
+   5. フィナーレ：全画面一枚絵ポップアップ
+   ------------------------------------------ */
+.final-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.final-popup.active {
+  opacity: 1;
+}
+
+.final-popup.hidden {
+  display: none !important;
+}
+
+.final-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ★ 華やかな Thank you for playing のスタイル */
+.final-thanks-text {
+  font-size: 10rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  opacity:1;
+  /* 1. 文字自体の色を白（または明るい色）にする */
+  color: #ffffff;
+  
+  /* 2. 重ねたネオンの光（ピンク/サイバー感のある色例） */
+  text-shadow: 
+    0 0 5px  #ffffff,
+    0 0 10px #00f0ff,
+    0 0 20px #00f0ff,
+    0 0 40px #00f0ff,
+    0 0 80px #00f0ff;
+
+  /* アニメーション */
+  animation: 
+    neonGlow 1.5s ease-in-out infinite alternate;     /* ネオンが点滅 */
+}
+
+/* ★ ネオンがぼんやり明滅するキーフレーム */
+@keyframes neonGlow {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.4);
+  }
+}
+
+/* ==========================================
+   左下：ミニゲームエリア設定
+   ========================================== */
+.game-area {
+  position: relative;
+  width: 100%;
+  height: 180px;            /* ゲームエリアの高さ */
+  margin-top: auto;         /* 下詰めに配置 */
+  background: rgba(255, 255, 255, 0.05); /* うっすら背景（不要なら0） */
+  border-bottom: 2px solid #555; /* 地面線 */
+  overflow: hidden;
+}
+
+/* プレイヤー（丸いロゴ） */
+.game-player {
+  position: absolute;
+  left: 40px;
+  bottom: 0px;
+  width: 60px;             /* ★敵とサイズを統一 */
+  height: 60px;            /* ★敵とサイズを統一 */
+  border-radius: 50%;
+  background-image: url('ending/player.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 10;
+  
+  /* 常に回転させ続ける */
+  animation: rollPlayer 0.8s linear infinite;
+}
+
+@keyframes rollPlayer {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 障害物（敵・正方形） */
+.game-enemy {
+  position: absolute;
+  width: 60px;             /* ★プレイヤーとサイズを統一 */
+  height: 60px;            /* ★プレイヤーとサイズを統一 */
+  background-size: cover;
+  background-position: center;
+  z-index: 9;
+}
+
+/* 障害物の高さパターン */
+.game-enemy.ground {
+  bottom: 0px;   /* 地上 */
+}
+
+.game-enemy.air {
+  bottom: 80px;  /* 空中（高さを微調整） */
+}
+
+/* ★ 破裂演出：画面全体を覆い尽くすサイズへ */
+.game-player.pop {
+  animation: popExplode 0.3s cubic-bezier(0.1, 0.8, 0.3, 1) forwards !important;
+  z-index: 9999; /* 最前面へ表示 */
+}
+
+@keyframes popExplode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(25); /* 画面全体を覆う大きさ */
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(50); /* 画面外へ押し出し */
+    opacity: 0;
+  }
+}
+
+/* ★ プレイヤーがゆっくり右へ転がり去るアニメーション */
+.game-player.exit-right {
+  /* 3.5秒かけてゆっくり右端（left: 110%）へ移動 */
+  transition: left 3.5s linear !important;
+  left: 110% !important;
+}
+
+/* ポップアップ全体（背景の暗転） */
+.letter-modal {
+  display: none; /* 初期状態は非表示 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85); /* 半透明の黒背景 */
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+    z-index:99999;
+}
+
+/* ポップアップが有効化された時 */
+.letter-modal.active {
+  display: flex !important;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* 手紙の外枠 */
+.letter-content {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* 便箋風の横線デザイン */
+.letter-body {
+  line-height: 2.2;
+  font-size: 1.05rem;
+  /* 罫線（横線）を引く背景設定 */
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 36px,
+    #444444 36px,
+    #444444 37px
+  );
+  background-attachment: local;
+  padding-bottom: 10px;
+}
+
+/* 文字の揃え位置指定 */
+.text-right {
+  text-align: right !important;
+  margin: 0 0 0 0;
+}
+
+.text-left {
+  text-align: left;
+  margin: 0 0 15px 0;
+}
+
+/* 閉じるボタン */
+.close-btn {
+  display: block;
+  margin: 20px 0 0 auto;
+  padding: 8px 20px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
