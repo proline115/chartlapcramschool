@@ -74,12 +74,12 @@ img{
 }
 
 .left.show{
-    animation:leftPop 0.65s cubic-bezier(.25,.9,.45,1) forwards;
+    animation:leftPop 0.65s cubic-bezier(.25,.9,.45,1) forwards 0.5s;
 
 }
 
 .right.show{
-    animation:rightPop 0.65s cubic-bezier(.25,.9,.45,1) forwards;
+    animation:rightPop 0.65s cubic-bezier(.25,.9,.45,1) forwards 0.5s;
 
 }
 
