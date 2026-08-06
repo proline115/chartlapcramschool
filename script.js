@@ -48,7 +48,8 @@ const randomPhrases = [
     "背景の写真は<br>どこから撮ったでしょう",
     "私の愛した「Cookie」",
     "教養は高く<br>品性は低く",
-    "ミリカンすごくね？"
+    "ミリカンすごくね？",
+    "ここ最近一番の驚き<br>リトマスゴケ"
 ];
 
 const sequentialPhrases = [
@@ -157,15 +158,15 @@ const membersData = [
   { id: 5, name: "さすらいのブッダ", 
     profile: "播磨に悟りを教えに来た。<br><br>岡山の吉右衛門からの遊びの誘いを、「お金をかけて疲れに行くなんてw」と最悪の冷笑で断った話はあまりにも有名。<br><br>心得：来世は美少女になりたい<br><br>挨拶：なますて〜。極楽は西の方にあるよ〜。探してみてね！",
     beliefProfile: "来世は美少女になりたい"},
-  { id: 6, name: "妹嶌　紫", 
+  { id: 6, name: "妹嶌 紫", 
     profile: "物理が好きな生物選択。<br><br>とりあえず、受験生は『やさしい理系数学』をすればよい。『やさしい理系数学』はやさしくない。『やさしい理系数学』をするときとYoutube shortを見てるときが一番生きていることを感じられる。『やさしい理系数学』に憧れて『やさしい理系生物』を作成。生物の資料集は『新課程　視覚でとらえるフォトサイエンス生物図録』一択。問題集は『生物重要問題集』と『生物上級問題精講』を勧める。きゃんべるんるん。あ、名前の読み方はどこかにあるはず。きゃんべるんるん。きゃんべるんるん。きゃんべるんるん。きゃんべるんるん。きゃんべるんるん",
     beliefProfile: "彼女欲しい"},
-  { id: 7, name: "メンバー7", 
-    profile: "ここに7人目のプロフィールのテキストが入ります。",
-    beliefProfile: "ベリリウムは貴ガスやぁ"},
-  { id: 8, name: "メンバー8", 
-    profile: "ここに8人目のプロフィールのテキストが入ります。",
-    beliefProfile: "「に加えて」は三文字やろ！"},
+  { id: 7, name: "(・∀・)", 
+    profile: "チャート周回予備校首班<br>物理・世界史選択<br><br>心得：確率は収束する<br><br>挨拶：どうも、こんにちは。運が絡むようなゲームではとことん惨敗している弱者です。でも上振れた時が楽しくてついついやってしまうよね。皆さんも大学生とかになって暇な時間ができたら是非とも！",
+    beliefProfile: "確率は収束する"},
+  { id: 8, name: "ニコメディア", 
+    profile: "ニコメディア（チャート周回予備校）は、令和時代、日本の高校生。<br><br>大会で優秀な成績を修めている。白陵高等学校功労賞筆頭候補。<br><br>「『鉄壁』はクソの会」<br>「アクリロニトリルガチ恋評議会」<br>「落ち目の倫理を壊滅させて地学を必修にする会」<br>初代会長。<br><br>ひとこと：カニカマに穴をあけるとあなかま",
+    beliefProfile: "カニカマに穴をあけるとあなかま"},
   { id: 9, name: "メンバー9", 
     profile: "ここに9人目のプロフィールのテキストが入ります。",
     beliefProfile: "3人以上は百合ではない"},
@@ -195,23 +196,61 @@ const CUSTOM_ERROR_MESSAGES = [
   ["unpi","💩"],
   ["💩","💩"],
   ["会長", "お前ら、最高だぜ〜！🐢"],
+  ["お前ら、最高だぜ〜！🐢","彼は本当に今までに見た人間の中で最も人を楽しませる事ができた人間であった。常に楽しいことを考え、そして実現する。どれだけの苦難があっても諦めることはなかった。確実に彼は輝くと思った。そして彼は輝いた。これまでの誰よりも輝き、そして退任を惜しまれた。彼は必ず世界を創る側の人間になる。というより、彼の創る世界を見てみたい。"],
   ["","なんか書いて"],
+  ["なんか","ちゃんと書け"],
+  ["ちゃんと","これは俺が悪い"],
   ["岡山の吉右衛門","圧倒的有能"],
   ["白狐ふゆ","こいつがいなけりゃゲームも小説も無い。"],
   ["プロリン115","僕だよ! 115は分子量!"],
   ["アポロ12号","なんかこの人にはついていきたくなるよね。"],
+  ["さすらいのブッダ","雑なボケも拾ってくれる。ありがたい。"],
+  ["妹嶌紫","この人の授業で全国行ってるなら…もしやこいつが真の有能ってｺﾄ!?"],
+  ["(・∀・)","予備校の創始者であり首班。割と最近決まった設定やけど受け入れるの早すぎて笑ってもた。"],
+  ["ニコメディア","早くASMR撮ってくれ"],
   ["合言葉","素直め"],
   ["百合コーン","🦄（正解）"],
   ["ユリコーン","🦄（正解）"],
   ["ユニコーン","惜しい！"],
+  ["🦄","それなんて読む？"],
   ["ニンヒドリン","アミノ基を検出する試薬。アミノ基が存在する溶液には赤紫色の呈色を示す。プロリンなどのイミノ基を持つ物質に対しては黄色を呈色し、この色をプロリン黄という。"],
   ["ビウレット","ペプチド結合を検出する試薬。ペプチド結合が化合物一分子内に三つ以上存在する場合、ペプチド結合を行っている原子と錯体を形成し、赤紫色を呈色する。"],
   ["イミノ基","=NHや-NH-のこと。イミド基ともいう。ニンヒドリンと反応し、黄色を呈色する。"],
+  ["プロリン","アミノ酸の一種であり、環状かつイミノ基を有している。アミノ基は有していない。かつてイミノ酸と言われていたが、生体内での反応がアミノ酸と同等なためアミノ酸という分類になった。"],
   ["00000","...ローラー？"],
   ["00001","...諦めな？"],
   ["00002","...10万通りあるよ？"],
   ["00003","...まぁ頑張れ"],
-  ["Cookie","そのページは存在しません。<br>ですが何かが進んだかもしれません。<br>当たり前にあった何かが。"]
+  ["Cookie","そのページは存在しません。<br>ですが何かが進んだかもしれません。<br>当たり前にあった何かが。"],
+  ["Delete","何も押さずにそのままロード"],
+  ["sensible","ごめんそれ関係ないやつ"],
+  ["Sensible","ごめんそれ関係ないやつ"],
+  ["チャート周回予備校","家"],
+  ["Char-Shoo","この名前というかシステム天才じゃない？"],
+  ["あなかま","「黙れ」の意。あなやかましいから来ている。直訳すると「とてもうるさい」となる。現代における、「うるさい」と叫んで黙れの意を表すのに通ずる。<br>…なんでこれ打とうと思ったの？"],
+  ["オハイオの風","これよく作ったよね。英検講座でお世話になったと思うけどどうなんだろう。忘れた。"],
+  ["はい歌ろ","いろは歌を習字で書くと<br>はい<br>歌ろ<br>になるかららしい。"],
+  ["きゃんべるんるん","きゃんべるんるん"],
+  ["猫","猫が一番可愛い。絶対いつか飼ってわしゃわしゃする。"],
+  ["ホーム","ここを始めに作ったけどここを作った時点でもうほとんどの構成が出来上がってたという恐怖。よくやりきったよ。"],
+  ["問題集","間違えてカス問題なんこか紛れ込んだ気がするけどまぁいいや。"],
+  ["カス問題集","一番ここ好きかも。定期的に覗いてる。"],
+  ["心得","始めはアーケードゲームで作るつもりやったし、イメージとして提出した画像はアーケードゲームやった。あまりにあからさま過ぎだと思ったのでレトロデジタル画面風に。由来は昔作ろうとしてたチャットゲーム。"],
+  ["やさしい理系数学","私も使ってる。解説がおもろいから読み物として楽しんでる節はある。イェンゼンの不等式を重心で証明されたのにはビビった。その後のn個での相加相乗平均も。"],
+  ["倫理","史上最高の学問。倫理が無ければこの世界は存在していない。どの学問でもそうだと言う人もいるかもしれないが、その学問という概念すらも元はと言えば倫理由来である。一日中倫理のことを考えていても飽きない。なんで二次試験倫理無いの。"],
+  ["『鉄壁』はクソの会","そんなことないです。"],
+  ["実績","私の好きなもの達を詰め込みました。全員名前言えてほしい。"],
+  ["岡山","見たかったなぁ。"],
+  ["数学","誘導って大切なんだなって思いました。でもすごいのが先生普通に解けてたこと。"],
+  ["質問","なんかあったら送ってね！感想欲しい！"],
+  ["和歌","信じられんと思うけどこれが全てのサイトの要素の中で一番時間かかってる。意味わからん。"],
+  ["読込","思いついたことを思いついたままに。"],
+  ["小説","何ヶ月前から育ってたんだろう。お待ちしておりました。"],
+  ["受験生","ほんとにね！何してんだろね！"],
+  ["科学の甲子園","バレたか。そうです。ここで一個一個問題渡してたのが面倒すぎたのでこうなりました。でもここまで隠し要素詰め込めるなんて思わないよね。"],
+  ["網代木","こんなにメンバーいて日本史選択が0。でも学年で問題解く以上作らないといけない。そんでもって生まれた各教科のキメラ、網代木。"],
+  ["犬の値段当てゲーム","え！知ってる人いた！嬉しい！誰にも伝わらなかったこれ！"],
+  ["白陵","...言及は避けよう"]
 ];
 
 const container = document.querySelector(".container");
@@ -274,7 +313,11 @@ function enterMain(){
 }
 
 container.addEventListener("click", (event) => {
-    startSite();
+    if(isIdleClearReady){
+      openClearInputModal();
+    }else{
+      startSite();
+    }
 });
 
 const targetPages = ["page-home", "page-mondai", "page-kasu", "page-kokoroe", "page-history"];
@@ -549,6 +592,9 @@ function executeFilter(filterSelectId, itemSelector) {
             item.classList.remove("fade-out");
             void item.offsetWidth;
             item.classList.add("fade-in");
+            setTimeout(() => {
+               item.classList.remove("fade-in");
+            }, 400);
         } else {
             item.classList.add("fade-out");
         }
@@ -1101,7 +1147,11 @@ function updateScreen(index, direction = "") {
 
   // アニメーションなし（初期表示など）の場合
   if (!direction) {
+    if(membersData[index].id===7){
+      memberPhoto.src = `belief/member${membersData[index].id}.gif`;
+    }else{
     memberPhoto.src = `belief/member${membersData[index].id}.png`;
+    }
     memberName.textContent = membersData[index].name;
     memberProfile.innerHTML = membersData[index].profile;
     refreshStarIcon();
@@ -1120,7 +1170,11 @@ function updateScreen(index, direction = "") {
   }
 
   setTimeout(() => {
+    if(membersData[index].id===7){
+      memberPhoto.src = `belief/member${membersData[index].id}.gif`;
+    }else{
     memberPhoto.src = `belief/member${membersData[index].id}.png`;
+    }
     memberName.textContent = membersData[index].name;
     memberProfile.innerHTML = membersData[index].profile;
     refreshStarIcon();
@@ -1460,6 +1514,10 @@ function checkPassword() {
         achievementsData[4].description=`遠心力って強すぎるとこうなるんだよ<br><br><button id="upgrade-click-btn" class="upgrade-btn" onclick="buyClickUpgrade()">アップグレード<br>100回転<br現在✕1</button>`;
         renderAchievements();
         localStorage.setItem("cookie","start");
+      }
+      if(inputVal==="Delete"){
+          localStorage.clear();
+          window.location.href = 'https://proline115.github.io/chartlapcramschool/';
       }
 
     } else if (/^\d{5}$/.test(inputVal)) {
@@ -1886,7 +1944,7 @@ const achievementsData = [
     conditionText: "数学だけ解く",
     currentVal: 0,
     targetVal: 10,
-    description: "数学がこれで終わりだと思ったら大間違い<br>（・∀・）",
+    description: "数学がこれで終わりだと思ったら大間違い<br>(⌒▽⌒)",
     unlocked: false
   },
   {
@@ -2052,11 +2110,11 @@ const achievementsData = [
   {
     id: "achievement_27",
     image: "achieve/achieve27.png",
-    title: "ありがとう④",
+    title: "人間は万物の尺度である",
     conditionText: "メンバー４をお気に入り登録する",
     currentVal: 0,
     targetVal: 0,
-    description: "メンバー４を固定した",
+    description: "正しいや間違いの絶対的な基準はない。自分が正しいと思ったものを信じよう。ただし、倫理選択が正しく、政経選択は間違いであることは絶対である。",
     unlocked: false
   },
   {
@@ -2081,22 +2139,22 @@ const achievementsData = [
   },
   {
     id: "achievement_30",
-    image: "images/logo.png",
-    title: "ありがとう⑦",
+    image: "achieve/achieve30.gif",
+    title: "君に幸あれ",
     conditionText: "メンバー７をお気に入り登録する",
     currentVal: 0,
     targetVal: 0,
-    description: "メンバー７を固定した",
+    description: "たとえ今の運が悪かったとしても、いつか上振れるときは来る。深く考えすぎず、気楽に頑張ろう！",
     unlocked: false
   },
   {
     id: "achievement_31",
-    image: "images/logo.png",
-    title: "ありがとう⑧",
+    image: "achieve/achieve31.png",
+    title: "〜「『鉄壁』はクソの会」へのお誘い〜<br>みなさん、特に英語を使用する受験生の方々は、まず『鉄壁』を焼くことから受験勉強の日々が始まります。一体誰がゴリラのようにレンガを持って机に向かえるであろうか。『鉄壁』を持ってペンを動かしてみても、鍛えられるのは上腕二頭筋くらいのものであろう。皆さんには文明人らしく、『単語帳』を使用して勉強してもらいたいものである。",
     conditionText: "メンバー８をお気に入り登録する",
     currentVal: 0,
     targetVal: 0,
-    description: "メンバー８を固定した",
+    description: "長すぎてどうすればええねんこれ",
     unlocked: false
   },
   {
@@ -2162,7 +2220,7 @@ const achievementsData = [
   {
     id: "achievement_38",
     image: "achieve/achieve38.png",
-    title: "5.00✕10^4",
+    title: "50000に最小の偶素数と最小の奇素数を掛けて最小の完全数で割った数",
     conditionText: "ハイスコア50000達成",
     currentVal: 0,
     targetVal: 50000,
@@ -2191,7 +2249,7 @@ const achievementsData = [
   },
   {
     id: "achievement_41",
-    image: "images/logo.png",
+    image: "achieve/achieve41.png",
     title: "①",
     conditionText: "①",
     currentVal: 0,
@@ -2201,7 +2259,7 @@ const achievementsData = [
   },
   {
     id: "achievement_42",
-    image: "images/logo.png",
+    image: "achieve/achieve42.png",
     title: "②",
     conditionText: "②",
     currentVal: 0,
@@ -2211,7 +2269,7 @@ const achievementsData = [
   },
   {
     id: "achievement_43",
-    image: "images/logo.png",
+    image: "achieve/achieve43.png",
     title: "③",
     conditionText: "③",
     currentVal: 0,
@@ -2221,7 +2279,7 @@ const achievementsData = [
   },
   {
     id: "achievement_44",
-    image: "images/logo.png",
+    image: "achieve/achieve44.png",
     title: "④",
     conditionText: "④",
     currentVal: 0,
@@ -2231,7 +2289,7 @@ const achievementsData = [
   },
   {
     id: "achievement_45",
-    image: "images/logo.png",
+    image: "achieve/achieve45.png",
     title: "実績マニア",
     conditionText: "実績を全て解除する",
     currentVal: 0,
@@ -2730,7 +2788,7 @@ function setupSecretCode5() {
   if (typeof achievementsData !== "undefined") {
     const ach45 = achievementsData.find(a => a.id === "achievement_45");
     if (ach45) {
-      ach45.description = `ここまで辿り着いたあなたへ。まずはありがとう。そしてどこを探してもなかったこれをあなたに。<br>⑤${code5}<br>さぁ、クリアしよう`;
+      ach45.description = `ここまで辿り着いたあなたへ。まずはありがとう。そしてどこを探してもなかったこれをあなたに。<br>⑤${code5}<br>さぁクリアしよう`;
     }
   }
 }
@@ -3002,4 +3060,764 @@ function updateCursorButtonUI() {
 
   // ボタン表示の更新（3行構成など必要に応じて調整してください）
   btn.innerHTML = `購入<br>${currentCost}回転`;
+}
+
+// ==========================================
+// 隠しクリア判定＆コード入力処理
+// ==========================================
+
+let idleTimer = null;
+let isIdleClearReady = false; // 30秒放置されたかのフラグ
+
+// 30秒放置タイマーの開始
+function startIdleTimer() {
+  clearTimeout(idleTimer);
+  isIdleClearReady = false;
+
+  idleTimer = setTimeout(() => {
+    isIdleClearReady = true;
+    const tapElement = document.getElementById("tapStart");
+    if (tapElement) {
+      // 1. 既存の transition (1.5s) を利用して一度ふんわり消す
+      tapElement.style.opacity = "0";
+
+      // 2. 1.5秒後に文字を書き換えて、再度ふんわり表示させる
+      setTimeout(() => {
+        tapElement.innerHTML = "Tap to Clear...?";
+        tapElement.style.opacity = "1";
+      }, 1500);
+    }
+  }, 10000); // 30秒 (30,000ms)
+}
+
+// モーダルを開く
+function openClearInputModal() {
+  const modal = document.getElementById("clear-input-modal");
+    const inputEl = document.getElementById("clear-code-input");
+    const errorEl = document.getElementById("clear-error-msg");
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
+    if (inputEl) inputEl.value = "";
+      if (errorEl) errorEl.textContent = "";
+}
+
+// 条件判定（全実績解除 ＆ 隠し数字が全て発見されているか）
+function checkClearConditions() {
+  // ① 全実績の `unlocked` プロパティをチェック
+  if (typeof achievementsData !== "undefined" && Array.isArray(achievementsData)) {
+    const allUnlocked = achievementsData.every(item => item.unlocked === true);
+    if (!allUnlocked) return false;
+  } else {
+    return false;
+  }
+
+  // ② 隠し数字の全解放チェック (loadDiscoveredSecrets 関数を利用)
+  if (typeof loadDiscoveredSecrets === "function") {
+    const secrets = loadDiscoveredSecrets();
+    // キー 1〜5 がすべて true であるか確認
+    const allSecretsFound = [1, 2, 3, 4, 5].every(key => secrets[key] === true);
+    if (!allSecretsFound) return false;
+  } else {
+    return false;
+  }
+
+  return true;
+}
+
+// コード入力判定と暗転処理
+function submitClearCode() {
+  const inputEl = document.getElementById("clear-code-input");
+  const errorEl = document.getElementById("clear-error-msg");
+  if (!inputEl || !errorEl) return;
+
+  const code = inputEl.value.trim();
+  const isConditionsMet = checkClearConditions();
+
+  // ① コード判定 ('25327')
+  const correctCode = (typeof SECRET_CODE !== "undefined" && Array.isArray(SECRET_CODE))
+    ? SECRET_CODE.join('')
+    : "25327";
+
+  if (code !== correctCode) {
+    errorEl.textContent = "コードが違います";
+    return;
+  }
+
+  // ② 全実績 ＆ 隠し数字達成判定
+  if (!isConditionsMet) {
+    errorEl.textContent = "まだ条件を満たしていません…";
+    return;
+  }
+
+  // --- 条件クリア時 ---
+  // モーダルを閉じる
+  document.getElementById("clear-input-modal")?.classList.add("hidden");
+
+  // 暗転オーバーレイを起動（2秒で真っ黒にする）
+  const overlay = document.getElementById("clear-blackout-overlay");
+  if (overlay) {
+    overlay.classList.add("active");
+  }
+
+  // ★ 変更箇所：暗転完了後（2秒後）にエンディングを開始する
+  setTimeout(() => {
+    startEndingSequence();
+  }, 2000);
+}
+
+// 初期化とイベント登録
+document.addEventListener("DOMContentLoaded", () => {
+  // 放置タイマー起動
+  startIdleTimer();
+
+  // tapStart 要素のクリック監視
+  const tapStartEl = document.getElementById("tapStart");
+  if (tapStartEl) {
+    // キャプチャフェーズ（true）またはバブリング防止で確実に startSite への伝播を止める
+    tapStartEl.addEventListener("click", (e) => {
+      if (isIdleClearReady) {
+        e.stopPropagation(); // 親要素のクリックイベント発火を防止
+        e.stopImmediatePropagation(); // 他の同階層リスナーの発火も防止
+        openClearInputModal();
+      } else {
+        clearTimeout(idleTimer);
+      }
+    }, true);
+  }
+
+  // モーダル内ボタンのイベント
+  const submitBtn = document.getElementById("clear-code-submit-btn");
+  const cancelBtn = document.getElementById("clear-code-cancel-btn");
+
+if (submitBtn) {
+    submitBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      submitClearCode();
+    });
+    window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.stopPropagation();
+      submitClearCode();
+    }
+  });
+  }
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      document.getElementById("clear-input-modal")?.classList.add("hidden");
+      const inputEl = document.getElementById("clear-code-input");
+      const errorEl = document.getElementById("clear-error-msg");
+      if (inputEl) inputEl.value = "";
+      if (errorEl) errorEl.textContent = "";
+    });
+  }
+});
+
+// ==========================================
+// スタッフロール用データ管理 (JSリスト)
+// ==========================================
+
+// 1. クレジットリスト (枠ごとにオブジェクトで作成)
+const staffRollData = [
+  {
+    sectionTitle: "オープニング画面", // 枠の見出し
+    members: [
+      { role: "左", name: "さすらいのブッダ" },
+      { role: "右", name: "岡山の吉右衛門" },
+      { role: "下", name: "ニコメディア" }
+    ]
+  },
+  {
+    sectionTitle: "背景写真",
+    members: [
+      { role: "撮影", name: "プロリン115" },
+      { role: "カメラ提供", name: "妹嶌紫" }
+    ]
+  },
+  {
+    sectionTitle: "問題制作",
+    members: [
+      { role: "オハイオの風シリーズ", name: "岡山の吉右衛門" },
+      { role: "共テ地理シリーズ", name: "ニコメディア" },
+      { role: "the field of「Subjunctive」", name: "アポロ12号" },
+      { role: "The Tale of Genji", name: "ニコメディア"},
+      { role: "旭川の網代木", name: "岡山の吉右衛門"},
+      { role: "永田町の番人", name: "岡山の吉右衛門"},
+      { role: "加古川の網代木", name: "共同制作"},
+      { role: "奇問の崖", name: "ニコメディア"},
+      { role: "共テ情報", name: "おしり"},
+      { role: "共テ世界史-1", name: "まつお"},
+      { role: "共テ世界史2以降", name: "(・∀・)"},
+      { role: "共テ倫理キリスト教編", name: "白狐ふゆ"},
+      { role: "生物基礎", name: "白狐ふゆ"},
+      { role: "化学基礎", name: "さすらいのブッダ"},
+      { role: "小学生でもできる情報", name: "おしり"},
+      { role: "単発数学", name: "さすらいのブッダ"},
+      { role: "二発数学", name: "ニコメディア"},
+      { role: "中学生でもできる情報", name: "おしり"},
+      { role: "日本史", name: "岡山の吉右衛門"},
+      { role: "別府川の網代木", name: "プロリン115"},
+      { role: "無知の知", name: "ニコメディア"},
+      { role: "倫理テスト", name: "プロリン115"},
+      { role: "倫理大問", name: "プロリン115"}
+    ]
+  },
+  {
+    sectionTitle: "カス問題制作",
+    members: [
+      { role: "カス英語", name: "ニコメディア" },
+      { role: "カス英語2", name: "アポロ12号" },
+      { role: "カス世界史", name: "さすらいのブッダ"},
+      { role: "カス政経", name: "ニコメディア"},
+      { role: "カス倫理", name: "プロリン115"},
+      { role: "カス歴史", name: "ニコメディア"},
+      { role: "ザグロスの頂", name: "ニコメディア"},
+      { role: "やさしい理系生物", name: "妹嶌紫"}
+    ]
+  },
+  {
+    sectionTitle: "実績写真撮影",
+    members: [
+      { role: "大吉", name: "プロリン115（の家の前で寝てた猫）" },
+      { role: "岡山の吉右衛門固定", name: "プロリン115" },
+      { role: "プロリン115固定", name: "プロリン115（が行った海で寝てた猫）" },
+      { role: "さすらいのブッダ固定", name: "お友達（ありがとう）" },
+      { role: "妹嶌紫固定", name: "妹嶌紫" },
+      { role: "隠し数字発見", name: "岡山の吉右衛門" }
+    ]
+  },
+  {
+    sectionTitle: "数学",
+    members: [
+      { role: "制作", name: "後輩（ありがとう）" },
+      { role: "頑張って解いた人", name: "プロリン115" },
+      { role: "頑張って解いた人", name: "さすらいのブッダ" },
+      { role: "頑張って解いた人", name: "妹嶌紫" },
+      { role: "頑張って解いた人", name: "ニコメディア" },
+      { role: "先に帰って解かなかった人", name: "岡山の吉右衛門" }
+    ]
+  },
+  {
+    sectionTitle: "和歌",
+    members: [
+      { role: "詠み手", name: "岡山の吉右衛門" },
+      { role: "詠み手", name: "アポロ12号" },
+      { role: "詠み手", name: "さすらいのブッダ" },
+      { role: "詠み手", name: "ニコメディア" },
+      { role: "批評", name: "プロリン115" }
+    ]
+  },
+  {
+    sectionTitle: "小説",
+    members: [
+      { role: "原案", name: "アポロ12号" },
+      { role: "タイトル", name: "プロリン115" },
+      { role: "執筆", name: "白狐ふゆ" }
+    ]
+  },
+  {
+    sectionTitle: "岡山写真館",
+    members: [
+      { role: "東京写真", name: "プロリン115" },
+      { role: "京都写真", name: "岡山の吉右衛門" },
+      { role: "岡山写真送ってくれなかった人", name: "岡山の吉右衛門" }
+    ]
+  },
+  {
+    sectionTitle: "フリー画像出典",
+    members: [
+      { role: "ページアイコン", name: "human pictogram 2.0" },
+      { role: "宇宙船・宇宙人", name: "Dotown" },
+      { role: "カーソル", name: "コトノハワークス" },
+      { role: "その他", name: "ウィキペディアコモンズ" }
+    ]
+  },
+  {
+    sectionTitle: "フリーBGM出典",
+    members: [
+      { role: "エンディング", name: "甘茶の音楽工房" }
+    ]
+  },
+  {
+    sectionTitle: "Special Thanks",
+    members: [
+      { role: "ここまで遊んでくれた", name: "あなた" }
+    ]
+  }
+];
+
+// 2. 回想画像リスト (※画像パスを適宜変更してください)
+const memoryImages = [
+  "memory/memory1.png",
+  "memory/memory2.png",
+  "memory/memory3.png",
+  "memory/memory4.png",
+  "memory/memory5.png",
+  "memory/memory6.png",
+  "memory/memory7.png",
+  "memory/memory8.png",
+  "memory/memory9.png",
+  "memory/memory10.png",
+  "memory/memory11.png",
+  "memory/memory12.png",
+  "memory/memory13.png",
+  "memory/memory14.png",
+  "memory/memory15.png",
+  "memory/memory16.png",
+  "memory/memory17.png"
+];
+
+// ==========================================
+// エンディング＆スタッフロール構築処理
+// ==========================================
+
+// JS配列からHTML要素を動的生成
+function buildStaffRollDOM() {
+  const container = document.getElementById("staff-roll-content");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  staffRollData.forEach(section => {
+    const sectionEl = document.createElement("div");
+    sectionEl.className = "credit-section";
+
+    const titleEl = document.createElement("h2");
+    titleEl.className = "section-title";
+    titleEl.textContent = section.sectionTitle;
+    sectionEl.appendChild(titleEl);
+
+    section.members.forEach(member => {
+      const rowEl = document.createElement("div");
+      rowEl.className = "credit-row";
+
+      const roleEl = document.createElement("span");
+      roleEl.className = "role";
+      roleEl.textContent = member.role;
+
+      const nameEl = document.createElement("span");
+      nameEl.className = "name";
+      nameEl.textContent = member.name;
+
+      rowEl.appendChild(roleEl);
+      rowEl.appendChild(nameEl);
+      sectionEl.appendChild(rowEl);
+    });
+
+    container.appendChild(sectionEl);
+  });
+}
+
+let memoryImageIndex = 0;
+let memoryImageInterval = null;
+
+// 左側の思い出画像フェードイン・アウト (89秒間でピッタリ1周する自動計算)
+function startMemoryImageSlideshow() {
+  const imgEl = document.getElementById("memory-image");
+  if (!imgEl || memoryImages.length === 0) return;
+
+  // 1. 二重起動防止：既存のタイマーをクリア
+  if (memoryImageInterval) {
+    clearInterval(memoryImageInterval);
+  }
+
+  // 2. 89秒（89000ms）を画像枚数で割って、1枚あたりの表示時間を自動計算
+  const totalDuration = 89000; // BGMの長さ（ミリ秒）
+  const displayTimePerImage = totalDuration / memoryImages.length;
+
+  // 3. 初期化（最初の画像を表示）
+  memoryImageIndex = 0;
+  imgEl.src = memoryImages[0];
+  imgEl.classList.add("show");
+
+  // 4. 計算された時間ごとに次の画像へフェード切替
+  memoryImageInterval = setInterval(() => {
+    imgEl.classList.remove("show"); // 一度フェードアウト
+
+    setTimeout(() => {
+      // 次の画像へ（1周したら最後で止まる、またはループ）
+      memoryImageIndex = (memoryImageIndex + 1) % memoryImages.length;
+      imgEl.src = memoryImages[memoryImageIndex];
+      imgEl.classList.add("show"); // フェードイン
+    }, 1200); // CSSのフェード時間 (1.2秒)
+  }, displayTimePerImage);
+}
+
+const bgm = document.getElementById("ending-bgm");
+// エンディング本編開始
+function startEndingSequence() {
+  const endingContainer = document.getElementById("ending-container");
+  
+  const rollContent = document.getElementById("staff-roll-content");
+
+  if (!endingContainer) return;
+
+  // スタッフロール組み立て
+  buildStaffRollDOM();
+
+  // エンディング画面表示
+  endingContainer.classList.remove("hidden");
+  setTimeout(() => endingContainer.classList.add("active"), 50);
+
+  // BGM再生＆終了時イベント登録
+  if (bgm) {
+    bgm.currentTime = 0;
+    bgm.play().catch(e => console.log("BGM再生エラー:", e));
+
+    // ★ 89秒のBGM終了時に全画面一枚絵ポップアップを表示
+    bgm.addEventListener("ended", () => {
+      showFinalPopup();
+    }, { once: true });
+  }
+
+  // 右側の自動スクロール開始 (89秒間)
+  if (rollContent) {
+    rollContent.classList.add("scrolling");
+  }
+
+  // 左側の回想スライドショー開始
+  startMemoryImageSlideshow();
+    initMinigame();
+}
+
+// 最終ポップアップ表示
+function showFinalPopup() {
+  isGameOver = true;
+  
+  const finalPopup = document.getElementById("final-popup");
+  const letterModal = document.getElementById('letter-modal');
+  const closeBtn = document.getElementById('close-letter-btn');
+
+  // メモリ画像ループの停止
+  if (memoryImageInterval) {
+    clearInterval(memoryImageInterval);
+  }
+
+  // 1. Thank youポップアップ（final-popup）の表示
+  if (finalPopup) {
+    finalPopup.classList.remove("hidden");
+    // リフロー（再描画）を促してアニメーションを確実に適用
+    void finalPopup.offsetWidth; 
+    finalPopup.classList.add("active");
+  }
+
+  // 2. 画面タップで手紙を開くイベントの設定
+  if (letterModal) {
+    const openLetterHandler = (e) => {
+      // 閉じるボタンを押した場合は手紙を再オープンしない
+      if (closeBtn && (e.target === closeBtn || closeBtn.contains(e.target))) {
+        return;
+      }
+      // 手紙ポップアップを表示
+      letterModal.classList.add('active');
+    };
+
+    // 誤タップ防止のため0.5秒後にタップイベントを登録
+    setTimeout(() => {
+      window.addEventListener('click', openLetterHandler);
+      window.addEventListener('touchstart', openLetterHandler, { passive: true });
+    }, 500);
+
+    // 3. 閉じるボタンの処理
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // 画面タップイベントへの伝播を防止
+        letterModal.classList.remove('active');
+      });
+    }
+  }
+}
+    
+
+
+// ==========================================
+// ミニゲーム（ランアクション）物理計算版
+// ==========================================
+
+const enemyImages = [
+  'ending/enemy1.png',
+  'ending/enemy2.png',
+  'ending/enemy3.png',
+  'ending/enemy4.png',
+  'ending/enemy5.png',
+  'ending/enemy6.png',
+  'ending/enemy7.png',
+  'ending/enemy8.png',
+  'ending/enemy9.png',
+  'ending/enemy10.png',
+  'ending/enemy11.gif',
+  'ending/enemy12.png',
+  'ending/enemy13.png',
+  'ending/enemy14.png',
+  'ending/enemy15.png',
+  'ending/enemy16.png',
+  'ending/enemy17.png',
+  'ending/enemy18.png'
+];
+
+let isGameOver = false;
+let gameLoopInterval = null;
+let enemySpawnTimeout = null;
+
+// 物理パラメータ（ジャンプ・重力）
+let posY = 0;              // プレイヤーの高さ (bottom)
+let velocityY = 0;         // プレイヤーの垂直速度
+const gravity = -0.4;      // 重力加速度 (毎フレーム速度を減速/加速)
+const jumpInitialVelocity = 9; // ジャンプ初速
+let isGrounded = true;     // 接地フラグ
+
+// 初期化・キー登録
+function initMinigame() {
+  isGameOver = false;
+  posY = 0;
+  velocityY = 0;
+  isGrounded = true;
+  currentEnemySpeed = 6;
+  currentMinDelay = 1000;
+  currentMaxDelay = 1500;
+  window.addEventListener('keydown', handleKeyPress);
+    window.addEventListener('click', handleTap);
+  window.addEventListener('touchstart', handleTap, { passive: false });
+
+    // 1. 既に動いているタイマーやインターバルを完全にクリア
+  if (gameLoopInterval) clearInterval(gameLoopInterval);
+  if (enemySpawnTimeout) clearTimeout(enemySpawnTimeout);
+
+  // 2. 画面に残っている敵要素（.game-enemy）をすべて削除して初期化
+  const existingEnemies = document.querySelectorAll('.game-enemy');
+  existingEnemies.forEach(enemy => enemy.remove());
+
+  // 3. プレイヤーの表示状態・アニメーションのリセット
+  const player = document.getElementById('player');
+  if (player) {
+    player.classList.remove('pop', 'jumping');
+    player.style.bottom = '0px';
+  }
+
+    // ★ BGMの再生時間を監視するイベントを登録
+  if (bgm) {
+    bgm.removeEventListener('timeupdate', checkBgmTime);
+    bgm.addEventListener('timeupdate', checkBgmTime);
+  }
+  
+  scheduleNextEnemy();
+  
+  // メインループ (60fps相当)
+  if (gameLoopInterval) clearInterval(gameLoopInterval);
+  gameLoopInterval = setInterval(updateGame, 1000 / 60);
+}
+
+function handleKeyPress(e) {
+  if (isGameOver) return;
+  
+  if (e.code === 'Space' || e.code === 'ArrowUp' || e.key === ' ' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    jump();
+  }
+    
+}
+// 画面タップ・クリック時の処理
+function handleTap(e) {
+  if (isGameOver) return;
+  
+  // スマホでタップした時のデフォルト挙動（画面ダブルタップ拡大など）を防止
+  if (e.type === 'touchstart') {
+    e.preventDefault();
+  }
+
+  jump();
+}
+
+// ジャンプ発動（初速を与える）
+function jump() {
+  if (!isGrounded) return; // 空中での再ジャンプ防止
+  
+  velocityY = jumpInitialVelocity;
+  isGrounded = false;
+}
+
+// メイン更新ループ（重力計算・位置更新・当たり判定）
+function updateGame() {
+  if (isGameOver) return;
+
+  const player = document.getElementById('player');
+  if (!player) return;
+
+  // --- 1. 物理運動計算（重力加速度） ---
+  if (!isGrounded) {
+    posY += velocityY;       // 速度ぶん位置を移動
+    velocityY += gravity;    // 速度に重力を加算 (上昇時は減速、下降時は加速)
+
+    // 着地判定
+    if (posY <= 0) {
+      posY = 0;
+      velocityY = 0;
+      isGrounded = true;
+    }
+
+    player.style.bottom = `${posY}px`;
+  }
+
+  // --- 2. 当たり判定 ---
+  const playerRect = player.getBoundingClientRect();
+  const enemies = document.querySelectorAll('.game-enemy');
+
+  enemies.forEach(enemy => {
+    const enemyRect = enemy.getBoundingClientRect();
+
+    const padding = 6; // 当たり判定の余白調整
+    const isHit = !(
+      playerRect.right - padding < enemyRect.left + padding ||
+      playerRect.left + padding > enemyRect.right - padding ||
+      playerRect.bottom - padding < enemyRect.top + padding ||
+      playerRect.top + padding > enemyRect.bottom - padding
+    );
+
+    if (isHit) {
+      triggerGameOver(player);
+    }
+  });
+}
+
+// スピード調整用の変数
+let currentEnemySpeed = 6;      // 初期移動スピード
+const maxEnemySpeed = 12;       // 最大移動スピード（上限）
+
+let currentMinDelay = 1300;     // 出現間隔の最小値（初期1.0秒）
+let currentMaxDelay = 2500;     // 出現間隔の変動幅（初期1.0秒 + 1.5秒 = 2.5秒）
+const minDelayLimit = 800;      // 出現間隔の限界値（これ以上は狭まらない）
+
+let probability = 0.6;
+if(localStorage.getItem("clear")){
+    probability = 0;
+}
+//==========================================
+// 障害物の生成（徐々に加速）
+// ==========================================
+function spawnEnemy() {
+  if (isGameOver) return;
+
+  const gameArea = document.getElementById('game-area');
+  if (!gameArea) return;
+
+  const enemy = document.createElement('div');
+  enemy.classList.add('game-enemy');
+
+  const randomImg = enemyImages[Math.floor(Math.random() * enemyImages.length)];
+  enemy.style.backgroundImage = `url('${randomImg}')`;
+
+  const isGround = Math.random() < probability;
+  enemy.classList.add(isGround ? 'ground' : 'air');
+
+  enemy.style.left = '100%';
+  gameArea.appendChild(enemy);
+
+  let enemyPos = gameArea.clientWidth;
+
+  // ★ 現在のスピードで移動を開始
+  const speed = currentEnemySpeed;
+
+  const moveInterval = setInterval(() => {
+    if (isGameOver) {
+      clearInterval(moveInterval);
+      enemy.remove();
+      return;
+    }
+
+    enemyPos -= speed;
+    enemy.style.left = `${enemyPos}px`;
+
+    if (enemyPos < -60) {
+      clearInterval(moveInterval);
+      enemy.remove();
+    }
+  }, 1000 / 60);
+
+  // ★ 敵が1匹出るたびに、次回以降のスピードをほんの少しだけアップさせる
+  if (currentEnemySpeed < maxEnemySpeed) {
+    currentEnemySpeed += 0.15; // 1匹ごとに0.15ずつスピードアップ
+  }
+
+  // ★ 出現間隔もほんの少し短くする
+  if (currentMinDelay > minDelayLimit) {
+    currentMinDelay -= 20; // 最小待機時間を短縮
+  }
+
+  scheduleNextEnemy();
+}
+
+
+
+
+// ==========================================
+// 次の出現タイミング設定
+// ==========================================
+function scheduleNextEnemy() {
+  if (isGameOver) return;
+
+  // ★ 徐々に短くなる間隔でランダム生成
+  const randomDelay = Math.floor(Math.random() * currentMaxDelay) + currentMinDelay;
+  enemySpawnTimeout = setTimeout(spawnEnemy, randomDelay);
+}
+
+// 衝突・爆発（巨大化破裂 ➔ トップへ遷移）
+function triggerGameOver(player) {
+  isGameOver = true;
+
+  clearInterval(gameLoopInterval);
+  clearTimeout(enemySpawnTimeout);
+  window.removeEventListener('keydown', handleKeyPress);
+
+  // 1. 大迫力の破裂演出（画面を覆う規模）
+  player.classList.add('pop');
+
+  // 2. 破裂アニメーション完了後にトップへ遷移
+  setTimeout(() => {
+    window.location.href = 'https://proline115.github.io/chartlapcramschool/';
+  }, 350);
+}
+
+function checkBgmTime() {
+  if (isGameOver || isExiting || !bgm) return;
+
+  // BGM終了の4秒前に到達したら退場シークエンスを開始
+  const timeLeft = bgm.duration - bgm.currentTime;
+  if (timeLeft <= 4.0 && bgm.duration > 0) {
+    startExitSequence();
+  }
+}
+let isExiting = false;
+// ★ 段階的な退場シークエンス
+function startExitSequence() {
+  isExiting = true;
+
+  // 1. 敵の新規生成をストップ
+  clearTimeout(enemySpawnTimeout);
+
+
+  // 3. 画面上に残っている敵が画面左外へ消え去るまで約1.5秒待つ
+  setTimeout(() => {
+    if (isGameOver) return; // 待機中に万が一ゲームオーバーになっていたら中断
+
+    const player = document.getElementById('player');
+    if (player) {
+      // ジャンプ中なら強制着地
+      player.classList.remove('jumping');
+      player.style.bottom = '0px';
+        // 2. プレイヤーの操作入力を無効化（誤操作・事故防止）
+  window.removeEventListener('keydown', handleKeyPress);
+  window.removeEventListener('click', handleTap);
+  window.removeEventListener('touchstart', handleTap);
+
+      // 4. 安全が確認できてから、ゆっくり右へ走り去る
+      player.classList.add('exit-right');
+        if(localStorage.getItem("clear")){
+            localStorage.removeItem("clear");
+        }else{
+      localStorage.setItem("clear","Congratulation!");
+        }
+    }
+  }, 1500); // 敵が通り過ぎるのを待つ時間（ミリ秒）
 }
