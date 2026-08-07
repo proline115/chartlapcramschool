@@ -167,9 +167,9 @@ const membersData = [
   { id: 8, name: "ニコメディア", 
     profile: "ニコメディア（チャート周回予備校）は、令和時代、日本の高校生。<br><br>大会で優秀な成績を修めている。白陵高等学校功労賞筆頭候補。<br><br>「『鉄壁』はクソの会」<br>「アクリロニトリルガチ恋評議会」<br>「落ち目の倫理を壊滅させて地学を必修にする会」<br>初代会長。<br><br>ひとこと：カニカマに穴をあけるとあなかま",
     beliefProfile: "カニカマに穴をあけるとあなかま"},
-  { id: 9, name: "メンバー9", 
-    profile: "ここに9人目のプロフィールのテキストが入ります。",
-    beliefProfile: "3人以上は百合ではない"},
+  { id: 9, name: "ハフマン木の伐採者", 
+    profile: 'name = "ハフマン木の伐採者"<br>inchargeof = "情報"<br>kokoroe = "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"<br>selfintroduction = "情報の問題作ったりしてます。これをpythonに打ち込んでみてね☆"<br><br>for s in range(0,100000000000,1):<br>&nbsp;&nbsp;print(name)<br>&nbsp;&nbsp;print(inchargeof)<br>&nbsp;&nbsp;print(selfintroduction)',
+    beliefProfile: "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"},
   { id: 10, name: "メンバー10", 
     profile: "ここに10人目のプロフィールのテキストが入ります。",
     beliefProfile:"お前の親父巨人軍？"}
@@ -208,6 +208,7 @@ const CUSTOM_ERROR_MESSAGES = [
   ["妹嶌紫","この人の授業で全国行ってるなら…もしやこいつが真の有能ってｺﾄ!?"],
   ["(・∀・)","予備校の創始者であり首班。割と最近決まった設定やけど受け入れるの早すぎて笑ってもた。"],
   ["ニコメディア","早くASMR撮ってくれ"],
+  ["ハフマン木の伐採者","つい雑に扱ってしまう。でもちゃんと反応してくれておもろい。"],
   ["合言葉","素直め"],
   ["百合コーン","🦄（正解）"],
   ["ユリコーン","🦄（正解）"],
@@ -2159,12 +2160,12 @@ const achievementsData = [
   },
   {
     id: "achievement_32",
-    image: "images/logo.png",
-    title: "ありがとう⑨",
+    image: "achieve/achieve32.png",
+    title: "固定してくれてありがfor関数",
     conditionText: "メンバー９をお気に入り登録する",
     currentVal: 0,
     targetVal: 0,
-    description: "メンバー９を固定した",
+    description: "中2の黒歴史↓<br>https://scratch.mit.edu/users/tehutehu2/<br>おすすめ<br>サザエさん戦Gルート<br>アナゴブラスターの実装に幾億年消費",
     unlocked: false
   },
   {
@@ -3247,16 +3248,16 @@ const staffRollData = [
       { role: "永田町の番人", name: "岡山の吉右衛門"},
       { role: "加古川の網代木", name: "共同制作"},
       { role: "奇問の崖", name: "ニコメディア"},
-      { role: "共テ情報", name: "おしり"},
+      { role: "共テ情報", name: "ハフマン木の伐採者"},
       { role: "共テ世界史-1", name: "まつお"},
       { role: "共テ世界史2以降", name: "(・∀・)"},
       { role: "共テ倫理キリスト教編", name: "白狐ふゆ"},
       { role: "生物基礎", name: "白狐ふゆ"},
       { role: "化学基礎", name: "さすらいのブッダ"},
-      { role: "小学生でもできる情報", name: "おしり"},
+      { role: "小学生でもできる情報", name: "ハフマン木の伐採者"},
       { role: "単発数学", name: "さすらいのブッダ"},
       { role: "二発数学", name: "ニコメディア"},
-      { role: "中学生でもできる情報", name: "おしり"},
+      { role: "中学生でもできる情報", name: "ハフマン木の伐採者"},
       { role: "日本史", name: "岡山の吉右衛門"},
       { role: "別府川の網代木", name: "プロリン115"},
       { role: "無知の知", name: "ニコメディア"},
@@ -3554,7 +3555,8 @@ const enemyImages = [
   'ending/enemy15.png',
   'ending/enemy16.png',
   'ending/enemy17.png',
-  'ending/enemy18.png'
+  'ending/enemy18.png',
+  'ending/enemy19.png'
 ];
 
 let isGameOver = false;
