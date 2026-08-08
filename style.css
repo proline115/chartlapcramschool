@@ -609,6 +609,8 @@ img{
 @media (max-width: 1200px) { .thumbnail-grid { grid-template-columns: repeat(5, 1fr); } }
 @media (max-width: 900px) {  .thumbnail-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 600px) {  .thumbnail-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 510px) {  .thumbnail-grid { grid-template-columns: repeat(2, 1fr); } }
+
 
 .mondai-item {
     position: relative;
@@ -1222,7 +1224,7 @@ body.no-scroll {
   width: 80px !important;
   height: 80px !important;
   border-radius: 50% !important;
-  font-size: 40px !important; 
+  font-size: 40px; 
   line-height: 1 !important;  
 }
 .belief-btn-oval {
@@ -1303,7 +1305,7 @@ body.modal-open [onclick] {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999999;
+  z-index: 9999;
 }
 
 .password-modal-overlay.hidden {
@@ -1395,7 +1397,7 @@ body.modal-open [onclick] {
 .secret-page-container {
   display: block;
   background-color: #ffffff; /* 完全な白 */
-  width: 70%;               /* 実際の白い表示幅 */
+  width:100%;               /* 実際の白い表示幅 */
   max-width: 800px;
   margin-top: 0;
   margin-bottom:0;
