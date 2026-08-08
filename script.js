@@ -168,7 +168,7 @@ const membersData = [
     profile: "ニコメディア（チャート周回予備校）は、令和時代、日本の高校生。<br><br>大会で優秀な成績を修めている。白陵高等学校功労賞筆頭候補。<br><br>「『鉄壁』はクソの会」<br>「アクリロニトリルガチ恋評議会」<br>「落ち目の倫理を壊滅させて地学を必修にする会」<br>初代会長。<br><br>ひとこと：カニカマに穴をあけるとあなかま",
     beliefProfile: "カニカマに穴をあけるとあなかま"},
   { id: 9, name: "ハフマン木の伐採者", 
-    profile: 'name = "ハフマン木の伐採者"<br>inchargeof = "情報"<br>kokoroe = "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"<br>selfintroduction = "情報の問題作ったりしてます。これをpythonに打ち込んでみてね☆"<br><br>for s in range(0,100000000000,1):<br>&nbsp;&nbsp;print(name)<br>&nbsp;&nbsp;print(inchargeof)<br>&nbsp;&nbsp;print(selfintroduction)',
+    profile: 'name = "ハフマン木の伐採者"<br>inchargeof = "情報"<br>kokoroe = "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"<br>selfintroduction = "情報の問題作ったりしてます。これをpythonに打ち込んでみてね☆"<br><br>for s in range(0,100000000000,1):<br>&nbsp;&nbsp;print(name)<br>&nbsp;&nbsp;print(inchargeof)<br>&nbsp;&nbsp;print(kokoroe)<br>&nbsp;&nbsp;print(selfintroduction)',
     beliefProfile: "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"},
   { id: 10, name: "メンバー10", 
     profile: "ここに10人目のプロフィールのテキストが入ります。",
@@ -251,7 +251,17 @@ const CUSTOM_ERROR_MESSAGES = [
   ["科学の甲子園","バレたか。そうです。ここで一個一個問題渡してたのが面倒すぎたのでこうなりました。でもここまで隠し要素詰め込めるなんて思わないよね。"],
   ["網代木","こんなにメンバーいて日本史選択が0。でも学年で問題解く以上作らないといけない。そんでもって生まれた各教科のキメラ、網代木。"],
   ["犬の値段当てゲーム","え！知ってる人いた！嬉しい！誰にも伝わらなかったこれ！"],
-  ["白陵","...言及は避けよう"]
+  ["白陵","...言及は避けよう"],
+  ["あ","畦。田んぼのあぜ道のこと。畔とも書く。"],
+  ["ああ","アア溶岩。玄武岩-安山岩質の溶岩の表面形態の一つ。名称の由来はハワイ語。表面は粗く、ゴツゴツとしたコークス状の岩片がころがっている。パホイホイ溶岩が低温化し、粘性を得るとアア溶岩になることがあるが、アア溶岩からパホイホイ溶岩に変わることはない。伊豆諸島などで見られる。<br>(引用元:ブリタニカ国際大百科事典 一部略)"],
+  ["あああ","アアー。エジプト神話における月神。古代の月神の種々の形態のうちの一つで、ほかにトート、コンス、オシリスも同じく月神とみなされる。狩猟者や農耕民によって、生命を生み出すもの、およびその守護者として崇拝された。イヌの顔やフクロウの顔をもつとされ、また片目が太陽である偉大なタカの左目ともいわれる。<br>(引用元:ブリタニカ国際大百科事典 一部略)"],
+  ["ああああ","もう思いつかない"],
+  ["パホイホイ溶岩","なにそれ"],
+  ["パホイホイ","なにそれ"],
+  ["歴史","そのページは移動しました。"],
+  ["狂気","いやまぁ意味ちゃうのはわかってんねんけど、画像よりタイトルが先に決まってたんよね。もうならこれしかないやろ。"],
+  ["アクリロニトリルガチ恋評議会","まぁエッフェル塔みたいなもんか…"],
+  ["落ち目の倫理を壊滅させて地学を必修にする会","やめてください。"]
 ];
 
 const container = document.querySelector(".container");
@@ -2483,6 +2493,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if(localStorage.getItem("cookie")){
     achievementsData[1].description=`中心軸をずらしてるのがポイント<div class="achievement-shop-container"><div class="achievement-shop-left"><img src="images/cursor.png" alt="cursor" class="achievement-cursor-img"></div><button id="buyCursorBtn" onclick="buyCursor()" class="achievement-buy-btn">購入<br>10回転</button></div>`;
     achievementsData[4].description=`遠心力って強すぎるとこうなるんだよ<br><br><button id="upgrade-click-btn" class="upgrade-btn" onclick="buyClickUpgrade()">アップグレード<br>100回転<br>現在✕1</button>`;
+    localUpgrade();
   }
   loadAchievementsData();
   renderAchievements();
@@ -2997,14 +3008,12 @@ function toggleBurstSetting() {
 let upgradeLevel = 1;      // 現在のレベル
 let clickPower = 1;        // 1打あたりの倍率 (1, 2, 3...)
 let upgradeCost = 100;     // 必要回転数（コスト）
-
 /**
  * ボタンのテキスト表示を3行構成で更新する
  */
 function updateUpgradeButtonUI() {
   const btn = document.getElementById("upgrade-click-btn");
   if (!btn) return;
-
   // innerHTML を使って3行（<br>区切り）で設定
   btn.innerHTML = `アップグレード<br>${upgradeCost}回転<br>現在✕${clickPower}`;
 }
@@ -3018,16 +3027,35 @@ function buyClickUpgrade() {
   const item4 = achievementsData.find(a => a.id === "achievement_4");
   if (item4 && item4.currentVal >= upgradeCost) {
   upgradeLevel++;
+  localStorage.setItem("level",upgradeLevel.toString());
   clickPower=Math.ceil(clickPower*1.5);
+  localStorage.setItem("power",clickPower.toString());
   updateAchievementProgress("achievement_4", -upgradeCost, false, true);
   // コストの増加（例: 2倍ずつ増加。必要に応じて調整してください）
   upgradeCost = Math.floor(upgradeCost * 2);
-
+  localStorage.setItem("cost", upgradeCost.toString());
   // UI更新と状態保存
   updateUpgradeButtonUI();
-  localStorage.setItem("upgradeLevel", upgradeLevel.toString());
-  const item4 = achievementsData.find(a => a.id === "achievement_4");
     const index4 = achievementsData.findIndex(a => a.id === "achievement_4");
+    if (index4 !== -1) {
+      const grid = document.getElementById("achievement-grid");
+      if (grid && grid.children[index4]) {
+        const progressEl = grid.children[index4].querySelector(".overlay-progress");
+        if (progressEl) {
+          progressEl.textContent = `${item4.currentVal} / ${item4.targetVal}`;
+        }
+      }
+    }
+  }
+}
+
+function localUpgrade(){
+  if(localStorage.getItem("cost")){
+    upgradeLevel = Number(localStorage.getItem("level"));
+    upgradeCost = Number(localStorage.getItem("cost"));
+    clickPower = Number(localStorage.getItem("power"));
+    const index4 = achievementsData.findIndex(a => a.id === "achievement_4");
+    const item4 = achievementsData.find(a => a.id === "achievement_4");
     if (index4 !== -1) {
       const grid = document.getElementById("achievement-grid");
       if (grid && grid.children[index4]) {
@@ -3062,6 +3090,7 @@ function updateCursorButtonUI() {
   // ボタン表示の更新（3行構成など必要に応じて調整してください）
   btn.innerHTML = `購入<br>${currentCost}回転`;
 }
+
 
 // ==========================================
 // 隠しクリア判定＆コード入力処理
