@@ -48,6 +48,7 @@
 </head>
 
 <body>
+    <p class="hello">チャート周回予備校。ここは生徒が集まり、問題を制作する場所。そしてあなたが訪れ、問題を解く場所。チャートを周回していると気づけばこんなことに。それもきっと神の思し召し。この文章が見えているならすぐにそのリンクを押そう。あなたを待っているのは問題だけじゃないかもしれない。</p>
 <div class="transition-curtain-container">
     <div class="curtain layer-1"></div>
     <div class="curtain layer-2"></div>
@@ -65,7 +66,7 @@
     <div id="tapStart" onclick="startSite()">Tap to Start</div>
 </div>
 
-<header id="banner">
+<header class="banner pc-banner">
     <div class="banner-left">
         <div class="logo">
             <div class="logo-wrapper">
@@ -107,6 +108,50 @@
     </div>
 </header>
 
+<header class="banner sp-banner">
+    <div class="banner-left">
+        <div class="logo">
+            <div class="logo-wrapper">
+                <img src="images/logo.png" onclick="rotateLogo(event)" class="header-logo-img">
+                <span class="logo-hidden-text">①98643</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sp-grid-container">
+        <div class="nav-item" >
+            <img src="images/home.png" onclick="navigateTo('home')">
+            <span onclick="navigateTo('home')">ホーム</span>
+        </div>
+        <div class="nav-item">
+            <img src="images/problem.png" onclick="navigateTo('mondai')">
+            <span onclick="navigateTo('mondai')">問題集</span>
+        </div>
+        <div class="nav-item">
+            <img src="images/kasu.png" onclick="navigateTo('kasu')">
+            <span onclick="navigateTo('kasu')">カス問題集</span>
+        </div>
+
+        <div class="nav-item">
+            <img src="images/kokoroe.png" onclick="navigateTo('kokoroe')">
+            <span onclick="navigateTo('kokoroe')">心得</span>
+        </div>
+        <div class="nav-item">
+            <img src="images/history.png" onclick="navigateTo('history')">
+            <span onclick="navigateTo('history')">実績</span>
+        </div>
+
+        <div class="nav-item">
+            <img src="images/password.png" onclick="openPasswordModal()">
+            <span onclick="openPasswordModal()">合言葉</span>
+        </div>
+        <div class="nav-item">
+            <img src="images/answer.png" onclick="openAnswerModal()">
+            <span onclick="openAnswerModal()">答え</span>
+        </div>
+    </div>
+</header>
+
 <div id="pdf-viewer-view" class="hidden">
     <div class="viewer-actions">
         <button class="btn-back" onclick="closePdf()">← 一覧に戻る</button>
@@ -132,12 +177,12 @@
 
 <div id="page-home" class="page active">
     <div class="hero-section">
-        <h1 class="hero-title">チャート周回予備校</h1>
-        <p class="hero-catch" id="home-headline">チャートの周りで回ること、それが受験生。</p>
+        <h1 class="hero-title">チャート<span class="smart-phone">周回予備校</span></h1>
+        <p class="hero-catch" id="home-headline">チャートの周りで回ること、<span class="smart-phone">それが受験生。</span></p>
         <div class="hero-welcome">
             <p>チャート周回予備校へようこそ！</p>
             <p>ここは生徒が集まり、問題を作り合う場所。</p>
-            <p>これまでの自作問題をまとめています。ぜひチャレンジしてみてください！</p>
+            <p>これまでの自作問題をまとめています。<span class="smart-phone">ぜひチャレンジしてみてください！</span></p>
         </div>
     </div>
     <div class="menu-grid">
@@ -258,9 +303,9 @@
         <img id="fav-star" src="belief/star_off.png" alt="星マーク">
       </div>
     </div>
-
+      <h2 id="member-name">メンバー1</h2>
     <div class="belief-screen-left">
-        <h2 id="member-name">メンバー1</h2>
+        
       <div class="belief-member-photo-frame">
         <img id="member-photo" src="belief/member1.png" alt="メンバー写真">
       </div>
@@ -810,7 +855,7 @@
     <div id="letter-modal" class="letter-modal">
   <div class="letter-content">
     <div class="letter-body">
-      <div class="text-left">ここまで遊んでくださりありがとうございました！あなたの知識と、経験と、メタ思考が完全に噛み合いここまで辿り着いたことと思います。あなたの解いた問題や、しみじみとあわれを感じた和歌が、あなたの糧となり、そしてまた新たな作問と作品が生まれることを願っています。
+      <div class="text-left">ここまで遊んでくださりありがとうございました！あなたの知識と、経験と、メタ読みが完全に噛み合いここまで辿り着いたことと思います。あなたの解いた問題や、しみじみとあわれを感じた和歌が、あなたの糧となり、そしてまた新たな作問と作品が生まれることを願っています。
       <p class="text-right">2026 8/5 プロリン115</p>
       追記：エンドロールがちゃんと見れなかった人はもう一度エンドロールを見ましょう。</div>
     </div>
