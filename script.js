@@ -10,7 +10,7 @@ const randomPhrases = [
     "ひさかたの輝かしき空<br>きみがため<br>未来を照らす光なりけり",
     "しろたへの雪が溶けゆく春の日に<br>君の門出よいとあはれかな",
     "千木り無き流るる時の遠けれど<br>違える年の春も来にけり",
-    "あらたまの春にぞならんめでたき日<br>輝く六花降りしきること",
+    "あらたまの<br>春にぞならんめでたき日<br>輝く六花降りしきること",
     "朝露の置きし木立をながむれば<br>苔よりいづる竹ぞありけむ",
     "朝露に濡れにし竹ののぶがごと<br>延びゆく君の明日をも見てむ",
     "竹の子や一日ふるまにおよすげば<br>誰か明日の姿知るらむ",
@@ -20,10 +20,10 @@ const randomPhrases = [
     "合言葉に<br>「Okayama」と入れると…？",
     "合言葉に<br>「Math」と入れると…？",
     "合言葉「Question」で<br>直接メッセージが送れます",
-    "いつまでも回るわけでは無いらしい",
+    "いつまでも回るわけでは<br>無いらしい",
     "ティンバル果が<br>結局何かわかってない",
     "ジャムシェドプルの<br>タタ財閥を創始したのは<br>ジャムシェトジー・タタ",
-    "このサイトには<br>クリアという概念が存在する…かも",
+    "このサイトには<br>クリアという概念が<br>存在する…かも",
     "勉強を楽しむのに<br>頭の良さは関係ない",
     "『恋愛は幸福の期待値が低い』",
     "大吉！！！<br>今日一日全部の四択を当てるかも",
@@ -44,7 +44,7 @@ const randomPhrases = [
     "長い文章を入れたらどうなるかのチェックのためにこの文章を書いてるけど、多分こいつがはじめに表示されてそのあと流れてくるみたいな挙動になってるはず。自動で改行する機能を入れるか、文字の大きさを縮めるようにするか。自動で改行したら和歌の侘び寂びがなくなってしまう気がするし、文字を小さくしたらそれはそれで見にくい。画面の横幅が小さい場合縦から流すようにするのもあるけどほんまにプログラムめんどい気がする。でもかと言ってなぁ、スマホで見た時どう思うかよな。文化祭で見るとしたら多分スマホから。わざわざパソコンでするなんて準備中の人ぐらい？その人は多分このサイト楽しむ余裕ないし、そもそも文化祭に間に合うかわからんぐらい超大作が出来上がろうとしてる。自動改行は必要っぽいな。正味侘び寂びは一旦やってみてから判断するしか無い。縦に流すのもできることならしたい。このサイト出来上がるのほんまに来年の文化祭とかになるんちゃうかな。",
     "老人のイカれ昭和エピソード好き",
     "山へ芝刈りにって<br>結局何してたんやろ",
-    "範囲多すぎると<br>逆に何もしたくなくなる症候群",
+    "範囲多すぎると逆に<br>何もしたくなくなる症候群",
     "背景の写真は<br>どこから撮ったでしょう",
     "私の愛した「Cookie」",
     "教養は高く<br>品性は低く",
@@ -169,10 +169,10 @@ const membersData = [
     beliefProfile: "カニカマに穴をあけるとあなかま"},
   { id: 9, name: "ハフマン木の伐採者", 
     profile: 'name = "ハフマン木の伐採者"<br>inchargeof = "情報"<br>kokoroe = "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"<br>selfintroduction = "情報の問題作ったりしてます。これをpythonに打ち込んでみてね☆"<br><br>for s in range(0,100000000000,1):<br>&nbsp;&nbsp;print(name)<br>&nbsp;&nbsp;print(inchargeof)<br>&nbsp;&nbsp;print(kokoroe)<br>&nbsp;&nbsp;print(selfintroduction)',
-    beliefProfile: "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"},
-  { id: 10, name: "メンバー10", 
-    profile: "ここに10人目のプロフィールのテキストが入ります。",
-    beliefProfile:"お前の親父巨人軍？"}
+    beliefProfile: "課題の進行と紛失は常に同値条件。<span class='smart-phone'>範囲の3周は朝飯前。</span>"},
+  { id: 10, name: "韓流メスガキ", 
+    profile: "&emsp;え〜♡　こんなカンタンな問題もできないの？　よわよわじゃ〜ん♡　こんなの、小・学・生でもできちゃうよ？　もう諦めちゃうんですかぁ〜♡<br>&emsp;ほらほら、解いて♡　解いて♡　答えは見ちゃダメだよ？　え？　『どうしても見たい』？　『なんでもする』？　そこまで言うなら〜、私に土下座してくれたら、見せてあげてもいいかな♡<br>&emsp;うわ♡　ホントに土下座しちゃうんだ♡　誇りとかないんですかぁ〜♡　ざぁこ♡　ざぁこ♡　クソザコさん♡<br>&emsp;じゃあ次は〜、私をオキニイリにしてもらおっかなっ♡　『答えを見せてくれないのか』って、本気にしてたの？　素直に見せてあげるわけないじゃ～ん♡　こんなことにも気づかないなんて♡　そんなんだから、小学生にも負けちゃうんだよ〜♡<br>&emsp;頑張れ♡　頑張れ♡　答えが見たいんでしょ〜♡<br>&emsp;まだまだ逃さないから、覚悟しててね♡",
+    beliefProfile:"10円パン両替したい"}
 ];
 
 const CUSTOM_ERROR_MESSAGES = [
@@ -209,6 +209,7 @@ const CUSTOM_ERROR_MESSAGES = [
   ["(・∀・)","予備校の創始者であり首班。割と最近決まった設定やけど受け入れるの早すぎて笑ってもた。"],
   ["ニコメディア","早くASMR撮ってくれ"],
   ["ハフマン木の伐採者","つい雑に扱ってしまう。でもちゃんと反応してくれておもろい。"],
+  ["韓流メスガキ","※彼は男です。<br>※中々送ってくれないためみんなで考えたらこうなりました。"],
   ["合言葉","素直め"],
   ["百合コーン","🦄（正解）"],
   ["ユリコーン","🦄（正解）"],
@@ -265,7 +266,6 @@ const CUSTOM_ERROR_MESSAGES = [
 ];
 
 const container = document.querySelector(".container");
-const banner = document.getElementById("banner");
 const tap = document.getElementById("tapStart");
 const left = document.querySelector(".left");
 const right = document.querySelector(".right");
@@ -274,7 +274,6 @@ const bottom = document.querySelector(".bottom");
 window.addEventListener("DOMContentLoaded", init);
 
 function init(){
-    banner.style.display = "none";
     document.body.style.overflow = "hidden";
 
     left.classList.add("show");
@@ -304,7 +303,6 @@ function startSite(){
         openingLogo.classList.add("hide");
     }
 
-    banner.style.display = "flex";
 
     document.getElementById("openingCover").classList.add("hide");
 
@@ -315,6 +313,7 @@ function startSite(){
 
     setTimeout(enterMain, 1500);
     updateAchievementProgress("achievement_1");
+    localStorage.setItem("started","start");
 }
 
 function enterMain(){
@@ -374,6 +373,7 @@ function setCurtainText() {
     }
 
     textElement.innerHTML = selectedText;
+    
 }
 
 function executePageSwitch(fullPageId) {
@@ -435,8 +435,16 @@ let isBurst = false;
 function rotateLogo(event) {
     if (event) event.stopPropagation();
     if (isBurst) return; 
+    // getComputedStyle を使って実際の display 状態を取得する
+const spBanner = document.querySelector('.sp-banner');
+const isSpVisible = spBanner && window.getComputedStyle(spBanner).display === "flex";
 
-    const logoImg = document.querySelector('.logo img');
+let logoImg;
+if (isSpVisible) {
+    logoImg = document.querySelector('.sp-banner .logo img');
+} else {
+    logoImg = document.querySelector('.pc-banner .logo img');
+}
     if (!logoImg) return;
     updateLogoAchievements();
     clickCount+=clickPower;
@@ -1091,7 +1099,7 @@ const btnNext = document.getElementById("btn-next");
 const btnFavorite = document.getElementById("btn-favorite");
 
 const homeHeadline = document.getElementById("home-headline"); 
-const defaultHeadline = "チャートの周りで回ること、それが受験生。";
+const defaultHeadline = "チャートの周りで回ること、<span class='smart-phone'>それが受験生。</span>";
 
 function updateHomeHeadline() {
   if (favoriteMemberId !== null && typeof membersData !== "undefined") {
@@ -1102,7 +1110,7 @@ function updateHomeHeadline() {
       return;
     }
   }
-  homeHeadline.textContent = defaultHeadline;
+  homeHeadline.innerHTML = defaultHeadline;
 }
 function updateScreen(index, direction = "") {
   profileWrap.className = "belief-profile-text-wrap";
@@ -2180,12 +2188,12 @@ const achievementsData = [
   },
   {
     id: "achievement_33",
-    image: "images/logo.png",
-    title: "ありがとう⑩",
+    image: "achieve/achieve33.png",
+    title: "キュアトゥンカロン",
     conditionText: "メンバー１０をお気に入り登録する",
     currentVal: 0,
     targetVal: 0,
-    description: "メンバー１０を固定した",
+    description: "ワタシのアマアマトゥンカロンパワーにメロメロなの？ざっこー♡",
     unlocked: false
   },
   {
@@ -2497,6 +2505,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   loadAchievementsData();
   renderAchievements();
+  updateBurstToggleButton();
   updateSubjectOnlyAchievements();
 });
 
@@ -2848,7 +2857,15 @@ const RADIUS_STEP = 35;        // 周（レイヤー）ごとの加算半径(px)
  * 新しいカーソルを購入して追加する関数
  */
 function spawnOrbitCursor() {
-  const logoContainer = document.querySelector('.logo');
+    const spBanner = document.querySelector('.sp-banner');
+    const isSpVisible = spBanner && window.getComputedStyle(spBanner).display === "flex";
+
+    let logoContainer;
+    if (isSpVisible) {
+        logoContainer = document.querySelector('.sp-banner .logo');
+    } else {
+        logoContainer = document.querySelector('.pc-banner .logo');
+    }
   if (!logoContainer) return;
 
   if (getComputedStyle(logoContainer).position === 'static') {
@@ -3101,6 +3118,7 @@ let isIdleClearReady = false; // 30秒放置されたかのフラグ
 
 // 30秒放置タイマーの開始
 function startIdleTimer() {
+    if (!localStorage.getItem("started")) return;
   clearTimeout(idleTimer);
   isIdleClearReady = false;
 
@@ -3278,7 +3296,7 @@ const staffRollData = [
       { role: "加古川の網代木", name: "共同制作"},
       { role: "奇問の崖", name: "ニコメディア"},
       { role: "共テ情報", name: "ハフマン木の伐採者"},
-      { role: "共テ世界史-1", name: "まつお"},
+      { role: "共テ世界史-1", name: "韓流メスガキ"},
       { role: "共テ世界史2以降", name: "(・∀・)"},
       { role: "共テ倫理キリスト教編", name: "白狐ふゆ"},
       { role: "生物基礎", name: "白狐ふゆ"},
@@ -3310,9 +3328,9 @@ const staffRollData = [
   {
     sectionTitle: "実績写真撮影",
     members: [
-      { role: "大吉", name: "プロリン115（の家の前で寝てた猫）" },
+      { role: "大吉", name: "プロリン115<br>（↳の家の前で寝てた猫）" },
       { role: "岡山の吉右衛門固定", name: "プロリン115" },
-      { role: "プロリン115固定", name: "プロリン115（が行った海で寝てた猫）" },
+      { role: "プロリン115固定", name: "プロリン115<br>（↳が行った海で寝てた猫）" },
       { role: "さすらいのブッダ固定", name: "お友達（ありがとう）" },
       { role: "妹嶌紫固定", name: "妹嶌紫" },
       { role: "隠し数字発見", name: "岡山の吉右衛門" }
@@ -3352,7 +3370,7 @@ const staffRollData = [
     members: [
       { role: "東京写真", name: "プロリン115" },
       { role: "京都写真", name: "岡山の吉右衛門" },
-      { role: "岡山写真送ってくれなかった人", name: "岡山の吉右衛門" }
+      { role: "岡山写真送ってくれない人", name: "岡山の吉右衛門" }
     ]
   },
   {
@@ -3429,7 +3447,7 @@ function buildStaffRollDOM() {
 
       const nameEl = document.createElement("span");
       nameEl.className = "name";
-      nameEl.textContent = member.name;
+      nameEl.innerHTML = member.name;
 
       rowEl.appendChild(roleEl);
       rowEl.appendChild(nameEl);
@@ -3585,7 +3603,8 @@ const enemyImages = [
   'ending/enemy16.png',
   'ending/enemy17.png',
   'ending/enemy18.png',
-  'ending/enemy19.png'
+  'ending/enemy19.png',
+  'ending/enemy20.png'
 ];
 
 let isGameOver = false;
