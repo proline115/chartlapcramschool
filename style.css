@@ -18,6 +18,10 @@ body{
     background:transparent;
 }
 
+.hello{
+    display:none;
+}
+
 #openingCover{
     position:fixed;
     inset:0;
@@ -50,7 +54,7 @@ img{
 
 .left{
     width:450px;
-    left:-40px;
+    left: calc(-45px - (1000px - 100vw) * 0.2);
     top:18%;
     transform:translate(-600px,500px) rotate(32deg);
     z-index:2000;
@@ -58,7 +62,7 @@ img{
 
 .right{
     width:450px;
-    right:-30px;
+    right: calc(-30px - (1000px - 100vw) * 0.08);
     top:18%;
     transform:translate(600px,500px) rotate(-32deg);
     z-index:2000;
@@ -118,8 +122,10 @@ img{
     position: fixed;
     left: 50%;
     top: 25%;
-    width: 250px;
-    height: 250px;
+    width: 40vw;           /* 画面幅に合わせて伸縮 */
+    height: 40vw;          /* 縦横比を保って伸縮 */
+    max-width: 250px;      /* 250px を上限（最大値）とする */
+    max-height: 250px;     /* 250px を上限（最大値）とする */
     transform: translate(-50%, -50%);
     object-fit: contain;
     opacity: 0;
@@ -194,14 +200,14 @@ img{
     transition:opacity 1.5s ease;
 }
 
-#banner{
+.banner{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     height:120px;
     background-color: rgba(27, 76, 154, 0.9);
-    display:none;
+    display:flex;
     justify-content:space-between;
     align-items:center;
     padding:0 40px;
@@ -216,6 +222,19 @@ img{
     align-items:center;
     gap:10px;
 }
+
+
+/* ==========================================
+   スマホ用バナー表示設定 (768px以下)
+   ========================================== */
+
+/* PC時はスマホ専用バナーを非表示 */
+.sp-banner {
+    display: none;
+}
+
+
+
 
 .logo{
     width:90px;
@@ -234,6 +253,12 @@ img{
     transition: transform 0.5s ease;
     cursor: pointer;
     z-index:99998;
+    user-select: none;                   /* 標準の要素選択を無効化 */
+    -webkit-user-select: none;           /* Safari / Chrome 用 */
+    -moz-user-select: none;              /* Firefox 用 */
+    -webkit-user-drag: none;             /* ドラッグ（青い選択の引きずり）を無効化 */
+    -webkit-tap-highlight-color: transparent; /* スマホやブラウザのタップ時青枠を消去 */
+    outline: none;
 }
 
 .logo img:active{
@@ -343,6 +368,199 @@ img{
     animation: logoRespawn 0.6s ease-out forwards;
 }
 
+@media (max-width: 850px) {
+    /* 1. PC用バナーを非表示 */
+    .pc-banner {
+        display: none !important;
+    }
+
+    /* 2. スマホ用バナー全体 */
+    .sp-banner {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        
+        /* 💡 height を auto にし、max-height で高さを制限 */
+        height: auto !important;
+        max-height: 120px !important; /* 初期状態は120px制限 */
+        overflow: hidden !important;   /* はみ出た部分を隠す */
+        
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 1000 !important;
+        isolation: auto !important;
+        
+        background-color: rgba(27, 76, 154, 0.9) !important;
+        
+        /* 💡 ホバー時にスムーズに伸びるアニメーション */
+        transition: max-height 0.35s ease-in-out !important;
+        
+        padding: 10px !important;
+        box-sizing: border-box !important;
+        gap: 10px !important;
+    }
+
+    /* 💡 3. ホバーした時：max-height を解放して下まで広げる */
+    .sp-banner:hover {
+        max-height: 360px !important; /* 3段分を表示できる高さまで開放 */
+    }
+
+    /* 4. ロゴエリア */
+    .sp-banner .sp-logo-container {
+        flex-shrink: 0 !important;
+        width: 90px !important;
+        padding-top: 5px !important;
+    }
+    
+    /* 5. 右側の 3×3 グリッドエリア */
+    .sp-banner .sp-grid-container {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        
+        grid-template-areas: 
+            "item1 item2 item3"
+            "item4 item5 .    "
+            "item6 item7 .    " !important;
+        
+        column-gap: 10px !important;
+        row-gap: 20px !important;
+        
+        flex: 1 !important;
+        width: calc(100% - 100px) !important;
+        height: auto !important;
+        padding-top: 5px !important; /* 1段目を120pxの中に綺麗に収める調整 */
+    }
+
+    /* 各ボタンをGridエリアに紐付け */
+    .sp-banner .sp-grid-container > div:nth-child(1) { grid-area: item1; }
+    .sp-banner .sp-grid-container > div:nth-child(2) { grid-area: item2; }
+    .sp-banner .sp-grid-container > div:nth-child(3) { grid-area: item3; }
+    .sp-banner .sp-grid-container > div:nth-child(4) { grid-area: item4; }
+    .sp-banner .sp-grid-container > div:nth-child(5) { grid-area: item5; }
+    .sp-banner .sp-grid-container > div:nth-child(6) { grid-area: item6; }
+    .sp-banner .sp-grid-container > div:nth-child(7) { grid-area: item7; }
+
+    /* 6. アイコンボタン枠組み */
+    .sp-banner .nav-item {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        cursor: pointer !important;
+    }
+
+    /* 7. 画像サイズ (66px × 66px) */
+    .sp-banner .nav-item img {
+        position: static !important;
+        width: 66px !important;
+        height: 66px !important;
+        object-fit: contain !important;
+        margin-top: 0 !important;
+        margin-bottom: 2px !important;
+        padding: 0 !important;
+    }
+
+    /* 8. 文字サイズ */
+    .sp-banner .nav-item span {
+        position: static !important;
+        display: block !important;
+        color: #ffffff !important;
+        font-size: 14px !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1.2 !important;
+        transform: none !important;
+    }
+    .logo{
+        width:90px;
+        height:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin-right:0px;
+    }
+
+    .logo img{
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        transition: transform 0.5s ease;
+        cursor: pointer;
+        z-index:99998;
+        user-select: none;                   /* 標準の要素選択を無効化 */
+        -webkit-user-select: none;           /* Safari / Chrome 用 */
+        -moz-user-select: none;              /* Firefox 用 */
+        -webkit-user-drag: none;             /* ドラッグ（青い選択の引きずり）を無効化 */
+        -webkit-tap-highlight-color: transparent; /* スマホやブラウザのタップ時青枠を消去 */
+        outline: none;
+    }
+
+    .logo img:active{
+       transform: rotateZ(360deg);
+    }
+
+    @keyframes logoBurst {
+        0% {
+            transform: rotateZ(0deg) scale(20.0);
+            filter: blur(0px) brightness(1);
+            opacity: 1;
+        }
+        40% {
+            transform: rotateZ(360deg) scale(25.0);
+            filter: blur(15px) brightness(3); 
+            opacity: 0.95;
+        }
+        100% {
+            transform: rotateZ(900deg) scale(0);
+            filter: blur(50px) brightness(5);
+            opacity: 0;
+        }
+    }
+
+    @keyframes logoRespawn {
+        0% {
+            opacity: 0;
+            transform: rotateZ(-360deg) scale(0);
+        }
+        100% {
+            opacity: 1;
+            transform: rotateZ(0deg) scale(1);
+        }
+    }
+
+    .logo img.burst {
+        position: fixed; 
+        left: 50vw;
+        top: 50vh;
+        margin: 0;
+        transform-origin: center center;
+        z-index: 99998; 
+        animation: logoBurst 1.0s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+        pointer-events: none;
+    }
+
+    .logo img.respawn {
+        animation: logoRespawn 0.6s ease-out forwards;
+    }
+
+    .banner-left{
+        margin-left:30px;
+    }
+
+    .logo-hidden-text {
+        top: 50px !important;
+    }
+}
+
 .hero-section {
     text-align: center;
     padding: 60px 20px;
@@ -359,6 +577,10 @@ img{
     text-shadow: 
         2px 2px 0px #ffffff, 
         4px 4px 10px rgba(27, 76, 154, 0.2); 
+}
+
+.smart-phone {
+  display: inline-block;
 }
 
 .hero-catch {
@@ -392,7 +614,7 @@ img{
     padding: 0 20px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
     .menu-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px;
@@ -409,6 +631,7 @@ img{
 }
 
 .menu-box {
+    container-type: inline-size;
     background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #1B4C9A;
     border-radius: 8px;
@@ -450,14 +673,14 @@ img{
 }
 
 .menu-box h3 {
-    font-size: 20px;
+    font-size: 7cqw;
     color: #1B4C9A;
     margin: 0 0 15px 0;
     font-weight: 700;
 }
 
 .menu-box p {
-    font-size: 14px;
+    font-size: clamp(12px, 4.5cqw, 15px);
     color: #333333;
     margin: 0;
     line-height: 1.5;
@@ -516,7 +739,7 @@ img{
 }
 
 .curtain-text {
-    font-size: 4rem;
+    font-size: min(4rem, 6vw);
     font-weight: 900;
     color: #ffffff;
     letter-spacing: 2px;
@@ -549,7 +772,7 @@ img{
     font-weight: bold;
     color: #ffffff;
     white-space: nowrap;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 #page-mondai {
@@ -608,11 +831,12 @@ img{
 
 @media (max-width: 1200px) { .thumbnail-grid { grid-template-columns: repeat(5, 1fr); } }
 @media (max-width: 900px) {  .thumbnail-grid { grid-template-columns: repeat(4, 1fr); } }
-@media (max-width: 600px) {  .thumbnail-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 510px) {  .thumbnail-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) {  .thumbnail-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 530px) {  .thumbnail-grid { grid-template-columns: repeat(2, 1fr); } }
 
 
 .mondai-item {
+    container-type: inline-size;
     position: relative;
     aspect-ratio: 1 / 1;
     width: 100% !important; 
@@ -666,7 +890,7 @@ img{
 
 .mondai-title {
     color: #222222 !important; 
-    font-size: 1.3rem !important; 
+    font-size: 11cqw !important; 
     font-weight: 800 !important; 
     line-height: 1.3 !important; 
     margin: 0;
@@ -693,12 +917,12 @@ img{
 
 #pdf-viewer-view {
     width: 100vw !important;
-    height: 100vh !important; 
+    height: 100dvh !important; 
     background: #333333;
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box;
-    position: relative !important;
+    position: fixed !important;
     overflow: hidden;
     z-index:9999;
 }
@@ -727,7 +951,7 @@ img{
     display: flex;
     justify-content: flex-end !important; 
     align-items: center;
-    z-index: 100;
+    z-index: 10000;
 }
 
 .btn-solved {
@@ -1192,6 +1416,69 @@ body.no-scroll {
   opacity: 1 !important;
 }
 
+/* ==========================================
+   レスポンシブ対応（画面幅が狭くなった時）
+   ※850px以下で縦並びに切替
+========================================== */
+@media (max-width: 950px) {
+
+    /* 💡 星マークの位置をさらに右寄せにする */
+  .belief-favorite-tag {
+    right: 5px !important; /* 元の20pxから5pxに変更して右へ寄せる */
+  }
+
+    /* 💡 名前の下線を親要素の端まで広げず、名前の幅ぴったりに収める */
+  #member-name {
+    display: inline-block !important; /* または width: fit-content !important; */
+    max-width: calc(100% - 90px) !important; /* 星アイコン（約80px）との衝突・重なりを確実に防ぐ */
+  }
+  /* 1. 枠体を画面幅に合わせて可変（縦長）にする */
+  .belief-digital-screen {
+    width: 95% !important;
+    max-width: 500px !important;
+    height: auto !important;
+    padding-top: 60px !important; /* 名前に重ならないための余白 */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* 2. 画像エリア（上側） */
+  .belief-screen-left {
+    position: relative !important;
+    width: 100% !important;
+    height: 220px !important;
+    pointer-events: auto !important;
+  }
+
+  .belief-member-photo-frame {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .belief-member-photo-frame img {
+    height: 100% !important;
+    width: auto !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    object-fit: contain !important;
+  }
+
+  /* 3. 自己紹介文章エリア（下側） */
+  .belief-screen-right {
+    position: relative !important;
+    float: none !important;
+    width: 100% !important;
+    height: auto !important;
+    padding-left: 0 !important;
+    padding-top: 10px !important;
+  }
+
+  .belief-profile-text-wrap {
+    margin-top: 10px !important;
+  }
+}
+
 .belief-digital-controller {
   text-align: center !important;
   margin-top: 35px !important;
@@ -1219,6 +1506,7 @@ body.no-scroll {
   user-select: none !important;
   box-sizing: border-box !important;
   margin: 0 20px !important;
+  flex-shrink: 0 !important;
 }
 .belief-btn-round {
   width: 80px !important;
@@ -1745,6 +2033,7 @@ iframe.questionnaire {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.2s ease;
+    container-type: inline-size;
 }
 
 /* ホバー時の箱 */
@@ -1814,20 +2103,20 @@ iframe.questionnaire {
 /* 白背景内のテキスト装飾 */
 .overlay-title {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 8.5cqw;
     margin-bottom: 6px;
     color: #000;
 }
 
 .overlay-text {
-    font-size: 0.85rem;
+    font-size: 7cqw;
     line-height: 1.4;
     color: #333;
     word-break: break-all;
 }
 
 .overlay-progress {
-    margin-top: 8px;
+    margin-top: 6.8cqw;
     font-size: 0.85rem;
     font-weight: bold;
     color: #0056b3;
@@ -2267,7 +2556,7 @@ iframe.questionnaire {
 
 /* アニメーション起動クラス */
 .staff-roll-content.scrolling {
-  animation: staffRollScroll 89s linear forwards;
+  animation: staffRollScroll 89s linear forwards !important;
 }
 
 /* ★ 画面下から現れ、スタッフロールの「一番下」が画面上へ消え切るまで移動 */
@@ -2356,7 +2645,7 @@ iframe.questionnaire {
 
 /* ★ 華やかな Thank you for playing のスタイル */
 .final-thanks-text {
-  font-size: 10rem;
+  font-size: 15vw;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
@@ -2392,7 +2681,7 @@ iframe.questionnaire {
    ========================================== */
 .game-area {
   position: relative;
-  width: 100%;
+  width: 600px;
   height: 180px;            /* ゲームエリアの高さ */
   margin-top: auto;         /* 下詰めに配置 */
   background: rgba(255, 255, 255, 0.05); /* うっすら背景（不要なら0） */
@@ -2552,4 +2841,67 @@ iframe.questionnaire {
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================
+   スマホ・小画面用（位置とレイアウト調整）
+========================================== */
+@media (max-width: 980px) {
+  /* 1. 全体コンテナを上下いっぱいに使う設定 */
+  .ending-container {
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 100vh !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. 左側グループ（写真＋ミニゲーム） */
+  .ending-left {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important; /* 上下にがっと離す */
+    align-items: center !important;
+  }
+
+  /* 上部：写真枠 */
+  .memory-image-wrapper {
+    height: min(50%,75vw) !important;
+    aspect-ratio: 4 / 3 !important;
+    margin: 15px auto 0 auto !important;
+      background-color: #000;
+  overflow: hidden !important; /* 枠外のはみだしをカット */
+  border-radius: 12px;         /* 大きくなった分、角丸も少し滑らかに */
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  }
+
+  /* 下部：ミニゲーム枠（画面の一番下にピッタリ揃える） */
+  .game-area {
+    width: min(90%,600px) !important;
+    height: 180px !important;
+    margin-top: auto !important; /* 下揃え */
+      margin-bottom:40px;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    flex-shrink: 0 !important;
+    background: rgba(255, 255, 255, 0.05); /* うっすら背景（不要なら0） */
+    border-bottom: 2px solid #555;
+  }
+
+  /* 3. 右側グループ（エンドロール枠） */
+  .ending-right {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important; /* 背面に配置して隙間部分にエンドロールを流す */
+    top: 0 !important;
+    left: 0 !important;
+    pointer-events: none !important;
+  }
 }
