@@ -502,6 +502,29 @@ window.initGame = function(canvas) {
             if (window.currentGameScene === "GAMEOVER" || window.currentGameScene === "CLEAR") {
                 SoundEffects.playSelect();
                 window.currentGameScene = "SELECT";
+                score = 0;
+                passedEnemiesCount = 0; // 侵略数の初期化
+                player.hp = 30;
+                player.x = canvas.width / 2;
+                player.y = canvas.height - 50; 
+                currentPhase = 1;
+                phaseSpawnCount = 0;
+                enemySpawnTimer = 0;
+                phase7ElapsedTime = 0;
+                clearStar.progress = 0;
+                clearStar.x = canvas.width / 2;
+                clearStar.y = -100; 
+                bullets = [];
+                whiteEraserCircles = []; // ★ 白武器用の消滅サークルを初期化
+                enemyBullets = [];
+                enemies = [];
+                chargeTimer = 0;
+
+                // ④ 拡大演出パラメータのリセット
+                clearPresentation.scale = 1.0;
+                clearPresentation.angle = 0;
+                clearPresentation.opacity = 1.0;
+                clearPresentation.fadeStarted = false;
             }
         };
         canvas.addEventListener("click", handleCanvasClick);
@@ -1381,6 +1404,7 @@ window.initGame = function(canvas) {
                 ctx.fillStyle = "#ffffff";
                 ctx.font = "16px 'DotGothic16'";
                 ctx.fillText("Click to return menu", canvas.width / 2, canvas.height * 0.8);
+                
             }
 
             if (window.currentGameScene === "CLEAR") {
