@@ -487,6 +487,7 @@ img{
         align-items:center;
         justify-content:center;
         margin-right:0px;
+        margin-top:50px;
     }
 
     .logo img{
@@ -502,6 +503,7 @@ img{
         -webkit-user-drag: none;             /* ドラッグ（青い選択の引きずり）を無効化 */
         -webkit-tap-highlight-color: transparent; /* スマホやブラウザのタップ時青枠を消去 */
         outline: none;
+        position:fixed;
     }
 
     .logo img:active{
@@ -556,9 +558,6 @@ img{
         margin-left:30px;
     }
 
-    .logo-hidden-text {
-        top: 50px !important;
-    }
 }
 
 .hero-section {
@@ -568,7 +567,7 @@ img{
 }
 
 .hero-title {
-    font-size: 64px;
+    font-size: min(64px,14vw);
     font-weight: 900;
     font-family:sans-serif;
     color: #1B4C9A;
@@ -584,7 +583,7 @@ img{
 }
 
 .hero-catch {
-    font-size: 18px;
+    font-size: min(18px,4vw);
     color: #444444;
     margin: 0 0 40px 0;
     font-weight: 600;
@@ -592,7 +591,7 @@ img{
 }
 
 .hero-welcome {
-    font-size: 16px;
+    font-size: min(16px,3vw);
     color: #333333;
     line-height: 1.8;
 }
@@ -2221,7 +2220,7 @@ iframe.questionnaire {
 /* 共通ボタン基本スタイル */
 .ach35-btn {
   padding: 4px 12px;
-  font-size: 0.75rem;
+  font-size: 6cqw;
   font-weight: bold;
   border: 1px solid #ccc;
   border-radius: 4px;
