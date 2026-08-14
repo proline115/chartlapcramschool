@@ -49,7 +49,8 @@ const randomPhrases = [
     "私の愛した「Cookie」",
     "教養は高く<br>品性は低く",
     "ミリカンすごくね？",
-    "ここ最近一番の驚き<br>リトマスゴケ"
+    "ここ最近一番の驚き<br>リトマスゴケ",
+    "情報✕外れ値＝香川"
 ];
 
 const sequentialPhrases = [
@@ -171,7 +172,7 @@ const membersData = [
     profile: 'name = "ハフマン木の伐採者"<br>inchargeof = "情報"<br>kokoroe = "課題の進行と紛失は常に同値条件。範囲の3周は朝飯前。"<br>selfintroduction = "情報の問題作ったりしてます。これをpythonに打ち込んでみてね☆"<br><br>for s in range(0,100000000000,1):<br>&nbsp;&nbsp;print(name)<br>&nbsp;&nbsp;print(inchargeof)<br>&nbsp;&nbsp;print(kokoroe)<br>&nbsp;&nbsp;print(selfintroduction)',
     beliefProfile: "課題の進行と紛失は常に同値条件。<span class='smart-phone'>範囲の3周は朝飯前。</span>"},
   { id: 10, name: "韓流メスガキ", 
-    profile: "&emsp;え〜♡　こんなカンタンな問題もできないの？　よわよわじゃ〜ん♡　こんなの、小・学・生でもできちゃうよ？　もう諦めちゃうんですかぁ〜♡<br>&emsp;ほらほら、解いて♡　解いて♡　答えは見ちゃダメだよ？　え？　『どうしても見たい』？　『なんでもする』？　そこまで言うなら〜、私に土下座してくれたら、見せてあげてもいいかな♡<br>&emsp;うわ♡　ホントに土下座しちゃうんだ♡　誇りとかないんですかぁ〜♡　ざぁこ♡　ざぁこ♡　クソザコさん♡<br>&emsp;じゃあ次は〜、私をオキニイリにしてもらおっかなっ♡　『答えを見せてくれないのか』って、本気にしてたの？　素直に見せてあげるわけないじゃ～ん♡　こんなことにも気づかないなんて♡　そんなんだから、小学生にも負けちゃうんだよ〜♡<br>&emsp;頑張れ♡　頑張れ♡　答えが見たいんでしょ〜♡<br>&emsp;まだまだ逃さないから、覚悟しててね♡",
+    profile: "&emsp;え〜♡&emsp;こんな簡単な問題ができないの？&emsp;よっわぁ♡&emsp;こんなの、小・学・生でもできちゃうよ？<br>&emsp;ほ〜ら、解いて♡&emsp;解いて♡&emsp;答えは見ちゃダメだよ♡&emsp;でも、どうしても見たいって言うなら、私に土下座してくれたら、考えてあげてもいいかな♡<br>&emsp;うわ♡&emsp;ホントに土下座しちゃうんだぁ♡&emsp;プライドとかないんですかぁ〜♡&emsp;ざぁこ♡&emsp;ざぁこ♡<br>&emsp;じゃあ次は〜、私をオキニイリにしてもらおっかな♡&emsp;素直に見せてあげるわけないじゃん♡&emsp;こんな単純な手に引っかかるなんて♡&emsp;だから、私に負けちゃうんだよ♡&emsp;小学生以下のくそざこさん♡<br>&emsp;頑張れ♡&emsp;頑張れ♡&emsp;答えが見たいんでしょ〜♡<br>&emsp;まだまだ逃さないから、覚悟してね♡",
     beliefProfile:"10円パン両替したい"}
 ];
 
@@ -2854,52 +2855,58 @@ const BASE_RADIUS = 70;        // 1周目の半径(px)
 const RADIUS_STEP = 35;        // 周（レイヤー）ごとの加算半径(px)
 
 /**
- * 新しいカーソルを購入して追加する関数
+ * 新しいカーソルを購入して追加する関数（PC・スマホ両対応版）
  */
 function spawnOrbitCursor() {
-    const spBanner = document.querySelector('.sp-banner');
-    const isSpVisible = spBanner && window.getComputedStyle(spBanner).display === "flex";
+  const pcLogo = document.querySelector('.pc-banner .logo');
+  const spLogo = document.querySelector('.sp-banner .logo');
 
-    let logoContainer;
-    if (isSpVisible) {
-        logoContainer = document.querySelector('.sp-banner .logo');
-    } else {
-        logoContainer = document.querySelector('.pc-banner .logo');
-    }
-  if (!logoContainer) return;
-
-  if (getComputedStyle(logoContainer).position === 'static') {
-    logoContainer.style.position = 'relative';
+  // 両方のロゴコンテナの position を relative に確認設定
+  if (pcLogo && getComputedStyle(pcLogo).position === 'static') {
+    pcLogo.style.position = 'relative';
+  }
+  if (spLogo && getComputedStyle(spLogo).position === 'static') {
+    spLogo.style.position = 'relative';
   }
 
-  // 1. 新しいカーソルDOMの生成
-  const cursorImg = document.createElement('img');
-  cursorImg.className = 'orbit-cursor-item';
-  cursorImg.src = 'images/cursor.png';
-  
-  Object.assign(cursorImg.style, {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: '32px',
-    height: '32px',
-    pointerEvents: 'none',
-    zIndex: '100',
-    transition: 'none',
-    opacity: '0'
-  });
+  // 1. カーソル要素作成ヘルパー関数
+  function createCursorElement() {
+    const img = document.createElement('img');
+    img.className = 'orbit-cursor-item';
+    img.src = 'images/cursor.png';
+    Object.assign(img.style, {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      width: '32px',
+      height: '32px',
+      pointerEvents: 'none',
+      zIndex: '100',
+      transition: 'none',
+      opacity: '0'
+    });
+    return img;
+  }
 
-  logoContainer.appendChild(cursorImg);
+  // 2. PC用とスマホ用の両方にDOMを追加
+  const pcImg = pcLogo ? createCursorElement() : null;
+  const spImg = spLogo ? createCursorElement() : null;
 
-  // 2. カーソルデータを配列に追加
+  if (pcImg) pcLogo.appendChild(pcImg);
+  if (spImg) spLogo.appendChild(spImg);
+
+  // 3. カーソルデータを配列に追加（pcElementとspElementの両方を保持）
   const newCursor = {
-    element: cursorImg,
+    pcElement: pcImg,
+    spElement: spImg,
+    // 既存のループ処理が `element` を参照している場合の互換性保持（配列化）
+    elements: [pcImg, spImg].filter(Boolean),
     spawnTime: globalTime,
     lastClickTime: -99999,
   };
   activeCursors.push(newCursor);
 
-  // 3. アニメーションループが動いていなければ開始
+  // 4. アニメーションループが動いていなければ開始
   if (!animationFrameId) {
     lastTimestamp = performance.now();
     animationFrameId = requestAnimationFrame(updateCursorLoop);
@@ -2910,9 +2917,7 @@ function spawnOrbitCursor() {
 const CURSOR_DELAY = 100;      // ★ 隣のカーソルとの時間間隔 (200ms = 0.2秒で固定)
 const CLICK_INTERVAL = 10000;  // ★ 各カーソルが次に叩くまでの周期 (10秒で固定)
 
-/**
- * 毎フレーム全カーソルを計算・描画するメインループ (60fps)
- */
+
 function updateCursorLoop(timestamp) {
   const deltaTime = timestamp - lastTimestamp;
   lastTimestamp = timestamp;
@@ -2936,16 +2941,11 @@ function updateCursorLoop(timestamp) {
     const currentAngle = (baseAngle + globalTime * orbitSpeed) % 360;
 
     // --- ② 各カーソル独立の10秒周期クリック判定 ---
-    // 各カーソル固有の発火タイミング（生成順 index × 固定オフセット CURSOR_DELAY）
     const cursorOffset = index * CURSOR_DELAY;
-    
-    // このカーソル専用の周期時間 (0 ~ 9999ms)
     const cursorCycleTime = (globalTime - cursorOffset) % CLICK_INTERVAL;
     
     let isKnocking = false;
     
-    // 自身の10秒周期の先頭 120ms 間だけ叩く
-    // (globalTime >= cursorOffset は生成直後にマイナス周期で誤発火するのを防止)
     if (globalTime >= cursorOffset && cursorCycleTime >= 0 && cursorCycleTime < 120) {
       isKnocking = true;
 
@@ -2958,18 +2958,17 @@ function updateCursorLoop(timestamp) {
       }
     }
 
-    // --- ③ ヌッと登場する演出 (0.5秒) ---
+    // --- ③ ヌッと登場する演出 (0.5秒) の計算 ---
     const age = globalTime - cursor.spawnTime;
     let spawnScale = 1;
     let radius = targetRadius;
+    let currentOpacity = '1';
 
     if (age < 500) {
       const progress = age / 500;
       spawnScale = progress;
       radius = targetRadius * progress;
-      cursor.element.style.opacity = progress.toString();
-    } else {
-      cursor.element.style.opacity = '1';
+      currentOpacity = progress.toString();
     }
 
     // --- ④ ノック（たたき）演出 ---
@@ -2977,13 +2976,25 @@ function updateCursorLoop(timestamp) {
       radius -= 18; // 叩く時に内側へ引き込む
     }
 
-    // --- ⑤ 位置・回転の適用 ---
+    // --- ⑤ 位置・回転の適用（PC用・スマホ用の両方のDOM要素に適用） ---
     const rad = (currentAngle * Math.PI) / 180;
     const x = Math.cos(rad) * radius;
     const y = Math.sin(rad) * radius;
     const rotation = currentAngle - 90; // 指先を中心へ固定
 
-    cursor.element.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${spawnScale}) rotate(${rotation}deg)`;
+    const transformValue = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${spawnScale}) rotate(${rotation}deg)`;
+
+    // ★ ここを修正：cursor.elements（PC用とスマホ用）のすべてにスタイルを適用
+    if (cursor.elements && cursor.elements.length > 0) {
+      cursor.elements.forEach(el => {
+        el.style.opacity = currentOpacity;
+        el.style.transform = transformValue;
+      });
+    } else if (cursor.element) {
+      // 過去データや単一要素の場合のフォールバック
+      cursor.element.style.opacity = currentOpacity;
+      cursor.element.style.transform = transformValue;
+    }
   });
 
   animationFrameId = requestAnimationFrame(updateCursorLoop);
