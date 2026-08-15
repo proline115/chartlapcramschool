@@ -362,6 +362,10 @@ window.initGame = function(canvas) {
                         startStage(selectedName);
                     }
                 }
+                if (type ==="right"){
+                    const screen = document.getElementById("screen");
+                    screen.classList.remove("party");
+                }
             }
             // ⭕ if だったのを else if に変更
             else if (window.currentGameScene === "PLAYING" && type === "space") {
@@ -499,6 +503,27 @@ window.initGame = function(canvas) {
 
         // 元々あったhandleCanvasClick（ゲームオーバー・クリア画面用）
         const handleCanvasClick = (e) => {
+            if (window.currentGameScene === "SELECT") {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const clickX = (e.clientX - rect.left) * scaleX;
+        const clickY = (e.clientY - rect.top) * scaleY;
+
+        const btnSize = 32;
+        const margin = 10;
+        const btnX = canvas.width - btnSize - margin;
+        const btnY = canvas.height - btnSize - margin;
+
+        // 右下の四角内がタップされたか判定
+        if (clickX >= btnX && clickX <= btnX + btnSize && clickY >= btnY && clickY <= btnY + btnSize) {
+            const screen = document.getElementById("screen");
+            screen.classList.toggle("party");
+            canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+        }
+    }
+            
             if (window.currentGameScene === "GAMEOVER" || window.currentGameScene === "CLEAR") {
                 SoundEffects.playSelect();
                 window.currentGameScene = "SELECT";
@@ -551,6 +576,33 @@ window.initGame = function(canvas) {
         canvas.addEventListener("mouseleave", handleTouchEnd);
         canvas.addEventListener("touchend", handleTouchEnd);
         canvas.addEventListener("touchcancel", handleTouchEnd);
+        // 二本指タップによるチャージ判定の追加例
+canvas.addEventListener("touchstart", (e) => {
+    if (window.currentGameScene === "PLAYING") {
+        if (e.cancelable) e.preventDefault();
+
+        // 画面に触れている指が2本以上ある場合
+        if (e.touches.length >= 2) {
+            if (!isCharging) {
+                isCharging = true;
+                chargeTimer = 0;
+            }
+        }
+    }
+    handleTouchStartOrMove(e);
+}, { passive: false });
+
+canvas.addEventListener("touchend", (e) => {
+    if (window.currentGameScene === "PLAYING") {
+        // 指が離れて2本未満になった時、チャージショットを発射
+        if (isCharging && e.touches.length < 2) {
+            fireChargeShot();
+            isCharging = false;
+            chargeTimer = 0;
+        }
+    }
+    handleTouchEnd();
+});
 
         // --- 画面内UIボタンのイベント紐付け ---
         function setupUiButtons() {
@@ -572,6 +624,7 @@ window.initGame = function(canvas) {
             if (btnRight) {
                 btnRight.onmousedown = btnRight.ontouchstart = (e) => { blockPropagation(e); keys.ArrowRight = true; pressAction("right"); };
                 btnRight.onmouseup = btnRight.onmouseleave = btnRight.ontouchend = (e) => { if(e) e.stopPropagation(); keys.ArrowRight = false; };
+                
             }
             if (btnUp) {
                 btnUp.onmousedown = btnUp.ontouchstart = (e) => { blockPropagation(e); keys.ArrowUp = true; pressAction("up"); };
@@ -805,6 +858,8 @@ window.initGame = function(canvas) {
 
         // --- アップデート処理 ---
         function update() {
+            canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
             // ④ 拡大演出時の処理：背景以外のオブジェクトの動きを一時停止
             if (window.currentGameScene === "PRESENTATION") {
                 clearPresentation.angle += 0.05; // 回転
@@ -891,14 +946,15 @@ window.initGame = function(canvas) {
             // --- フェーズ管理と敵の出現 ---
             enemySpawnTimer++;
             let spawnInterval = 35;
+            const trivial = 777/canvas.width;
             if (currentPhase === "INFINITY") {
                 phase7ElapsedTime++; // 経過時間を進める
                 // 最初は120フレーム(約2秒)間隔。600フレーム(約10秒)経つごとに徐々に狭まる。
                 // 結構遅めの加速度にするため、減少値を「- 3」程度に抑え、限界値を12（フェーズ7相当の最速）にします。
-                spawnInterval = Math.max(12, 50 - Math.floor(phase7ElapsedTime / 400) * 3);
+                spawnInterval = Math.max(12*trivial, 50*trivial - Math.floor(phase7ElapsedTime / 400) * 3);
             } else if (currentPhase === 7) {
                 phase7ElapsedTime++;
-                spawnInterval = Math.max(12, 35 - Math.floor(phase7ElapsedTime / 300) * 4);
+                spawnInterval = Math.max(12*trivial, 35*trivial - Math.floor(phase7ElapsedTime / 300) * 4);
             }
 
             if (enemySpawnTimer >= spawnInterval) {
@@ -1187,6 +1243,31 @@ window.initGame = function(canvas) {
                 ctx.fillStyle = "#ffcc00"; 
                 ctx.font = "16px 'DotGothic16'";
                 ctx.fillText("HIGH SCORE: " + highScore, canvas.width / 2, canvas.height * 0.85);
+                // =========================================================
+// 【追加】選択画面の右下に全画面切り替えボタンを描画
+// =========================================================
+const fsBtnSize = 32;
+const fsBtnMargin = 10;
+const fsBtnX = canvas.width - fsBtnSize - fsBtnMargin;
+const fsBtnY = canvas.height - fsBtnSize - fsBtnMargin;
+
+ctx.save();
+// 背景（黒半透明の四角）
+ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+ctx.fillRect(fsBtnX, fsBtnY, fsBtnSize, fsBtnSize);
+
+// 枠線（レトロな緑色）
+ctx.strokeStyle = "#8bd88b";
+ctx.lineWidth = 2;
+ctx.strokeRect(fsBtnX, fsBtnY, fsBtnSize, fsBtnSize);
+
+// 矢印アイコン（⤢）
+ctx.fillStyle = "#8bd88b";
+ctx.font = "30px 'DotGothic16', monospace";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText("⤢", fsBtnX + fsBtnSize / 2, fsBtnY + fsBtnSize / 2);
+ctx.restore();
             }
 
             // ④ 勝利時星の拡大演出の描画
@@ -1600,4 +1681,19 @@ function playRetroBootCompleteSound() {
         });
     } catch (e) {
     }
+}
+
+// 右ボタンが押された時に実行する処理
+function exitFullscreenIfActive() {
+    const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+    if (isFS) {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+}
+
+// btn-nextの押下イベントに紐付け
+if (gameBtnNext) {
+    gameBtnNext.addEventListener("click", exitFullscreenIfActive);
+    gameBtnNext.addEventListener("touchstart", exitFullscreenIfActive, { passive: true });
 }
