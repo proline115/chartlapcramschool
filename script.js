@@ -85,8 +85,9 @@ const sequentialPhrases = [
 ];
 
 const problemList = [
+    ["pdf/〜今日からあなたも平安人day1〜.pdf","〜今日からあなたも平安人day1〜","国語","2359","answer/仮PDF.pdf"],
     ["pdf/『オハイオの風』.pdf", "『オハイオの風』", "英語", "7230","answer/仮PDF.pdf"],
-    ["pdf/1-共テ.pdf", "1-共テ<br>(地理)", "地理", "7109","answer/仮PDF.pdf"],
+    ["pdf/1-共テ.pdf", "1-共テ<br>(地理)", "地理", "7109","answer/地理1解答.pdf"],
     ["pdf/2-共テ.pdf", "2-共テ<br>(地理)", "地理", "7653","answer/仮PDF.pdf"],
     ["pdf/3-共テ.pdf", "3-共テ<br>(地理)", "地理", "4075","answer/仮PDF.pdf"],
     ["pdf/4-共テ.pdf", "4-共テ<br>(地理)", "地理", "6734","answer/仮PDF.pdf"],
@@ -96,13 +97,13 @@ const problemList = [
     ["pdf/8-共テ.pdf", "8-共テ<br>(地理)", "地理", "3287","answer/仮PDF.pdf"],
     ["pdf/9-共テ.pdf", "9-共テ<br>(地理)", "地理", "6103","answer/仮PDF.pdf"],
     ["pdf/the field of「Subjunctive」.pdf","the field of<br>「Subjunctive」","英語","6578","answer/仮PDF.pdf"],
-    ["pdf/The Tale of Genji.pdf","The Tale of<br>Genji","国語","9842","answer/仮PDF.pdf"],
+    ["pdf/The Tale of Genji.pdf","The Tale of<br>Genji","国語","9842","answer/古典解答.pdf"],
     ["pdf/オハイオの風2.pdf","オハイオの風2","英語","8610","answer/仮PDF.pdf"],
     ["pdf/旭川の網代木.pdf","旭川の網代木<br>(日本史)","歴史","9283","answer/仮PDF.pdf"],
     ["pdf/永田町の番人（公共・政経そして少し香る地理）.pdf","永田町の番人<br>(公共・政経<br>そして少し<br>香る地理)","公共","7209","answer/仮PDF.pdf"],
     ["pdf/英検対策オハイオの風.pdf","英検対策<br>オハイオの風","英語","0798","answer/仮PDF.pdf"],
     ["pdf/加古川の網代木.pdf","加古川の網代木<br>(日本史)","歴史","4701","answer/仮PDF.pdf"],
-    ["pdf/奇問の崖.pdf","奇問の崖<br>(物理)","理科","5098","answer/仮PDF.pdf"],
+    ["pdf/奇問の崖.pdf","奇問の崖<br>(物理)","理科","5098","answer/奇問の崖 解答.pdf"],
     ["pdf/共テ2-情報.pdf","共テ2-情報","情報","4986","answer/仮PDF.pdf"],
     ["pdf/共テ世界史-1.pdf","共テ世界史-1","歴史","0916","answer/仮PDF.pdf"],
     ["pdf/共テ世界史-2.pdf","共テ世界史-2","歴史","0784","answer/仮PDF.pdf"],
@@ -110,7 +111,7 @@ const problemList = [
     ["pdf/共テ世界史-4.pdf","共テ世界史-4","歴史","2374","answer/仮PDF.pdf"],
     ["pdf/共テ倫理キリスト教編.pdf","共テ倫理<br>キリスト教編","公共","1997","answer/仮PDF.pdf"],
     ["pdf/共通テスト作問 生物基礎 - 第1問A.pdf","生物基礎<br>第1問A","理科","3610","answer/仮PDF.pdf"],
-    ["pdf/共通テスト理科基礎演習のための演習1日目.pdf","化学基礎<br>1日目","理科","9720","answer/仮PDF.pdf"],
+    ["pdf/共通テスト理科基礎演習のための演習1日目.pdf","化学基礎<br>1日目","理科","9720","answer/共通テスト理科基礎演習のための演習 解答.pdf"],
     ["pdf/共通テスト理科基礎演習のための演習2日目.pdf","化学基礎<br>2日目","理科","3748","answer/仮PDF.pdf"],
     ["pdf/共通テスト理科基礎演習のための演習3日目.pdf","化学基礎<br>3日目","理科","9640","answer/仮PDF.pdf"],
     ["pdf/小学生でもできる情報.pdf","小学生でも<br>できる情報","情報","3658","answer/仮PDF.pdf"],
@@ -119,15 +120,16 @@ const problemList = [
     ["pdf/中学生でもできる情報.pdf","中学生でも<br>できる情報","情報","8274","answer/仮PDF.pdf"],
     ["pdf/日本史.pdf","日本史","歴史","0874","answer/仮PDF.pdf"],
     ["pdf/別府川の網代木（日本史）.pdf","別府川の網代木<br>(日本史)","歴史","5697","answer/仮PDF.pdf"],
-    ["pdf/無地の知.pdf","無知の知<br>(地学)","理科","8136","answer/仮PDF.pdf"],
-    ["pdf/倫理テスト.pdf","倫理テスト","公共","0792","answer/仮PDF.pdf"],
-    ["pdf/倫理大問1.pdf","倫理大問1","公共","2783","answer/仮PDF.pdf"],
-    ["pdf/倫理大問2.pdf","倫理大問2","公共","4895","answer/仮PDF.pdf"],
-    ["pdf/倫理大問3.pdf","倫理大問3","公共","6048","answer/仮PDF.pdf"],
-    ["pdf/倫理大問4.pdf","倫理大問4","公共","9740","answer/仮PDF.pdf"],
-    ["pdf/倫理大問5.pdf","倫理大問5","公共","9658","answer/仮PDF.pdf"],
-    ["pdf/倫理大問6.pdf","倫理大問6","公共","7681","answer/仮PDF.pdf"],
-    ["pdf/倫理大問7.pdf","倫理大問7","公共","2871","answer/仮PDF.pdf"]
+    ["pdf/無地の知.pdf","無知の知<br>(地学)","理科","8136","answer/地学解答.pdf"],
+    ["pdf/倫理テスト.pdf","倫理テスト","公共","0792","answer/倫理テスト解答.pdf"],
+    ["pdf/倫理大問1.pdf","倫理大問1","公共","2783","answer/倫理大問一解答.pdf"],
+    ["pdf/倫理大問2.pdf","倫理大問2","公共","4895","answer/倫理大問二解答.pdf"],
+    ["pdf/倫理大問3.pdf","倫理大問3","公共","6048","answer/倫理大問三解答.pdf"],
+    ["pdf/倫理大問4.pdf","倫理大問4","公共","9740","answer/倫理大問四解答.pdf"],
+    ["pdf/倫理大問5.pdf","倫理大問5","公共","9658","answer/倫理大問五解答.pdf"],
+    ["pdf/倫理大問6.pdf","倫理大問6","公共","7681","answer/倫理大問六解答.pdf"],
+    ["pdf/倫理大問7.pdf","倫理大問7","公共","2871","answer/倫理大問七解答.pdf"],
+    ["pdf/倫理大問8.pdf","倫理大問8","公共","0401","answer/倫理大問八解答.pdf"]
 ];
 
 const kasuProblemList = [
@@ -136,7 +138,7 @@ const kasuProblemList = [
     ["kasupdf/カス世界史NOVA①.pdf","カス世界史<br>NOVA①","歴史","9436","answer/仮PDF.pdf"],
     ["kasupdf/カス世界史NOVA② .pdf","カス世界史<br>NOVA②","歴史","8704","answer/仮PDF.pdf"],
     ["kasupdf/カス政経.pdf","カス政経","公共","8769","answer/仮PDF.pdf"],
-    ["kasupdf/カス倫理.pdf","カス倫理","公共","2693","answer/仮PDF.pdf"],
+    ["kasupdf/カス倫理.pdf","カス倫理","公共","2693","answer/カス倫理解答.pdf"],
     ["kasupdf/カス歴史.pdf","カス歴史","歴史","1273","answer/仮PDF.pdf"],
     ["kasupdf/カス歴史2.pdf","カス歴史2","歴史","0577","answer/仮PDF.pdf"],
     ["kasupdf/ザグロスの頂.pdf","ザグロスの頂<br>(地理)","地理","2695","answer/仮PDF.pdf"],
@@ -762,7 +764,7 @@ const secretDialogueTree = {
     ]
   },
   relieved: {
-    text: "良かった良かった",
+    text: "良かった良かった。",
     buttons: [
       { text: "消す", next: "why_do_this" },
       { text: "閉じる", next: "CLOSE" }
@@ -818,7 +820,7 @@ const secretDialogueTree = {
     ]
   },
   enjoy_again: {
-    text: "もう一度楽しむ",
+    text: "もう一度楽しむ？",
     buttons: [
       { text: "はい", next: "DELETE_HISTORY" },
       { text: "楽しむ", next: "DELETE_HISTORY" }
@@ -1482,6 +1484,12 @@ let isPasswordModalOpen = false;
 
 // 1. 合言葉ポップアップを開く
 function openPasswordModal() {
+    const banner = document.getElementById("spBanner");
+    const toggleButten = document.getElementById("bannerToggleBtn");
+    if(banner){
+        banner.classList.remove("open");
+        toggleButten.classList.remove("open");
+    }
   if (!passwordOverlay) return;
   isPasswordModalOpen = true;
   document.body.classList.add("modal-open"); // 背景全体のクリックを物理遮断
@@ -1695,6 +1703,12 @@ let isAnswerModalOpen = false;
 
 // 答えモーダルを開く
 function openAnswerModal() {
+     const banner = document.getElementById("spBanner");
+    const toggleButten = document.getElementById("bannerToggleBtn");
+    if(banner){
+        banner.classList.remove("open");
+        toggleButten.classList.remove("open");
+    }
   if (!answerOverlay) return;
   isAnswerModalOpen = true;
   document.body.classList.add("modal-open");
@@ -3121,33 +3135,63 @@ function updateCursorButtonUI() {
 
 
 // ==========================================
-// 隠しクリア判定＆コード入力処理
+// 隠しクリア判定＆コード入力処理（画面注視のみカウント版）
 // ==========================================
 
 let idleTimer = null;
-let isIdleClearReady = false; // 30秒放置されたかのフラグ
+let isIdleClearReady = false; // 放置完了フラグ
 
-// 30秒放置タイマーの開始
+// 放置タイマー設定（ミリ秒）
+const IDLE_LIMIT = 10000; // 10秒（※30秒にする場合は 30000 に変更してください）
+let startTime = 0;       // タイマー開始時刻
+let remainingTime = IDLE_LIMIT; // 残り時間
+
+// 放置タイマーの開始
 function startIdleTimer() {
-    if (!localStorage.getItem("started")) return;
+  if (!localStorage.getItem("started")) return;
+  
   clearTimeout(idleTimer);
   isIdleClearReady = false;
+  remainingTime = IDLE_LIMIT;
+  
+  runTimer(remainingTime);
+}
 
+// 実際のタイマー起動処理
+function runTimer(duration) {
+  startTime = Date.now();
+  
   idleTimer = setTimeout(() => {
     isIdleClearReady = true;
     const tapElement = document.getElementById("tapStart");
     if (tapElement) {
-      // 1. 既存の transition (1.5s) を利用して一度ふんわり消す
       tapElement.style.opacity = "0";
 
-      // 2. 1.5秒後に文字を書き換えて、再度ふんわり表示させる
       setTimeout(() => {
         tapElement.innerHTML = "Tap to Clear...?";
         tapElement.style.opacity = "1";
       }, 1500);
     }
-  }, 10000); // 30秒 (30,000ms)
+  }, duration);
 }
+
+// 画面の表示状態（タブのアクティブ/非アクティブ）を監視
+document.addEventListener("visibilitychange", () => {
+  // すでに放置完了しているか、ゲーム未開始の場合は何もしない
+  if (isIdleClearReady || !localStorage.getItem("started")) return;
+
+  if (document.hidden) {
+    // ★ タブが裏に回った時：経過時間を計算してタイマーを一時停止
+    clearTimeout(idleTimer);
+    const elapsedTime = Date.now() - startTime;
+    remainingTime = Math.max(0, remainingTime - elapsedTime);
+  } else {
+    // ★ タブに戻ってきた時：残り時間からタイマーを再開
+    if (remainingTime > 0) {
+      runTimer(remainingTime);
+    }
+  }
+});
 
 // モーダルを開く
 function openClearInputModal() {
@@ -3227,8 +3271,6 @@ function submitClearCode() {
 
 // 初期化とイベント登録
 document.addEventListener("DOMContentLoaded", () => {
-  // 放置タイマー起動
-  startIdleTimer();
 
   // tapStart 要素のクリック監視
   const tapStartEl = document.getElementById("tapStart");
@@ -3882,3 +3924,33 @@ function startExitSequence() {
     }
   }, 1500); // 敵が通り過ぎるのを待つ時間（ミリ秒）
 }
+
+function toggleSpBanner() {
+  const spBanner = document.getElementById("spBanner");
+  const toggleBtn = document.getElementById("bannerToggleBtn");
+
+  if (spBanner && toggleBtn) {
+    spBanner.classList.toggle("open");
+    toggleBtn.classList.toggle("open");
+  }
+}
+
+// 全てのアセット（画像・スタイルなど）の読み込みが完了した時の処理
+window.addEventListener("load", () => {
+  const loadingOverlay = document.getElementById("loading-overlay");
+  
+  if (loadingOverlay) {
+    // 1. ローディング画面をふんわり消す
+    loadingOverlay.style.opacity = "0";
+    
+    // 2. フェードアウト完了後に要素を完全に消去し、タイマーを開始する
+    setTimeout(() => {
+      loadingOverlay.style.display = "none";
+      
+      // ★ ロードが完了したこのタイミングで放置タイマーを開始
+      startIdleTimer();
+    }, 500);
+  } else {
+    startIdleTimer();
+  }
+});
