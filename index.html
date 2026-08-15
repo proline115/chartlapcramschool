@@ -49,6 +49,11 @@
 
 <body>
     <p class="hello">チャート周回予備校。ここは生徒が集まり、問題を制作する場所。そしてあなたが訪れ、問題を解く場所。チャートを周回していると気づけばこんなことに。それもきっと神の思し召し。この文章が見えているならすぐにそのリンクを押そう。あなたを待っているのは問題だけじゃないかもしれない。</p>
+    <!-- ローディング画面 -->
+<div id="loading-overlay">
+  <div class="spinner"></div>
+  <p>LOADING...</p>
+</div>
 <div class="transition-curtain-container">
     <div class="curtain layer-1"></div>
     <div class="curtain layer-2"></div>
@@ -108,7 +113,7 @@
     </div>
 </header>
 
-<header class="banner sp-banner">
+<header class="banner sp-banner" id="spBanner">
     <div class="banner-left">
         <div class="logo">
             <div class="logo-wrapper">
@@ -151,6 +156,9 @@
         </div>
     </div>
 </header>
+<button class="banner-toggle-btn" id="bannerToggleBtn" type="button" onclick="toggleSpBanner()" aria-label="バナーを開閉">
+  <span class="arrow-icon">▼</span>
+</button>
 
 <div id="pdf-viewer-view" class="hidden">
     <div class="viewer-actions">
@@ -172,6 +180,7 @@
       <iframe id="math-pdf-iframe" class="math-pdf-iframe" src="" frameborder="0"></iframe>
     </div>
 </div>
+    
 
 <main id="content">
 
@@ -242,7 +251,8 @@
     <div class="reset-container" style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
         <button class="btn-reset" onclick="openResetModal()">解答履歴を削除する</button>
     </div>
-
+    <p style="opacity:0;">iPhoneユーザーはタブ名が下にあるからボタンが押せないらしい。</p>
+    <p style="opacity:0;">これで調整</p>
     <div id="reset-confirm-modal" class="custom-modal-overlay hidden">
         <div class="custom-modal-box">
             <h3>確認</h3>
@@ -278,6 +288,8 @@
 <div class="reset-container" style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
     <button class="btn-reset" onclick="openKasuResetModal()">解答履歴を削除する</button>
     </div>
+    <p style="opacity:0;">Androidユーザーワイ、絶対これいらんと思う。</p>
+    <p style="opacity:0;">Androidに変えましょう。</p>
 
 <div id="kasu-reset-confirm-modal" class="custom-modal-overlay hidden">
     <div class="custom-modal-box">
@@ -295,7 +307,7 @@
 
 <div class="belief-page-container">
 
-  <div class="belief-digital-screen">
+  <div class="belief-digital-screen" id="screen">
     
     <div class="belief-favorite-tag">
       <span class="belief-indicator-text">オキニイリ</span>
