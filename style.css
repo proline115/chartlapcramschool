@@ -611,7 +611,7 @@ img{
 
 .hero-section {
     text-align: center;
-    padding: 60px 20px;
+    padding: 60px 0px;
     box-sizing: border-box;
 }
 
@@ -1302,11 +1302,11 @@ body.no-scroll {
 .belief-page-container {
   display: block !important;
   font-family: 'DotGothic16';
-  padding: 30px !important;
   box-sizing: border-box !important;
 }
 
 .belief-digital-screen {
+    container-type: inline-size;
   position: relative !important;
   display: block !important;
   width: 800px !important;  
@@ -1452,13 +1452,14 @@ body.no-scroll {
   transform: translate(-50%, -50%) !important;
   background-color: #131b12 !important;
   color: #8bd88b !important;
-  padding: 15px 30px !important;
-  font-size: 20px !important;
+  padding: min(5%,15px) min(5%,30px) !important;
+  font-size: min(5cqw,20px) !important;
   font-weight: bold !important;
   border-radius: 8px !important;
   opacity: 0;
   pointer-events: none !important;
   z-index: 20 !important;
+  white-space:nowrap;
 }
 .belief-error-toast.show {
   opacity: 1 !important;
@@ -2075,7 +2076,7 @@ iframe.questionnaire {
 .achievement-grid {
     display: grid;
     /* 最小幅を160pxに設定することで1列の数を抑え、1つを大きくします */
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 2fr));
     gap: 30px; /* 余白を広めに設定 */
     padding: 30px 0;
 }
@@ -2177,7 +2178,7 @@ iframe.questionnaire {
 
 .overlay-progress {
     margin-top: 6.8cqw;
-    font-size: 0.85rem;
+    font-size: 7cqw;
     font-weight: bold;
     color: #0056b3;
 }
@@ -2376,7 +2377,7 @@ iframe.questionnaire {
 /* 設定トグルボタンの基本スタイル */
 .toggle-btn {
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
   border: 2px solid #ccc;
   border-radius: 20px;
