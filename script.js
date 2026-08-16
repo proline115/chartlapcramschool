@@ -274,7 +274,7 @@ const left = document.querySelector(".left");
 const right = document.querySelector(".right");
 const bottom = document.querySelector(".bottom");
 
-window.addEventListener("DOMContentLoaded", init);
+
 
 function init(){
     document.body.style.overflow = "hidden";
@@ -3938,7 +3938,7 @@ function toggleSpBanner() {
 // 全てのアセット（画像・スタイルなど）の読み込みが完了した時の処理
 window.addEventListener("load", () => {
   const loadingOverlay = document.getElementById("loading-overlay");
-  
+  init();
   if (loadingOverlay) {
     // 1. ローディング画面をふんわり消す
     loadingOverlay.style.opacity = "0";
