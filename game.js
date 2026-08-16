@@ -415,120 +415,156 @@ window.initGame = function(canvas) {
             }
         };
 
-        // ⭕ 【画面外引っ張り防止＆マルチタッチ内枠優先版】
-        const handleTouchStartOrMove = (e) => {
-            const rect = canvas.getBoundingClientRect();
+        // ⭕ 【画面外引っ張り防止＆マルチタッチ内枠優先＆全画面ボタン対応版】
+const handleTouchStartOrMove = (e) => {
+    const rect = canvas.getBoundingClientRect();
 
-            // --- スマホ等のマルチタッチに対応：Canvas内に入っているタッチ（指）を探す ---
-            let validTouch = null;
+    // ★ Android等の描画サイズズレを防ぐため、既存のrectから拡大率(scale)を計算
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
 
-            if (e.touches && e.touches.length > 0) {
-                for (let i = 0; i < e.touches.length; i++) {
-                    const t = e.touches[i];
-                    const relX = t.clientX - rect.left;
-                    const relY = t.clientY - rect.top;
+    // --- スマホ等のマルチタッチに対応：Canvas内に入っているタッチ（指）を探す ---
+    let validTouch = null;
 
-                    // 1. タップされた座標がCanvasの枠内（0〜width, 0〜height）に入っている指を優先
-                    if (relX >= 0 && relX <= canvas.width && relY >= 0 && relY <= canvas.height) {
-                        validTouch = { x: relX, y: relY };
-                        break; // 枠内の指が見つかったらそれを採用
+    if (e.touches && e.touches.length > 0) {
+        for (let i = 0; i < e.touches.length; i++) {
+            const t = e.touches[i];
+            // 拡大率(scale)を掛け合わせてCanvas内部の正確な座標に変換
+            const relX = (t.clientX - rect.left) * scaleX;
+            const relY = (t.clientY - rect.top) * scaleY;
+
+            // 1. タップされた座標がCanvasの枠内（0〜width, 0〜height）に入っている指を優先
+            if (relX >= 0 && relX <= canvas.width && relY >= 0 && relY <= canvas.height) {
+                validTouch = { x: relX, y: relY };
+                break; // 枠内の指が見つかったらそれを採用
+            }
+        }
+
+        // 2. もし枠内の指が見つからず、枠外から指がそのままスライド侵入してきた場合
+        if (!validTouch) {
+            const firstTouch = e.touches[0];
+            let rawX = (firstTouch.clientX - rect.left) * scaleX;
+            let rawY = (firstTouch.clientY - rect.top) * scaleY;
+
+            // 枠外の座標であっても、Canvasの端（0〜width, 0〜height）にクランプ（収める）する
+            validTouch = {
+                x: Math.max(0, Math.min(canvas.width, rawX)),
+                y: Math.max(0, Math.min(canvas.height, rawY))
+            };
+        }
+    } else {
+        // PCのマウス操作の場合
+        let rawX = (e.clientX - rect.left) * scaleX;
+        let rawY = (e.clientY - rect.top) * scaleY;
+
+        validTouch = {
+            x: Math.max(0, Math.min(canvas.width, rawX)),
+            y: Math.max(0, Math.min(canvas.height, rawY))
+        };
+    }
+
+    const clickX = validTouch.x;
+    const clickY = validTouch.y;
+
+    // --- ① 選択画面（SELECT）での処理 ---
+    // --- ① 選択画面（SELECT）での処理 ---
+    if (window.currentGameScene === "SELECT") {
+        if (typeof retroLoading !== "undefined" && retroLoading) return;
+
+        if (e.type === "touchstart" || e.type === "mousedown") {
+            const currentOptions = hasCleared ? ["NUMBER MODE", "INFINITY MODE", "WEAPON SELECT"] : ["NUMBER MODE", "INFINITY MODE"];
+            
+            for (let i = 0; i < currentOptions.length; i++) {
+                const itemCenterY = canvas.height * 0.48 + (i * 45);
+                const itemHeight = 36;
+
+                if (clickY >= itemCenterY - itemHeight / 2 && clickY <= itemCenterY + itemHeight / 2) {
+                    if (clickX >= canvas.width * 0.1 && clickX <= canvas.width * 0.9) {
+                        // 未選択の項目ならカーソル（▶）だけを移動
+                        if (stageSelect.selectedIndex !== i) {
+                            SoundEffects.playSelect();
+                            stageSelect.selectedIndex = i;
+                        }
+                        break;
                     }
                 }
-
-                // 2. もし枠内の指が見つからず、枠外から指がそのままスライド侵入してきた場合
-                if (!validTouch) {
-                    const firstTouch = e.touches[0];
-                    let rawX = firstTouch.clientX - rect.left;
-                    let rawY = firstTouch.clientY - rect.top;
-
-                    // 枠外の座標であっても、Canvasの端（0〜width, 0〜height）にクランプ（収める）する
-                    validTouch = {
-                        x: Math.max(0, Math.min(canvas.width, rawX)),
-                        y: Math.max(0, Math.min(canvas.height, rawY))
-                    };
-                }
-            } else {
-                // PCのマウス操作の場合
-                let rawX = e.clientX - rect.left;
-                let rawY = e.clientY - rect.top;
-
-                validTouch = {
-                    x: Math.max(0, Math.min(canvas.width, rawX)),
-                    y: Math.max(0, Math.min(canvas.height, rawY))
-                };
             }
+        }
+        return; // 選択画面では追従移動処理を行わない
+    }
 
-            const clickX = validTouch.x;
-            const clickY = validTouch.y;
+    // --- ② ゲームプレイ中（PLAYING）での追従移動処理 ---
+    if (window.currentGameScene === "PLAYING") {
+        isScreenTapping = true;
+        targetTouchX = clickX;
+        targetTouchY = clickY;
+    }
+};
 
-            // --- ① 選択画面（SELECT）での処理 ---
+        // 選択画面・リザルト画面専用の決定/タップ処理関数
+        const handleSelectOrCanvasClick = (e) => {
+            const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const clickX = (clientX - rect.left) * scaleX;
+            const clickY = (clientY - rect.top) * scaleY;
+
+            // --- 1. SELECT 画面の処理 ---
             if (window.currentGameScene === "SELECT") {
                 if (typeof retroLoading !== "undefined" && retroLoading) return;
 
-                // "touchend" や "mouseup" は無視し、「押した瞬間」のみ実行
-                if (e.type === "touchstart" || e.type === "mousedown") {
-                    
-                    if (e.type === "touchstart" && e.cancelable) {
-                        e.preventDefault();
-                    }
+                // 右下の全画面・パーティーモード切替ボタン判定
+                const fsBtnSize = 32;
+                const fsBtnMargin = 10;
+                const fsBtnX = canvas.width - fsBtnSize - fsBtnMargin;
+                const fsBtnY = canvas.height - fsBtnSize - fsBtnMargin;
+                const padding = 10;
 
-                    const currentOptions = hasCleared ? ["NUMBER MODE", "INFINITY MODE", "WEAPON SELECT"] : ["NUMBER MODE", "INFINITY MODE"];
-                    
-                    for (let i = 0; i < currentOptions.length; i++) {
-                        const itemCenterY = canvas.height * 0.48 + (i * 45);
-                        const itemHeight = 36;
+                if (
+                    clickX >= fsBtnX - padding &&
+                    clickX <= fsBtnX + fsBtnSize + padding &&
+                    clickY >= fsBtnY - padding &&
+                    clickY <= fsBtnY + fsBtnSize + padding
+                ) {
+                    const screen = document.getElementById("screen");
+                    screen.classList.toggle("party"); // パーティーモード切替
+                    canvas.width = canvas.clientWidth;
+                    canvas.height = canvas.clientHeight;
+                    return;
+                }
 
-                        if (clickY >= itemCenterY - itemHeight / 2 && clickY <= itemCenterY + itemHeight / 2) {
-                            if (clickX >= canvas.width * 0.1 && clickX <= canvas.width * 0.9) {
-                                if (stageSelect.selectedIndex === i) {
-                                    pressAction("space");
-                                } else {
-                                    SoundEffects.playSelect();
-                                    stageSelect.selectedIndex = i;
-                                }
-                                break;
+                // メニュー項目の判定（2回目のタップ・クリックで決定）
+                const currentOptions = hasCleared ? ["NUMBER MODE", "INFINITY MODE", "WEAPON SELECT"] : ["NUMBER MODE", "INFINITY MODE"];
+                
+                for (let i = 0; i < currentOptions.length; i++) {
+                    const itemCenterY = canvas.height * 0.48 + (i * 45);
+                    const itemHeight = 36;
+
+                    if (clickY >= itemCenterY - itemHeight / 2 && clickY <= itemCenterY + itemHeight / 2) {
+                        if (clickX >= canvas.width * 0.1 && clickX <= canvas.width * 0.9) {
+                            if (stageSelect.selectedIndex === i) {
+                                // ★ すでに選択中の項目をもう一度押した時だけ「決定」
+                                pressAction("space");
+                            } else {
+                                // 未選択の場合はカーソル移動
+                                SoundEffects.playSelect();
+                                stageSelect.selectedIndex = i;
                             }
+                            return;
                         }
                     }
                 }
             }
 
-            // --- ② ゲームプレイ中（PLAYING）での追従移動処理 ---
-            if (window.currentGameScene === "PLAYING") {
-                isScreenTapping = true;
-                targetTouchX = clickX;
-                targetTouchY = clickY;
-            }
-        };
-
-        // 元々あったhandleCanvasClick（ゲームオーバー・クリア画面用）
-        const handleCanvasClick = (e) => {
-            if (window.currentGameScene === "SELECT") {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width;
-        const scaleY = canvas.height / rect.height;
-        const clickX = (e.clientX - rect.left) * scaleX;
-        const clickY = (e.clientY - rect.top) * scaleY;
-
-        const btnSize = 32;
-        const margin = 10;
-        const btnX = canvas.width - btnSize - margin;
-        const btnY = canvas.height - btnSize - margin;
-
-        // 右下の四角内がタップされたか判定
-        if (clickX >= btnX && clickX <= btnX + btnSize && clickY >= btnY && clickY <= btnY + btnSize) {
-            const screen = document.getElementById("screen");
-            screen.classList.toggle("party");
-            canvas.width = canvas.clientWidth;
-        canvas.height = canvas.clientHeight;
-        }
-    }
-            
+            // --- 2. GAMEOVER / CLEAR 画面の処理 ---
             if (window.currentGameScene === "GAMEOVER" || window.currentGameScene === "CLEAR") {
                 SoundEffects.playSelect();
                 window.currentGameScene = "SELECT";
                 score = 0;
-                passedEnemiesCount = 0; // 侵略数の初期化
+                passedEnemiesCount = 0;
                 player.hp = 30;
                 player.x = canvas.width / 2;
                 player.y = canvas.height - 50; 
@@ -540,32 +576,55 @@ window.initGame = function(canvas) {
                 clearStar.x = canvas.width / 2;
                 clearStar.y = -100; 
                 bullets = [];
-                whiteEraserCircles = []; // ★ 白武器用の消滅サークルを初期化
+                whiteEraserCircles = [];
                 enemyBullets = [];
                 enemies = [];
                 chargeTimer = 0;
 
-                // ④ 拡大演出パラメータのリセット
                 clearPresentation.scale = 1.0;
                 clearPresentation.angle = 0;
                 clearPresentation.opacity = 1.0;
                 clearPresentation.fadeStarted = false;
             }
         };
-        canvas.addEventListener("click", handleCanvasClick);
 
-        // 各種マウス・タッチイベントの登録（追従とタップ選択を両立）
+        // 【PC用】クリックイベントの登録
+        canvas.addEventListener("click", handleSelectOrCanvasClick);
+
+        // 【スマホ用】選択画面・クリア画面のタップ判定（離した瞬間に処理）
+        canvas.addEventListener("touchend", (e) => {
+            if (window.currentGameScene !== "PLAYING") {
+                if (e.cancelable) e.preventDefault();
+                handleSelectOrCanvasClick(e);
+            }
+        }, { passive: false });
+
+        // 【PLAYING画面専用】自機移動・操作用のタッチイベント
         canvas.addEventListener("mousedown", handleTouchStartOrMove);
         canvas.addEventListener("mousemove", (e) => {
             if (isScreenTapping && window.currentGameScene === "PLAYING") handleTouchStartOrMove(e);
         });
+
         canvas.addEventListener("touchstart", (e) => {
-            if (window.currentGameScene === "PLAYING" && e.cancelable) e.preventDefault();
-            handleTouchStartOrMove(e);
+            if (window.currentGameScene === "PLAYING") {
+                if (e.cancelable) e.preventDefault();
+
+                // 2本指以上でチャージ開始
+                if (e.touches.length >= 2) {
+                    if (!isCharging) {
+                        isCharging = true;
+                        chargeTimer = 0;
+                    }
+                }
+                handleTouchStartOrMove(e);
+            }
         }, { passive: false });
+
         canvas.addEventListener("touchmove", (e) => {
-            if (window.currentGameScene === "PLAYING" && e.cancelable) e.preventDefault();
-            handleTouchStartOrMove(e);
+            if (window.currentGameScene === "PLAYING") {
+                if (e.cancelable) e.preventDefault();
+                handleTouchStartOrMove(e);
+            }
         }, { passive: false });
 
         // 指やマウスを離した時のリセット処理
@@ -574,35 +633,19 @@ window.initGame = function(canvas) {
         };
         canvas.addEventListener("mouseup", handleTouchEnd);
         canvas.addEventListener("mouseleave", handleTouchEnd);
-        canvas.addEventListener("touchend", handleTouchEnd);
         canvas.addEventListener("touchcancel", handleTouchEnd);
-        // 二本指タップによるチャージ判定の追加例
-canvas.addEventListener("touchstart", (e) => {
-    if (window.currentGameScene === "PLAYING") {
-        if (e.cancelable) e.preventDefault();
 
-        // 画面に触れている指が2本以上ある場合
-        if (e.touches.length >= 2) {
-            if (!isCharging) {
-                isCharging = true;
-                chargeTimer = 0;
+        canvas.addEventListener("touchend", (e) => {
+            if (window.currentGameScene === "PLAYING") {
+                // 指が離れて2本未満になった時、チャージショットを発射
+                if (isCharging && e.touches.length < 2) {
+                    fireChargeShot();
+                    isCharging = false;
+                    chargeTimer = 0;
+                }
+                handleTouchEnd();
             }
-        }
-    }
-    handleTouchStartOrMove(e);
-}, { passive: false });
-
-canvas.addEventListener("touchend", (e) => {
-    if (window.currentGameScene === "PLAYING") {
-        // 指が離れて2本未満になった時、チャージショットを発射
-        if (isCharging && e.touches.length < 2) {
-            fireChargeShot();
-            isCharging = false;
-            chargeTimer = 0;
-        }
-    }
-    handleTouchEnd();
-});
+        });
 
         // --- 画面内UIボタンのイベント紐付け ---
         function setupUiButtons() {
@@ -642,11 +685,9 @@ canvas.addEventListener("touchend", (e) => {
 
         window.removeEventListener("keydown", handleKeyDown, true);
         window.removeEventListener("keyup", handleKeyUp, true);
-        canvas.removeEventListener("click", handleCanvasClick);
         
         window.addEventListener("keydown", handleKeyDown, true);
         window.addEventListener("keyup", handleKeyUp, true);
-        canvas.addEventListener("click", handleCanvasClick);
 
         setupUiButtons();
 
@@ -945,8 +986,8 @@ canvas.addEventListener("touchend", (e) => {
 
             // --- フェーズ管理と敵の出現 ---
             enemySpawnTimer++;
-            let spawnInterval = 35;
-            const trivial = 777/canvas.width;
+            let trivial = 777/canvas.width;
+            let spawnInterval = 35*trivial;
             if (currentPhase === "INFINITY") {
                 phase7ElapsedTime++; // 経過時間を進める
                 // 最初は120フレーム(約2秒)間隔。600フレーム(約10秒)経つごとに徐々に狭まる。
@@ -1121,7 +1162,7 @@ canvas.addEventListener("touchend", (e) => {
                             if (score > highScore) {
                                 highScore = score;
                                 localStorage.setItem("belief_highscore_common", highScore.toString());
-                                updateAchievementProgress("achievement_38", highScore);
+                                updateAchievementProgress("achievement_38", highScore, true);
                             }
                         }
                         b.y = -999; 
@@ -1190,15 +1231,15 @@ canvas.addEventListener("touchend", (e) => {
             ctx.lineWidth = 1;
             for(let x=0; x<canvas.width; x+=40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
             for(let y=0; y<canvas.height; y+=40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
-
+            
             if (window.currentGameScene === "SELECT") {
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.fillStyle = "#adadad";
-                ctx.font = "bold 30px 'DotGothic16'";
+                ctx.font = `bold ${Math.min(canvas.width*0.08,30)}px 'DotGothic16'`;
                 ctx.fillText("Charge-Shooting Game", canvas.width/2, canvas.height * 0.16);
                 ctx.fillStyle = "#ffffff";
-                ctx.font = "bold 60px 'DotGothic16'"; 
+                ctx.font = `bold ${Math.min(canvas.width*0.2,60)}px 'DotGothic16'`; 
                 ctx.fillText("Char-Shoo", canvas.width / 2, canvas.height * 0.3);
 
                 const currentOptions = hasCleared ? ["NUMBER MODE", "INFINITY MODE", "WEAPON SELECT"] : ["NUMBER MODE", "INFINITY MODE"];
@@ -1251,22 +1292,24 @@ const fsBtnMargin = 10;
 const fsBtnX = canvas.width - fsBtnSize - fsBtnMargin;
 const fsBtnY = canvas.height - fsBtnSize - fsBtnMargin;
 
+// Androidでの表示ずれ・縮小を修正したコード
 ctx.save();
-// 背景（黒半透明の四角）
 ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
 ctx.fillRect(fsBtnX, fsBtnY, fsBtnSize, fsBtnSize);
 
-// 枠線（レトロな緑色）
 ctx.strokeStyle = "#8bd88b";
 ctx.lineWidth = 2;
 ctx.strokeRect(fsBtnX, fsBtnY, fsBtnSize, fsBtnSize);
 
-// 矢印アイコン（⤢）
+// ★ Android向けにフォントサイズ指定と縦位置のオフセット微調整を追加
 ctx.fillStyle = "#8bd88b";
-ctx.font = "30px 'DotGothic16', monospace";
+// monospaceを優先指定し、絵文字化を防止
+ctx.font = "bold 24px monospace"; 
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
-ctx.fillText("⤢", fsBtnX + fsBtnSize / 2, fsBtnY + fsBtnSize / 2);
+
+// 記号のフォント差異によるズレを抑えるため、中心（+ fsBtnSize / 2）にそのまま描画
+ctx.fillText("⤢", fsBtnX + fsBtnSize / 2, fsBtnY + fsBtnSize / 2 + 1); 
 ctx.restore();
             }
 
@@ -1550,7 +1593,6 @@ ctx.restore();
                 clearInterval(gameIntervalId);
                 window.removeEventListener("keydown", handleKeyDown, true);
                 window.removeEventListener("keyup", handleKeyUp, true);
-                canvas.removeEventListener("click", handleCanvasClick);
                 return;
             }
             // ⭕ 【ロマン重視のレトロロード演出に強化】
