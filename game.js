@@ -1462,8 +1462,8 @@ ctx.restore();
                 ctx.fillStyle = player.hp <= 6 ? "#ff0000" : "#00ff00";
                 ctx.fillRect(canvas.width - 150, 16, 130 * (player.hp / player.maxHp), 12);
 
-                const barX = 20;
-                const barY = canvas.height - 30;
+                const barX = canvas.width-180;
+                const barY = 50;
                 const barW = 160;
                 const barH = 14;
 
