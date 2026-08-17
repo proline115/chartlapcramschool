@@ -2075,11 +2075,14 @@ iframe.questionnaire {
 /* 実績グリッド：1列あたりの数を減らし、1つのサイズを大きく・余白を広めに調整 */
 .achievement-grid {
     display: grid;
-    /* 最小幅を160pxに設定することで1列の数を抑え、1つを大きくします */
-    grid-template-columns: repeat(auto-fill, minmax(160px, 2fr));
     gap: 30px; /* 余白を広めに設定 */
     padding: 30px 0;
 }
+
+@media (max-width: 1200px) { .achievement-grid { grid-template-columns: repeat(5, 1fr); } }
+@media (max-width: 1100px) {  .achievement-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 900px) {  .achievement-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) {  .achievement-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* 正方形の箱（ベース） */
 .achievement-box {
