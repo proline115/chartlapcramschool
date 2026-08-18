@@ -3146,15 +3146,9 @@ const IDLE_LIMIT = 10000; // 10秒（※30秒にする場合は 30000 に変更�
 let startTime = 0;       // タイマー開始時刻
 let remainingTime = IDLE_LIMIT; // 残り時間
 
-// 放置タイマーの開始
+// 放置タイマーの開始（手動リセット用など）
 function startIdleTimer() {
-  if (!localStorage.getItem("started")) return;
-  
-  clearTimeout(idleTimer);
-  isIdleClearReady = false;
-  remainingTime = IDLE_LIMIT;
-  
-  runTimer(remainingTime);
+  initIdleTimerOnLoad();
 }
 
 // 実際のタイマー起動処理
@@ -3181,10 +3175,12 @@ document.addEventListener("visibilitychange", () => {
   if (isIdleClearReady || !localStorage.getItem("started")) return;
 
   if (document.hidden) {
-    // ★ タブが裏に回った時：経過時間を計算してタイマーを一時停止
+    // ★ タブが裏に回った時：タイマーを一時停止し、消費した時間を減算
     clearTimeout(idleTimer);
-    const elapsedTime = Date.now() - startTime;
-    remainingTime = Math.max(0, remainingTime - elapsedTime);
+    if (startTime > 0) {
+      const elapsedTime = Date.now() - startTime;
+      remainingTime = Math.max(0, remainingTime - elapsedTime);
+    }
   } else {
     // ★ タブに戻ってきた時：残り時間からタイマーを再開
     if (remainingTime > 0) {
@@ -3935,7 +3931,6 @@ function toggleSpBanner() {
   }
 }
 
-// 全てのアセット（画像・スタイルなど）の読み込みが完了した時の処理
 window.addEventListener("load", () => {
   const loadingOverlay = document.getElementById("loading-overlay");
   init();
@@ -3947,10 +3942,27 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       loadingOverlay.style.display = "none";
       
-      // ★ ロードが完了したこのタイミングで放置タイマーを開始
-      startIdleTimer();
+      // ★ ロード完了時に裏画面なら一時停止状態で保持、表なら通常スタート
+      initIdleTimerOnLoad();
     }, 500);
   } else {
-    startIdleTimer();
+    initIdleTimerOnLoad();
   }
 });
+
+// ロード完了時のタイマー初期化処理
+function initIdleTimerOnLoad() {
+  if (!localStorage.getItem("started")) return;
+
+  clearTimeout(idleTimer);
+  isIdleClearReady = false;
+  remainingTime = IDLE_LIMIT;
+
+  if (document.hidden) {
+    // ★ 裏に回っている場合はスタート時刻だけ記録し、タイマー（setTimeout）は動かさない
+    startTime = Date.now();
+  } else {
+    // 表にいる場合は通常通りカウント開始
+    runTimer(remainingTime);
+  }
+}
