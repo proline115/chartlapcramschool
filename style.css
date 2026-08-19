@@ -2073,7 +2073,7 @@ iframe.questionnaire {
 /* 実績グリッド：1列あたりの数を減らし、1つのサイズを大きく・余白を広めに調整 */
 .achievement-grid {
     display: grid;
-    gap: 30px; /* 余白を広めに設定 */
+    gap: min(30px,3vw); /* 余白を広めに設定 */
     padding: 30px 0;
     grid-template-columns: repeat(5, 1fr);
 }
@@ -2292,6 +2292,7 @@ iframe.questionnaire {
   cursor: pointer;
   transition: all 0.2s ease;
   outline: none;
+  white-space:nowrap;
 }
 
 /* 「欲しい！」ボタンのホバー・アクティブ表示 */
