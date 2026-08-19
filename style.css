@@ -2171,14 +2171,14 @@ iframe.questionnaire {
 }
 
 .overlay-text {
-    font-size: 7cqw;
+    font-size: 6.7cqw;
     line-height: 1.4;
     color: #333;
     word-break: break-all;
 }
 
 .overlay-progress {
-    margin-top: 6.8cqw;
+    margin-top: 6.9cqw;
     font-size: 7cqw;
     font-weight: bold;
     color: #0056b3;
