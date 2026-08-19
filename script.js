@@ -3172,7 +3172,8 @@ function runTimer(duration) {
 // 画面の表示状態（タブのアクティブ/非アクティブ）を監視
 document.addEventListener("visibilitychange", () => {
   // すでに放置完了しているか、ゲーム未開始の場合は何もしない
-  if (isIdleClearReady || !localStorage.getItem("started")) return;
+    const loadingOverlay = document.getElementById("loading-overlay");
+  if (isIdleClearReady || !localStorage.getItem("started") || loadingOverlay) return;
 
   if (document.hidden) {
     // ★ タブが裏に回った時：タイマーを一時停止し、消費した時間を減算
