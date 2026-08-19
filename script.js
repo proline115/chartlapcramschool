@@ -100,7 +100,7 @@ const problemList = [
     ["pdf/The Tale of Genji.pdf","The Tale of<br>Genji","国語","9842","answer/古典解答.pdf"],
     ["pdf/オハイオの風2.pdf","オハイオの風2","英語","8610","answer/オハイオの風2解答.pdf"],
     ["pdf/旭川の網代木.pdf","旭川の網代木<br>(日本史)","歴史","9283","answer/旭川の網代木解答.pdf"],
-    ["pdf/永田町の番人（公共・政経そして少し香る地理）.pdf","永田町の番人<br>(公共・政経<br>そして少し<br>香る地理)","公共","7209","answer/仮PDF.pdf"],
+    ["pdf/永田町の番人（公共・政経そして少し香る地理）.pdf","永田町の番人<br>(公共・政経<br>そして少し<br>香る地理)","公共","7209","answer/仮PDF2.pdf"],
     ["pdf/英検対策オハイオの風.pdf","英検対策<br>オハイオの風","英語","0798","answer/オハイオ英検編解答.pdf"],
     ["pdf/加古川の網代木.pdf","加古川の網代木<br>(日本史)","歴史","4701","answer/加古川の網代木解答.pdf"],
     ["pdf/奇問の崖.pdf","奇問の崖<br>(物理)","理科","5098","answer/奇問の崖 解答.pdf"],
@@ -142,7 +142,7 @@ const kasuProblemList = [
     ["kasupdf/カス歴史.pdf","カス歴史","歴史","1273","answer/カス歴史解答.pdf"],
     ["kasupdf/カス歴史2.pdf","カス歴史2","歴史","0577","answer/カス歴史2解答.pdf"],
     ["kasupdf/ザグロスの頂.pdf","ザグロスの頂<br>(地理)","地理","2695","answer/ザグロスの頂解答.pdf"],
-    ["kasupdf/やさしい理系生物.pdf","やさしい理系生物","理科","2987","answer/仮PDF.pdf"]
+    ["kasupdf/やさしい理系生物.pdf","やさしい理系生物","理科","2987","answer/やさしい理系生物解答.pdf"]
 ];
 
 const membersData = [
