@@ -85,7 +85,6 @@ const sequentialPhrases = [
 ];
 
 const problemList = [
-    ["pdf/〜今日からあなたも平安人day1〜.pdf","〜今日からあなたも平安人day1〜","国語","2359","answer/今日から平安人解答.pdf"],
     ["pdf/『オハイオの風』.pdf", "『オハイオの風』", "英語", "7230","answer/オハイオ解答.pdf"],
     ["pdf/1-共テ.pdf", "1-共テ<br>(地理)", "地理", "7109","answer/地理1解答.pdf"],
     ["pdf/2-共テ.pdf", "2-共テ<br>(地理)", "地理", "7653","answer/地理2解答.pdf"],
