@@ -85,6 +85,7 @@ const sequentialPhrases = [
 ];
 
 const problemList = [
+    ["pdf/〜今日からあなたも平安人day1〜.pdf","〜今日からあなたも平安人day1〜","国語","2359","answer/今日から平安人解答.pdf"],
     ["pdf/『オハイオの風』.pdf", "『オハイオの風』", "英語", "7230","answer/オハイオ解答.pdf"],
     ["pdf/1-共テ.pdf", "1-共テ<br>(地理)", "地理", "7109","answer/地理1解答.pdf"],
     ["pdf/2-共テ.pdf", "2-共テ<br>(地理)", "地理", "7653","answer/地理2解答.pdf"],
@@ -264,7 +265,25 @@ const CUSTOM_ERROR_MESSAGES = [
   ["歴史","そのページは移動しました。"],
   ["狂気","いやまぁ意味ちゃうのはわかってんねんけど、画像よりタイトルが先に決まってたんよね。もうならこれしかないやろ。"],
   ["アクリロニトリルガチ恋評議会","まぁエッフェル塔みたいなもんか…"],
-  ["落ち目の倫理を壊滅させて地学を必修にする会","やめてください。"]
+  ["落ち目の倫理を壊滅させて地学を必修にする会","やめてください。"],
+  ["回る","全てはここから始まった！"],
+  ["永劫回帰","誰か手伝って！"],
+  ["爆破","遠心力こそExplosion"],
+  ["大吉","いつかできるよ"],
+  ["何もない",""],
+  ["解いた","ならすることは…？"],
+  ["何でもある","↔何もない"],
+  ["消したくない","そんな事言われたら余計に"],
+  ["謝る","誰に？"],
+  ["ごめん","誰に？"],
+  ["ごめんなさい","誰に？"],
+  ["すいません","誰に？"],
+  ["すまん","誰に？"],
+  ["Sorry","誰に？"],
+  ["ゲーム","Qどこにある？<br>Aヒントは無数に置いてきた!"],
+  ["Game","Qどこにある？<br>Aヒントは無数に置いてきた!"],
+  ["敵","ﾋﾟｺﾋﾟｺ"],
+  ["隠しページ","隠れてるから隠しページであって、<br>教えることは出来ない。"]
 ];
 
 const container = document.querySelector(".container");
@@ -380,6 +399,8 @@ function setCurtainText() {
 
 function executePageSwitch(fullPageId) {
     const pages = document.querySelectorAll(".page");
+    const philosophy = document.getElementById("philosophy");
+    philosophy.classList.remove("philosophy");
     pages.forEach((page) => {
         page.classList.remove("active");
     });
@@ -440,7 +461,7 @@ function rotateLogo(event) {
     // getComputedStyle を使って実際の display 状態を取得する
 const spBanner = document.querySelector('.sp-banner');
 const isSpVisible = spBanner && window.getComputedStyle(spBanner).display === "flex";
-
+const philosophy = document.getElementById("philosophy");
 let logoImg;
 if (isSpVisible) {
     logoImg = document.querySelector('.sp-banner .logo img');
@@ -471,6 +492,7 @@ if (isSpVisible) {
         isBurst = true;
         logoImg.style.transition = 'none'; 
         logoImg.classList.add('burst'); 
+        philosophy.classList.toggle("philosophy");
         updateLogoExplodeAchievements();
         logoImg.addEventListener('animationend', function handler() {
             logoImg.removeEventListener('animationend', handler);
@@ -3145,11 +3167,6 @@ const IDLE_LIMIT = 10000; // 10秒（※30秒にする場合は 30000 に変更�
 let startTime = 0;       // タイマー開始時刻
 let remainingTime = IDLE_LIMIT; // 残り時間
 
-// 放置タイマーの開始（手動リセット用など）
-function startIdleTimer() {
-  initIdleTimerOnLoad();
-}
-
 // 実際のタイマー起動処理
 function runTimer(duration) {
   startTime = Date.now();
@@ -3172,7 +3189,7 @@ function runTimer(duration) {
 document.addEventListener("visibilitychange", () => {
   // すでに放置完了しているか、ゲーム未開始の場合は何もしない
     const loadingOverlay = document.getElementById("loading-overlay");
-  if (isIdleClearReady || !localStorage.getItem("started") || loadingOverlay) return;
+  if (isIdleClearReady || !localStorage.getItem("started")||loadingOverlay) return;
 
   if (document.hidden) {
     // ★ タブが裏に回った時：タイマーを一時停止し、消費した時間を減算
@@ -3256,13 +3273,44 @@ function submitClearCode() {
   // 暗転オーバーレイを起動（2秒で真っ黒にする）
   const overlay = document.getElementById("clear-blackout-overlay");
   if (overlay) {
+    // ★ テキスト要素があれば「読み込んでいます…」に変更
+    const statusText = overlay.querySelector("p") || overlay;
+    statusText.textContent = "読み込んでいます…";
     overlay.classList.add("active");
   }
+    
 
-  // ★ 変更箇所：暗転完了後（2秒後）にエンディングを開始する
-  setTimeout(() => {
-    startEndingSequence();
-  }, 2000);
+  // ★ 画像アセットの事前読み込みを開始
+  preloadEndingAssets().then(() => {
+    // 暗転演出（2秒）の完了を待ってからエンディングを開始
+    setTimeout(() => {
+      startEndingSequence();
+    }, 2000);
+  }).catch(err => {
+    console.error("画像の読み込みに失敗しました:", err);
+    // エラー時も止まらず開始させる場合のフォールバック
+    setTimeout(() => {
+      startEndingSequence();
+    }, 2000);
+  });
+}
+
+// エンディング・ミニゲーム用アセットの事前読み込み関数
+function preloadEndingAssets() {
+  // 回想画像と敵画像を一つの配列に統合
+  const allImages = [...memoryImages, ...enemyImages];
+
+  const promises = allImages.map(src => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = src;
+      // 読み込み成功時・失敗時どちらでもPromiseを解決して処理を止めないようにする
+      img.onload = () => resolve(src);
+      img.onerror = () => resolve(src);
+    });
+  });
+
+  return Promise.all(promises);
 }
 
 // 初期化とイベント登録
@@ -3336,6 +3384,7 @@ const staffRollData = [
   {
     sectionTitle: "問題制作",
     members: [
+      { role: "〜今日からあなたも平安人〜", name: "岡山の吉右衛門"},
       { role: "オハイオの風シリーズ", name: "岡山の吉右衛門" },
       { role: "共テ地理シリーズ", name: "ニコメディア" },
       { role: "the field of「Subjunctive」", name: "アポロ12号" },
