@@ -863,7 +863,7 @@ const handleTouchStartOrMove = (e) => {
             } else {
                 spawnX = Math.random() * (canvas.width - 60) + 30;
             }
-
+            let trivial = canvas.height/377;
             enemies.push({
                 type: type, 
                 img: assets[`enemy${type}`],
@@ -871,7 +871,7 @@ const handleTouchStartOrMove = (e) => {
                 y: -30, 
                 width: 32,
                 height: 32,
-                speedY: 1.5,
+                speedY: 1.5*trivial,
                 baseX: spawnX,
                 swingTimer: Math.random() * 100,
                 shootCooldown: Math.random() * 20 + 20 
@@ -987,7 +987,7 @@ const handleTouchStartOrMove = (e) => {
             // --- フェーズ管理と敵の出現 ---
             enemySpawnTimer++;
             let trivial = 777/canvas.width;
-            let spawnInterval = 35*trivial;
+            let spawnInterval = 50*trivial;
             if (currentPhase === "INFINITY") {
                 phase7ElapsedTime++; // 経過時間を進める
                 // 最初は120フレーム(約2秒)間隔。600フレーム(約10秒)経つごとに徐々に狭まる。
