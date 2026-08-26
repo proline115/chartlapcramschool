@@ -1740,6 +1740,7 @@ body.modal-open [onclick] {
   overflow: auto !important;
 }
 
+
 /* 中央の白いコンテナ：見た目の「白い箱」と領域（青エリア）をぴったり一致させる */
 .secret-page-container {
   display: block;
@@ -1753,6 +1754,10 @@ body.modal-open [onclick] {
   box-sizing: border-box;   /* paddingを含めたサイズ計算にする */
   height: auto;             /* 中身に合わせて伸びる */
   overflow: auto !important;
+}
+
+.secret-page-container.philosophy{
+    background-color: black;
 }
 
 /* コンテナ内の画像を重ねず、1枚ずつ上から順番に並べる設定 */
@@ -2335,24 +2340,25 @@ iframe.questionnaire {
 
 /* 左側のカーソル画像 */
 .achievement-cursor-img {
-  width: 50px;
-  height: 50px;
+  width: 30%;
+  height: 30%;
   object-fit: contain;
-  margin-left: 20px;
+  margin-left: 3cqw;
 }
 
 /* 右側の正方形購入ボタン（金枠・背景と文字色のみ反転） */
 .achievement-buy-btn {
-  width: 56px;
-  height: 56px;
-  margin-left: 90px;
+  width: 35cqw;
+  height: 35cqw;
+  margin-right: 3cqw !important;
+    margin-left:auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   line-height: 1.2;
-  font-size: 11px;
+  font-size: 7cqw;
   font-weight: bold;
   color: #444444;           /* 初期：黒文字 */
   background-color: #ffffff;/* 初期：白背景 */
@@ -2378,8 +2384,8 @@ iframe.questionnaire {
 
 /* 設定トグルボタンの基本スタイル */
 .toggle-btn {
-  padding: 8px 16px;
-  font-size: 10px;
+  padding: 4cqw 10cqw;
+  font-size: 7cqw;
   font-weight: bold;
   border: 2px solid #ccc;
   border-radius: 20px;
@@ -2406,8 +2412,8 @@ iframe.questionnaire {
 
 .upgrade-btn {
   display: inline-block;
-  padding: 12px 24px;
-  font-size: 14px;
+  padding: 7cqw 15cqw;
+  font-size: 7cqw;
   font-weight: bold;
   line-height: 1.4;       /* 行間を整える */
   text-align: center;     /* 中央揃え */
@@ -2448,6 +2454,9 @@ iframe.questionnaire {
   pointer-events: none;
   transition: opacity 2s ease;
   z-index: 99998;
+    display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .blackout-overlay.active {
@@ -3025,4 +3034,15 @@ body:has(.party) .banner-toggle-btn{
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* 「読み込んでいます…」テキストのスタイル */
+.blackout-overlay .loading-text {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin: 0;
+  padding: 0 20px;
 }
