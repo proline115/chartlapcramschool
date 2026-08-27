@@ -1307,8 +1307,8 @@ body.no-scroll {
     container-type: inline-size;
   position: relative !important;
   display: block !important;
-  width: 800px !important;  
-  height: 400px !important; 
+  width: 800px ;  
+  height: 400px; 
   border: 12px solid #333 !important; 
   border-radius: 12px !important;
   background-color: #8bd88b !important;
@@ -1481,9 +1481,9 @@ body.no-scroll {
   }
   /* 1. 枠体を画面幅に合わせて可変（縦長）にする */
   .belief-digital-screen {
-    width: 95% !important;
-    max-width: 500px !important;
-    height: auto !important;
+    width: 95% ;
+    max-width: 500px;
+    height: auto;
     padding-top: 60px !important; /* 名前に重ならないための余白 */
     display: flex !important;
     flex-direction: column !important;
@@ -2199,7 +2199,7 @@ iframe.questionnaire {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    z-index: 9999;
+    z-index: 999999;
     pointer-events: none; /* クリックを阻害しない */
 }
 
@@ -2980,6 +2980,7 @@ iframe.questionnaire {
 .party {
     width: 100vw !important;
     height: 100vh !important;
+    max-width:100000px !important;
     position: fixed !important;
     top: 0 !important;      /* ★ これで画面最上部に固定 */
     left: 0 !important;     /* ★ これで画面最左部に固定 */
