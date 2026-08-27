@@ -986,16 +986,15 @@ const handleTouchStartOrMove = (e) => {
 
             // --- フェーズ管理と敵の出現 ---
             enemySpawnTimer++;
-            let trivial = 777/canvas.width;
-            let spawnInterval = 50*trivial;
+            let spawnInterval = 40;
             if (currentPhase === "INFINITY") {
                 phase7ElapsedTime++; // 経過時間を進める
                 // 最初は120フレーム(約2秒)間隔。600フレーム(約10秒)経つごとに徐々に狭まる。
                 // 結構遅めの加速度にするため、減少値を「- 3」程度に抑え、限界値を12（フェーズ7相当の最速）にします。
-                spawnInterval = Math.max(12*trivial, 50*trivial - Math.floor(phase7ElapsedTime / 400) * 3);
+                spawnInterval = Math.max(12, 40 - Math.floor(phase7ElapsedTime / 400) * 3);
             } else if (currentPhase === 7) {
                 phase7ElapsedTime++;
-                spawnInterval = Math.max(12*trivial, 35*trivial - Math.floor(phase7ElapsedTime / 300) * 4);
+                spawnInterval = Math.max(12, 35 - Math.floor(phase7ElapsedTime / 300) * 4);
             }
 
             if (enemySpawnTimer >= spawnInterval) {
