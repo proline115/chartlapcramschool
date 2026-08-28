@@ -14,6 +14,23 @@ const buttonStates = {
   star: false
 };
 
+const memberEnemy = ["achieve/achieve24.png",
+                    "achieve/achieve25.png",
+                    "achieve/achieve26.png",
+                    "achieve/achieve27.png",
+                    "achieve/achieve28.png",
+                    "achieve/achieve29.png",
+                    "achieve/achieve30.gif",
+                    "achieve/achieve31.png",
+                    "achieve/achieve32.png",
+                    "achieve/achieve33.png"]
+
+const memberEnemyAssets = memberEnemy.map(path => {
+    const img = new Image();
+    img.src = path;
+    return img;
+});
+
 // 二重発火を防ぎ、スマホの長押しを保証する共通登録関数
 function setupMobileButton(element, stateKey) {
   if (!element) return;
@@ -247,7 +264,10 @@ window.initGame = function(canvas) {
         let retroLoading = isFirstTimeOpen; // 初回のみロード画面を有効化
         let loadY = 0;                      // 現在どこまで読み込まれたか（Y座標）
         let loadStuckTimer = 0;             // ひっかかり（停止）用のタイマー
-        
+        // --- コマンド入力管理変数 ---
+let commandProgress = 0;   // 0:なし, 1:'c', 2:'ch', 3:'chr', 4:'chrt'(完成)
+let bgFadeAlpha = 0;        // 画面を白く変えていく透明度 (0.0 ～ 1.0)
+let isCommandActive = false; // コマンド成功フラグ
         
 
         const stageSelect = {
@@ -292,6 +312,7 @@ window.initGame = function(canvas) {
         const chargeColors = [
             "#666666", "#ffff00", "#ff9900", "#ff0000", "#00ff00", "#00ffff", "#9900ff", "#0000ff"
         ];
+        
 
         // --- ステージ・フェーズ管理 ---
         let currentPhase = 1;
@@ -388,6 +409,29 @@ window.initGame = function(canvas) {
 
         // --- キーボードイベントリスナー ---
         const handleKeyDown = (e) => {
+            // 1文字のアルファベットキーを小文字で判定
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+
+    // SELECT画面でのコマンド判定処理
+    if (window.currentGameScene === "SELECT" && !isCommandActive) {
+        if (commandProgress === 0 && key === "c") {
+            commandProgress = 1; // 'c' 成功
+        } else if (commandProgress === 1 && key === "h") {
+            commandProgress = 2; // 'ch' 成功
+        } else if (commandProgress === 2 && key === "a") {
+            commandProgress = 3; // 'cha' 成功
+        } else if (commandProgress === 3 && key === "r") {
+            commandProgress = 4; // 'char' 成功
+        } else if (commandProgress === 4 && key === "t") {
+            commandProgress = 5; // 'chart' 成功（発動）
+            isCommandActive = true;
+
+            if (typeof SoundEffects !== "undefined") SoundEffects.playDecide();
+        } else {
+            // 条件以外のキーが押された場合は重ね文字を全て消去（リセット）
+            commandProgress = 0;
+        }
+    }
             if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
                 if (window.currentGameScene !== "SELECT") {
                     e.preventDefault();
@@ -762,7 +806,7 @@ const handleTouchStartOrMove = (e) => {
             let color = chargeColors[level];
             if (level === 7) {
                 if (selectedWeapon === "white") {
-                    color = "#ffffff";
+                    color = isCommandActive?"#000000":"#ffffff";
                 } else if (selectedWeapon === "pink") {
                     color = "#ff66cc";
                 }
@@ -864,9 +908,16 @@ const handleTouchStartOrMove = (e) => {
                 spawnX = Math.random() * (canvas.width - 60) + 30;
             }
             let trivial = canvas.height/377;
+            let enemyImg;
+    if (isCommandActive) {
+        let randomNumber = Math.floor(Math.random() * memberEnemyAssets.length);
+        enemyImg = memberEnemyAssets[randomNumber];
+    } else {
+        enemyImg = assets[`enemy${type}`];
+    }
             enemies.push({
                 type: type, 
-                img: assets[`enemy${type}`],
+                img: enemyImg,
                 x: spawnX,
                 y: -30, 
                 width: 32,
@@ -876,6 +927,7 @@ const handleTouchStartOrMove = (e) => {
                 swingTimer: Math.random() * 100,
                 shootCooldown: Math.random() * 20 + 20 
             });
+                
             phaseSpawnCount++;
         }
 
@@ -902,6 +954,10 @@ const handleTouchStartOrMove = (e) => {
             canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
             // ④ 拡大演出時の処理：背景以外のオブジェクトの動きを一時停止
+            if (isCommandActive && bgFadeAlpha < 1.0) {
+        bgFadeAlpha += 0.02; // 変化スピードの調整
+        if (bgFadeAlpha > 1.0) bgFadeAlpha = 1.0;
+    }
             if (window.currentGameScene === "PRESENTATION") {
                 clearPresentation.angle += 0.05; // 回転
                 clearPresentation.scale += 0.5;  // 急速に拡大
@@ -987,16 +1043,17 @@ const handleTouchStartOrMove = (e) => {
             // --- フェーズ管理と敵の出現 ---
             enemySpawnTimer++;
             let spawnInterval = 40;
+            
             if (currentPhase === "INFINITY") {
                 phase7ElapsedTime++; // 経過時間を進める
                 // 最初は120フレーム(約2秒)間隔。600フレーム(約10秒)経つごとに徐々に狭まる。
                 // 結構遅めの加速度にするため、減少値を「- 3」程度に抑え、限界値を12（フェーズ7相当の最速）にします。
-                spawnInterval = Math.max(12, 40 - Math.floor(phase7ElapsedTime / 400) * 3);
+                spawnInterval = Math.max(20, 60 - Math.floor(phase7ElapsedTime /550) * 3);
             } else if (currentPhase === 7) {
                 phase7ElapsedTime++;
                 spawnInterval = Math.max(12, 35 - Math.floor(phase7ElapsedTime / 300) * 4);
             }
-
+console.log(spawnInterval);
             if (enemySpawnTimer >= spawnInterval) {
                 enemySpawnTimer = 0;
                 if (currentPhase === "INFINITY") {
@@ -1223,10 +1280,17 @@ const handleTouchStartOrMove = (e) => {
 
         // --- 描画処理 ---
         function draw() {
-            ctx.fillStyle = "#020208";
+            
+            
+if (bgFadeAlpha > 0&isCommandActive) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${bgFadeAlpha})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }else{
+    ctx.fillStyle = "#020208";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.strokeStyle = "rgba(0, 255, 255, 0.03)";
+    }
+            ctx.strokeStyle = "rgba(0, 255, 255, 0)";
+            
             ctx.lineWidth = 1;
             for(let x=0; x<canvas.width; x+=40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
             for(let y=0; y<canvas.height; y+=40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
@@ -1240,13 +1304,39 @@ const handleTouchStartOrMove = (e) => {
                 ctx.fillStyle = "#ffffff";
                 ctx.font = `bold ${Math.min(canvas.width*0.2,60)}px 'DotGothic16'`; 
                 ctx.fillText("Char-Shoo", canvas.width / 2, canvas.height * 0.3);
+                // コマンド入力状況に合わせて青色文字を重ね描画
+    if (commandProgress > 0) {
+        let overlayText = "";
+        if (commandProgress === 1) overlayText = "C";
+        else if (commandProgress === 2) overlayText = "Ch";
+        else if (commandProgress === 3) overlayText = "Cha";
+        else if (commandProgress >= 4) overlayText = "Char";
+        ctx.save();
+        ctx.textAlign = "left"; // 位置合わせのため左揃えに変更
+        ctx.font = `bold ${Math.min(canvas.width*0.2,60)}px 'DotGothic16'`;
+        ctx.fillStyle = "#0000ff"; // 青色
+
+        // "Char-Shoo" 全体の描画幅から開始X座標（"C"の左端）を算出
+        const fullWidth = ctx.measureText("Char-Shoo").width;
+        const startX = (canvas.width / 2) - (fullWidth / 2);
+
+        ctx.fillText(overlayText, startX, canvas.height * 0.3);
+        if (bgFadeAlpha > 0&isCommandActive) {
+        ctx.fillStyle = `rgba(0, 0, 255, ${bgFadeAlpha})`;
+        ctx.fillText("ChartMode", startX, canvas.height * 0.3);
+    }
+        ctx.restore();
+    }
 
                 const currentOptions = hasCleared ? ["NUMBER MODE", "INFINITY MODE", "WEAPON SELECT"] : ["NUMBER MODE", "INFINITY MODE"];
                 currentOptions.forEach((name, i) => {
                     const isSelected = (i === stageSelect.selectedIndex);
                     let displayName = name;
                     if (name === "WEAPON SELECT") {
-                        const wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : "BLUE";
+                        let wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : "BLUE";
+                        if(isCommandActive&selectedWeapon === "white"){
+                            wLabel = "BLACK";
+                        }
                         displayName = `[ ${wLabel} ] WEAPON SELECT`;
                     }
                     if (isSelected) {
@@ -1254,7 +1344,7 @@ const handleTouchStartOrMove = (e) => {
                         ctx.font = "bold 26px 'DotGothic16'";
                         if(name ==="WEAPON SELECT"){
                             if(selectedWeapon==="white"){
-                                ctx.fillStyle = "#ffffff";
+                                ctx.fillStyle = isCommandActive?"#000000":"#ffffff";
                             }else if(selectedWeapon==="pink"){
                                 ctx.fillStyle = "#ff66cc";
                             }else{
@@ -1267,7 +1357,7 @@ const handleTouchStartOrMove = (e) => {
                         ctx.font = "22px 'DotGothic16'";
                         if(name ==="WEAPON SELECT"){
                             if(selectedWeapon==="white"){
-                                ctx.fillStyle = "#ffffff";
+                                ctx.fillStyle = isCommandActive?"#000000":"#ffffff";
                             }else if(selectedWeapon==="pink"){
                                 ctx.fillStyle = "#ff66cc";
                             }else{
@@ -1311,6 +1401,7 @@ ctx.textBaseline = "middle";
 ctx.fillText("⤢", fsBtnX + fsBtnSize / 2, fsBtnY + fsBtnSize / 2 + 1); 
 ctx.restore();
             }
+            
 
             // ④ 勝利時星の拡大演出の描画
             if (window.currentGameScene === "PRESENTATION") {
@@ -1391,7 +1482,7 @@ ctx.restore();
                     // レベル7（最大）の時だけ武器固有の色、レベル1〜6は通常の進行カラー（黄・橙・赤など）
                     let auraColor = chargeColors[currentLevel];
                     if (currentLevel === 7) {
-                        if (selectedWeapon === "white") auraColor = "#ffffff";
+                        if (selectedWeapon === "white") auraColor = isCommandActive?"#000000":"#ffffff";
                         else if (selectedWeapon === "pink") auraColor = "#ff66cc";
                     }
                     
@@ -1404,9 +1495,10 @@ ctx.restore();
 
                 enemies.forEach(e => {
                     if (e.img.complete) {
-                        ctx.drawImage(e.img, e.x - e.width/2, e.y - e.height/2, e.width, e.height);
+                        
+                            ctx.drawImage(e.img, e.x - e.width/2, e.y - e.height/2, e.width, e.height);
                     } else {
-                        ctx.fillStyle = e.type === 1 ? "#ff0000" : e.type === 2 ? "#ff6600" : e.type === 3 ? "#ff00ff" : "#ffff00";
+                        ctx.fillStyle = e.type === 1 ? "#ffff00" : e.type === 2 ? "#ff6600" : e.type === 3 ? "#ff00ff" : "#ff0000";
                         ctx.fillRect(e.x - e.width/2, e.y - e.height/2, e.width, e.height);
                     }
                 });
@@ -1431,7 +1523,7 @@ ctx.restore();
                         // 判定ロジックと完全に一致させるため、厚み40px（内径 -20px、外径 +20px）のドーナツ型の線を引く
                         ctx.arc(circle.cx, circle.cy, circle.radius, 0, Math.PI * 2);
                         
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.strokeStyle = isCommandActive?`rgba(0, 0, 0, ${alpha})`:`rgba(255, 255, 255, ${alpha})`;
                         ctx.lineWidth = 40; // 敵弾を消去する「厚さ40pxのフチ」に完全に合わせる
                         ctx.stroke();
                         ctx.restore();
@@ -1447,13 +1539,11 @@ ctx.restore();
 
                 ctx.textAlign = "left";
                 ctx.textBaseline = "top";
-                ctx.fillStyle = "#ffffff";
+                ctx.fillStyle = isCommandActive ? "rgb(0,0,0)" : "#ffffff";
                 ctx.font = "18px 'DotGothic16'";
                 ctx.fillText(`SCORE: ${score}`, 15, 15);
                 
-                // ⑥ 【修正】プレイ中画面からの「INVASIONS:」の表示を削除しました。
-
-                ctx.fillStyle = "#ffffff";
+                ctx.fillStyle = isCommandActive ? "rgb(0,0,0)" : "#ffffff";
                 ctx.font = "14px 'DotGothic16'";
                 ctx.fillText("HP:", canvas.width - 180, 15);
                 ctx.fillStyle = "#444444";
@@ -1466,7 +1556,7 @@ ctx.restore();
                 const barW = 160;
                 const barH = 14;
 
-                ctx.fillStyle = "#222222";
+                ctx.fillStyle = isCommandActive?"#eeeeee":"#222222";
                 ctx.fillRect(barX, barY, barW, barH);
 
                 if (isCharging) {
@@ -1477,27 +1567,23 @@ ctx.restore();
 
                     if (currentLevel > 1) {
                         let bgLevelColor = chargeColors[currentLevel - 1];
-                        if (currentLevel - 1 === 7) {
-                            if (selectedWeapon === "white") bgLevelColor = "#888888";
-                            else if (selectedWeapon === "pink") bgLevelColor = "#aa3377";
-                        }
                         ctx.fillStyle = bgLevelColor;
                         ctx.fillRect(barX, barY, barW, barH);
                     }
 
                     let fgLevelColor = chargeColors[currentLevel];
                     if (currentLevel === 7) {
-                        if (selectedWeapon === "white") fgLevelColor = "#ffffff";
+                        if (selectedWeapon === "white") fgLevelColor = isCommandActive?"#000000":"#ffffff";
                         else if (selectedWeapon === "pink") fgLevelColor = "#ff66cc";
                     }
                     ctx.fillStyle = fgLevelColor;
                     ctx.fillRect(barX, barY, barW * currentLevelProgress, barH);
                 }
 
-                ctx.strokeStyle = "#ffffff";
+                ctx.strokeStyle = isCommandActive ? "rgb(0,0,0)" : "#ffffff";
                 ctx.lineWidth = 1;
                 ctx.strokeRect(barX, barY, barW, barH);
-                ctx.fillStyle = "#ffffff";
+                ctx.fillStyle = isCommandActive ? "rgb(0,0,0)" : "#ffffff";
                 ctx.font = "15px 'DotGothic16'";
                 ctx.fillText("CHARGE GAUGE", barX, barY - 18);
             }
@@ -1506,6 +1592,10 @@ ctx.restore();
                 if (passedEnemiesCount === 0) {
                     updateAchievementProgress("achievement_37");
                 }
+                
+                isCommandActive = false;
+                commandProgress = false;
+                bgFadeAlpha = 0;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.fillStyle = "#ff0000";
@@ -1528,9 +1618,13 @@ ctx.restore();
                 ctx.font = "16px 'DotGothic16'";
                 ctx.fillText("Click to return menu", canvas.width / 2, canvas.height * 0.8);
                 
+                
             }
 
             if (window.currentGameScene === "CLEAR") {
+                isCommandActive = false;
+                commandProgress = 0;
+                bgFadeAlpha = 0;
                 updateAchievementProgress("achievement_36");
                 if (passedEnemiesCount === 0) {
                     updateAchievementProgress("achievement_37");
