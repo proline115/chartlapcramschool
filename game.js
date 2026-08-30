@@ -276,7 +276,11 @@ let isCommandActive = false; // コマンド成功フラグ
         };
 
         // ② & ③ 武器選択のパラメータ
+        const hasNewItem = !!localStorage.getItem("newItem");
         const weaponOptions = ["blue", "white", "pink"];
+        if (hasNewItem) {
+            weaponOptions.push("green");
+        }
         let selectedWeapon = localStorage.getItem("belief_selected_weapon") || "blue";
         let weaponSelectIndex = weaponOptions.indexOf(selectedWeapon);
         if (weaponSelectIndex === -1) weaponSelectIndex = 0;
@@ -375,7 +379,13 @@ let isCommandActive = false; // コマンド成功フラグ
                     SoundEffects.playDecide();
                     const selectedName = currentOptions[stageSelect.selectedIndex];
                     if (selectedName === "WEAPON SELECT") {
-                        const maxWeapons = highScore >= 50000 ? 3 : 2;
+                        let maxWeapons = 2;
+                        if(localStorage.getItem("newItem")){
+                            maxWeapons = 4;
+                            console.log("a");
+                        }else if(highScore >= 50000){
+                            maxWeapons = 3;
+                        }
                         weaponSelectIndex = (weaponSelectIndex + 1) % maxWeapons;
                         selectedWeapon = weaponOptions[weaponSelectIndex];
                         localStorage.setItem("belief_selected_weapon", selectedWeapon);
@@ -809,6 +819,8 @@ const handleTouchStartOrMove = (e) => {
                     color = isCommandActive?"#000000":"#ffffff";
                 } else if (selectedWeapon === "pink") {
                     color = "#ff66cc";
+                }else if (selectedWeapon === "green") {
+                    color = "#00aa33"; // 少し濃い目の緑色
                 }
             }
 
@@ -884,6 +896,19 @@ const handleTouchStartOrMove = (e) => {
                             noDamage: true // 敵への攻撃能力なし
                         });
                     }
+                }else if (selectedWeapon === "green") {
+                    // ★ 緑武器：非貫通・当たると8方向分裂する弾を正面に1発発射
+                    bullets.push({
+                        x: player.x,
+                        y: player.y - 15,
+                        vx: 0,
+                        vy: -baseSpeed,
+                        color: "#00aa33",
+                        isPenetrating: false, // 貫通しない
+                        size: 20,
+                        hitEnemies: new Set(),
+                        isGreenSplit: true // 緑武器（分裂効果あり）フラグ
+                    });
                 }
                 // ★ 通常（青武器）: 24方向
                 else {
@@ -1048,7 +1073,7 @@ const handleTouchStartOrMove = (e) => {
                 phase7ElapsedTime++; // 経過時間を進める
                 // 最初は120フレーム(約2秒)間隔。600フレーム(約10秒)経つごとに徐々に狭まる。
                 // 結構遅めの加速度にするため、減少値を「- 3」程度に抑え、限界値を12（フェーズ7相当の最速）にします。
-                spawnInterval = Math.max(20, 60 - Math.floor(phase7ElapsedTime /550) * 3);
+                spawnInterval = Math.max(10, 60 - Math.floor(phase7ElapsedTime /550) * 3);
             } else if (currentPhase === 7) {
                 phase7ElapsedTime++;
                 spawnInterval = Math.max(12, 35 - Math.floor(phase7ElapsedTime / 300) * 4);
@@ -1242,6 +1267,24 @@ console.log(spawnInterval);
                         else if (e.type === 3) score += 400;
                         else if (e.type === 4) score += 800;
 
+                        if (b.isGreenSplit) {
+                            const splitSpeed = 6;
+                            for (let i = 0; i < 16; i++) {
+                                const angle = (i / 16) * Math.PI * 2;
+                                bullets.push({
+                                    x: e.x, // 倒した敵の座標を中心とする
+                                    y: e.y,
+                                    vx: Math.cos(angle) * splitSpeed,
+                                    vy: Math.sin(angle) * splitSpeed,
+                                    color: "#00aa33",
+                                    isPenetrating: false, // 再度分裂する弾も非貫通
+                                    size: 16,
+                                    hitEnemies: new Set(),
+                                    isGreenSplit: true // 分裂弾も同じ連鎖効果を持つ
+                                });
+                            }
+                        }
+
                         if (!b.isPenetrating) {
                             b.y = 999; 
                         }
@@ -1296,6 +1339,28 @@ if (bgFadeAlpha > 0&isCommandActive) {
             for(let y=0; y<canvas.height; y+=40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
             
             if (window.currentGameScene === "SELECT") {
+                score = 0;
+                passedEnemiesCount = 0;
+                player.hp = 30;
+                player.x = canvas.width / 2;
+                player.y = canvas.height - 50; 
+                currentPhase = 1;
+                phaseSpawnCount = 0;
+                enemySpawnTimer = 0;
+                phase7ElapsedTime = 0;
+                clearStar.progress = 0;
+                clearStar.x = canvas.width / 2;
+                clearStar.y = -100; 
+                bullets = [];
+                whiteEraserCircles = [];
+                enemyBullets = [];
+                enemies = [];
+                chargeTimer = 0;
+
+                clearPresentation.scale = 1.0;
+                clearPresentation.angle = 0;
+                clearPresentation.opacity = 1.0;
+                clearPresentation.fadeStarted = false;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.fillStyle = "#adadad";
@@ -1333,7 +1398,7 @@ if (bgFadeAlpha > 0&isCommandActive) {
                     const isSelected = (i === stageSelect.selectedIndex);
                     let displayName = name;
                     if (name === "WEAPON SELECT") {
-                        let wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : "BLUE";
+                        let wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : selectedWeapon === "green" ? "GREEN" :"BLUE";
                         if(isCommandActive&selectedWeapon === "white"){
                             wLabel = "BLACK";
                         }
@@ -1347,6 +1412,8 @@ if (bgFadeAlpha > 0&isCommandActive) {
                                 ctx.fillStyle = isCommandActive?"#000000":"#ffffff";
                             }else if(selectedWeapon==="pink"){
                                 ctx.fillStyle = "#ff66cc";
+                            }else if (selectedWeapon === "green") {
+                                ctx.fillStyle = "#00aa33";
                             }else{
                                 ctx.fillStyle = "#0000ff";
                             }
@@ -1360,6 +1427,8 @@ if (bgFadeAlpha > 0&isCommandActive) {
                                 ctx.fillStyle = isCommandActive?"#000000":"#ffffff";
                             }else if(selectedWeapon==="pink"){
                                 ctx.fillStyle = "#ff66cc";
+                            }else if (selectedWeapon === "green") {
+                                ctx.fillStyle = "#00aa33";
                             }else{
                                 ctx.fillStyle = "#0000ff";
                             }
@@ -1484,6 +1553,7 @@ ctx.restore();
                     if (currentLevel === 7) {
                         if (selectedWeapon === "white") auraColor = isCommandActive?"#000000":"#ffffff";
                         else if (selectedWeapon === "pink") auraColor = "#ff66cc";
+                        else if (selectedWeapon === "green") auraColor = "#00aa33";
                     }
                     
                     ctx.strokeStyle = auraColor;
@@ -1575,6 +1645,7 @@ ctx.restore();
                     if (currentLevel === 7) {
                         if (selectedWeapon === "white") fgLevelColor = isCommandActive?"#000000":"#ffffff";
                         else if (selectedWeapon === "pink") fgLevelColor = "#ff66cc";
+                        else if (selectedWeapon === "green") fgLevelColor = "#00aa33";
                     }
                     ctx.fillStyle = fgLevelColor;
                     ctx.fillRect(barX, barY, barW * currentLevelProgress, barH);
