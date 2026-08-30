@@ -3966,6 +3966,9 @@ function startExitSequence() {
         }else{
       localStorage.setItem("clear","Congratulation!");
         }
+        if(!localStorage.getItem("newItem")){
+            localStorage.setItem("newItem","getNewItem");
+        }
     }
   }, 1500); // 敵が通り過ぎるのを待つ時間（ミリ秒）
 }
