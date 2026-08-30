@@ -805,7 +805,9 @@ const handleTouchStartOrMove = (e) => {
 
             // レベル4以上での通常回復（共通の基本処理）
             if (level >= 4) {
+                if(selectedWeapon !== "green"||level !==7){
                 player.hp = Math.min(player.maxHp, player.hp + 3); 
+                    }
             }
 
             const baseSpeed = 6;
@@ -907,7 +909,9 @@ const handleTouchStartOrMove = (e) => {
                         isPenetrating: false, // 貫通しない
                         size: 20,
                         hitEnemies: new Set(),
-                        isGreenSplit: true // 緑武器（分裂効果あり）フラグ
+                        isGreenSplit: true, // 緑武器（分裂効果あり）フラグ
+                        divide: 32,
+                        telomere: 20
                     });
                 }
                 // ★ 通常（青武器）: 24方向
@@ -1267,10 +1271,11 @@ console.log(spawnInterval);
                         else if (e.type === 3) score += 400;
                         else if (e.type === 4) score += 800;
 
-                        if (b.isGreenSplit) {
+                        if (b.isGreenSplit&&b.telomere>0) {
                             const splitSpeed = 6;
-                            for (let i = 0; i < 16; i++) {
-                                const angle = (i / 16) * Math.PI * 2;
+                            if(b.divide === 2){
+                                for (let i = 0; i < b.divide; i++) {
+                                const angle = (i / b.divide) * Math.PI * 2;
                                 bullets.push({
                                     x: e.x, // 倒した敵の座標を中心とする
                                     y: e.y,
@@ -1280,8 +1285,28 @@ console.log(spawnInterval);
                                     isPenetrating: false, // 再度分裂する弾も非貫通
                                     size: 16,
                                     hitEnemies: new Set(),
-                                    isGreenSplit: true // 分裂弾も同じ連鎖効果を持つ
+                                    isGreenSplit: true, // 分裂弾も同じ連鎖効果を持つ
+                                    divide: 32,
+                                    telomere: b.telomere-1
                                 });
+                            }
+                            }else{
+                            for (let i = 0; i < b.divide; i++) {
+                                const angle = (i / b.divide) * Math.PI * 2;
+                                bullets.push({
+                                    x: e.x, // 倒した敵の座標を中心とする
+                                    y: e.y,
+                                    vx: Math.cos(angle) * splitSpeed,
+                                    vy: Math.sin(angle) * splitSpeed,
+                                    color: "#00aa33",
+                                    isPenetrating: false, // 再度分裂する弾も非貫通
+                                    size: 16,
+                                    hitEnemies: new Set(),
+                                    isGreenSplit: true, // 分裂弾も同じ連鎖効果を持つ
+                                    divide: b.divide/2,
+                                    telomere: b.telomere-1
+                                });
+                            }
                             }
                         }
 
