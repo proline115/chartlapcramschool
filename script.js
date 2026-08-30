@@ -50,7 +50,8 @@ const randomPhrases = [
     "教養は高く<br>品性は低く",
     "ミリカンすごくね？",
     "ここ最近一番の驚き<br>リトマスゴケ",
-    "情報✕外れ値＝香川"
+    "情報✕外れ値＝香川",
+    "報酬は芝"
 ];
 
 const sequentialPhrases = [
