@@ -1082,7 +1082,6 @@ const handleTouchStartOrMove = (e) => {
                 phase7ElapsedTime++;
                 spawnInterval = Math.max(12, 35 - Math.floor(phase7ElapsedTime / 300) * 4);
             }
-console.log(spawnInterval);
             if (enemySpawnTimer >= spawnInterval) {
                 enemySpawnTimer = 0;
                 if (currentPhase === "INFINITY") {
