@@ -382,7 +382,6 @@ let isCommandActive = false; // コマンド成功フラグ
                         let maxWeapons = 2;
                         if(localStorage.getItem("newItem")){
                             maxWeapons = 4;
-                            console.log("a");
                         }else if(highScore >= 50000){
                             maxWeapons = 3;
                         }
@@ -1422,7 +1421,7 @@ if (bgFadeAlpha > 0&isCommandActive) {
                     const isSelected = (i === stageSelect.selectedIndex);
                     let displayName = name;
                     if (name === "WEAPON SELECT") {
-                        let wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : selectedWeapon === "green" ? "GREEN" :"BLUE";
+                        let wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : selectedWeapon === "green" ? "SHIBA" :"BLUE";
                         if(isCommandActive&selectedWeapon === "white"){
                             wLabel = "BLACK";
                         }
@@ -1476,7 +1475,7 @@ const fsBtnY = canvas.height - fsBtnSize - fsBtnMargin;
 
 // Androidでの表示ずれ・縮小を修正したコード
 ctx.save();
-ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+ctx.fillStyle = isCommandActive ? `rgba(255, 255, 255, ${bgFadeAlpha})` : "rgba(0, 0, 0, 0.7)";
 ctx.fillRect(fsBtnX, fsBtnY, fsBtnSize, fsBtnSize);
 
 ctx.strokeStyle = "#8bd88b";
