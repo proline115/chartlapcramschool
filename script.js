@@ -242,6 +242,7 @@ const CUSTOM_ERROR_MESSAGES = [
   ["問題集","間違えてカス問題なんこか紛れ込んだ気がするけどまぁいいや。"],
   ["カス問題集","一番ここ好きかも。定期的に覗いてる。"],
   ["心得","始めはアーケードゲームのキャラ選択画面みたいに作るつもりやったし、イメージとして提出した画像はアーケードゲームだった。あまりにあからさま過ぎだと思ったのでレトロデジタル画面風に。由来は昔作ろうとしてたチャットゲーム。"],
+  ["答え","永田町の答えは追加予定ありません"],
   ["やさしい理系数学","私も使ってる。解説がおもろいから読み物として楽しんでる節はある。イェンゼンの不等式を重心で証明されたのにはビビった。その後のn個での相加相乗平均も。"],
   ["倫理","史上最高の学問。倫理が無ければこの世界は存在していない。どの学問でもそうだと言う人もいるかもしれないが、その学問という概念すらも元はと言えば倫理由来である。一日中倫理のことを考えていても飽きない。なんで二次試験倫理無いの。"],
   ["『鉄壁』はクソの会","そんなことないです。"],
@@ -2541,10 +2542,24 @@ document.addEventListener("DOMContentLoaded", () => {
     localUpgrade();
   }
   loadAchievementsData();
+    if(localStorage.getItem("newItem")&&!localStorage.getItem("randomWeapon")&&localStorage.getItem("millionaire")){
+　const ach35 = achievementsData.find(a => a.id === "achievement_35");
+    if (ach35) {
+        ach35.unlocked = false;
+        ach35.currentVal = 0;
+        achievementsData[34].conditionText = `新武器が欲しい？<br><div class="ach35-btn-group"><button type="button" class="ach35-btn ach35-btn-want" onclick="handleAch35Want(event)">欲しい！</button><button type="button" class="ach35-btn ach35-btn-reject" onclick="handleAch35Reject(event)">いらない！</button></div>`;
+        saveAchievementsData();
+    }
+        }
   renderAchievements();
   updateBurstToggleButton();
   updateSubjectOnlyAchievements();
+    
 });
+
+function getNewWeapon(){
+    localStorage.setItem("randomWeapon","letsparty");
+}
 
 /**
  * ロゴ回転系の実績（②・③・④）を一括更新する関数
@@ -2731,6 +2746,9 @@ function handleAch35Want(event) {
 
   // 実績㉟を解除
   updateAchievementProgress("achievement_35");
+    if(localStorage.getItem("newItem")&&localStorage.getItem("millionaire")){
+        getNewWeapon();
+    }
 }
 
 /**
