@@ -7,6 +7,8 @@ let gameBtnPrev = document.getElementById("btn-prev");
 let gameBtnNext = document.getElementById("btn-next");
 let gameBtnFav  = document.getElementById("btn-favorite");
 
+let random = 0;
+const randomBullets = ["blue", "white", "pink", "green"];
 // 画面ボタンの押下状態を記録するオブジェクト
 const buttonStates = {
   left: false,
@@ -276,11 +278,7 @@ let isCommandActive = false; // コマンド成功フラグ
         };
 
         // ② & ③ 武器選択のパラメータ
-        const hasNewItem = !!localStorage.getItem("newItem");
-        const weaponOptions = ["blue", "white", "pink"];
-        if (hasNewItem) {
-            weaponOptions.push("green");
-        }
+        const weaponOptions = ["blue", "white", "pink", "green", "gold"];
         let selectedWeapon = localStorage.getItem("belief_selected_weapon") || "blue";
         let weaponSelectIndex = weaponOptions.indexOf(selectedWeapon);
         if (weaponSelectIndex === -1) weaponSelectIndex = 0;
@@ -380,7 +378,9 @@ let isCommandActive = false; // コマンド成功フラグ
                     const selectedName = currentOptions[stageSelect.selectedIndex];
                     if (selectedName === "WEAPON SELECT") {
                         let maxWeapons = 2;
-                        if(localStorage.getItem("newItem")){
+                        if(localStorage.getItem("randomWeapon")){
+                            maxWeapons = 5;
+                        }else if(localStorage.getItem("newItem")){
                             maxWeapons = 4;
                         }else if(highScore >= 50000){
                             maxWeapons = 3;
@@ -412,6 +412,9 @@ let isCommandActive = false; // コマンド成功フラグ
                     fireChargeShot();
                     isCharging = false;
                     chargeTimer = 0;
+                    if(random === 1){
+                        selectedWeapon = randomBullets[Math.floor(Math.random()*4)];
+                    }
                 }
             }
         }
@@ -615,6 +618,9 @@ const handleTouchStartOrMove = (e) => {
             // --- 2. GAMEOVER / CLEAR 画面の処理 ---
             if (window.currentGameScene === "GAMEOVER" || window.currentGameScene === "CLEAR") {
                 SoundEffects.playSelect();
+                if(random===1){
+                    selectedWeapon = "random";
+                }
                 window.currentGameScene = "SELECT";
                 score = 0;
                 passedEnemiesCount = 0;
@@ -633,7 +639,7 @@ const handleTouchStartOrMove = (e) => {
                 enemyBullets = [];
                 enemies = [];
                 chargeTimer = 0;
-
+                
                 clearPresentation.scale = 1.0;
                 clearPresentation.angle = 0;
                 clearPresentation.opacity = 1.0;
@@ -771,6 +777,9 @@ const handleTouchStartOrMove = (e) => {
                 clearPresentation.angle = 0;
                 clearPresentation.opacity = 1.0;
                 clearPresentation.fadeStarted = false;
+
+                random = selectedWeapon === "random"?1:0;
+
             } else {
                 window.currentGameScene = "PLAYING";
                 currentPhase = "INFINITY"; // フェーズ管理を特別フラグにする
@@ -786,12 +795,17 @@ const handleTouchStartOrMove = (e) => {
                 enemyBullets = [];
                 enemies = [];
                 chargeTimer = 0;
+                random = selectedWeapon === "random"?1:0;
             }
         }
 
         // --- チャージショット発射ロジック ---
         function fireChargeShot() {
+            
             let level = Math.floor(chargeTimer / CHARGE_THRESHOLD) + 1;
+            if(random ===1){
+                level = Math.floor(Math.random()*7)+1;
+            }
             if (level > MAX_CHARGE_LEVEL) level = MAX_CHARGE_LEVEL;
 
             // 発射音の再生
@@ -803,7 +817,7 @@ const handleTouchStartOrMove = (e) => {
             
 
             // レベル4以上での通常回復（共通の基本処理）
-            if (level >= 4) {
+            if (level >= 4&&random===0) {
                 if(selectedWeapon !== "green"||level !==7){
                 player.hp = Math.min(player.maxHp, player.hp + 3); 
                     }
@@ -822,6 +836,10 @@ const handleTouchStartOrMove = (e) => {
                     color = "#ff66cc";
                 }else if (selectedWeapon === "green") {
                     color = "#00aa33"; // 少し濃い目の緑色
+                }else if (selectedWeapon === "glay"){
+                    color = "#888888";
+                }else if (selectedWeapon ==="gold"){
+                    color = "#ffd700";
                 }
             }
 
@@ -912,6 +930,24 @@ const handleTouchStartOrMove = (e) => {
                         divide: 32,
                         telomere: 20
                     });
+                }else if (selectedWeapon === "glay"){
+                     bullets.push({
+                        x: player.x,
+                        y: player.y - 15,
+                        vx: 0,
+                        vy: 0,
+                        color: "#888888",
+                        isPenetrating: true, // 貫通しない
+                        size: 20,
+                        hitEnemies: new Set(),
+                        isGlayPersist: true,
+                        rest: 20
+                    });
+                }else if (selectedWeapon === "gold"){
+                    for (let i = 0; i < 16; i++) {
+                        const angle = (i / 16) * Math.PI * 2;
+                        createBullet(player.x, player.y, Math.cos(angle) * 5, Math.sin(angle) * 5, color, true, 25);
+                    }
                 }
                 // ★ 通常（青武器）: 24方向
                 else {
@@ -976,6 +1012,21 @@ const handleTouchStartOrMove = (e) => {
                 });
             });
         }
+        // ★ 友好化した敵（type 3, 4）用の8方向緑の玉発射処理
+function fireFriendlyRadial(e) {
+    const speed = 4.5;
+    for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2;
+        enemyBullets.push({
+            x: e.x,
+            y: e.y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            parent: e,
+            isFriendlyBullet: true // 判定用の緑の玉フラグ
+        });
+    }
+}
 
         // --- アップデート処理 ---
         function update() {
@@ -1176,7 +1227,12 @@ const handleTouchStartOrMove = (e) => {
             bullets = bullets.filter(b => b.x > 0 && b.x < canvas.width && b.y > 0 && b.y < canvas.height);
 
             enemies.forEach(e => {
-                e.y += e.speedY; 
+                
+                if (e.isFriendly) {
+                    e.y -= Math.abs(e.speedY);
+                } else {
+                    e.y += e.speedY; 
+                }
 
                 if (e.type === 2 || e.type === 4) {
                     e.swingTimer += 0.05;
@@ -1188,18 +1244,38 @@ const handleTouchStartOrMove = (e) => {
                     e.shootCooldown = Math.random() * 30 + 35; 
 
                     if (e.y > 0 && e.y < canvas.height) {
-                        if (e.type === 1 || e.type === 2) {
-                            enemyBullets.push({ x: e.x, y: e.y + 10, vx: 0, vy: 4.5, parent: e });
-                        } else if (e.type === 3 || e.type === 4) {
-                            fireEnemyRadial(e);
-                        }
-                    }
+    if (e.isFriendly) {
+        // ★ 友好化している敵の処理
+        if (e.type === 1 || e.type === 2) {
+            // type 1, 2 は真上に1発
+            enemyBullets.push({ 
+                x: e.x, 
+                y: e.y - 10, 
+                vx: 0, 
+                vy: -4.5, 
+                parent: e, 
+                isFriendlyBullet: true 
+            });
+        } else if (e.type === 3 || e.type === 4) {
+            // type 3, 4 は友好化用の8方向発射
+            fireFriendlyRadial(e);
+        }
+    } else {
+        // 通常（未友好）の敵の処理
+        if (e.type === 1 || e.type === 2) {
+            enemyBullets.push({ x: e.x, y: e.y + 10, vx: 0, vy: 4.5, parent: e });
+        } else if (e.type === 3 || e.type === 4) {
+            fireEnemyRadial(e);
+        }
+    }
+}
                 }
             });
 
             // ⑥ 侵略数（倒されずに画面外へ通り過ぎていった敵の数）のカウント
             const currentEnemiesLength = enemies.length;
             enemies = enemies.filter(e => {
+                if (e.isFriendly && e.y <= -50) return false;
                 const isPassed = e.y >= canvas.height + 20;
                 if (isPassed) {
                     passedEnemiesCount++; // 侵略数を1増やす
@@ -1246,7 +1322,11 @@ const handleTouchStartOrMove = (e) => {
                                 highScore = score;
                                 localStorage.setItem("belief_highscore_common", highScore.toString());
                                 updateAchievementProgress("achievement_38", highScore, true);
+                                
                             }
+                            if(highScore >= 1000000){
+                                    localStorage.setItem("millionaire","Wow");
+                                }
                         }
                         b.y = -999; 
                         return; 
@@ -1260,6 +1340,12 @@ const handleTouchStartOrMove = (e) => {
                     const dist = Math.hypot(b.x - e.x, b.y - e.y);
                     if (dist < (e.width / 2 + b.size / 2)) {
                         b.hitEnemies.add(e);
+                        if (b.color === "#ffd700") {
+                            if(!e.isFriendly){
+                            e.isFriendly = true;
+                            SoundEffects.playHitStar();
+                            }
+                        }else{
                         enemies = enemies.filter(item => item !== e);
                         
                         SoundEffects.playExplosion(); // 敵を撃破した時のSE
@@ -1308,8 +1394,16 @@ const handleTouchStartOrMove = (e) => {
                             }
                         }
 
+                        if(b.isGlayPersist){
+                            b.rest=b.rest-1;
+                            if(b.rest === 0){
+                                b.isPenetrating = false;
+                            }
+                        }
+
                         if (!b.isPenetrating) {
                             b.y = 999; 
+                        }
                         }
                     }
                 });
@@ -1319,6 +1413,34 @@ const handleTouchStartOrMove = (e) => {
 
             // --- 当たり判定（敵弾/敵本体 vs 自機） ---
             enemyBullets.forEach((eb) => {
+                if (eb.isFriendlyBullet) {
+                    // 1. プレイヤーに当たった場合：回復して玉消去
+                    const distPlayer = Math.hypot(eb.x - player.x, eb.y - player.y);
+                    if (distPlayer < (player.width / 2 + 5)) {
+                        player.hp = Math.min(player.maxHp, player.hp + 2);
+                        SoundEffects.playHitStar();
+                        enemyBullets = enemyBullets.filter(item => item !== eb);
+                        return;
+                    }
+
+                    // 2. 通常の敵に当たった場合：敵と玉を消去（非貫通）
+                    enemies.forEach(e => {
+                        if (!e.isFriendly) {
+                            const distEnemy = Math.hypot(eb.x - e.x, eb.y - e.y);
+                            if (distEnemy < (e.width / 2 + 5)) {
+                                enemies = enemies.filter(item => item !== e);
+                                enemyBullets = enemyBullets.filter(item => item !== eb);
+                                SoundEffects.playExplosion(); // 敵を撃破した時のSE
+
+                        if (e.type === 1) score += 100;
+                        else if (e.type === 2) score += 200;
+                        else if (e.type === 3) score += 400;
+                        else if (e.type === 4) score += 800;
+                            }
+                        }
+                    });
+                    return;
+                }
 
                 const dist = Math.hypot(eb.x - player.x, eb.y - player.y);
                 if (dist < (player.width / 2 + 3)) {
@@ -1342,6 +1464,28 @@ const handleTouchStartOrMove = (e) => {
                     else if (e.type === 4) score += 800;
                 }
             });
+            for (let i = 0; i < enemies.length; i++) {
+                for (let j = i + 1; j < enemies.length; j++) {
+                    const e1 = enemies[i];
+                    const e2 = enemies[j];
+
+                    if (e1.isFriendly !== e2.isFriendly) {
+                        const dist = Math.hypot(e1.x - e2.x, e1.y - e2.y);
+                        if (dist < (e1.width / 2 + e2.width / 2)) {
+                            // 通常の（友好化していない）敵のみを削除
+                            const normalEnemy = e1.isFriendly ? e2 : e1;
+                            enemies = enemies.filter(item => item !== normalEnemy);
+                            SoundEffects.playExplosion();
+
+                        if (e2.type === 1) score += 100;
+                        else if (e2.type === 2) score += 200;
+                        else if (e2.type === 3) score += 400;
+                        else if (e2.type === 4) score += 800;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         // --- 描画処理 ---
@@ -1379,6 +1523,7 @@ if (bgFadeAlpha > 0&isCommandActive) {
                 enemyBullets = [];
                 enemies = [];
                 chargeTimer = 0;
+                random = selectedWeapon === "random"?1:0;
 
                 clearPresentation.scale = 1.0;
                 clearPresentation.angle = 0;
@@ -1421,7 +1566,7 @@ if (bgFadeAlpha > 0&isCommandActive) {
                     const isSelected = (i === stageSelect.selectedIndex);
                     let displayName = name;
                     if (name === "WEAPON SELECT") {
-                        let wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : selectedWeapon === "green" ? "SHIBA" :"BLUE";
+                        let wLabel = selectedWeapon === "white" ? "WHITE" : selectedWeapon === "pink" ? "PINK" : selectedWeapon === "green" ? "SHIBA" : selectedWeapon === "random" ? "??????": selectedWeapon ==="glay"?"GLAY":selectedWeapon ==="gold"?"GOLD":"BLUE";
                         if(isCommandActive&selectedWeapon === "white"){
                             wLabel = "BLACK";
                         }
@@ -1437,11 +1582,63 @@ if (bgFadeAlpha > 0&isCommandActive) {
                                 ctx.fillStyle = "#ff66cc";
                             }else if (selectedWeapon === "green") {
                                 ctx.fillStyle = "#00aa33";
+                            }else if(selectedWeapon === "random"){
+                                ctx.fillStyle = "#ffff00";
+                            }else if(selectedWeapon ==="glay"){
+                                ctx.fillStyle = "#888888";
+                            }else if(selectedWeapon ==="gold"){
+                                ctx.fillStyle = "#ffd700";
                             }else{
                                 ctx.fillStyle = "#0000ff";
                             }
                         }
                         ctx.fillText("▶ " + displayName, canvas.width / 2, canvas.height * 0.48 + (i * 45));
+                        if(selectedWeapon ==="random"&&i===2){
+                            ctx.textAlign = "left"; // 位置合わせのため左揃えに変更
+                            ctx.fillStyle = "#ff9900"; // 青色
+                            const fullWidth = ctx.measureText("▶ " + displayName).width;
+                            const startX = (canvas.width / 2) - (fullWidth / 2);
+                            ctx.fillText("▶ [ ?????? ] WEAPON SELEC", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#ff0000";
+                            ctx.fillText("▶ [ ?????? ] WEAPON SELE", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#00ff00";
+                            ctx.fillText("▶ [ ?????? ] WEAPON SEL", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#00ffff";
+                            ctx.fillText("▶ [ ?????? ] WEAPON SE", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#9900ff";
+                            ctx.fillText("▶ [ ?????? ] WEAPON S", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#0000ff";
+                            ctx.fillText("▶ [ ?????? ] WEAPON", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = isCommandActive?"#000000":"#ffffff";
+                            ctx.fillText("▶ [ ?????? ] WEAPO", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#ff66cc";
+                            ctx.fillText("▶ [ ?????? ] WEAP", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#00aa33";
+                            ctx.fillText("▶ [ ?????? ] WEA", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#ffff00";
+                            ctx.fillText("▶ [ ?????? ] WE", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#ff9900";
+                            ctx.fillText("▶ [ ?????? ] W", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#ff0000";
+                            ctx.fillText("▶ [ ?????? ]", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#00ff00";
+                            ctx.fillText("▶ [ ??????", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#00ffff";
+                            ctx.fillText("▶ [ ?????", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#9900ff";
+                            ctx.fillText("▶ [ ????", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#0000ff";
+                            ctx.fillText("▶ [ ???", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = isCommandActive?"#000000":"#ffffff";
+                            ctx.fillText("▶ [ ??", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#ff66cc";
+                            ctx.fillText("▶ [ ?", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#00aa33";
+                            ctx.fillText("▶ [", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.fillStyle = "#ffd700";
+                            ctx.fillText("▶", startX, canvas.height * 0.48 + (i * 45));
+                            ctx.textAlign = "center";
+                        }
                     } else {
                         ctx.fillStyle = "#555555"; 
                         ctx.font = "22px 'DotGothic16'";
@@ -1452,6 +1649,12 @@ if (bgFadeAlpha > 0&isCommandActive) {
                                 ctx.fillStyle = "#ff66cc";
                             }else if (selectedWeapon === "green") {
                                 ctx.fillStyle = "#00aa33";
+                            }else if(selectedWeapon === "random"){
+                                ctx.fillStyle = "#ffff00";
+                            }else if(selectedWeapon ==="glay"){
+                                ctx.fillStyle = "#888888";
+                            }else if(selectedWeapon ==="gold"){
+                                ctx.fillStyle = "#ffd700";
                             }else{
                                 ctx.fillStyle = "#0000ff";
                             }
@@ -1569,6 +1772,9 @@ ctx.restore();
 
                 if (isCharging) {
                     let currentLevel = Math.floor(chargeTimer / CHARGE_THRESHOLD) + 1;
+                    if(random ===1){
+                        currentLevel = Math.floor(Math.random()*7)+1;
+                    }
                     if (currentLevel > MAX_CHARGE_LEVEL) currentLevel = MAX_CHARGE_LEVEL;
                     
                     // レベル7（最大）の時だけ武器固有の色、レベル1〜6は通常の進行カラー（黄・橙・赤など）
@@ -1577,6 +1783,8 @@ ctx.restore();
                         if (selectedWeapon === "white") auraColor = isCommandActive?"#000000":"#ffffff";
                         else if (selectedWeapon === "pink") auraColor = "#ff66cc";
                         else if (selectedWeapon === "green") auraColor = "#00aa33";
+                        else if (selectedWeapon === "glay") auraColor = "#888888";
+                        else if (selectedWeapon === "gold") auraColor = "#ffd700";
                     }
                     
                     ctx.strokeStyle = auraColor;
@@ -1587,13 +1795,31 @@ ctx.restore();
                 }
 
                 enemies.forEach(e => {
+                    ctx.save(); // 1. 描画状態を保存
+
+                    // ★ 友好化した敵には金のオーラを描画＆上下反転
+                    if (e.isFriendly) {
+                        // 金のオーラ（外周リング）
+                        ctx.strokeStyle = "#ffd700";
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.arc(e.x, e.y, e.width / 2 + 6, 0, Math.PI * 2);
+                        ctx.stroke();
+
+                        // 描画位置を中心に移動して上下反転（180度回転）
+                        ctx.translate(e.x, e.y);
+                        ctx.scale(1, -1);
+                        ctx.translate(-e.x, -e.y);
+                    }
+
                     if (e.img.complete) {
-                        
-                            ctx.drawImage(e.img, e.x - e.width/2, e.y - e.height/2, e.width, e.height);
+                        ctx.drawImage(e.img, e.x - e.width/2, e.y - e.height/2, e.width, e.height);
                     } else {
                         ctx.fillStyle = e.type === 1 ? "#ffff00" : e.type === 2 ? "#ff6600" : e.type === 3 ? "#ff00ff" : "#ff0000";
                         ctx.fillRect(e.x - e.width/2, e.y - e.height/2, e.width, e.height);
                     }
+
+                    ctx.restore(); // 2. 必ずここで描画状態を元に戻す
                 });
 
                 bullets.forEach(b => {
@@ -1623,10 +1849,16 @@ ctx.restore();
                     });
                 }
 
-                ctx.fillStyle = "#ff3333";
                 enemyBullets.forEach(eb => {
                     ctx.beginPath();
-                    ctx.arc(eb.x, eb.y, 3, 0, Math.PI * 2);
+                    // ★ 友好化敵が打った弾は「緑色（少し大きめ）」で描画
+                    if (eb.isFriendlyBullet) {
+                        ctx.fillStyle = "#00ff66";
+                        ctx.arc(eb.x, eb.y, 5, 0, Math.PI * 2);
+                    } else {
+                        ctx.fillStyle = "#ff3333";
+                        ctx.arc(eb.x, eb.y, 3, 0, Math.PI * 2);
+                    }
                     ctx.fill();
                 });
 
@@ -1654,6 +1886,9 @@ ctx.restore();
 
                 if (isCharging) {
                     let currentLevel = Math.floor(chargeTimer / CHARGE_THRESHOLD) + 1;
+                    if(random ===1){
+                        currentLevel = Math.floor(Math.random()*7)+1;
+                    }
                     if (currentLevel > MAX_CHARGE_LEVEL) currentLevel = MAX_CHARGE_LEVEL;
 
                     let currentLevelProgress = (currentLevel === 7) ? 1.0 : (chargeTimer % CHARGE_THRESHOLD) / CHARGE_THRESHOLD;
@@ -1669,6 +1904,8 @@ ctx.restore();
                         if (selectedWeapon === "white") fgLevelColor = isCommandActive?"#000000":"#ffffff";
                         else if (selectedWeapon === "pink") fgLevelColor = "#ff66cc";
                         else if (selectedWeapon === "green") fgLevelColor = "#00aa33";
+                        else if (selectedWeapon === "glay") fgLevelColor = "#888888";
+                        else if (selectedWeapon === "gold") fgLevelColor = "#ffd700";
                     }
                     ctx.fillStyle = fgLevelColor;
                     ctx.fillRect(barX, barY, barW * currentLevelProgress, barH);
@@ -1841,7 +2078,11 @@ ctx.restore();
                 highScore = score;
                 localStorage.setItem("belief_highscore_common", highScore.toString());
                 updateAchievementProgress("achievement_38", highScore,true);
+                
             }
+            if(highScore >= 1000000){
+                    localStorage.setItem("millionaire","Wow");
+                }
         }
     });
 };
