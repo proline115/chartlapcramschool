@@ -1635,7 +1635,9 @@ if (passwordOverlay) {
 // Math専用の資料データリスト [PDFパス, 表示タイトル]
 const mathDataList = [
   ["secret/数学.pdf", "問題"],
-  ["secret/数学答え.pdf","答え"]
+  ["secret/数学答え.pdf","答え"],
+  ["secret/数学2.pdf", "問題<br>追加分"],
+  ["secret/数学2答え.pdf","答え<br>追加分"]
 ];
 
 // 初期化：正方形カードの生成
