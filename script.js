@@ -3464,7 +3464,8 @@ const staffRollData = [
       { role: "プロリン115固定", name: "プロリン115<br>（↳が行った海で寝てた猫）" },
       { role: "さすらいのブッダ固定", name: "お友達（ありがとう）" },
       { role: "妹嶌紫固定", name: "妹嶌紫" },
-      { role: "隠し数字発見", name: "岡山の吉右衛門" }
+      { role: "隠し数字発見", name: "岡山の吉右衛門" },
+      { role: "隠し数字発見V", name: "ニコメディア"}
     ]
   },
   {
@@ -3485,6 +3486,7 @@ const staffRollData = [
       { role: "詠み手", name: "アポロ12号" },
       { role: "詠み手", name: "さすらいのブッダ" },
       { role: "詠み手", name: "ニコメディア" },
+      { role: "詠み手", name: "(・∀・)"},
       { role: "批評", name: "プロリン115" }
     ]
   },
@@ -3503,6 +3505,21 @@ const staffRollData = [
       { role: "京都写真", name: "岡山の吉右衛門" },
       { role: "岡山写真送ってくれない人", name: "岡山の吉右衛門" }
     ]
+  },
+  {
+      sectionTitle: "チャート周回予備校",
+      members: [
+        { role:"首班", name: "(・∀・)"},
+        { role:"班員", name: "岡山の吉右衛門"},
+        { role:"班員", name: "白狐ふゆ"},
+        { role:"班員", name: "プロリン115"},
+        { role:"班員", name: "アポロ12号"},
+        { role:"班員", name: "さすらいのブッダ"},
+        { role:"班員", name: "妹嶌紫"},
+        { role:"班員", name: "ニコメディア"},
+        { role:"班員", name: "ハフマン木の伐採者"},
+        { role:"班員", name: "韓流メスガキ"}
+      ]
   },
   {
     sectionTitle: "フリー画像出典",
